@@ -62,3 +62,13 @@ class dT_i(Variable):
     """Temperature increment of insulation material"""
 
     unit = kelvin
+
+__all__ = (
+    'c_pi',
+    'lambda_i',
+    'rho_i',
+    'L_i',
+    'A_i',
+    'Q_i',
+    'dT_i',
+)

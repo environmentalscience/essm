@@ -1,4 +1,12 @@
+# -*- coding: utf-8 -*-
+
+"""Core variable type."""
+
+from __future__ import absolute_import
+
 from sage.all import var
+
+from .units import SHORT_UNIT_SYMBOLS
 
 
 class VariableMeta(type):
@@ -32,13 +40,24 @@ class VariableMeta(type):
 
 
 class Variable(object):
-    """Base type for all variables."""
+    """Base type for all physical variables."""
     __metaclass__ = VariableMeta
     __registry__ = {}
     __defaults__ = {}
     __units__ = {}
 
+    @classmethod
+    def short_unit(cls, variable):
+        """Return short unit."""
+        return (variable*cls.__units__[variable]/variable).subs(
+            SHORT_UNIT_SYMBOLS
+        )
+
+
 
 def register(cls):
     """Register symbolic variable instead of class definition."""
     return cls.symbolic_variable
+
+__all__ = (
+)
