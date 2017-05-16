@@ -14,10 +14,5 @@ class eq_Qi(Equation):
 
 
 __all__ = (
-    'A_i',
-    'L_i',
-    'Q_i',
-    'dT_i',
     'eq_Qi',
-    'lambda_i',
 )

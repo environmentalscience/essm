@@ -50,7 +50,7 @@ for reqs in extras_require.values():
     extras_require['all'].extend(reqs)
 
 install_requires = [
-    'sage>=7.6',
+    # 'sage>=7.6',
     'wrapt>=1.10.10',
 ]
 

@@ -14,7 +14,18 @@ class ExpressionProxy(wrapt.ObjectProxy):
     def __init__(self, cls):
         super(ExpressionProxy, self).__init__(cls.expr)
         self.definition = cls
-        self.__doc__ = cls.__doc__
+
+    @property
+    def __doc__(self):
+        return self.definition.__doc__
+
+    @property
+    def __name__(self):
+        return self.definition.__name__
+
+    @property
+    def __module__(self):
+        return self.definition.__module__
 
 
 def register(cls):
