@@ -4,9 +4,22 @@
 
 from __future__ import absolute_import
 
+from functools import wraps
+
 from sage.misc.latex import latex
 
 from ..variables import SHORT_UNIT_SYMBOLS, Variable
+
+
+def load_expr(f):
+    """Use only on class methods with expr argument."""
+    @wraps(f)
+    def decorated(cls, expr=None, **kwargs):
+        """Load expression from a class if not provided."""
+        if expr is not None:
+            cls = cls.from_expression(expr)
+        return f(cls, **kwargs)
+    return decorated
 
 
 def convert(expr):
@@ -17,20 +30,6 @@ def convert(expr):
             return op(*map(convert, ops))
         return op(convert(ops[0]), reduce(op, map(convert, ops[1:])))
     return expr.convert() if hasattr(expr, 'convert') else expr
-
-
-def markdown(unit):
-    """Return markdown representaion of a unit."""
-    #FIXME consider (m/s)**(s/2)
-    facs = unit.factor_list()
-    str1 = ''
-    for term1 in facs:
-        op1 = term1[1]
-        if op1 == 1:
-            str1 = str(term1[0]) + ' ' + str1
-        else:
-            str1 += ' {0}$^{{{1}}}$ '.format(markdown(term1[0]), markdown(op1))
-    return str1
 
 
 class EquationMeta(type):
@@ -68,6 +67,7 @@ class Equation(object):
         return cls.__expressions__[expr]
 
     @classmethod
+    @load_expr
     def expand_units(cls, simplify_full=True):
         """Expand units of all arguments in expression."""
         used_units = {}
@@ -82,9 +82,12 @@ class Equation(object):
         return result
 
     @classmethod
-    def short_unit(cls):
-        """Return short unit representation."""
-        return cls.expand_units().lhs().subs(SHORT_UNIT_SYMBOLS)
+    @load_expr
+    def short_units(cls):
+        """Return short units of equation."""
+        expanded = cls.expand_units()
+        return expanded.lhs().subs(SHORT_UNIT_SYMBOLS) \
+            == expanded.rhs().subs(SHORT_UNIT_SYMBOLS)
 
 
 def register(cls):
