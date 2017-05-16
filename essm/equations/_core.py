@@ -4,22 +4,10 @@
 
 from __future__ import absolute_import
 
-from functools import wraps
-
 from sage.misc.latex import latex
 
+from ..proxy import register
 from ..variables import SHORT_UNIT_SYMBOLS, Variable
-
-
-def load_expr(f):
-    """Use only on class methods with expr argument."""
-    @wraps(f)
-    def decorated(cls, expr=None, **kwargs):
-        """Load expression from a class if not provided."""
-        if expr is not None:
-            cls = cls.from_expression(expr)
-        return f(cls, **kwargs)
-    return decorated
 
 
 def convert(expr):
@@ -67,7 +55,6 @@ class Equation(object):
         return cls.__expressions__[expr]
 
     @classmethod
-    @load_expr
     def expand_units(cls, simplify_full=True):
         """Expand units of all arguments in expression."""
         used_units = {}
@@ -82,17 +69,11 @@ class Equation(object):
         return result
 
     @classmethod
-    @load_expr
     def short_units(cls):
         """Return short units of equation."""
         expanded = cls.expand_units()
         return expanded.lhs().subs(SHORT_UNIT_SYMBOLS) \
             == expanded.rhs().subs(SHORT_UNIT_SYMBOLS)
-
-
-def register(cls):
-    """Register symbolic variable instead of class definition."""
-    return cls.expr
 
 
 __all__ = (

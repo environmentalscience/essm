@@ -6,6 +6,7 @@ from __future__ import absolute_import
 
 from sage.all import var
 
+from ..proxy import register
 from .units import SHORT_UNIT_SYMBOLS
 
 
@@ -23,9 +24,9 @@ class VariableMeta(type):
             name = dct.get('name', name)
             domain = dct.get('domain', 'real')
             latex_name = dct.get('latex_name')
-            symbolic_variable = var(name, domain=domain, latex_name=latex_name)
-            dct['symbolic_variable'] = symbolic_variable
-            dct['latex'] = symbolic_variable._latex_()
+            expr = var(name, domain=domain, latex_name=latex_name)
+            dct['expr'] = expr
+            dct['latex'] = expr._latex_()
 
         return super(VariableMeta, cls).__new__(cls, name, parents, dct)
 
@@ -36,7 +37,7 @@ class VariableMeta(type):
             if hasattr(cls, 'default'):
                 cls.__defaults__[name] = cls.default
             # Store unit for each variable:
-            cls.__units__[cls.symbolic_variable] = getattr(cls, 'unit', 1/1)
+            cls.__units__[cls.expr] = getattr(cls, 'unit', 1/1)
 
 
 class Variable(object):
@@ -53,11 +54,7 @@ class Variable(object):
             SHORT_UNIT_SYMBOLS
         )
 
-
-
-def register(cls):
-    """Register symbolic variable instead of class definition."""
-    return cls.symbolic_variable
-
 __all__ = (
+    'Variable',
+    'register',
 )
