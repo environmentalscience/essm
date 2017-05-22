@@ -27,6 +27,30 @@ class ExpressionProxy(wrapt.ObjectProxy):
     def __module__(self):
         return self.definition.__module__
 
+    def __call__(self, *args, **kwargs):
+        """Return wrapped object."""
+        if args:
+            return getattr(self.__wrapped__, args[0])(*args[1:], **kwargs)
+        return self.__wrapped__
+
+    def subs(self, *args, **kwargs):
+        """Proxy to expression subtitution method."""
+        expr = self.__wrapped__.subs(
+            *(x.__wrapped__ if isinstance(x, ExpressionProxy) else x
+              for x in args),
+            **{key: x.__wrapped__ if isinstance(x, ExpressionProxy) else x
+              for key, x in kwargs.items()}
+        )
+        return self.__class__(type(
+            self.definition.__name__ + str(hash(str(expr))),
+            (self.definition, ),
+            {
+                '__doc__': 'Subtituted "{0}" in "{1}".'.format(
+                    str(expr), str(self.__wrapped__)
+                ),
+                'expr': expr,
+            },
+        ))
 
 def register(cls):
     """Register an expression object instead of class definition."""
