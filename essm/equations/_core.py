@@ -9,6 +9,14 @@ from sage.misc.latex import latex
 
 from ..variables import SHORT_UNIT_SYMBOLS, Variable
 
+def convert(expr):
+    """Convert a given expression."""
+    op = expr.operator()
+    ops = expr.operands()
+    if op:
+        return op(*(convert(o) for o in ops))
+    return expr.convert() if hasattr(expr, 'convert') else expr
+
 
 class BaseEquation(Expression):
     """Add definition and short unit."""
@@ -37,15 +45,7 @@ class BaseEquation(Expression):
             == expanded.rhs().subs(SHORT_UNIT_SYMBOLS)
 
     def convert(self):
-        op = self.operator()
-        ops = self.operands()
-        if op:
-            return op(*(o.convert() if hasattr(o, 'convert') else o
-                        for o in ops))
-
-        if hasattr(super(BaseEquation, self), 'convert'):
-            return super(BaseEquation, self).convert()
-        return self
+        return convert(self)
 
 
 class EquationMeta(type):
@@ -79,4 +79,5 @@ class Equation(object):
 
 __all__ = (
     'Equation',
+    'convert',
 )
