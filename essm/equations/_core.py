@@ -4,20 +4,48 @@
 
 from __future__ import absolute_import
 
+from sage.all import Expression, SR
 from sage.misc.latex import latex
 
-from ..proxy import register
 from ..variables import SHORT_UNIT_SYMBOLS, Variable
 
 
-def convert(expr):
-    op = expr.operator()
-    ops = expr.operands()
-    if op:
-        if len(ops) == 2:
-            return op(*map(convert, ops))
-        return op(convert(ops[0]), reduce(op, map(convert, ops[1:])))
-    return expr.convert() if hasattr(expr, 'convert') else expr
+class BaseEquation(Expression):
+    """Add definition and short unit."""
+
+    @property
+    def definition(self):
+        return Equation.__registry__[self]
+
+    def expand_units(self, simplify_full=True):
+        """Expand units of all arguments in expression."""
+        used_units = {}
+        # Need to multiply units with variable,
+        # so that we can devide by the symbolic equation later:
+        for variable in self.arguments():
+            used_units[variable] = variable * Variable.__units__[variable]
+
+        result = BaseEquation(SR, self.subs(used_units)/self).convert()
+        if simplify_full:
+            result = result.simplify_full()
+        return result
+
+    def short_units(self):
+        """Return short units of equation."""
+        expanded = self.expand_units()
+        return expanded.lhs().subs(SHORT_UNIT_SYMBOLS) \
+            == expanded.rhs().subs(SHORT_UNIT_SYMBOLS)
+
+    def convert(self):
+        op = self.operator()
+        ops = self.operands()
+        if op:
+            return op(*(o.convert() if hasattr(o, 'convert') else o
+                        for o in ops))
+
+        if hasattr(super(BaseEquation, self), 'convert'):
+            return super(BaseEquation, self).convert()
+        return self
 
 
 class EquationMeta(type):
@@ -27,57 +55,28 @@ class EquationMeta(type):
         """Build and register new variable."""
         if '__registry__' not in dct:
             name = dct.get('name', name)
+            expr = BaseEquation(SR, dct['expr'])
+            dct['expr'] = expr
 
-        return super(EquationMeta, cls).__new__(cls, name, parents, dct)
+            instance = super(EquationMeta, cls).__new__(cls, name, parents, dct)
+            instance.__registry__[expr] = instance
 
-    def __init__(cls, name, bases, dct):
-        """Register variable."""
-        if '__registry__' not in dct:
-            expanded_units = cls.expand_units()
+            expanded_units = expr.expand_units()
             if not expanded_units:
                 raise ValueError(
                     'Invalid expression units: {0}'.format(expanded_units)
                 )
-            cls.__registry__[name] = cls
-            cls.__expressions__[cls.expr] = cls
+            return expr
+
+        return super(EquationMeta, cls).__new__(cls, name, parents, dct)
 
 
 class Equation(object):
     """Base type for all equation."""
     __metaclass__ = EquationMeta
     __registry__ = {}
-    __expressions__ = {}
-    __defaults__ = {}
-
-    @classmethod
-    def from_expression(cls, expr):
-        """Return class for given expression."""
-        return cls.__expressions__[expr]
-
-    @classmethod
-    def expand_units(cls, simplify_full=True):
-        """Expand units of all arguments in expression."""
-        used_units = {}
-        # Need to multiply units with variable,
-        # so that we can devide by the symbolic equation later:
-        for variable in cls.expr.arguments():
-            used_units[variable] = variable * Variable.__units__[variable]
-
-        result = convert(cls.expr.subs(used_units)/cls.expr)
-        if simplify_full:
-            result = result.simplify_full()
-        return result
-
-    @classmethod
-    def short_units(cls):
-        """Return short units of equation."""
-        expanded = cls.expand_units()
-        return expanded.lhs().subs(SHORT_UNIT_SYMBOLS) \
-            == expanded.rhs().subs(SHORT_UNIT_SYMBOLS)
 
 
 __all__ = (
     'Equation',
-    'convert',
-    'register',
 )

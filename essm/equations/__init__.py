@@ -4,10 +4,8 @@
 
 from __future__ import absolute_import
 
-from ._core import Equation, convert, register
+from ._core import Equation
 
 __all__ = (
     'Equation',
-    'convert',
-    'register',
 )

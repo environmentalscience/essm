@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 from sage.symbolic.units import units
 
-from .._core import Variable, register
+from .._core import Variable
 
 # Used units
 kelvin = units.temperature.kelvin
@@ -15,42 +15,36 @@ second = units.time.second
 watt = units.power.watt
 
 
-@register
 class W_c(Variable):
     """Chamber width"""
 
     unit = meter
 
 
-@register
 class L_c(Variable):
     """Chamber length"""
 
     unit = meter
 
 
-@register
 class H_c(Variable):
     """Chamber height"""
 
     unit = meter
 
 
-@register
 class V_c(Variable):
     """Chamber volume"""
 
     unit = meter ** 3
 
 
-@register
 class n_c(Variable):
     """molar mass of gas in chamber"""
 
     unit = mole
 
 
-@register
 class F_in_v(Variable):
     """Volumetric flow rate into chamber"""
 
@@ -58,7 +52,6 @@ class F_in_v(Variable):
     latex_name = 'F_{in,v}'
 
 
-@register
 class F_in_mola(Variable):
     """Molar flow rate of dry air into chamber"""
 
@@ -66,7 +59,6 @@ class F_in_mola(Variable):
     latex_name = 'F_{in,mol,a}'
 
 
-@register
 class F_in_molw(Variable):
     """Molar flow rate of water vapour into chamber"""
 
@@ -74,7 +66,6 @@ class F_in_molw(Variable):
     latex_name = 'F_{in,mol,w}'
 
 
-@register
 class F_out_mola(Variable):
     """Molar flow rate of dry air out of chamber"""
 
@@ -82,7 +73,6 @@ class F_out_mola(Variable):
     latex_name = 'F_{out,mol,a}'
 
 
-@register
 class F_out_molw(Variable):
     """Molar flow rate of water vapour out of chamber"""
 
@@ -90,7 +80,6 @@ class F_out_molw(Variable):
     latex_name = 'F_{out,mol,w}'
 
 
-@register
 class F_out_v(Variable):
     """Volumetric flow rate out of chamber"""
 
@@ -98,14 +87,12 @@ class F_out_v(Variable):
     latex_name = 'F_{out,v}'
 
 
-@register
 class T_d(Variable):
     """Dew point temperature of incoming air"""
 
     unit = kelvin
 
 
-@register
 class T_in(Variable):
     """Temperature of incoming air"""
 
@@ -113,7 +100,6 @@ class T_in(Variable):
     latex_name = 'T_{in}'
 
 
-@register
 class T_out(Variable):
     """Temperature of outgoing air (= chamber T_a)"""
 
@@ -121,7 +107,6 @@ class T_out(Variable):
     latex_name = 'T_{out}'
 
 
-@register
 class T_room(Variable):
     """Lab air temperature"""
 
@@ -129,7 +114,6 @@ class T_room(Variable):
     latex_name = 'T_{room}'
 
 
-@register
 class P_w_in(Variable):
     """Vapour pressure of incoming air"""
 
@@ -137,7 +121,6 @@ class P_w_in(Variable):
     latex_name = 'P_{w,in}'
 
 
-@register
 class P_w_out(Variable):
     """Vapour pressure of outgoing air"""
 
@@ -145,7 +128,6 @@ class P_w_out(Variable):
     latex_name = 'P_{w,out}'
 
 
-@register
 class R_H_in(Variable):
     """Relative humidity of incoming air"""
 
@@ -153,7 +135,6 @@ class R_H_in(Variable):
     latex_name = 'R_{H,in}'
 
 
-@register
 class L_A(Variable):
     """Leaf area"""
 

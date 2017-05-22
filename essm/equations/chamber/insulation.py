@@ -1,10 +1,9 @@
 from __future__ import absolute_import
 
 from ...variables.chamber.insulation import A_i, L_i, Q_i, dT_i, lambda_i
-from .._core import Equation, register
+from .._core import Equation
 
 
-@register
 class eq_Qi(Equation):
     """Calculate ....
 

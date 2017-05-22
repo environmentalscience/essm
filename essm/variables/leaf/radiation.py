@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 from sage.symbolic.units import units
 
-from .._core import Variable, register
+from .._core import Variable
 
 # Used units
 joule = units.energy.joule
@@ -15,21 +15,18 @@ second = units.time.second
 watt = units.power.watt
 
 
-@register
 class alpha_l(Variable):
     """Leaf albedo, fraction of shortwave radiation reflected by the leaf"""
 
     unit = watt / watt
 
 
-@register
 class R_d(Variable):
     """Downwelling global radiation"""
 
     unit = joule / second / meter ** 2
 
 
-@register
 class R_la(Variable):
     """Longwave radiation absorbed by leaf"""
 
@@ -37,7 +34,6 @@ class R_la(Variable):
     latex_name = 'R_{la}'
 
 
-@register
 class R_ld(Variable):
     """Downwards emitted/reflected global radiation from leaf"""
 
@@ -45,7 +41,6 @@ class R_ld(Variable):
     latex_name = 'R_{ld}'
 
 
-@register
 class R_lu(Variable):
     """Upwards emitted/reflected global radiation from leaf"""
 
@@ -53,28 +48,24 @@ class R_lu(Variable):
     latex_name = 'R_{lu}'
 
 
-@register
 class R_u(Variable):
     """Upwelling global radiation"""
 
     unit = joule / second / meter ** 2
 
 
-@register
 class S_a(Variable):
     """Radiation sensor above leaf reading"""
 
     unit = joule / second / meter ** 2
 
 
-@register
 class S_b(Variable):
     """Radiation sensor below leaf reading"""
 
     unit = joule / second / meter ** 2
 
 
-@register
 class S_s(Variable):
     """Radiation sensor beside leaf reading"""
 
