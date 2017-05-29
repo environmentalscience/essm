@@ -4,9 +4,12 @@
 
 from __future__ import absolute_import
 
-from sage.all import Expression, SR, var
+import warnings
+
+from sage.all import SR, Expression, var
 
 from .units import SHORT_UNIT_SYMBOLS
+
 
 class BaseVariable(Expression):
     """Add definition and short unit."""
@@ -40,19 +43,31 @@ class VariableMeta(type):
         if '__registry__' not in dct:
             name = dct.get('name', name)
             domain = dct.get('domain', 'real')
+            unit = dct.get('unit', 1/1)
             latex_name = dct.get('latex_name')
             expr = BaseVariable(
                 SR, SR.var(name, domain=domain, latex_name=latex_name)
             )
-            dct['expr'] = expr
-            dct['latex'] = expr._latex_()
-
+            dct.update({
+                'domain': domain,
+                'expr': expr,
+                'latex': expr._latex_(),
+                'name': name,
+                'unit': unit,
+            })
             instance = super(VariableMeta, cls).__new__(cls, name, parents, dct)
+            if expr in instance.__registry__:
+                warnings.warn(
+                    'Variable "{0}" will be overridden by "{1}"'.format(
+                        instance.__registry__[expr].__module__ + ':' + name,
+                        instance.__module__ + ':' + name,
+                    ), stacklevel=2
+                )
             instance.__registry__[expr] = instance
             if 'default' in dct:
                 instance.__defaults__[expr] = dct['default']
             # Store unit for each variable:
-            instance.__units__[expr] = dct.get('unit', 1/1)
+            instance.__units__[expr] = unit
             return expr
 
         return super(VariableMeta, cls).__new__(cls, name, parents, dct)

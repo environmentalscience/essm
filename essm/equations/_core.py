@@ -4,10 +4,13 @@
 
 from __future__ import absolute_import
 
-from sage.all import Expression, SR
+import warnings
+
+from sage.all import SR, Expression
 from sage.misc.latex import latex
 
 from ..variables import SHORT_UNIT_SYMBOLS, Variable
+
 
 def convert(expr):
     """Convert a given expression."""
@@ -56,9 +59,19 @@ class EquationMeta(type):
         if '__registry__' not in dct:
             name = dct.get('name', name)
             expr = BaseEquation(SR, dct['expr'])
-            dct['expr'] = expr
+            dct.update({
+                'name': name,
+                'expr': expr,
+            })
 
             instance = super(EquationMeta, cls).__new__(cls, name, parents, dct)
+            if expr in instance.__registry__:
+                warnings.warn(
+                    'Equation "{0}" will be overridden by "{1}"'.format(
+                        instance.__registry__[expr].__module__ + ':' + name,
+                        instance.__module__ + ':' + name,
+                    ), stacklevel=2
+                )
             instance.__registry__[expr] = instance
 
             expanded_units = expr.expand_units()
