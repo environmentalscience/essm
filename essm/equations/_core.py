@@ -150,6 +150,14 @@ class Equation(object):
     __metaclass__ = EquationMeta
     __registry__ = {}
 
+    @classmethod
+    def args(cls):
+        return tuple(
+            Variable.__registry__[arg].expr
+            if arg in Variable.__registry__ else arg
+            for arg in cls.expr.args()
+        )
+
 
 __all__ = (
     'Equation',
