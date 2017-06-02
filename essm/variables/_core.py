@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """Core variable type."""
 
 from __future__ import absolute_import
@@ -12,7 +11,7 @@ from .units import SHORT_UNIT_SYMBOLS
 
 
 class BaseVariable(Expression):
-    """Add definition and short unit."""
+    """Physical variable."""
 
     @property
     def definition(self):
@@ -25,9 +24,17 @@ class BaseVariable(Expression):
     @property
     def short_unit(self):
         """Return short unit."""
-        return (self*self.unit/self).subs(
-            SHORT_UNIT_SYMBOLS
-        )
+        return (self * self.unit / self).subs(SHORT_UNIT_SYMBOLS)
+
+    def delete(self):
+        """Deletes variable from __registry__,
+        __defaults__ and __units__.
+        """
+        del Variable.__registry__[self]
+        if self in Variable.__defaults__.keys():
+            del Variable.__defaults__[self]
+        if self in Variable.__units__.keys():
+            del Variable.__units__[self]
 
 
 class VariableMeta(type):
@@ -43,11 +50,12 @@ class VariableMeta(type):
         if '__registry__' not in dct:
             name = dct.get('name', name)
             domain = dct.get('domain', 'real')
-            unit = dct.get('unit', 1/1)
+            unit = dct.get('unit', 1 / 1)
             latex_name = dct.get('latex_name')
-            expr = BaseVariable(
-                SR, SR.var(name, domain=domain, latex_name=latex_name)
-            )
+            expr = BaseVariable(SR,
+                                SR.var(
+                                    name, domain=domain,
+                                    latex_name=latex_name))
             dct.update({
                 'domain': domain,
                 'expr': expr,
@@ -55,14 +63,14 @@ class VariableMeta(type):
                 'name': name,
                 'unit': unit,
             })
-            instance = super(VariableMeta, cls).__new__(cls, name, parents, dct)
+            instance = super(VariableMeta, cls).__new__(
+                cls, name, parents, dct)
             if expr in instance.__registry__:
                 warnings.warn(
                     'Variable "{0}" will be overridden by "{1}"'.format(
                         instance.__registry__[expr].__module__ + ':' + name,
-                        instance.__module__ + ':' + name,
-                    ), stacklevel=2
-                )
+                        instance.__module__ + ':' + name, ),
+                    stacklevel=2)
             instance.__registry__[expr] = instance
             if 'default' in dct:
                 instance.__defaults__[expr] = dct['default']
@@ -80,7 +88,5 @@ class Variable(object):
     __defaults__ = {}
     __units__ = {}
 
-__all__ = (
-    'Variable',
-    'register',
-)
+
+__all__ = ('Variable', 'register', )
