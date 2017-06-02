@@ -142,7 +142,7 @@ class EquationMeta(type):
 
 
 class Equation(object):
-    """Base type for all equation."""
+    """Base type for all equations."""
     __metaclass__ = EquationMeta
     __registry__ = {}
 

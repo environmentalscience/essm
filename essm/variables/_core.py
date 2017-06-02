@@ -26,16 +26,6 @@ class BaseVariable(Expression):
         """Return short unit."""
         return (self * self.unit / self).subs(SHORT_UNIT_SYMBOLS)
 
-    def delete(self):
-        """Deletes variable from __registry__,
-        __defaults__ and __units__.
-        """
-        del Variable.__registry__[self]
-        if self in Variable.__defaults__.keys():
-            del Variable.__defaults__[self]
-        if self in Variable.__units__.keys():
-            del Variable.__units__[self]
-
 
 class VariableMeta(type):
     """Variable interface.
@@ -77,6 +67,18 @@ class VariableMeta(type):
 
         return super(VariableMeta, cls).__new__(cls, name, parents, dct)
 
+    def __remove__(cls, expr):
+        """Unregister a variable."""
+        if expr in cls.__registry__:
+            warnings.warn(
+                'Variable "{0}" will be removed'.format(
+                    cls.__registry__[expr].__module__),
+                stacklevel=2)
+            del cls.__registry__[expr]
+            del cls.__units__[expr]
+        if expr in cls.__defaults__:
+            del cls.__defaults__[expr]
+
 
 class Variable(object):
     """Base type for all physical variables."""
@@ -86,4 +88,4 @@ class Variable(object):
     __units__ = {}
 
 
-__all__ = ('Variable', 'register', )
+__all__ = ('Variable')
