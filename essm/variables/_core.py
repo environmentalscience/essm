@@ -71,13 +71,17 @@ class VariableMeta(type):
         """Unregister a variable."""
         if expr in cls.__registry__:
             warnings.warn(
-                'Variable "{0}" will be removed'.format(
+                'Variable "{0}" will be unregistered.'.format(
                     cls.__registry__[expr].__module__),
-                stacklevel=2)
+                stacklevel=2)            
             del cls.__registry__[expr]
             del cls.__units__[expr]
-        if expr in cls.__defaults__:
-            del cls.__defaults__[expr]
+            if expr in cls.__defaults__:
+                del cls.__defaults__[expr]
+        else:
+            warnings.warn(
+                'Variable "{0}" did not exist in registry.'.format(
+                    expr), stacklevel=2)
 
 
 class Variable(object):
