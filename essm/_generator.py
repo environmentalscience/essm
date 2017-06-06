@@ -159,7 +159,7 @@ class EquationWriter(object):
                 variable.setdefault('latexname', variable['name'])
                 variable['doc'] = "Internal parameter of {0}.".format(
                     variable['name'])
-                if 'default' in variables:
+                if 'default' in variable:
                     variable['default'] = 'default = {0}'.format(
                         variable['default'])
                 else:
