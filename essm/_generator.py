@@ -16,9 +16,10 @@ class {name}({parents}):
 VARIABLE_TPL = """
 class {name}(Variable):
     \"\"\"{doc}\"\"\"
-    name = \'{name}\'
+    name = {name!r}
     unit = {units}
-    latex_name = r\"{latexname}\"
+    domain = {domain!r}
+    latex_name = {latexname!r}
     {default}   
 """
 
@@ -51,23 +52,24 @@ class VariableWriter(object):
             yield 'from {key} import {names}'.format(
                 key=key, names=', '.join(sorted(values)))
 
-    def write(self, filename='temp/eqs_test.py'):
-        with open(filename, 'w') as file_out:
-            if self.docstring:
-                file_out.write('"""' + self.docstring + '"""\n\n')
-            file_out.write('\n'.join(self.imports) + '\n')
-            file_out.write('\n\n'.join(
-                self.TPL.format(**var).replace('^', '**')
-                for var in self.vars))
-            file_out.write(
-                '\n\n__all__ = (\n{0}\n)'.format('\n'.join(
-                    "    '{0}',".format(var['name']) for var in self.vars)))
+    def __str__(self):
+        result = ''
+        if self.docstring:
+            result += '"""' + self.docstring + '"""\n\n'
+            result += '\n'.join(self.imports) + '\n'
+        result += '\n\n'.join(
+            self.TPL.format(**var).replace('^', '**')
+            for var in self.vars)
+        if self.docstring:
+            result += '\n\n__all__ = (\n{0}\n)'.format('\n'.join(
+                "    '{0}',".format(var['name']) for var in self.vars))
+        return result
 
     def var(self,
             name,
             doc='',
             units=None,
-            domain1='real',
+            domain='real',
             latexname=None,
             value=None):
         if not latexname:
@@ -84,7 +86,7 @@ class VariableWriter(object):
             "name": name,
             "doc": doc,
             "units": str(units).replace('^', '**') if units else '1/1',
-            "domain1": domain1,
+            "domain": domain,
             "latexname": latexname,
             "default": default
         }
@@ -95,6 +97,10 @@ class VariableWriter(object):
             if units != 1:
                 for arg in units.args():
                     self._imports['essm.variables.units'].add(str(arg))
+
+    def write(self, filename):
+        with open(filename, 'w') as out:
+            out.write(str(self))
 
 
 class EquationWriter(object):
@@ -137,16 +143,17 @@ class EquationWriter(object):
             yield 'from {key} import {names}'.format(
                 key=key, names=', '.join(sorted(values)))
 
-    def write(self, filename='temp/eqs_test.py'):
-        with open(filename, 'w') as file_out:
-            if self.docstring:
-                file_out.write('"""' + self.docstring + '"""\n\n')
-            file_out.write('\n'.join(self.imports) + '\n')
-            file_out.write('\n'.join(
-                self.TPL.format(**eq).replace('^', '**')
-                for eq in self.eqs))
-            file_out.write('\n\n__all__ = (\n{0}\n)'.format(
-                '\n'.join("    '{0}',".format(eq['name']) for eq in self.eqs)))
+    def __str__(self):
+        result = ''
+        if self.docstring:
+            result += '"""' + self.docstring + '"""\n\n'
+        result += '\n'.join(self.imports) + '\n'
+        result += '\n'.join(
+            self.TPL.format(**eq).replace('^', '**')
+            for eq in self.eqs)
+        result += '\n\n__all__ = (\n{0}\n)'.format(
+            '\n'.join("    '{0}',".format(eq['name']) for eq in self.eqs))
+        return result
 
     def eq(self, name, expr, doc='', parents=None, variables=None):
         if parents:
@@ -159,16 +166,19 @@ class EquationWriter(object):
                 variable.setdefault('latexname', variable['name'])
                 variable['doc'] = "Internal parameter of {0}.".format(
                     variable['name'])
-                if 'default' in variable:
-                    variable['default'] = 'default = {0}'.format(
-                        variable['default'])
-                else:
-                    variable['default'] = ''
-            variables = '\n'.join(re.sub(
-                r'^', 4 * ' ',
-                self.VAR_TPL.format(**variable),
+            
+            # Serialize the internal variables.
+            writer = VariableWriter()
+            for variable in variables:
+                writer.var(**variable)
+            variables = re.sub(
+                r'^', 4 * ' ', str(writer),
                 flags=re.MULTILINE,
-            ) for variable in variables)
+            )
+
+            # Merge all imports from variables (units, Variable).
+            for key, value in writer._imports.items():
+                self._imports[key] |= value
         else:
             variables = ''
 
@@ -186,5 +196,7 @@ class EquationWriter(object):
             if arg in Variable.__registry__:
                 self._imports[Variable.__registry__[arg].__module__].add(
                     str(arg))
-            else:
-                self._imports['essm.variables'].add('Variable')
+
+    def write(self, filename):
+        with open(filename, 'w') as out:
+            out.write(str(self))
