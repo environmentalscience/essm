@@ -1,9 +1,9 @@
 """Unsorted equations related to leaf model"""
 
 from essm.variables.physics.thermodynamics import D_va, Le, M_w, R_mol, R_s, Sh, T_a, c_pa, h_c, lambda_E, rho_a, sigm
+from sage.all import e, pi
 from essm.variables.units import kelvin, pascal
 from essm.variables.leaf.unsorted import C_wa, C_wl, E_l, E_lmol, H_l, L_l, P_wl, R_ll, T_l, T_w, a_s, a_sh, epsilon_l, g_bw, g_sw, g_tw
-from __main__ import p_CC1, p_CC2
 from essm.variables import Variable
 from essm.equations import Equation
 
@@ -62,34 +62,10 @@ class eq_Cwl(Equation):
 
 
 class eq_Pwl(Equation):
-    """Clausius-Clapeyron P_wl as function of T_l."""
-        
-    class p_CC1(Variable):
-        """Internal parameter of p_CC1."""
-        name = 'p_CC1'
-        unit = pascal
-        domain = 'real'
-        latex_name = 'p_CC1'
-        default = 611.   
-    
-    
-    
-    class p_CC2(Variable):
-        """Internal parameter of p_CC2."""
-        name = 'p_CC2'
-        unit = kelvin
-        domain = 'real'
-        latex_name = 'p_CC2'
-        default = 273.   
-    
-    expr = P_wl == p_CC1*e**(-M_w*lambda_E*(1/T_l - 1/p_CC2)/R_mol)
-
-
-class eq_Pwl(Equation):
     """Clausius-Clapeyron P_wl as function of T_l. \citep[Eq. B.3]{hartmann_global_1994}"""
         
     class p_CC1(Variable):
-        """Internal parameter of p_CC1."""
+        """Internal parameter of eq_Pwl."""
         name = 'p_CC1'
         unit = pascal
         domain = 'real'
@@ -99,31 +75,7 @@ class eq_Pwl(Equation):
     
     
     class p_CC2(Variable):
-        """Internal parameter of p_CC2."""
-        name = 'p_CC2'
-        unit = kelvin
-        domain = 'real'
-        latex_name = 'p_CC2'
-        default = 273.   
-    
-    expr = P_wl == p_CC1*e**(-M_w*lambda_E*(1/T_l - 1/p_CC2)/R_mol)
-
-
-class eq_Pwl(Equation):
-    """Clausius-Clapeyron P_wl as function of T_l. \citep[Eq. B.3]{hartmann_global_1994}"""
-        
-    class p_CC1(Variable):
-        """Internal parameter of p_CC1."""
-        name = 'p_CC1'
-        unit = pascal
-        domain = 'real'
-        latex_name = 'p_CC1'
-        default = 611.   
-    
-    
-    
-    class p_CC2(Variable):
-        """Internal parameter of p_CC2."""
+        """Internal parameter of eq_Pwl."""
         name = 'p_CC2'
         unit = kelvin
         domain = 'real'
@@ -143,7 +95,5 @@ __all__ = (
     'eq_gbw',
     'eq_gbw_hc',
     'eq_Cwl',
-    'eq_Pwl',
-    'eq_Pwl',
     'eq_Pwl',
 )

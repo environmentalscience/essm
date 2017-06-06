@@ -125,7 +125,9 @@ class EquationWriter(object):
 
     TPL = EQUATION_TPL
     VAR_TPL = VARIABLE_TPL
+    # Set up default imports, including general sage constants
     default_imports = {
+        'sage.all': {'e', 'pi'},
         'essm.equations': {'Equation'},
     }
 
@@ -194,6 +196,20 @@ class EquationWriter(object):
             if arg in Variable.__registry__:
                 self._imports[Variable.__registry__[arg].__module__].add(
                     str(arg))
+
+        def fun_names(expr):
+            operators = set()
+            op = expr.operator()
+            operands = expr.operands()
+            
+            if op:
+                if op.__module__ != 'operator':
+                    operators.add(op)
+                for operand in operands:
+                    operators |= fun_names(operand)
+            return operators
+
+
 
     def write(self, filename):
         with open(filename, 'w') as out:
