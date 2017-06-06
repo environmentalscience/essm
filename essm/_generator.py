@@ -109,20 +109,18 @@ class EquationWriter(object):
     Example:
 
     .. code-block:: python
-        from essm.variables import Variable
         from essm.equations import Equation
         from essm._generator import EquationWriter
         from essm.variables.units import second, meter, kelvin
-        from essm.variables.physics.thermodynamics import R_s, D_va, T_a
-        from essm.variables.leaf.unsorted import R_ll, H_l, E_l
-        var('R_s R_ll H_l E_l D_va T_a p_Dva1 p_Dva2')
+        from essm.variables.physics.thermodynamics import R_s, D_va, T_a, P_a, P_wa, P_N2, P_O2
+        var('p_Dva1 p_Dva2')
         writer = EquationWriter(docstring="Test.")
-        writer.eq('eq_enbal', 0 == R_s - R_ll - H_l - E_l, doc='Energy balance.')
-        writer.eq('eq_Rs_enbal', R_s == R_ll + H_l + E_l, doc='Calculate R_s from energy balance.', parents=['eq_enbal'])
+        writer.eq('eq_Pa', P_a == P_N2 + P_O2 + P_wa, doc='Sum partial pressures to obtain total air pressure.')
+        writer.eq('eq_Pwa_Pa', P_wa == P_a - P_N2 - P_O2, doc='Calculate P_wa from total air pressure.', parents=['eq_Pa'])
         writer.eq('eq_Dva', D_va == p_Dva1*T_a - p_Dva2, doc='D_va as a function of air temperature'
-                , variables = [{"name": "p_Dva1", "default": '1.49e-07', "units": meter^2/second/kelvin}, \
-                {"name": "p_Dva2", "default": '1.96e-05', "units": meter^2/second}])
-        writer.write(filename='temp/test.py')
+                , variables = [{"name": "p_Dva1", "value": '1.49e-07', "units": meter^2/second/kelvin}, \
+                {"name": "p_Dva2", "value": '1.96e-05', "units": meter^2/second}])
+        print str(writer)
     """
 
     TPL = EQUATION_TPL
@@ -165,7 +163,7 @@ class EquationWriter(object):
             for variable in variables:
                 variable.setdefault('latexname', variable['name'])
                 variable['doc'] = "Internal parameter of {0}.".format(
-                    variable['name'])
+                    name)
             
             # Serialize the internal variables.
             writer = VariableWriter()
