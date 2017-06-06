@@ -6,8 +6,6 @@ from collections import defaultdict
 
 from .variables import Variable
 
-_START = re.compile(r'^')
-
 EQUATION_TPL = """
 class {name}({parents}):
     \"\"\"{doc}\"\"\"
@@ -94,8 +92,9 @@ class VariableWriter(object):
 
         # register all imports of units
         if units:
-            for arg in units.args():
-                self._imports['essm.variables.units'].add(str(arg))
+            if units != 1:
+                for arg in units.args():
+                    self._imports['essm.variables.units'].add(str(arg))
 
 
 class EquationWriter(object):
@@ -113,7 +112,7 @@ class EquationWriter(object):
         var('R_s R_ll H_l E_l D_va T_a p_Dva1 p_Dva2')
         writer = EquationWriter(docstring="Test.")
         writer.eq('eq_enbal', 0 == R_s - R_ll - H_l - E_l, doc='Energy balance.')
-        writer.eq('eq_Rs_enbal', R_s == R_ll + H_l + E_l, doc='Calculate R_s from energy balance.', parents=['eq_enbal', 'eq_1'])
+        writer.eq('eq_Rs_enbal', R_s == R_ll + H_l + E_l, doc='Calculate R_s from energy balance.', parents=['eq_enbal'])
         writer.eq('eq_Dva', D_va == p_Dva1*T_a - p_Dva2, doc='D_va as a function of air temperature'
                 , variables = [{"name": "p_Dva1", "default": '1.49e-07', "units": meter^2/second/kelvin}, \
                 {"name": "p_Dva2", "default": '1.96e-05', "units": meter^2/second}])
@@ -144,8 +143,7 @@ class EquationWriter(object):
                 file_out.write('"""' + self.docstring + '"""\n\n')
             file_out.write('\n'.join(self.imports) + '\n')
             file_out.write('\n'.join(
-                re.sub(_START, 4 * ' ',
-                       self.TPL.format(**eq).replace('^', '**'))
+                self.TPL.format(**eq).replace('^', '**')
                 for eq in self.eqs))
             file_out.write('\n\n__all__ = (\n{0}\n)'.format(
                 '\n'.join("    '{0}',".format(eq['name']) for eq in self.eqs)))
@@ -166,8 +164,11 @@ class EquationWriter(object):
                         variable['default'])
                 else:
                     variable['default'] = ''
-            variables = '\n'.join(
-                self.VAR_TPL.format(**variable) for variable in variables)
+            variables = '\n'.join(re.sub(
+                r'^', 4 * ' ',
+                self.VAR_TPL.format(**variable),
+                flags=re.MULTILINE,
+            ) for variable in variables)
         else:
             variables = ''
 
