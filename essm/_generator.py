@@ -23,6 +23,10 @@ class {name}(Variable):
     {default}   
 """
 
+CONSTANTS = re.compile(
+    r'\b(e|pi)\b'
+)
+"""Regular expression to find common constants e and/or pi in equations."""
 
 class VariableWriter(object):
     """Generate Variable definitions.
@@ -127,7 +131,6 @@ class EquationWriter(object):
     VAR_TPL = VARIABLE_TPL
     # Set up default imports, including general sage constants
     default_imports = {
-        'sage.all': {'e', 'pi'},
         'essm.equations': {'Equation'},
     }
 
@@ -197,18 +200,8 @@ class EquationWriter(object):
                 self._imports[Variable.__registry__[arg].__module__].add(
                     str(arg))
 
-        def fun_names(expr):
-            operators = set()
-            op = expr.operator()
-            operands = expr.operands()
-            
-            if op:
-                if op.__module__ != 'operator':
-                    operators.add(op)
-                for operand in operands:
-                    operators |= fun_names(operand)
-            return operators
-
+        for match in re.finditer(CONSTANTS, str(expr)) or []:
+            self._imports['sage.all'].add(match.group())
 
 
     def write(self, filename):
