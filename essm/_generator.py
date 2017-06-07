@@ -23,10 +23,13 @@ class {name}(Variable):
     {default}   
 """
 
-CONSTANTS = re.compile(
-    r'\b(e|pi)\b'
-)
-"""Regular expression to find common constants e and/or pi in equations."""
+from sage import all as sage_all
+
+# CONSTANTS = re.compile(r'\b(e|pi)\b')
+SAGE_IMPORTS = re.compile(r'\b({0})\b'.format('|'.join(
+    name for name in dir(sage_all) if not name.startswith('_'))))
+"""Regular expression to find sage-specific constants and functions."""
+
 
 class VariableWriter(object):
     """Generate Variable definitions.
@@ -62,8 +65,7 @@ class VariableWriter(object):
             result += '"""' + self.docstring + '"""\n\n'
             result += '\n'.join(self.imports) + '\n'
         result += '\n\n'.join(
-            self.TPL.format(**var).replace('^', '**')
-            for var in self.vars)
+            self.TPL.format(**var).replace('^', '**') for var in self.vars)
         if self.docstring:
             result += '\n\n__all__ = (\n{0}\n)'.format('\n'.join(
                 "    '{0}',".format(var['name']) for var in self.vars))
@@ -152,8 +154,7 @@ class EquationWriter(object):
             result += '"""' + self.docstring + '"""\n\n'
         result += '\n'.join(self.imports) + '\n'
         result += '\n'.join(
-            self.TPL.format(**eq).replace('^', '**')
-            for eq in self.eqs)
+            self.TPL.format(**eq).replace('^', '**') for eq in self.eqs)
         result += '\n\n__all__ = (\n{0}\n)'.format(
             '\n'.join("    '{0}',".format(eq['name']) for eq in self.eqs))
         return result
@@ -167,17 +168,17 @@ class EquationWriter(object):
         if variables:
             for variable in variables:
                 variable.setdefault('latexname', variable['name'])
-                variable['doc'] = "Internal parameter of {0}.".format(
-                    name)
-            
+                variable['doc'] = "Internal parameter of {0}.".format(name)
+
             # Serialize the internal variables.
             writer = VariableWriter()
             for variable in variables:
                 writer.var(**variable)
             variables = re.sub(
-                r'^', 4 * ' ', str(writer),
-                flags=re.MULTILINE,
-            )
+                r'^',
+                4 * ' ',
+                str(writer),
+                flags=re.MULTILINE, )
 
             # Merge all imports from variables (units, Variable).
             for key, value in writer._imports.items():
@@ -200,9 +201,8 @@ class EquationWriter(object):
                 self._imports[Variable.__registry__[arg].__module__].add(
                     str(arg))
 
-        for match in re.finditer(CONSTANTS, str(expr)) or []:
+        for match in re.finditer(SAGE_IMPORTS, str(expr)) or []:
             self._imports['sage.all'].add(match.group())
-
 
     def write(self, filename):
         with open(filename, 'w') as out:
