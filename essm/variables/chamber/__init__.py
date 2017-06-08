@@ -10,5 +10,4 @@ from __future__ import absolute_import
 #     'mass',
 # )
 
-__all__ = (
-)
+__all__ = ()

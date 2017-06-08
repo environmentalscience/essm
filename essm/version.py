@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """Version information for essm.
 
 This file is imported by ``essm.__init__``,

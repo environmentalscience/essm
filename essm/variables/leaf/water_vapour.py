@@ -9,11 +9,11 @@ from .._core import Variable
 # Used units
 meter = units.length.meter
 
+
 class B_l(Variable):
     """Boundary layer thickness"""
 
     unit = meter
 
-__all__ = (
-    'B_l',
-)
+
+__all__ = ('B_l', )

@@ -30,7 +30,7 @@ class lambda_i(Variable):
 class rho_i(Variable):
     """Density of insulation material"""
 
-    unit = kilogram / meter ** 3
+    unit = kilogram / meter**3
 
 
 class L_i(Variable):
@@ -42,7 +42,7 @@ class L_i(Variable):
 class A_i(Variable):
     """Conducting area of insulation material"""
 
-    unit = meter ** 2
+    unit = meter**2
 
 
 class Q_i(Variable):
@@ -56,12 +56,5 @@ class dT_i(Variable):
 
     unit = kelvin
 
-__all__ = (
-    'c_pi',
-    'lambda_i',
-    'rho_i',
-    'L_i',
-    'A_i',
-    'Q_i',
-    'dT_i',
-)
+
+__all__ = ('c_pi', 'lambda_i', 'rho_i', 'L_i', 'A_i', 'Q_i', 'dT_i', )

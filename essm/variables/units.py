@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """Define unit symbols."""
 
 from sage.all import var
@@ -22,8 +21,7 @@ SHORT_UNIT_SYMBOLS = {
     mole: var('mol'),
     pascal: var('Pa'),
     second: var('s'),
-    watt: var('W'),
-}
+    watt: var('W'), }
 
 
 def markdown(unit):
@@ -39,7 +37,5 @@ def markdown(unit):
             str1 += ' {0}$^{{{1}}}$ '.format(markdown(term1[0]), markdown(op1))
     return str1
 
-__all__ = (
-    'SHORT_UNIT_SYMBOLS',
-    'markdown',
-)
+
+__all__ = ('SHORT_UNIT_SYMBOLS', 'markdown', )

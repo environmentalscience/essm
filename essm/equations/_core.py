@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """Core equation type."""
 
 from __future__ import absolute_import
@@ -40,7 +39,7 @@ class BaseEquation(Expression):
         for variable in self.arguments():
             used_units[variable] = variable * Variable.__units__[variable]
 
-        result = BaseEquation(SR, self.subs(used_units)/self).convert()
+        result = BaseEquation(SR, self.subs(used_units) / self).convert()
         if simplify_full:
             result = result.simplify_full()
         return result
@@ -54,6 +53,7 @@ class BaseEquation(Expression):
     def convert(self):
         return convert(self)
 
+
 _Integer = ast.parse('integer.Integer', mode='eval').body
 _Float = ast.parse('real_mpfr.RR', mode='eval').body
 
@@ -66,13 +66,13 @@ class Numbers(ast.NodeTransformer):
         func = _Integer
         if isinstance(node.n, float):
             func = _Float
-        return ast.copy_location(ast.Call(
-            func=func,
-            args=[ast.Str(str(node.n))],
-            keywords=[],
-            starargs=None,
-            kwargs=None,
-        ), node)
+        return ast.copy_location(
+            ast.Call(
+                func=func,
+                args=[ast.Str(str(node.n))],
+                keywords=[],
+                starargs=None,
+                kwargs=None, ), node)
 
 
 class ClassDef(ast.NodeVisitor):
@@ -108,10 +108,7 @@ def build_instance_expression(instance, back=1):
     f_globals.setdefault('integer', integer)
     f_globals.setdefault('real_mpfr', real_mpfr)
 
-    return BaseEquation(
-        SR, eval(class_def.expr, f_globals, frame.f_locals)
-    )
-
+    return BaseEquation(SR, eval(class_def.expr, f_globals, frame.f_locals))
 
 
 class EquationMeta(type):
@@ -123,23 +120,22 @@ class EquationMeta(type):
             dct.setdefault('name', name)
             expr = dct.pop('expr')
 
-            instance = super(EquationMeta, cls).__new__(cls, name, parents, dct)
+            instance = super(EquationMeta, cls).__new__(
+                cls, name, parents, dct)
             instance.expr = expr = build_instance_expression(instance)
 
             if expr in instance.__registry__:
                 warnings.warn(
                     'Equation "{0}" will be overridden by "{1}"'.format(
                         instance.__registry__[expr].__module__ + ':' + name,
-                        instance.__module__ + ':' + name,
-                    ), stacklevel=2
-                )
+                        instance.__module__ + ':' + name, ),
+                    stacklevel=2)
             instance.__registry__[expr] = instance
 
             expanded_units = expr.expand_units()
             if not expanded_units:
                 raise ValueError(
-                    'Invalid expression units: {0}'.format(expanded_units)
-                )
+                    'Invalid expression units: {0}'.format(expanded_units))
             return expr
 
         return super(EquationMeta, cls).__new__(cls, name, parents, dct)
@@ -155,11 +151,7 @@ class Equation(object):
         return tuple(
             Variable.__registry__[arg].expr
             if arg in Variable.__registry__ else arg
-            for arg in cls.expr.args()
-        )
+            for arg in cls.expr.args())
 
 
-__all__ = (
-    'Equation',
-    'convert',
-)
+__all__ = ('Equation', 'convert', )

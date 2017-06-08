@@ -52,17 +52,14 @@ class VariableMeta(type):
             domain = dct.get('domain', 'real')
             unit = dct.get('unit', 1 / 1)
             latex_name = dct.get('latex_name')
-            expr = BaseVariable(SR,
-                                SR.var(
-                                    name, domain=domain,
-                                    latex_name=latex_name))
+            expr = BaseVariable(
+                SR, SR.var(name, domain=domain, latex_name=latex_name))
             dct.update({
                 'domain': domain,
                 'expr': expr,
                 'latex': expr._latex_(),
                 'name': name,
-                'unit': unit,
-            })
+                'unit': unit, })
             instance = super(VariableMeta, cls).__new__(
                 cls, name, parents, dct)
             if expr in instance.__registry__:

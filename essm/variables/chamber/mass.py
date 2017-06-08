@@ -36,7 +36,7 @@ class H_c(Variable):
 class V_c(Variable):
     """Chamber volume"""
 
-    unit = meter ** 3
+    unit = meter**3
 
 
 class n_c(Variable):
@@ -48,7 +48,7 @@ class n_c(Variable):
 class F_in_v(Variable):
     """Volumetric flow rate into chamber"""
 
-    unit = meter ** 3 / second
+    unit = meter**3 / second
     latex_name = 'F_{in,v}'
 
 
@@ -83,7 +83,7 @@ class F_out_molw(Variable):
 class F_out_v(Variable):
     """Volumetric flow rate out of chamber"""
 
-    unit = meter ** 3 / second
+    unit = meter**3 / second
     latex_name = 'F_{out,v}'
 
 
@@ -131,33 +131,17 @@ class P_w_out(Variable):
 class R_H_in(Variable):
     """Relative humidity of incoming air"""
 
-    unit = 1/1
+    unit = 1 / 1
     latex_name = 'R_{H,in}'
 
 
 class L_A(Variable):
     """Leaf area"""
 
-    unit = meter ** 2
+    unit = meter**2
+
 
 __all__ = (
-    'W_c',
-    'L_c',
-    'H_c',
-    'V_c',
-    'n_c',
-    'F_in_v',
-    'F_in_mola',
-    'F_in_molw',
-    'F_out_mola',
-    'F_out_molw',
-    'F_out_v',
-    'T_d',
-    'T_in',
-    'T_out',
-    'T_room',
-    'P_w_in',
-    'P_w_out',
-    'R_H_in',
-    'L_A',
-)
+    'W_c', 'L_c', 'H_c', 'V_c', 'n_c', 'F_in_v', 'F_in_mola', 'F_in_molw',
+    'F_out_mola', 'F_out_molw', 'F_out_v', 'T_d', 'T_in', 'T_out', 'T_room',
+    'P_w_in', 'P_w_out', 'R_H_in', 'L_A', )

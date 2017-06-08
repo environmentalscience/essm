@@ -9,9 +9,7 @@ class eq_Qi(Equation):
 
     .. see-also: ...
     """
-    expr = Q_i == dT_i*lambda_i*A_i/L_i
+    expr = Q_i == dT_i * lambda_i * A_i / L_i
 
 
-__all__ = (
-    'eq_Qi',
-)
+__all__ = ('eq_Qi', )
