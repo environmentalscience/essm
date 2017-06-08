@@ -1,2 +1,1 @@
 """General physics variables. """
-
