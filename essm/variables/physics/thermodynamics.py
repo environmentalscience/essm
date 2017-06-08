@@ -4,7 +4,7 @@ from essm.variables import Variable
 from essm.variables.units import joule, kelvin, kilogram, meter, mole, pascal, second
 
 class alpha_a(Variable):
-    """Thermal diffusivity of dry air"""
+    """Thermal diffusivity of dry air."""
     name = 'alpha_a'
     unit = meter**2/second
     domain = 'real'
@@ -14,12 +14,12 @@ class alpha_a(Variable):
 
 
 class c_pa(Variable):
-    """Specific heat of dry air. """
+    """Specific heat of dry air."""
     name = 'c_pa'
     unit = joule/(kelvin*kilogram)
     domain = 'real'
     latex_name = 'c_{pa}'
-    default = 1010   
+    default = 1010.00000000000   
 
 
 
@@ -34,7 +34,7 @@ class c_pamol(Variable):
 
 
 class D_va(Variable):
-    """Binary diffusion coefficient of water vapour in air"""
+    """Binary diffusion coefficient of water vapour in air."""
     name = 'D_va'
     unit = meter**2/second
     domain = 'real'
@@ -44,7 +44,7 @@ class D_va(Variable):
 
 
 class g(Variable):
-    """Gravitational acceleration (9.81)"""
+    """Gravitational acceleration."""
     name = 'g'
     unit = meter/second**2
     domain = 'real'
@@ -54,7 +54,7 @@ class g(Variable):
 
 
 class Gr(Variable):
-    """Grashof number"""
+    """Grashof number."""
     name = 'Gr'
     unit = 1/1
     domain = 'real'
@@ -64,7 +64,7 @@ class Gr(Variable):
 
 
 class h_c(Variable):
-    """Average 1-sided convective transfer coefficient"""
+    """Average 1-sided convective transfer coefficient."""
     name = 'h_c'
     unit = joule/(kelvin*meter**2*second)
     domain = 'real'
@@ -74,7 +74,7 @@ class h_c(Variable):
 
 
 class k_a(Variable):
-    """Thermal conductivity of dry air"""
+    """Thermal conductivity of dry air."""
     name = 'k_a'
     unit = joule/(kelvin*meter*second)
     domain = 'real'
@@ -84,7 +84,7 @@ class k_a(Variable):
 
 
 class lambda_E(Variable):
-    """Latent heat of evaporation (2.45e6)"""
+    """Latent heat of evaporation."""
     name = 'lambda_E'
     unit = joule/kilogram
     domain = 'real'
@@ -94,7 +94,7 @@ class lambda_E(Variable):
 
 
 class Le(Variable):
-    """Lewis number"""
+    """Lewis number."""
     name = 'Le'
     unit = 1/1
     domain = 'real'
@@ -104,7 +104,7 @@ class Le(Variable):
 
 
 class M_N2(Variable):
-    """Molar mass of nitrogen (0.028)"""
+    """Molar mass of nitrogen."""
     name = 'M_N2'
     unit = kilogram/mole
     domain = 'real'
@@ -114,7 +114,7 @@ class M_N2(Variable):
 
 
 class M_O2(Variable):
-    """Molar mass of oxygen (0.032)"""
+    """Molar mass of oxygen."""
     name = 'M_O2'
     unit = kilogram/mole
     domain = 'real'
@@ -124,7 +124,7 @@ class M_O2(Variable):
 
 
 class M_w(Variable):
-    """Molar mass of water (0.018)"""
+    """Molar mass of water."""
     name = 'M_w'
     unit = kilogram/mole
     domain = 'real'
@@ -134,7 +134,7 @@ class M_w(Variable):
 
 
 class nu_a(Variable):
-    """Kinematic viscosity of dry air"""
+    """Kinematic viscosity of dry air."""
     name = 'nu_a'
     unit = meter**2/second
     domain = 'real'
@@ -144,7 +144,7 @@ class nu_a(Variable):
 
 
 class Nu(Variable):
-    """Nusselt number"""
+    """Nusselt number."""
     name = 'Nu'
     unit = 1/1
     domain = 'real'
@@ -154,7 +154,7 @@ class Nu(Variable):
 
 
 class P_a(Variable):
-    """Air pressure"""
+    """Air pressure."""
     name = 'P_a'
     unit = pascal
     domain = 'real'
@@ -164,17 +164,17 @@ class P_a(Variable):
 
 
 class Pr(Variable):
-    """Prandtl number (0.71)"""
+    """Prandtl number (0.71 for air)."""
     name = 'Pr'
     unit = 1/1
     domain = 'real'
     latex_name = 'N_{Pr}'
-    default = 0.710000000000000   
+       
 
 
 
 class P_N2(Variable):
-    """Partial pressure of nitrogen in the atmosphere"""
+    """Partial pressure of nitrogen."""
     name = 'P_N2'
     unit = pascal
     domain = 'real'
@@ -184,7 +184,7 @@ class P_N2(Variable):
 
 
 class P_O2(Variable):
-    """Partial pressure of oxygen in the atmosphere"""
+    """Partial pressure of oxygen."""
     name = 'P_O2'
     unit = pascal
     domain = 'real'
@@ -194,7 +194,7 @@ class P_O2(Variable):
 
 
 class P_wa(Variable):
-    """Vapour pressure in the atmosphere"""
+    """Vapour pressure in the atmosphere."""
     name = 'P_wa'
     unit = pascal
     domain = 'real'
@@ -204,7 +204,7 @@ class P_wa(Variable):
 
 
 class P_was(Variable):
-    """Saturation vapour pressure at air temperature"""
+    """Saturation vapour pressure at air temperature."""
     name = 'P_was'
     unit = pascal
     domain = 'real'
@@ -214,7 +214,7 @@ class P_was(Variable):
 
 
 class Re_c(Variable):
-    """Critical Reynolds number for the onset of turbulence"""
+    """Critical Reynolds number for the onset of turbulence."""
     name = 'Re_c'
     unit = 1/1
     domain = 'real'
@@ -224,7 +224,7 @@ class Re_c(Variable):
 
 
 class Re(Variable):
-    """Reynolds number"""
+    """Reynolds number."""
     name = 'Re'
     unit = 1/1
     domain = 'real'
@@ -234,7 +234,7 @@ class Re(Variable):
 
 
 class rho_a(Variable):
-    """Density of dry air"""
+    """Density of dry air."""
     name = 'rho_a'
     unit = kilogram/meter**3
     domain = 'real'
@@ -244,7 +244,7 @@ class rho_a(Variable):
 
 
 class R_mol(Variable):
-    """Molar gas constant (8.314472)"""
+    """Molar gas constant."""
     name = 'R_mol'
     unit = joule/(kelvin*mole)
     domain = 'real'
@@ -254,7 +254,7 @@ class R_mol(Variable):
 
 
 class R_s(Variable):
-    """Solar shortwave flux"""
+    """Solar shortwave flux per area."""
     name = 'R_s'
     unit = joule/(meter**2*second)
     domain = 'real'
@@ -264,7 +264,7 @@ class R_s(Variable):
 
 
 class Sh(Variable):
-    """Sherwood number"""
+    """Sherwood number."""
     name = 'Sh'
     unit = 1/1
     domain = 'real'
@@ -274,7 +274,7 @@ class Sh(Variable):
 
 
 class sigm(Variable):
-    """Stefan-Boltzmann constant (5.67e-8)"""
+    """Stefan-Boltzmann constant."""
     name = 'sigm'
     unit = joule/(kelvin**4*meter**2*second)
     domain = 'real'
@@ -284,7 +284,7 @@ class sigm(Variable):
 
 
 class T_a(Variable):
-    """Air temperature"""
+    """Air temperature."""
     name = 'T_a'
     unit = kelvin
     domain = 'real'
@@ -294,12 +294,32 @@ class T_a(Variable):
 
 
 class v_w(Variable):
-    """Wind velocity"""
+    """Wind velocity."""
     name = 'v_w'
     unit = meter/second
     domain = 'real'
     latex_name = 'v_w'
        
+
+
+
+class x_N2(Variable):
+    """Mole fraction of nitrogen in dry air."""
+    name = 'x_N2'
+    unit = 1
+    domain = 'real'
+    latex_name = 'x_{N2}'
+    default = 0.790000000000000   
+
+
+
+class x_O2(Variable):
+    """Mole fraction of oxygen in dry air."""
+    name = 'x_O2'
+    unit = 1
+    domain = 'real'
+    latex_name = 'x_{N2}'
+    default = 0.210000000000000   
 
 
 __all__ = (
@@ -333,4 +353,6 @@ __all__ = (
     'sigm',
     'T_a',
     'v_w',
+    'x_N2',
+    'x_O2',
 )

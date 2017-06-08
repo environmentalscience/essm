@@ -131,10 +131,11 @@ class EquationWriter(object):
 
     TPL = EQUATION_TPL
     VAR_TPL = VARIABLE_TPL
-    # Set up default imports, including general sage constants
     default_imports = {
         'essm.equations': {'Equation'},
+        '__future__': {'division'}
     }
+    """Set up default imports, including standard division as opposed to floor division in Python 2.7"""
 
     def __init__(self, docstring=None):
         self.docstring = docstring
