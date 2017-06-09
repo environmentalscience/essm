@@ -12,8 +12,9 @@ from sage.all import SR, Expression
 from sage.misc.latex import latex
 from sage.rings import integer, real_mpfr
 
-from ..variables import SHORT_UNIT_SYMBOLS, Variable
 from ..utils import process_parents
+from ..variables import SHORT_UNIT_SYMBOLS, Variable
+from ..variables._core import BaseVariable
 
 
 def convert(expr):
@@ -109,7 +110,17 @@ def build_instance_expression(instance, back=1):
     f_globals.setdefault('integer', integer)
     f_globals.setdefault('real_mpfr', real_mpfr)
 
-    return BaseEquation(SR, eval(class_def.expr, f_globals, frame.f_locals))
+    # Include locally defined variables.
+    f_locals = frame.f_locals.copy()
+    for name in dir(instance):
+        data = getattr(instance, name)
+        try:
+            if isinstance(data, BaseVariable):
+                f_locals[name] = data
+        except TypeError:
+            pass  # It is not a class.
+
+    return BaseEquation(SR, eval(class_def.expr, f_globals, f_locals))
 
 
 class EquationMeta(type):
