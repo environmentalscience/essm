@@ -7,7 +7,6 @@ import warnings
 
 from sage.all import SR, Expression, var
 
-from ..utils import process_parents
 from .units import SHORT_UNIT_SYMBOLS
 
 
@@ -39,7 +38,6 @@ class VariableMeta(type):
     def __new__(cls, name, parents, dct):
         """Build and register new variable."""
         if '__registry__' not in dct:
-            parents = process_parents(parents, BaseVariable)
             name = dct.get('name', name)
             domain = dct.get('domain', 'real')
             unit = dct.get('unit', 1 / 1)

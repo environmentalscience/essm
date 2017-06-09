@@ -12,7 +12,6 @@ from sage.all import SR, Expression
 from sage.misc.latex import latex
 from sage.rings import integer, real_mpfr
 
-from ..utils import process_parents
 from ..variables import SHORT_UNIT_SYMBOLS, Variable
 from ..variables._core import BaseVariable
 
@@ -133,7 +132,6 @@ class EquationMeta(type):
     def __new__(cls, name, parents, dct):
         """Build and register new variable."""
         if '__registry__' not in dct:
-            parents = process_parents(parents, BaseEquation)
             dct.setdefault('name', name)
             expr = dct.pop('expr')
 
