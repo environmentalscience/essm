@@ -54,7 +54,7 @@ class VariableWriter(object):
 
     @property
     def imports(self):
-        for key, values in self._imports.items():
+        for key, values in sorted(self._imports.items()):
             yield 'from {key} import {names}'.format(
                 key=key, names=', '.join(sorted(values)))
 
@@ -132,8 +132,8 @@ class EquationWriter(object):
     TPL = EQUATION_TPL
     VAR_TPL = VARIABLE_TPL
     default_imports = {
-        'essm.equations': {'Equation'},
-        '__future__': {'division'}}
+        '__future__': {'division'}, 
+        'essm.equations': {'Equation'}}
     """Set up default imports, including standard division as opposed to floor division in Python 2.7"""
 
     def __init__(self, docstring=None):
@@ -144,7 +144,7 @@ class EquationWriter(object):
 
     @property
     def imports(self):
-        for key, values in self._imports.items():
+        for key, values in sorted(self._imports.items()):
             yield 'from {key} import {names}'.format(
                 key=key, names=', '.join(sorted(values)))
 
