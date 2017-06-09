@@ -96,15 +96,14 @@ class eq_Elmol_conv(Equation):
     expr = E_lmol == -(P_wa - P_wl) * g_twmol / P_a
 
 
-class eq_gtwmol_gtw(eq_Elmol.definition, eq_Cwl.definition,
-                    eq_Elmol_conv.definition):
+class eq_gtwmol_gtw(eq_Elmol, eq_Cwl, eq_Elmol_conv):
     """g_twmol as a function of g_tw, using eq_Elmol, eq_Cwl and eq_Elmol_conv."""
 
     expr = g_twmol == -(P_a * P_wl * T_a - P_a * P_wa * T_l) * g_tw / ((
         P_wa - P_wl) * R_mol * T_a * T_l)
 
 
-class eq_gtwmol_gtw_iso(eq_gtwmol_gtw.definition):
+class eq_gtwmol_gtw_iso(eq_gtwmol_gtw):
     """g_twmol as a function of g_tw at isothermal conditions"""
 
     expr = g_twmol == P_a * g_tw / (R_mol * T_a)
