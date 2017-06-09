@@ -21,7 +21,7 @@ class {name}(Variable):
     unit = {units}
     domain = {domain!r}
     latex_name = {latexname!r}
-    {default}
+    {default}   
 """
 
 # CONSTANTS = re.compile(r'\b(e|pi)\b')
@@ -161,7 +161,7 @@ class EquationWriter(object):
 
     def eq(self, name, expr, doc='', parents=None, variables=None):
         if parents:
-            parents = ', '.join(parents)
+            parents = ', '.join(parent + '.definition' for parent in parents)
         else:
             parents = 'Equation'
 

@@ -157,19 +157,19 @@ class eq_PN2_PO2(Equation):
     expr = P_N2 == P_O2 * x_N2 / x_O2
 
 
-class eq_PO2(eq_Pa, eq_PN2_PO2):
+class eq_PO2(eq_Pa.definition, eq_PN2_PO2.definition):
     """Calculate P_O2 as a function of P_a, P_N2 and P_wa."""
 
     expr = P_O2 == (P_a * x_O2 - P_wa * x_O2) / (x_N2 + x_O2)
 
 
-class eq_PN2(eq_Pa, eq_PN2_PO2):
+class eq_PN2(eq_Pa.definition, eq_PN2_PO2.definition):
     """Calculate P_N2 as a function of P_a, P_O2 and P_wa."""
 
     expr = P_N2 == (P_a * x_N2 - P_wa * x_N2) / (x_N2 + x_O2)
 
 
-class eq_rhoa(eq_rhoa_Pwa_Ta, eq_PN2, eq_PO2):
+class eq_rhoa(eq_rhoa_Pwa_Ta.definition, eq_PN2.definition, eq_PO2.definition):
     """Calculate rho_a from T_a, P_a and P_wa."""
 
     expr = rho_a == ((M_N2 * P_a - (M_N2 - M_w) * P_wa) * x_N2 +
