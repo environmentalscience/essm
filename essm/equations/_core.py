@@ -95,32 +95,36 @@ class ClassDef(ast.NodeVisitor):
             break
 
 
-def build_instance_expression(instance, back=1):
+def build_instance_expression(instance, expr, back=1):
     """Return fixed expression."""
-    # Evaluate expression in the original context.
-    frame = sys._getframe(back + 1)
+    try:
+        # Evaluate expression in the original context.
+        frame = sys._getframe(back + 1)
 
-    # Find original code and convert numbers.
-    code = ast.parse(inspect.getsource(instance))
-    class_def = ClassDef()
-    class_def.visit(code)
+        # Find original code and convert numbers.
+        code = ast.parse(inspect.getsource(instance))
+        class_def = ClassDef()
+        class_def.visit(code)
 
-    # Include names used during number replacement.
-    f_globals = frame.f_globals.copy()
-    f_globals.setdefault('integer', integer)
-    f_globals.setdefault('real_mpfr', real_mpfr)
+        # Include names used during number replacement.
+        f_globals = frame.f_globals.copy()
+        f_globals.setdefault('integer', integer)
+        f_globals.setdefault('real_mpfr', real_mpfr)
 
-    # Include locally defined variables.
-    f_locals = frame.f_locals.copy()
-    for name in dir(instance):
-        data = getattr(instance, name)
-        try:
-            if isinstance(data, BaseVariable):
-                f_locals[name] = data
-        except TypeError:
-            pass  # It is not a class.
+        # Include locally defined variables.
+        f_locals = frame.f_locals.copy()
+        for name in dir(instance):
+            data = getattr(instance, name)
+            try:
+                if isinstance(data, BaseVariable):
+                    f_locals[name] = data
+            except TypeError:
+                pass  # It is not a class.
+        expr = eval(class_def.expr, f_globals, f_locals)
+    except TypeError:
+        pass
 
-    return BaseEquation(SR, eval(class_def.expr, f_globals, f_locals))
+    return BaseEquation(SR, expr)
 
 
 class EquationMeta(type):
@@ -135,7 +139,7 @@ class EquationMeta(type):
 
             instance = super(EquationMeta, cls).__new__(
                 cls, name, parents, dct)
-            instance.expr = expr = build_instance_expression(instance)
+            instance.expr = expr = build_instance_expression(instance, expr)
 
             if expr in instance.__registry__:
                 warnings.warn(
