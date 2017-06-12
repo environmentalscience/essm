@@ -14,6 +14,10 @@ class BaseVariable(Expression):
     """Physical variable."""
 
     @property
+    def __doc__(self):
+        return self.definition.__doc__
+
+    @property
     def definition(self):
         return Variable.__registry__[self]
 

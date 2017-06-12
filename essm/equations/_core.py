@@ -29,6 +29,10 @@ class BaseEquation(Expression):
     """Add definition and short unit."""
 
     @property
+    def __doc__(self):
+        return self.definition.__doc__
+
+    @property
     def definition(self):
         return Equation.__registry__[self]
 
@@ -114,11 +118,8 @@ def build_instance_expression(instance, expr, back=1):
         f_locals = frame.f_locals.copy()
         for name in dir(instance):
             data = getattr(instance, name)
-            try:
-                if isinstance(data, BaseVariable):
-                    f_locals[name] = data
-            except TypeError:
-                pass  # It is not a class.
+            if isinstance(data, BaseVariable):
+                f_locals[name] = data
         expr = eval(class_def.expr, f_globals, f_locals)
     except TypeError:
         pass
@@ -163,10 +164,9 @@ class Equation(object):
 
     @classmethod
     def args(cls):
-        return tuple(
-            Variable.__registry__[arg].expr
-            if arg in Variable.__registry__ else arg
-            for arg in cls.expr.args())
+        return tuple(Variable.__registry__[arg].expr
+                     if arg in Variable.__registry__ else arg
+                     for arg in cls.expr.args())
 
 
 __all__ = ('Equation', 'convert', )
