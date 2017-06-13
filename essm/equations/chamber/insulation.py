@@ -10,6 +10,7 @@ class eq_Qi(Equation):
     .. see-also: ...
     """
     expr = Q_i == dT_i * lambda_i * A_i / L_i
+    """Describe how you got the equation."""
 
 
 __all__ = ('eq_Qi', )

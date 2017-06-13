@@ -13,43 +13,70 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-sys.path.insert(0, os.path.abspath('..'))
-
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#
 import os
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
 import sys
 
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
+sys.path.insert(0, os.path.abspath('..'))
+
 from sphinx.domains.python import PyModulelevel
-from sphinx.ext.autodoc import ClassDocumenter
+from sphinx.ext.autodoc import AutoDirective, ClassDocumenter
+
+from essm.equations._core import BaseEquation
+from essm.variables._core import BaseVariable
 
 
-class ExpressionProxyDocumenter(ClassDocumenter):
+class BaseDocumenter(ClassDocumenter):
     """Document expression definitions."""
 
-    objtype = 'class'
-    member_order = 2
+    member_order = 1000
+
+    _BASE_ATTRIBUTES = {
+        'default',
+        'domain',
+        'expr',
+        'latex_name',
+        'unit',
+    }
 
     @classmethod
     def can_document_member(cls, member, membername, isattr, parent):
-        from essm.proxy import ExpressionProxy
-        return isinstance(member, ExpressionProxy) and hasattr(member, 'definition')
+        return isinstance(member, (BaseEquation, BaseVariable)) \
+            and hasattr(member, 'definition')
 
     @property
     def object(self):
-        if hasattr(self, '_expression_proxy_object'):
-            print(self._expression_proxy_object.definition.__name__)
-            return self._expression_proxy_object.definition
+        return getattr(self, '_definition', None)
 
     @object.setter
     def object(self, value):
-        setattr(self, '_expression_proxy_object', value)
+        if value is not None:
+            setattr(self, '_definition', value.definition)
+
+    def fiter_members(self, *args, **kwargs):
+        members = super(BaseDocumenter, self).filter_members(*args, **kwargs)
+        for (mname, member, isattr) in members:
+            if mname in self._BASE_ATTRIBUTES:
+                yield (mname, member, True)
+
+
+def process_base(app, objtype, membername, member, skip, options):
+    """Always document variables and equations."""
+    if isinstance(member, (BaseEquation, BaseVariable)):
+        return False
 
 
 def setup(app):
-    app.add_autodocumenter(ExpressionProxyDocumenter)
+    app.connect('autodoc-skip-member', process_base)
+    app.add_autodocumenter(BaseDocumenter)
+
+    def get_attr(obj, value, *args, **kwargs):
+        return getattr(obj.definition, value)
+
+    AutoDirective._special_attrgetters[BaseVariable] = get_attr
+    AutoDirective._special_attrgetters[BaseEquation] = get_attr
+
 
 # -- General configuration ------------------------------------------------
 
@@ -194,3 +221,5 @@ texinfo_documents = [
 intersphinx_mapping = {'https://docs.python.org/': None}
 
 autoclass_content = 'both'
+
+autodoc_default_flags = ['members', 'undoc-members', 'show-inheritance']

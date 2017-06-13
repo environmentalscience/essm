@@ -31,7 +31,6 @@ Then you can define a custom variable with its name, description, domain,
 latex_name, and unit, e.g.:
 
 ```
-@register
 class chamber_volume(Variable):
     """Volume of chamber."""
     latex_name = 'V_c'
@@ -66,7 +65,6 @@ from essm.equations import Equation, register
 ```
 Then define an equation, e.g.:
 ```
-@register
 class eq_Qi(Equation):
     """Calculate heat conduction through insulation material (Q_i)
     as a function of temperature difference ($dT_i$), and material
