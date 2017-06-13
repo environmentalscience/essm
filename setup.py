@@ -49,9 +49,13 @@ extras_require['all'] = []
 for reqs in extras_require.values():
     extras_require['all'].extend(reqs)
 
+
+setup_requires = [
+    'pytest-runner>=2.6.2',
+]
+
 install_requires = [
     # 'sage>=7.6',
-    'wrapt>=1.10.10',
 ]
 
 packages = find_packages()
@@ -80,6 +84,7 @@ setup(
     entry_points={},
     extras_require=extras_require,
     install_requires=install_requires,
+    setup_requires=setup_requires,
     tests_require=tests_require,
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
