@@ -19,6 +19,9 @@ cache:
   apt: true
   pip: true
 
+before_install:
+  - sudo sage -pip install -U pip setuptools
+
 install:
   - sudo sage setup.py install
 
