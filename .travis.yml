@@ -11,7 +11,8 @@ sudo: true
 addons:
   apt:
     sources:
-      - "ppa:aims/sagemath"
+      - deadsnakes
+      - sourceline: "ppa:aims/sagemath"
     packages:
       - "sagemath-upstream-binary"
 
