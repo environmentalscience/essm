@@ -27,7 +27,7 @@ SHORT_UNIT_SYMBOLS = {
 
 def markdown(unit):
     """Return markdown representaion of a unit."""
-    #FIXME consider (m/s)**(s/2)
+
     facs = unit.factor_list()
     str1 = ''
     for term1 in facs:

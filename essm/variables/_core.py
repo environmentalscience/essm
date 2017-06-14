@@ -28,6 +28,7 @@ class VariableMeta(type):
             unit = dct.get('unit', None)
             latex_name = dct.get('latex_name')
             definition = dct.pop('expr', None)
+            # In the below, domain=None is to avoid slow assume() process.
             expr = BaseVariable(
                 SR, SR.var(name, domain=None, latex_name=latex_name))
             dct.update({
@@ -44,7 +45,9 @@ class VariableMeta(type):
                 ))
                 definition_unit = definition.expand_units()
                 if unit is not None:
-                    assert bool(unit == definition_unit)
+                    if bool(unit == definition_unit):
+                        raise ValueError(
+                            'Invalid expression units: {0}'.format(unit))
                 else:
                     unit = definition_unit
                 instance.__expressions__[expr] = instance.expr = definition
@@ -67,20 +70,21 @@ class VariableMeta(type):
         return super(VariableMeta, cls).__new__(cls, name, parents, dct)
 
     def __remove__(cls, expr):
-        """Unregister a variable."""
+        """Remove a variable from the registry."""
         if expr in cls.__registry__:
             warnings.warn(
                 'Variable "{0}" will be unregistered.'.format(
                     cls.__registry__[expr].__module__),
                 stacklevel=2)
             del cls.__registry__[expr]
-            del cls.__units__[expr]
-            if expr in cls.__defaults__:
-                del cls.__defaults__[expr]
         else:
             warnings.warn(
                 'Variable "{0}" did not exist in registry.'.format(expr),
                 stacklevel=2)
+        if expr in cls.__units__:
+            del cls.__units__[expr]
+        if expr in cls.__defaults__:
+            del cls.__defaults__[expr]
 
     def set_domain(cls):
         """Set domain for all registered variables."""
@@ -104,13 +108,9 @@ class BaseVariable(BaseExpression):
     __units__ = Variable.__units__
 
     @property
-    def unit(self):
-        return Variable.__units__[self]
-
-    @property
     def short_unit(self):
         """Return short unit."""
-        return (self * self.unit / self).subs(SHORT_UNIT_SYMBOLS)
+        return (self * self.definition.unit / self).subs(SHORT_UNIT_SYMBOLS)
 
     def set_domain(self, domain=None):
         """Set domain to current variable."""
