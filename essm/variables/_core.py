@@ -5,11 +5,11 @@ from __future__ import absolute_import
 
 import warnings
 
-from sage.all import SR, Expression, var
+from sage.all import SR, Expression
 
-from .units import SHORT_UNIT_SYMBOLS
 from ..bases import BaseExpression
 from ..transformer import build_instance_expression
+from .units import SHORT_UNIT_SYMBOLS
 
 
 class VariableMeta(type):
@@ -29,7 +29,7 @@ class VariableMeta(type):
             latex_name = dct.get('latex_name')
             definition = dct.pop('expr', None)
             expr = BaseVariable(
-                SR, SR.var(name, domain=domain, latex_name=latex_name))
+                SR, SR.var(name, domain=None, latex_name=latex_name))
             dct.update({
                 'domain': domain,
                 'expr': expr,
@@ -82,6 +82,11 @@ class VariableMeta(type):
                 'Variable "{0}" did not exist in registry.'.format(expr),
                 stacklevel=2)
 
+    def set_domain(cls):
+        """Set domain for all registered variables."""
+        for expr in cls.__registry__:
+            expr.set_domain()
+
 
 class Variable(object):
     """Base type for all physical variables."""
@@ -106,6 +111,16 @@ class BaseVariable(BaseExpression):
     def short_unit(self):
         """Return short unit."""
         return (self * self.unit / self).subs(SHORT_UNIT_SYMBOLS)
+
+    def set_domain(self, domain=None):
+        """Set domain to current variable."""
+        if domain is not None:
+            self.definition.domain = domain
+        SR.var(
+            self.definition.name,
+            domain=self.definition.domain,
+            latex_name=self.definition.latex_name,
+        )
 
 
 __all__ = ('Variable')

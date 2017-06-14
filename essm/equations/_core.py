@@ -8,10 +8,10 @@ import warnings
 from sage.all import SR
 from sage.misc.latex import latex
 
-from ..variables import Variable
-from ..variables._core import BaseVariable
 from ..bases import BaseExpression, convert
 from ..transformer import build_instance_expression
+from ..variables import Variable
+from ..variables._core import BaseVariable
 
 
 class EquationMeta(type):
