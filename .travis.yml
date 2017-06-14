@@ -8,10 +8,16 @@ python:
 
 sudo: true
 
-before_install:
-  - sudo apt-add-repository -y ppa:aims/sagemath
-  - sudo apt-get update
-  - sudo apt-get install sagemath-upstream-binary
+addons:
+  apt:
+    sources:
+      - "ppa:aims/sagemath"
+    packages:
+      - "sagemath-upstream-binary"
+
+cache:
+  apt: true
+  pip: true
 
 install:
   - sudo sage setup.py install
