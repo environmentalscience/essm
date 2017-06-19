@@ -11,6 +11,8 @@ sudo: true
 cache:
   apt: true
   pip: true
+  directories:
+  - SageMath
 
 env:
   global:
@@ -18,18 +20,16 @@ env:
     - secure: "pEy4FXJt+jHGjWS8K7HJ/Quaqt3He2cjPK2DcuWwjX0xK71ZHqyhRU2xyyQ5JF5KROcZZNnzskGFVzsDuARAUB9N7B/EfvYRtEB230N7mc62/KbBA17NBxgaBo4KknRROulaTwxMxnqx0EPvGbk5JRS/frjiE+du5yMIY70rZykK7m2D2ZyB2tERRwux+74TF4yHtZm0bI1RgVsdiUqrfhw6RDDImvAfkmClrPxjEiU5BzebOs7QZhCIltLRdx7NWtsQVnBlUe3oJdkYSMRb0b7sxmZHCHtoHZocM0COeh7GMfe/U97pUN8++Ua18lJdQNIYAzW70hhvAFok8E7mYEPD11XllZg+LbjuK1Do0giUpfoHHFkwTzX7z+9+B7XHBmO/SvSX1eXWmCZfTpruM1Xzb4e4BAlvqAkqWhZkF/FtcEvk8Dcc815tyz8OVrrxQeUT3KtIXKSTxfHzyR8wBBBA9ipl5rVD8tgNbNo2ufYmU7t38ZAOdyg/xrbpJDBW8T/XxmK3yuUjzaiXir3BRqG7Gkw1lw6s1kCMEOxN9FIASAgI5OtaqSNKNnn0y8B7yLdbzlCEhALSyfgPGZaD4oi4ZVEM+7QX1YUdM0p10JXvtPbdScQAu40ud4zGlHnflwVIk11zBa4eFRJgkqzJwfHfWBcIcvxdUbHnTUCaCIA="
 
 before_install:
-  - sudo -E apt-add-repository -y 'deb http://ppa.launchpad.net/aims/sagemath/ubuntu xenial main'
-  - sudo -E apt-get update
-  - travis_wait 30 sudo -E apt-get install sagemath-upstream-binary
-  - sudo -E chown travis:travis -R /usr/lib/sagemath/
-  - pip install -U pip setuptools
-  - pip install -e .[all]
-  - sage -pip install -U pip setuptools
+  - >
+      if [ ! -f SageMath/sage ] ; then
+        wget -O - http://mirror.switch.ch/mirror/sagemath/linux/64bit/sage-7.6-Ubuntu_12.04-x86_64.tar.bz2 | tar xjf -;
+        SageMath/sage -pip install -U pip setuptools;
+      fi
 
 install:
-  - sage -pip install -e .[all]
+  - SageMath/sage -pip install -e .[all]
 
-script: sage setup.py sphinx_build
+script: SageMath/sage setup.py build_sphinx
 
 after_success:
   - ./gh-pages.sh
