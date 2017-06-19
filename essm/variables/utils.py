@@ -10,6 +10,7 @@ def generate_metadata_table(variables=None, include_header=True):
     If variables not provided in list ``variables``, table
     will contain all variables in ``Variables.__registry__``.
     """
+    from ._core import Variable
     variables = variables or Variable.__registry__.keys()
     if include_header:
         yield ('Symbol', 'Name', 'Description', 'Default value', 'Units')
@@ -18,6 +19,6 @@ def generate_metadata_table(variables=None, include_header=True):
         symbol = '$' + variable.definition.latex + '$'
         name = str(variable)
         doc = variable.__doc__
-        val = str(variable.__defaults__.get(v1, '-')
+        val = str(variable.__defaults__.get(variable, '-'))
 
-        yield (symbol, name, doc, val, markdown(variable.short_unit)))
+        yield (symbol, name, doc, val, markdown(variable.short_unit))
