@@ -15,8 +15,8 @@ def generate_metadata_table(variables=None, include_header=True):
     if include_header:
         yield ('Symbol', 'Name', 'Description', 'Default value', 'Units')
 
-    for variable in sorted(variables, key=lambda x: x.latex_name):
-        symbol = '$' + variable.definition.latex + '$'
+    for variable in sorted(variables, key=lambda x: x._latex_().lower()):
+        symbol = '$' + variable._latex_() + '$'
         name = str(variable)
         doc = variable.__doc__
         val = str(variable.__defaults__.get(variable, '-'))

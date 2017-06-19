@@ -108,6 +108,10 @@ class BaseVariable(BaseExpression):
     __units__ = Variable.__units__
 
     @property
+    def __doc__(self):
+        return self.definition.__doc__
+
+    @property
     def short_unit(self):
         """Return short unit."""
         return (self * self.definition.unit / self).subs(SHORT_UNIT_SYMBOLS)

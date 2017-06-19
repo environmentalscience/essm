@@ -64,5 +64,9 @@ class BaseEquation(BaseExpression):
     __registry__ = Equation.__registry__
     __units__ = Variable.__units__
 
+    @property
+    def __doc__(self):
+        return self.definition.__doc__
+
 
 __all__ = ('Equation', )

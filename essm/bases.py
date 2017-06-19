@@ -45,10 +45,6 @@ class BaseExpression(Expression):
     def definition(self):
         return self.__registry__[self]
 
-    @property
-    def __doc__(self):
-        return self.definition.__doc__
-
     def expand_units(self, simplify_full=True):
         """Expand units of all arguments in expression."""
         return expand_units(self, self.__units__, simplify_full=simplify_full)
