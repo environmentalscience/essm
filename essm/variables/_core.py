@@ -8,27 +8,8 @@ import warnings
 from sage.all import SR, Expression, var
 
 from .units import SHORT_UNIT_SYMBOLS
-
-
-class BaseVariable(Expression):
-    """Physical variable."""
-
-    @property
-    def __doc__(self):
-        return self.definition.__doc__
-
-    @property
-    def definition(self):
-        return Variable.__registry__[self]
-
-    @property
-    def unit(self):
-        return Variable.__units__[self]
-
-    @property
-    def short_unit(self):
-        """Return short unit."""
-        return (self * self.unit / self).subs(SHORT_UNIT_SYMBOLS)
+from ..bases import BaseExpression
+from ..transformer import build_instance_expression
 
 
 class VariableMeta(type):
@@ -44,18 +25,32 @@ class VariableMeta(type):
         if '__registry__' not in dct:
             name = dct.get('name', name)
             domain = dct.get('domain', 'real')
-            unit = dct.get('unit', 1 / 1)
+            unit = dct.get('unit', None)
             latex_name = dct.get('latex_name')
+            definition = dct.pop('expr', None)
             expr = BaseVariable(
                 SR, SR.var(name, domain=domain, latex_name=latex_name))
             dct.update({
                 'domain': domain,
                 'expr': expr,
-                'latex': expr._latex_(),
-                'name': name,
-                'unit': unit, })
+                'name': name, })
+
             instance = super(VariableMeta, cls).__new__(
                 cls, name, parents, dct)
+
+            if definition is not None:
+                definition = BaseVariable(SR, build_instance_expression(
+                    instance, definition
+                ))
+                definition_unit = definition.expand_units()
+                if unit is not None:
+                    assert bool(unit == definition_unit)
+                else:
+                    unit = definition_unit
+                instance.__expressions__[expr] = instance.expr = definition
+
+            instance.unit = unit
+
             if expr in instance.__registry__:
                 warnings.warn(
                     'Variable "{0}" will be overridden by "{1}"'.format(
@@ -94,6 +89,23 @@ class Variable(object):
     __registry__ = {}
     __defaults__ = {}
     __units__ = {}
+    __expressions__ = {}
+
+
+class BaseVariable(BaseExpression):
+    """Physical variable."""
+
+    __registry__ = Variable.__registry__
+    __units__ = Variable.__units__
+
+    @property
+    def unit(self):
+        return Variable.__units__[self]
+
+    @property
+    def short_unit(self):
+        """Return short unit."""
+        return (self * self.unit / self).subs(SHORT_UNIT_SYMBOLS)
 
 
 __all__ = ('Variable')
