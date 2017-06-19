@@ -5,7 +5,22 @@ from __future__ import absolute_import
 
 from sage.all import SR, Expression
 
-from .variables.units import SHORT_UNIT_SYMBOLS
+
+def expand_units(expr, units=None, simplify_full=True):
+    """Expand units of all arguments in expression."""
+    from .variables._core import Variable
+
+    units = units or Variable.__units__
+    used_units = {}
+    # Need to multiply units with variable,
+    # so that we can devide by the symbolic equation later:
+    for variable in expr.arguments():
+        used_units[variable] = variable * units[variable]
+
+    result = expr.__class__(SR, expr.subs(used_units) / expr).convert()
+    if simplify_full:
+        result = result.simplify_full()
+    return result
 
 
 def convert(expr):
@@ -36,20 +51,15 @@ class BaseExpression(Expression):
 
     def expand_units(self, simplify_full=True):
         """Expand units of all arguments in expression."""
-        used_units = {}
-        # Need to multiply units with variable,
-        # so that we can devide by the symbolic equation later:
-        for variable in self.arguments():
-            used_units[variable] = variable * self.__units__[variable]
-
-        result = self.__class__(SR, self.subs(used_units) / self).convert()
-        if simplify_full:
-            result = result.simplify_full()
-        return result
+        return expand_units(self, self.__units__, simplify_full=simplify_full)
 
     def short_units(self):
         """Return short units of equation."""
+        from .variables.units import SHORT_UNIT_SYMBOLS
         return self.expand_units().subs(SHORT_UNIT_SYMBOLS)
 
     def convert(self):
         return convert(self)
+
+
+__all__ = ('BaseExpression', 'convert', 'expand_units')
