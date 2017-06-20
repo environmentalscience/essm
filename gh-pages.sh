@@ -1,10 +1,10 @@
 set -e # exit with nonzero exit code if anything fails
 
 # clear and re-create the docs directory
-rm -rf build/sphinx/html || exit 0;
+# rm -rf build/sphinx/html || exit 0;
 
 # compile docs
-sage setup.py sphinx_build
+# sage setup.py sphinx_build
 
 # go to the docs directory and create a *new* Git repo
 git clone -b gh-pages --single-branch https://${GH_TOKEN}@${GH_REF} gh-pages
@@ -21,4 +21,5 @@ git add .
 git commit -m "docs: deployment to github pages"
 
 # push the docs to gh-pages
-git push --quiet origin gh-pages > /dev/null 2>&1
+# git push --quiet origin gh-pages > /dev/null 2>&1
+git push origin gh-pages
