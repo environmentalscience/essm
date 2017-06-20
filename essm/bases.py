@@ -3,6 +3,8 @@
 
 from __future__ import absolute_import
 
+import warnings
+
 from sage.all import SR, Expression
 
 
@@ -17,7 +19,7 @@ def expand_units(expr, units=None, simplify_full=True):
     for variable in expr.arguments():
         used_units[variable] = variable * units[variable]
 
-    result = expr.__class__(SR, expr.subs(used_units) / expr).convert()
+    result = Expression(SR, expr.subs(used_units) / expr).convert()
     if simplify_full:
         result = result.simplify_full()
     return result
@@ -35,15 +37,23 @@ def convert(expr):
 class BaseExpression(Expression):
     """Add definition and instance documentation."""
 
-    __registry__ = None
-    """Override the class property when subclassing."""
+    def __init__(self, expr, definition, units=None):
+        """Initialize expression."""
+        super(BaseExpression, self).__init__(SR, expr)
+        self.definition = definition
+        self.__units__ = units or getattr(definition, '__units__', None)
 
-    __units__ = None
-    """Override the class property when subclassing."""
-
-    @property
-    def definition(self):
-        return self.__registry__[self]
+    def register(self):
+        """Register expression in registry."""
+        if self in self.definition.__registry__:
+            warnings.warn(
+                '"{0}" will be overridden by "{1}"'.format(
+                    self.definition.__registry__[self].__module__ + ':'
+                    + self.definition.name,
+                    self.definition.__module__ + ':' + name, ),
+                stacklevel=2)
+        self.definition.__registry__[self] = self.definition
+        return self
 
     def expand_units(self, simplify_full=True):
         """Expand units of all arguments in expression."""

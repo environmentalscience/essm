@@ -3,8 +3,6 @@
 
 from __future__ import absolute_import
 
-import warnings
-
 from sage.all import SR
 from sage.misc.latex import latex
 
@@ -26,16 +24,10 @@ class EquationMeta(type):
             instance = super(EquationMeta, cls).__new__(
                 cls, name, parents, dct)
             instance.expr = expr = BaseEquation(
-                SR, build_instance_expression(instance, expr)
-            )
-
-            if expr in instance.__registry__:
-                warnings.warn(
-                    'Equation "{0}" will be overridden by "{1}"'.format(
-                        instance.__registry__[expr].__module__ + ':' + name,
-                        instance.__module__ + ':' + name, ),
-                    stacklevel=2)
-            instance.__registry__[expr] = instance
+                build_instance_expression(instance, expr),
+                instance,
+                units=Variable.__units__,
+            ).register()
 
             expanded_units = expr.expand_units()
             if not expanded_units:
@@ -60,9 +52,6 @@ class Equation(object):
 
 class BaseEquation(BaseExpression):
     """Add definition and short unit."""
-
-    __registry__ = Equation.__registry__
-    __units__ = Variable.__units__
 
     @property
     def __doc__(self):
