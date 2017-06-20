@@ -13,58 +13,46 @@ from .units import SHORT_UNIT_SYMBOLS
 
 
 class VariableMeta(type):
-    """Variable interface.
-
-    1. register domain (default: real)
-    2. store _latex_() name
-    3. register default values for each variable
-    """
+    """Variable interface."""
 
     def __new__(cls, name, parents, dct):
         """Build and register new variable."""
         if '__registry__' not in dct:
-            name = dct.get('name', name)
-            domain = dct.get('domain', 'real')
-            unit = dct.get('unit', None)
-            latex_name = dct.get('latex_name')
+            unit = dct.pop('unit', None)
             definition = dct.pop('expr', None)
-            # In the below, domain=None is to avoid slow assume() process.
-            expr = BaseVariable(
-                SR, SR.var(name, domain=None, latex_name=latex_name))
-            dct.update({
-                'domain': domain,
-                'expr': expr,
-                'name': name, })
+
+            dct.setdefault('name', name)
+            dct.setdefault('domain', 'real')
+            dct.setdefault('latex_name', dct['name'])
+            dct.setdefault('unit', unit or 1/1)
 
             instance = super(VariableMeta, cls).__new__(
                 cls, name, parents, dct)
 
+            # In the below, domain=None is to avoid slow assume() process.
+            expr = BaseVariable(
+                SR.var(name, domain=None, latex_name=dct['latex_name']),
+                instance,
+            ).register()
+
+            # Variable with definition expression.
             if definition is not None:
-                definition = BaseVariable(SR, build_instance_expression(
-                    instance, definition
-                ))
-                definition_unit = definition.expand_units()
-                if unit is not None:
-                    if bool(unit == definition_unit):
-                        raise ValueError(
-                            'Invalid expression units: {0}'.format(unit))
-                else:
-                    unit = definition_unit
+                definition = BaseVariable(
+                    build_instance_expression(instance, definition),
+                    instance,
+                )
+                instance.unit = definition.expand_units()
+                if unit is not None and bool(unit == instance.unit):
+                    raise ValueError(
+                        'Invalid expression units: {0}'.format(unit))
                 instance.__expressions__[expr] = instance.expr = definition
 
-            instance.unit = unit
-
-            if expr in instance.__registry__:
-                warnings.warn(
-                    'Variable "{0}" will be overridden by "{1}"'.format(
-                        instance.__registry__[expr].__module__ + ':' + name,
-                        instance.__module__ + ':' + name, ),
-                    stacklevel=2)
-            instance.__registry__[expr] = instance
+            # Store default variable only if it is defined.
             if 'default' in dct:
                 instance.__defaults__[expr] = dct['default']
+
             # Store unit for each variable:
-            instance.__units__[expr] = unit
+            instance.__units__[expr] = instance.unit
             return expr
 
         return super(VariableMeta, cls).__new__(cls, name, parents, dct)
@@ -120,6 +108,10 @@ class BaseVariable(BaseExpression):
         """Set domain to current variable."""
         if domain is not None:
             self.definition.domain = domain
+        self.rebuild_symbol()
+
+    def rebuild_symbol(self):
+        """Rebuild symbolic representation."""
         SR.var(
             self.definition.name,
             domain=self.definition.domain,
@@ -127,4 +119,4 @@ class BaseVariable(BaseExpression):
         )
 
 
-__all__ = ('Variable')
+__all__ = ('Variable', )
