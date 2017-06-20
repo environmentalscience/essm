@@ -19,6 +19,7 @@ def generate_metadata_table(variables=None, include_header=True):
         symbol = '$' + variable._latex_() + '$'
         name = str(variable)
         doc = variable.__doc__
-        val = str(variable.__defaults__.get(variable, '-'))
+        val = str(Variable.__defaults__.get(variable, '-'))
 
         yield (symbol, name, doc, val, markdown(variable.short_unit))
+
