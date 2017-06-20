@@ -1,12 +1,12 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>essm.variables._core &mdash; ESSM 0.1.0 documentation</title>
+    <title>essm.variables._core &#8212; ESSM 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,22 +17,23 @@
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="ESSM 0.1.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -44,90 +45,90 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Core variable type.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">from</span> <span class="nn">sage.all</span> <span class="kn">import</span> <span class="n">SR</span><span class="p">,</span> <span class="n">Expression</span>
+<span class="kn">from</span> <span class="nn">sage.all</span> <span class="k">import</span> <span class="n">SR</span><span class="p">,</span> <span class="n">Expression</span>
 
-<span class="kn">from</span> <span class="nn">..bases</span> <span class="kn">import</span> <span class="n">BaseExpression</span>
-<span class="kn">from</span> <span class="nn">..transformer</span> <span class="kn">import</span> <span class="n">build_instance_expression</span>
-<span class="kn">from</span> <span class="nn">.units</span> <span class="kn">import</span> <span class="n">SHORT_UNIT_SYMBOLS</span>
+<span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">BaseExpression</span>
+<span class="kn">from</span> <span class="nn">..transformer</span> <span class="k">import</span> <span class="n">build_instance_expression</span>
+<span class="kn">from</span> <span class="nn">.units</span> <span class="k">import</span> <span class="n">SHORT_UNIT_SYMBOLS</span>
 
 
 <span class="k">class</span> <span class="nc">VariableMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Variable interface.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build and register new variable.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s1">&#39;__registry__&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
-            <span class="n">unit</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-            <span class="n">definition</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;expr&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">definition</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;expr&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">)</span>
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;latex_name&#39;</span><span class="p">,</span> <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="ow">or</span> <span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="p">)</span>
 
-            <span class="n">instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">VariableMeta</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span>
-                <span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">VariableMeta</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span>
+                <span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
 
             <span class="c1"># In the below, domain=None is to avoid slow assume() process.</span>
             <span class="n">expr</span> <span class="o">=</span> <span class="n">BaseVariable</span><span class="p">(</span>
-                <span class="n">SR</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">latex_name</span><span class="o">=</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;latex_name&#39;</span><span class="p">]),</span>
+                <span class="n">SR</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex_name</span><span class="o">=</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;latex_name&#39;</span><span class="p">]),</span>
                 <span class="n">instance</span><span class="p">,</span>
             <span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
 
             <span class="c1"># Variable with definition expression.</span>
-            <span class="k">if</span> <span class="n">definition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">definition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">definition</span> <span class="o">=</span> <span class="n">BaseVariable</span><span class="p">(</span>
                     <span class="n">build_instance_expression</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">definition</span><span class="p">),</span>
                     <span class="n">instance</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">instance</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">definition</span><span class="o">.</span><span class="n">expand_units</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">unit</span> <span class="o">==</span> <span class="n">instance</span><span class="o">.</span><span class="n">unit</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="n">unit</span> <span class="o">==</span> <span class="n">instance</span><span class="o">.</span><span class="n">unit</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                        <span class="s1">&#39;Invalid expression units: {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+                        <span class="s1">&#39;Invalid expression units: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
                 <span class="n">instance</span><span class="o">.</span><span class="n">__expressions__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="n">definition</span>
 
             <span class="c1"># Store default variable only if it is defined.</span>
             <span class="k">if</span> <span class="s1">&#39;default&#39;</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
-                <span class="n">instance</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span> <span class="o">=</span> <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">__defaults__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span> <span class="o">=</span> <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">]</span>
 
             <span class="c1"># Store unit for each variable:</span>
             <span class="n">instance</span><span class="o">.</span><span class="n">__units__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">unit</span>
             <span class="k">return</span> <span class="n">expr</span>
 
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">VariableMeta</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">VariableMeta</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__remove__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__remove__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Remove a variable from the registry.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">expr</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__registry__</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__registry__</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="s1">&#39;Variable &quot;{0}&quot; will be unregistered.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">cls</span><span class="o">.</span><span class="n">__registry__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span><span class="o">.</span><span class="vm">__module__</span><span class="p">),</span>
+                <span class="s1">&#39;Variable &quot;</span><span class="si">{0}</span><span class="s1">&quot; will be unregistered.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">cls</span><span class="o">.</span><span class="n">__registry__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span><span class="o">.</span><span class="n">__module__</span><span class="p">),</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-            <span class="k">del</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__registry__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">cls</span><span class="o">.</span><span class="n">__registry__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="s1">&#39;Variable &quot;{0}&quot; did not exist in registry.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span>
+                <span class="s1">&#39;Variable &quot;</span><span class="si">{0}</span><span class="s1">&quot; did not exist in registry.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">expr</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__units__</span><span class="p">:</span>
-            <span class="k">del</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__units__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">expr</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">:</span>
-            <span class="k">del</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__units__</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">cls</span><span class="o">.</span><span class="n">__units__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__defaults__</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">cls</span><span class="o">.</span><span class="n">__defaults__</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">set_domain</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_domain</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set domain for all registered variables.&quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__registry__</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">__registry__</span><span class="p">:</span>
             <span class="n">expr</span><span class="o">.</span><span class="n">set_domain</span><span class="p">()</span>
 
 
 <span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base type for all physical variables.&quot;&quot;&quot;</span>
-    <span class="vm">__metaclass__</span> <span class="o">=</span> <span class="n">VariableMeta</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">VariableMeta</span>
     <span class="n">__registry__</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="vm">__defaults__</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">__defaults__</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">__units__</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">__expressions__</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -140,16 +141,16 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="vm">__doc__</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">__doc__</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">short_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return short unit.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span> <span class="o">/</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">SHORT_UNIT_SYMBOLS</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set domain to current variable.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rebuild_symbol</span><span class="p">()</span>
 
@@ -196,7 +197,7 @@
       &copy;2017, Stan Schymanski.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
       
     </div>

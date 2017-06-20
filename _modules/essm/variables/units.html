@@ -1,12 +1,12 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>essm.variables.units &mdash; ESSM 0.1.0 documentation</title>
+    <title>essm.variables.units &#8212; ESSM 0.1.0 documentation</title>
     
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
@@ -17,22 +17,23 @@
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="ESSM 0.1.0 documentation" href="../../../index.html" />
-    <link rel="up" title="Module code" href="../../index.html" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -44,8 +45,8 @@
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Define unit symbols.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">sage.all</span> <span class="kn">import</span> <span class="n">var</span>
-<span class="kn">from</span> <span class="nn">sage.symbolic.units</span> <span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span> <span class="nn">sage.all</span> <span class="k">import</span> <span class="n">var</span>
+<span class="kn">from</span> <span class="nn">sage.symbolic.units</span> <span class="k">import</span> <span class="n">units</span>
 
 <span class="n">joule</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">energy</span><span class="o">.</span><span class="n">joule</span>
 <span class="n">kelvin</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">kelvin</span>
@@ -78,7 +79,7 @@
         <span class="k">if</span> <span class="n">op1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">str1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">term1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">str1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">str1</span> <span class="o">+=</span> <span class="s1">&#39; {0}$^{{{1}}}$ &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">markdown</span><span class="p">(</span><span class="n">term1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">markdown</span><span class="p">(</span><span class="n">op1</span><span class="p">))</span>
+            <span class="n">str1</span> <span class="o">+=</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1">$^{{</span><span class="si">{1}</span><span class="s1">}}$ &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">markdown</span><span class="p">(</span><span class="n">term1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">markdown</span><span class="p">(</span><span class="n">op1</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">str1</span></div>
 
 
@@ -117,7 +118,7 @@
       &copy;2017, Stan Schymanski.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
       
     </div>
