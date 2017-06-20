@@ -9,7 +9,7 @@ set -e # exit with nonzero exit code if anything fails
 # go to the docs directory and create a *new* Git repo
 git clone -b gh-pages --single-branch https://${GH_TOKEN}@${GH_REF} gh-pages
 rm -rf gh-pages/*.html gh-pages/styles gh-pages/scripts
-cp -r build/sphinx/html/* gh-pages
+cp -r docs/_build/html/* gh-pages
 cd gh-pages
 
 # set the user to invenio-developer

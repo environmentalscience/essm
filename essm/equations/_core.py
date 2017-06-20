@@ -26,8 +26,7 @@ class EquationMeta(type):
             instance.expr = expr = BaseEquation(
                 build_instance_expression(instance, expr),
                 instance,
-                units=Variable.__units__,
-            ).register()
+                units=Variable.__units__, ).register()
 
             expanded_units = expr.expand_units()
             if not expanded_units:
@@ -45,9 +44,9 @@ class Equation(object):
 
     @classmethod
     def args(cls):
-        return tuple(Variable.__registry__[arg].expr
-                     if arg in Variable.__registry__ else arg
-                     for arg in cls.expr.args())
+        return tuple(
+            Variable.__registry__.get(arg, arg)
+            for arg in cls.expr.args())
 
 
 class BaseEquation(BaseExpression):
