@@ -19,7 +19,7 @@ def expand_units(expr, units=None, simplify_full=True):
     for variable in expr.arguments():
         used_units[variable] = variable * units[variable]
 
-    result = Expression(SR, expr.subs(used_units) / expr).convert()
+    result = convert(Expression(SR, expr.subs(used_units) / expr))
     if simplify_full:
         result = result.simplify_full()
     return result
@@ -50,7 +50,7 @@ class BaseExpression(Expression):
                 '"{0}" will be overridden by "{1}"'.format(
                     self.definition.__registry__[self].__module__ + ':' +
                     self.definition.name,
-                    self.definition.__module__ + ':' + name, ),
+                    self.definition.__module__ + ':' + str(self), ),
                 stacklevel=2)
         self.definition.__registry__[self] = self.definition
         return self
