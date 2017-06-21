@@ -48,6 +48,16 @@ class ClassDef(ast.NodeVisitor):
             break
 
 
+def unindent(source):
+    """Fix indentation."""
+    counter = 0
+    while source[counter] == ' ':
+        counter += 1
+    if counter:
+        return '\n'.join(line[counter:] for line in source.split('\n'))
+    return source
+
+
 def build_instance_expression(instance, expr, back=1):
     """Return fixed expression."""
     from .variables._core import BaseVariable
@@ -56,7 +66,7 @@ def build_instance_expression(instance, expr, back=1):
         frame = sys._getframe(back + 1)
 
         # Find original code and convert numbers.
-        code = ast.parse(inspect.getsource(instance))
+        code = ast.parse(unindent(inspect.getsource(instance)))
         class_def = ClassDef()
         class_def.visit(code)
 
@@ -72,7 +82,7 @@ def build_instance_expression(instance, expr, back=1):
             if isinstance(data, BaseVariable):
                 f_locals[name] = data
         expr = eval(class_def.expr, f_globals, f_locals)
-    except TypeError:
+    except TypeError:  # pragma: no cover
         pass
 
     return expr

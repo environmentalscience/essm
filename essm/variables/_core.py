@@ -24,7 +24,7 @@ class VariableMeta(type):
             dct.setdefault('name', name)
             dct.setdefault('domain', 'real')
             dct.setdefault('latex_name', dct['name'])
-            dct.setdefault('unit', unit or 1/1)
+            dct.setdefault('unit', unit or 1 / 1)
 
             instance = super(VariableMeta, cls).__new__(
                 cls, name, parents, dct)
@@ -32,19 +32,18 @@ class VariableMeta(type):
             # In the below, domain=None is to avoid slow assume() process.
             expr = BaseVariable(
                 SR.var(name, domain=None, latex_name=dct['latex_name']),
-                instance,
-            ).register()
+                instance, ).register()
 
             # Variable with definition expression.
             if definition is not None:
                 definition = BaseVariable(
                     build_instance_expression(instance, definition),
-                    instance,
-                )
+                    instance, )
                 instance.unit = definition.expand_units()
-                if unit is not None and bool(unit == instance.unit):
+                if unit is not None and bool(unit != instance.unit):
                     raise ValueError(
-                        'Invalid expression units: {0}'.format(unit))
+                        'Invalid expression units {0} should be {1}'.format(
+                            instance.unit, unit))
                 instance.__expressions__[expr] = instance.expr = definition
 
             # Store default variable only if it is defined.
@@ -57,7 +56,7 @@ class VariableMeta(type):
 
         return super(VariableMeta, cls).__new__(cls, name, parents, dct)
 
-    def __remove__(cls, expr):
+    def __delitem__(cls, expr):
         """Remove a variable from the registry."""
         if expr in cls.__registry__:
             warnings.warn(
@@ -66,9 +65,7 @@ class VariableMeta(type):
                 stacklevel=2)
             del cls.__registry__[expr]
         else:
-            warnings.warn(
-                'Variable "{0}" did not exist in registry.'.format(expr),
-                stacklevel=2)
+            raise KeyError(expr)
         if expr in cls.__units__:
             del cls.__units__[expr]
         if expr in cls.__defaults__:
@@ -115,8 +112,7 @@ class BaseVariable(BaseExpression):
         SR.var(
             self.definition.name,
             domain=self.definition.domain,
-            latex_name=self.definition.latex_name,
-        )
+            latex_name=self.definition.latex_name, )
 
 
 __all__ = ('Variable', )

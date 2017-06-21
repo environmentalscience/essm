@@ -22,4 +22,3 @@ def generate_metadata_table(variables=None, include_header=True):
         val = str(Variable.__defaults__.get(variable, '-'))
 
         yield (symbol, name, doc, val, markdown(variable.short_unit))
-

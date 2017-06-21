@@ -21,7 +21,7 @@ class {name}(Variable):
     unit = {units}
     domain = {domain!r}
     latex_name = {latexname!r}
-    {default}   
+    {default}
 """
 
 # CONSTANTS = re.compile(r'\b(e|pi)\b')
@@ -71,8 +71,7 @@ class VariableWriter(object):
                     "    '{0}',".format(var['name']) for var in self.vars))
         return result
 
-    def var(
-            self,
+    def var(self,
             name,
             doc='',
             units=None,
@@ -81,12 +80,12 @@ class VariableWriter(object):
             value=None):
         if not latexname:
             latexname = name
-        if value == None:
+        if value is None:
             default = ''
         else:
             default = 'default = ' + str(value)
             # Skip trailing zeroes from real numbers only
-            if type(value) == type(0.1):
+            if isinstance(value, type(0.1)):
                 default = 'default = ' + value.str(skip_zeroes=True).replace(
                     '^', '**')
         context = {
@@ -110,31 +109,39 @@ class VariableWriter(object):
 
 
 class EquationWriter(object):
-    """Generate Equation definitions.
+    r"""Generate Equation definitions.
 
     Example:
 
     .. code-block:: python
+
         from essm.equations import Equation
         from essm._generator import EquationWriter
         from essm.variables.units import second, meter, kelvin
-        from essm.variables.physics.thermodynamics import R_s, D_va, T_a, P_a, P_wa, P_N2, P_O2
+        from essm.variables.physics.thermodynamics import R_s, D_va, T_a, \
+            P_a, P_wa, P_N2, P_O2
         var('p_Dva1 p_Dva2')
         writer = EquationWriter(docstring="Test.")
-        writer.eq('eq_Pa', P_a == P_N2 + P_O2 + P_wa, doc='Sum partial pressures to obtain total air pressure.')
-        writer.eq('eq_Pwa_Pa', P_wa == P_a - P_N2 - P_O2, doc='Calculate P_wa from total air pressure.', parents=['eq_Pa'])
-        writer.eq('eq_Dva', D_va == p_Dva1*T_a - p_Dva2, doc='D_va as a function of air temperature'
-                , variables = [{"name": "p_Dva1", "value": '1.49e-07', "units": meter^2/second/kelvin}, \
-                {"name": "p_Dva2", "value": '1.96e-05', "units": meter^2/second}])
-        print str(writer)
+        writer.eq('eq_Pa', P_a == P_N2 + P_O2 + P_wa,
+                  doc='Sum partial pressures to obtain total air pressure.')
+        writer.eq('eq_Pwa_Pa', P_wa == P_a - P_N2 - P_O2,
+                  doc='Calculate P_wa from total air pressure.',
+                  parents=['eq_Pa'])
+        writer.eq('eq_Dva', D_va == p_Dva1*T_a - p_Dva2,
+                  doc='D_va as a function of air temperature',
+                  variables = [{"name": "p_Dva1", "value": '1.49e-07',
+                                "units": meter^2/second/kelvin},
+                               {"name": "p_Dva2", "value": '1.96e-05',
+                                "units": meter^2/second}])
+        print(writer)
     """
 
     TPL = EQUATION_TPL
     VAR_TPL = VARIABLE_TPL
     default_imports = {
-        '__future__': {'division'}, 
+        '__future__': {'division'},
         'essm.equations': {'Equation'}}
-    """Set up default imports, including standard division as opposed to floor division in Python 2.7"""
+    """Set up default imports, including standard division."""
 
     def __init__(self, docstring=None):
         self.docstring = docstring

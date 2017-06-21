@@ -29,7 +29,9 @@ before_install:
 install:
   - SageMath/sage -pip install -e .[all]
 
-script: SageMath/sage setup.py build_sphinx
+script:
+  - SageMath/sage setup.py test
+  - SageMath/sage setup.py build_sphinx
 
 after_success:
   - ./gh-pages.sh

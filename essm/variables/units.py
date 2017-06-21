@@ -21,13 +21,11 @@ SHORT_UNIT_SYMBOLS = {
     mole: var('mol'),
     pascal: var('Pa'),
     second: var('s'),
-    watt: var('W'),
-}
+    watt: var('W'), }
 
 
 def markdown(unit):
     """Return markdown representaion of a unit."""
-
     facs = unit.factor_list()
     str1 = ''
     for term1 in facs:
@@ -39,5 +37,6 @@ def markdown(unit):
     return str1
 
 
-__all__ = ('SHORT_UNIT_SYMBOLS', 'markdown', 'joule', 'kelvin', 'kilogram',
-           'meter', 'mole', 'pascal', 'second', 'watt')
+__all__ = (
+    'SHORT_UNIT_SYMBOLS', 'markdown', 'joule', 'kelvin', 'kilogram', 'meter',
+    'mole', 'pascal', 'second', 'watt')

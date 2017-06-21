@@ -48,8 +48,8 @@ class BaseExpression(Expression):
         if self in self.definition.__registry__:
             warnings.warn(
                 '"{0}" will be overridden by "{1}"'.format(
-                    self.definition.__registry__[self].__module__ + ':'
-                    + self.definition.name,
+                    self.definition.__registry__[self].__module__ + ':' +
+                    self.definition.name,
                     self.definition.__module__ + ':' + name, ),
                 stacklevel=2)
         self.definition.__registry__[self] = self.definition
