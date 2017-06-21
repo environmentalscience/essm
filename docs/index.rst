@@ -97,6 +97,10 @@ Physics
 .. automodule:: essm.equations.physics.thermodynamics
    :members:
 
+.. rubric:: References
+
+.. bibliography:: refs.bib
+
 Indices and tables
 ==================
 

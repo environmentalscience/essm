@@ -42,6 +42,7 @@ extras_require = {
     'docs': [
         'Sphinx>=1.5.1',
         'matplotlib>=1.5.1',
+        'sphinxcontrib-bibtex>=0.3.5',
     ],
     'tests': tests_require,
 }
