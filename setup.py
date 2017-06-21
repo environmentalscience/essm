@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of essm.
-# Copyright (C) 2017 Stan Schymanski.
+# Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -17,7 +17,6 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
-
 """Environmental Science for SageMath."""
 
 import os
