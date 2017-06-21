@@ -52,7 +52,7 @@ class BaseDocumenter(ClassDocumenter):
     @object.setter
     def object(self, value):
         if value is not None:
-            setattr(self, '_definition', value.definition)
+            setattr(self, '_definition', getattr(value, 'definition', value))
 
     def fiter_members(self, *args, **kwargs):
         members = super(BaseDocumenter, self).filter_members(*args, **kwargs)
