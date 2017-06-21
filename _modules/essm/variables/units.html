@@ -65,13 +65,11 @@
     <span class="n">mole</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;mol&#39;</span><span class="p">),</span>
     <span class="n">pascal</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;Pa&#39;</span><span class="p">),</span>
     <span class="n">second</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">),</span>
-    <span class="n">watt</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">),</span>
-<span class="p">}</span>
+    <span class="n">watt</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">),</span> <span class="p">}</span>
 
 
 <div class="viewcode-block" id="markdown"><a class="viewcode-back" href="../../../index.html#essm.variables.units.markdown">[docs]</a><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return markdown representaion of a unit.&quot;&quot;&quot;</span>
-
     <span class="n">facs</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">factor_list</span><span class="p">()</span>
     <span class="n">str1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">for</span> <span class="n">term1</span> <span class="ow">in</span> <span class="n">facs</span><span class="p">:</span>
@@ -83,8 +81,9 @@
     <span class="k">return</span> <span class="n">str1</span></div>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;SHORT_UNIT_SYMBOLS&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span> <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;meter&#39;</span><span class="p">,</span> <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span><span class="p">)</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;SHORT_UNIT_SYMBOLS&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span> <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span> <span class="s1">&#39;meter&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span><span class="p">)</span>
 </pre></div>
 
           </div>
