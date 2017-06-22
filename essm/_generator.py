@@ -77,21 +77,21 @@ SAGE_IMPORTS = re.compile(
 def create_module(name, doc=None, folder=None, overwrite=False):
     """Create folder with init file."""
     name_path = (name.replace('.', os.path.sep), ) \
-        if not instance(name, (tuple, list)) \
+        if not isinstance(name, (tuple, list)) \
         else name
     folder = folder or pkg_resources.resource_filename('essm', '')
-    path = os.path.join(folder, name_path)
+    path = os.path.join(folder, *name_path)
     try:
         os.makedirs(path)
         print 'Created new folder: {0}'.format(path)
     except OSError as e1:
         print e1
-        print 'Folder {0} already exists.'.format(path)
         pass
 
     init_path = os.path.join(path, '__init__.py')
     if os.path.isfile(init_path):
-        print '{0} already exists. Use `overwrite=True` to overwrite.'.format(init_path)
+        print '{0} already exists. Use `overwrite=True` to overwrite.'.format(
+            init_path)
 
     if overwrite or not os.path.isfile(init_path):
         with open(init_path, 'w') as file_out:
