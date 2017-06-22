@@ -24,7 +24,6 @@ import os
 import pkg_resources
 import re
 from collections import defaultdict
-
 from sage import all as sage_all
 
 from .variables import Variable
@@ -68,9 +67,8 @@ class {name}(Variable):
 """
 
 # CONSTANTS = re.compile(r'\b(e|pi)\b')
-SAGE_IMPORTS = re.compile(
-    r'\b({0})\b'.format(
-        '|'.join(name for name in dir(sage_all) if not name.startswith('_'))))
+SAGE_IMPORTS = re.compile(r'\b({0})\b'.format('|'.join(
+    name for name in dir(sage_all) if not name.startswith('_'))))
 """Regular expression to find sage-specific constants and functions."""
 
 
@@ -100,6 +98,8 @@ def create_module(name, doc=None, folder=None, overwrite=False):
             file_out.write('"""{0}"""'.format(doc))
         print 'Created file {0}.'.format(init_path)
 
+    return path
+
 
 class VariableWriter(object):
     """Generate Variable definitions.
@@ -115,7 +115,8 @@ class VariableWriter(object):
     TPL = VARIABLE_TPL
     LICENSE_TPL = LICENSE_TPL
     default_imports = {
-        'essm.variables': {'Variable'}, }
+        'essm.variables': {'Variable'},
+    }
 
     def __init__(self, docstring=None):
         self.docstring = docstring
@@ -139,13 +140,11 @@ class VariableWriter(object):
         result += '\n\n'.join(
             self.TPL.format(**var).replace('^', '**') for var in self.vars)
         if self.docstring:
-            result += '\n\n__all__ = (\n{0}\n)'.format(
-                '\n'.join(
-                    "    '{0}',".format(var['name']) for var in self.vars))
+            result += '\n\n__all__ = (\n{0}\n)'.format('\n'.join(
+                "    '{0}',".format(var['name']) for var in self.vars))
         return result
 
-    def var(
-            self,
+    def var(self,
             name,
             doc='',
             units=None,
@@ -168,7 +167,8 @@ class VariableWriter(object):
             "units": str(units).replace('^', '**') if units else '1/1',
             "domain": domain,
             "latexname": latexname,
-            "default": default}
+            "default": default
+        }
         self.vars.append(context)
 
         # register all imports of units
@@ -215,7 +215,8 @@ class EquationWriter(object):
     LICENSE_TPL = LICENSE_TPL
     default_imports = {
         '__future__': {'division'},
-        'essm.equations': {'Equation'}}
+        'essm.equations': {'Equation'}
+    }
     """Set up default imports, including standard division."""
 
     def __init__(self, docstring=None):
@@ -275,7 +276,8 @@ class EquationWriter(object):
             "doc": doc,
             "expr": expr,
             "parents": parents,
-            "variables": variables, }
+            "variables": variables,
+        }
         self.eqs.append(context)
 
         # register all imports
