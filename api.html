@@ -1,0 +1,2107 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Docs &#8212; ESSM 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="License" href="license.html" />
+    <link rel="prev" title="Usage" href="usage.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-docs">
+<h1>API Docs<a class="headerlink" href="#api-docs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-essm.variables">
+<span id="variables"></span><h2>Variables<a class="headerlink" href="#module-essm.variables" title="Permalink to this headline">¶</a></h2>
+<p>Define useful variables and symbols.</p>
+<div class="section" id="module-essm.variables.chamber">
+<span id="chamber"></span><h3>Chamber<a class="headerlink" href="#module-essm.variables.chamber" title="Permalink to this headline">¶</a></h3>
+<p>Chamber related variables.</p>
+<div class="section" id="module-essm.variables.chamber.mass">
+<span id="mass"></span><h4>Mass<a class="headerlink" href="#module-essm.variables.chamber.mass" title="Permalink to this headline">¶</a></h4>
+<p>Chamber mass and energy balance.</p>
+<dl class="class">
+<dt id="essm.variables.chamber.mass.W_c">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">W_c</code><a class="headerlink" href="#essm.variables.chamber.mass.W_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Chamber width</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.W_c.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.W_c.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.W_c.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘W_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.W_c.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.W_c.name">
+<code class="descname">name</code><em class="property"> = ‘W_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.W_c.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.W_c.unit">
+<code class="descname">unit</code><em class="property"> = meter</em><a class="headerlink" href="#essm.variables.chamber.mass.W_c.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.L_c">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">L_c</code><a class="headerlink" href="#essm.variables.chamber.mass.L_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Chamber length</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.L_c.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.L_c.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.L_c.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘L_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.L_c.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.L_c.name">
+<code class="descname">name</code><em class="property"> = ‘L_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.L_c.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.L_c.unit">
+<code class="descname">unit</code><em class="property"> = meter</em><a class="headerlink" href="#essm.variables.chamber.mass.L_c.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.H_c">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">H_c</code><a class="headerlink" href="#essm.variables.chamber.mass.H_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Chamber height</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.H_c.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.H_c.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.H_c.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘H_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.H_c.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.H_c.name">
+<code class="descname">name</code><em class="property"> = ‘H_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.H_c.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.H_c.unit">
+<code class="descname">unit</code><em class="property"> = meter</em><a class="headerlink" href="#essm.variables.chamber.mass.H_c.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.V_c">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">V_c</code><a class="headerlink" href="#essm.variables.chamber.mass.V_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Chamber volume</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.V_c.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.V_c.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.V_c.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘V_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.V_c.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.V_c.name">
+<code class="descname">name</code><em class="property"> = ‘V_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.V_c.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.V_c.unit">
+<code class="descname">unit</code><em class="property"> = meter^3</em><a class="headerlink" href="#essm.variables.chamber.mass.V_c.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.n_c">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">n_c</code><a class="headerlink" href="#essm.variables.chamber.mass.n_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>molar mass of gas in chamber</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.n_c.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.n_c.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.n_c.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘n_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.n_c.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.n_c.name">
+<code class="descname">name</code><em class="property"> = ‘n_c’</em><a class="headerlink" href="#essm.variables.chamber.mass.n_c.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.n_c.unit">
+<code class="descname">unit</code><em class="property"> = mole</em><a class="headerlink" href="#essm.variables.chamber.mass.n_c.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.F_in_v">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">F_in_v</code><a class="headerlink" href="#essm.variables.chamber.mass.F_in_v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Volumetric flow rate into chamber</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_v.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_v.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_v.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘F_{in,v}’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_v.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_v.name">
+<code class="descname">name</code><em class="property"> = ‘F_in_v’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_v.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_v.unit">
+<code class="descname">unit</code><em class="property"> = meter^3/second</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_v.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.F_in_mola">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">F_in_mola</code><a class="headerlink" href="#essm.variables.chamber.mass.F_in_mola" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar flow rate of dry air into chamber</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_mola.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_mola.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_mola.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘F_{in,mol,a}’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_mola.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_mola.name">
+<code class="descname">name</code><em class="property"> = ‘F_in_mola’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_mola.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_mola.unit">
+<code class="descname">unit</code><em class="property"> = mole/second</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_mola.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.F_in_molw">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">F_in_molw</code><a class="headerlink" href="#essm.variables.chamber.mass.F_in_molw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar flow rate of water vapour into chamber</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_molw.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_molw.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_molw.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘F_{in,mol,w}’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_molw.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_molw.name">
+<code class="descname">name</code><em class="property"> = ‘F_in_molw’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_molw.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_in_molw.unit">
+<code class="descname">unit</code><em class="property"> = mole/second</em><a class="headerlink" href="#essm.variables.chamber.mass.F_in_molw.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.F_out_mola">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">F_out_mola</code><a class="headerlink" href="#essm.variables.chamber.mass.F_out_mola" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar flow rate of dry air out of chamber</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_mola.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_mola.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_mola.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘F_{out,mol,a}’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_mola.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_mola.name">
+<code class="descname">name</code><em class="property"> = ‘F_out_mola’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_mola.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_mola.unit">
+<code class="descname">unit</code><em class="property"> = mole/second</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_mola.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.F_out_molw">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">F_out_molw</code><a class="headerlink" href="#essm.variables.chamber.mass.F_out_molw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar flow rate of water vapour out of chamber</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_molw.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_molw.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_molw.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘F_{out,mol,w}’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_molw.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_molw.name">
+<code class="descname">name</code><em class="property"> = ‘F_out_molw’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_molw.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_molw.unit">
+<code class="descname">unit</code><em class="property"> = mole/second</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_molw.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.F_out_v">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">F_out_v</code><a class="headerlink" href="#essm.variables.chamber.mass.F_out_v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Volumetric flow rate out of chamber</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_v.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_v.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_v.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘F_{out,v}’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_v.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_v.name">
+<code class="descname">name</code><em class="property"> = ‘F_out_v’</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_v.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.F_out_v.unit">
+<code class="descname">unit</code><em class="property"> = meter^3/second</em><a class="headerlink" href="#essm.variables.chamber.mass.F_out_v.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.T_d">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">T_d</code><a class="headerlink" href="#essm.variables.chamber.mass.T_d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Dew point temperature of incoming air</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_d.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_d.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_d.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘T_d’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_d.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_d.name">
+<code class="descname">name</code><em class="property"> = ‘T_d’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_d.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_d.unit">
+<code class="descname">unit</code><em class="property"> = kelvin</em><a class="headerlink" href="#essm.variables.chamber.mass.T_d.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.T_in">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">T_in</code><a class="headerlink" href="#essm.variables.chamber.mass.T_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Temperature of incoming air</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_in.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_in.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_in.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘T_{in}’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_in.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_in.name">
+<code class="descname">name</code><em class="property"> = ‘T_in’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_in.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_in.unit">
+<code class="descname">unit</code><em class="property"> = kelvin</em><a class="headerlink" href="#essm.variables.chamber.mass.T_in.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.T_out">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">T_out</code><a class="headerlink" href="#essm.variables.chamber.mass.T_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Temperature of outgoing air (= chamber T_a)</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_out.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_out.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_out.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘T_{out}’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_out.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_out.name">
+<code class="descname">name</code><em class="property"> = ‘T_out’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_out.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_out.unit">
+<code class="descname">unit</code><em class="property"> = kelvin</em><a class="headerlink" href="#essm.variables.chamber.mass.T_out.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.T_room">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">T_room</code><a class="headerlink" href="#essm.variables.chamber.mass.T_room" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Lab air temperature</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_room.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_room.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_room.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘T_{room}’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_room.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_room.name">
+<code class="descname">name</code><em class="property"> = ‘T_room’</em><a class="headerlink" href="#essm.variables.chamber.mass.T_room.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.T_room.unit">
+<code class="descname">unit</code><em class="property"> = kelvin</em><a class="headerlink" href="#essm.variables.chamber.mass.T_room.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.P_w_in">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">P_w_in</code><a class="headerlink" href="#essm.variables.chamber.mass.P_w_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Vapour pressure of incoming air</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.P_w_in.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.P_w_in.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.P_w_in.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘P_{w,in}’</em><a class="headerlink" href="#essm.variables.chamber.mass.P_w_in.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.P_w_in.name">
+<code class="descname">name</code><em class="property"> = ‘P_w_in’</em><a class="headerlink" href="#essm.variables.chamber.mass.P_w_in.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.P_w_in.unit">
+<code class="descname">unit</code><em class="property"> = pascal</em><a class="headerlink" href="#essm.variables.chamber.mass.P_w_in.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.P_w_out">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">P_w_out</code><a class="headerlink" href="#essm.variables.chamber.mass.P_w_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Vapour pressure of outgoing air</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.P_w_out.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.P_w_out.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.P_w_out.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘P_{w,out}’</em><a class="headerlink" href="#essm.variables.chamber.mass.P_w_out.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.P_w_out.name">
+<code class="descname">name</code><em class="property"> = ‘P_w_out’</em><a class="headerlink" href="#essm.variables.chamber.mass.P_w_out.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.P_w_out.unit">
+<code class="descname">unit</code><em class="property"> = pascal</em><a class="headerlink" href="#essm.variables.chamber.mass.P_w_out.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.R_H_in">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">R_H_in</code><a class="headerlink" href="#essm.variables.chamber.mass.R_H_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Relative humidity of incoming air</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.R_H_in.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.R_H_in.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.R_H_in.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘R_{H,in}’</em><a class="headerlink" href="#essm.variables.chamber.mass.R_H_in.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.R_H_in.name">
+<code class="descname">name</code><em class="property"> = ‘R_H_in’</em><a class="headerlink" href="#essm.variables.chamber.mass.R_H_in.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.R_H_in.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.chamber.mass.R_H_in.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.mass.L_A">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.mass.</code><code class="descname">L_A</code><a class="headerlink" href="#essm.variables.chamber.mass.L_A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Leaf area</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.L_A.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.mass.L_A.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.L_A.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘L_A’</em><a class="headerlink" href="#essm.variables.chamber.mass.L_A.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.L_A.name">
+<code class="descname">name</code><em class="property"> = ‘L_A’</em><a class="headerlink" href="#essm.variables.chamber.mass.L_A.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.mass.L_A.unit">
+<code class="descname">unit</code><em class="property"> = meter^2</em><a class="headerlink" href="#essm.variables.chamber.mass.L_A.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-essm.variables.chamber.insulation">
+<span id="insulation"></span><h4>Insulation<a class="headerlink" href="#module-essm.variables.chamber.insulation" title="Permalink to this headline">¶</a></h4>
+<p>Chamber insulation material.</p>
+<dl class="class">
+<dt id="essm.variables.chamber.insulation.c_pi">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.insulation.</code><code class="descname">c_pi</code><a class="headerlink" href="#essm.variables.chamber.insulation.c_pi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Heat capacity of insulation material.</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.c_pi.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.insulation.c_pi.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.c_pi.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘c_{pi}’</em><a class="headerlink" href="#essm.variables.chamber.insulation.c_pi.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.c_pi.name">
+<code class="descname">name</code><em class="property"> = ‘c_pi’</em><a class="headerlink" href="#essm.variables.chamber.insulation.c_pi.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.c_pi.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin*kilogram)</em><a class="headerlink" href="#essm.variables.chamber.insulation.c_pi.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.insulation.lambda_i">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.insulation.</code><code class="descname">lambda_i</code><a class="headerlink" href="#essm.variables.chamber.insulation.lambda_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Heat conductivity of insulation material</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.lambda_i.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.insulation.lambda_i.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.lambda_i.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘lambda_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.lambda_i.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.lambda_i.name">
+<code class="descname">name</code><em class="property"> = ‘lambda_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.lambda_i.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.lambda_i.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin*meter*second)</em><a class="headerlink" href="#essm.variables.chamber.insulation.lambda_i.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.insulation.rho_i">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.insulation.</code><code class="descname">rho_i</code><a class="headerlink" href="#essm.variables.chamber.insulation.rho_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Density of insulation material</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.rho_i.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.insulation.rho_i.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.rho_i.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘rho_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.rho_i.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.rho_i.name">
+<code class="descname">name</code><em class="property"> = ‘rho_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.rho_i.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.rho_i.unit">
+<code class="descname">unit</code><em class="property"> = kilogram/meter^3</em><a class="headerlink" href="#essm.variables.chamber.insulation.rho_i.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.insulation.L_i">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.insulation.</code><code class="descname">L_i</code><a class="headerlink" href="#essm.variables.chamber.insulation.L_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Thickness of insulation material</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.L_i.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.insulation.L_i.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.L_i.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘L_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.L_i.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.L_i.name">
+<code class="descname">name</code><em class="property"> = ‘L_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.L_i.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.L_i.unit">
+<code class="descname">unit</code><em class="property"> = meter</em><a class="headerlink" href="#essm.variables.chamber.insulation.L_i.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.insulation.A_i">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.insulation.</code><code class="descname">A_i</code><a class="headerlink" href="#essm.variables.chamber.insulation.A_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Conducting area of insulation material</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.A_i.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.insulation.A_i.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.A_i.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘A_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.A_i.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.A_i.name">
+<code class="descname">name</code><em class="property"> = ‘A_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.A_i.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.A_i.unit">
+<code class="descname">unit</code><em class="property"> = meter^2</em><a class="headerlink" href="#essm.variables.chamber.insulation.A_i.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.insulation.Q_i">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.insulation.</code><code class="descname">Q_i</code><a class="headerlink" href="#essm.variables.chamber.insulation.Q_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Heat conduction through insulation material</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.Q_i.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.insulation.Q_i.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.Q_i.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘Q_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.Q_i.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.Q_i.name">
+<code class="descname">name</code><em class="property"> = ‘Q_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.Q_i.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.Q_i.unit">
+<code class="descname">unit</code><em class="property"> = joule/second</em><a class="headerlink" href="#essm.variables.chamber.insulation.Q_i.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.chamber.insulation.dT_i">
+<em class="property">class </em><code class="descclassname">essm.variables.chamber.insulation.</code><code class="descname">dT_i</code><a class="headerlink" href="#essm.variables.chamber.insulation.dT_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Temperature increment of insulation material</p>
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.dT_i.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.chamber.insulation.dT_i.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.dT_i.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘dT_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.dT_i.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.dT_i.name">
+<code class="descname">name</code><em class="property"> = ‘dT_i’</em><a class="headerlink" href="#essm.variables.chamber.insulation.dT_i.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.chamber.insulation.dT_i.unit">
+<code class="descname">unit</code><em class="property"> = kelvin</em><a class="headerlink" href="#essm.variables.chamber.insulation.dT_i.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-essm.variables.leaf">
+<span id="leaf"></span><h3>Leaf<a class="headerlink" href="#module-essm.variables.leaf" title="Permalink to this headline">¶</a></h3>
+<p>Variables related to leaf energy and water balance.</p>
+<div class="section" id="module-essm.variables.leaf.radiation">
+<span id="radiation"></span><h4>Radiation<a class="headerlink" href="#module-essm.variables.leaf.radiation" title="Permalink to this headline">¶</a></h4>
+<p>Leaf radiation balance.</p>
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.alpha_l">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">alpha_l</code><a class="headerlink" href="#essm.variables.leaf.radiation.alpha_l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Leaf albedo, fraction of shortwave radiation reflected by the leaf</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.alpha_l.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.alpha_l.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.alpha_l.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘alpha_l’</em><a class="headerlink" href="#essm.variables.leaf.radiation.alpha_l.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.alpha_l.name">
+<code class="descname">name</code><em class="property"> = ‘alpha_l’</em><a class="headerlink" href="#essm.variables.leaf.radiation.alpha_l.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.alpha_l.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.leaf.radiation.alpha_l.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.R_d">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">R_d</code><a class="headerlink" href="#essm.variables.leaf.radiation.R_d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Downwelling global radiation</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_d.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_d.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_d.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘R_d’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_d.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_d.name">
+<code class="descname">name</code><em class="property"> = ‘R_d’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_d.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_d.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_d.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.R_la">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">R_la</code><a class="headerlink" href="#essm.variables.leaf.radiation.R_la" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Longwave radiation absorbed by leaf</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_la.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_la.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_la.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘R_{la}’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_la.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_la.name">
+<code class="descname">name</code><em class="property"> = ‘R_la’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_la.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_la.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_la.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.R_ld">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">R_ld</code><a class="headerlink" href="#essm.variables.leaf.radiation.R_ld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Downwards emitted/reflected global radiation from leaf</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_ld.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_ld.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_ld.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘R_{ld}’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_ld.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_ld.name">
+<code class="descname">name</code><em class="property"> = ‘R_ld’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_ld.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_ld.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_ld.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.R_lu">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">R_lu</code><a class="headerlink" href="#essm.variables.leaf.radiation.R_lu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Upwards emitted/reflected global radiation from leaf</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_lu.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_lu.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_lu.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘R_{lu}’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_lu.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_lu.name">
+<code class="descname">name</code><em class="property"> = ‘R_lu’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_lu.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_lu.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_lu.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.R_u">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">R_u</code><a class="headerlink" href="#essm.variables.leaf.radiation.R_u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Upwelling global radiation</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_u.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_u.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_u.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘R_u’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_u.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_u.name">
+<code class="descname">name</code><em class="property"> = ‘R_u’</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_u.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.R_u.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.leaf.radiation.R_u.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.S_a">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">S_a</code><a class="headerlink" href="#essm.variables.leaf.radiation.S_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Radiation sensor above leaf reading</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_a.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_a.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_a.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘S_a’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_a.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_a.name">
+<code class="descname">name</code><em class="property"> = ‘S_a’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_a.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_a.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_a.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.S_b">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">S_b</code><a class="headerlink" href="#essm.variables.leaf.radiation.S_b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Radiation sensor below leaf reading</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_b.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_b.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_b.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘S_b’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_b.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_b.name">
+<code class="descname">name</code><em class="property"> = ‘S_b’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_b.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_b.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_b.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.radiation.S_s">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.radiation.</code><code class="descname">S_s</code><a class="headerlink" href="#essm.variables.leaf.radiation.S_s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Radiation sensor beside leaf reading</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_s.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_s.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_s.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘S_s’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_s.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_s.name">
+<code class="descname">name</code><em class="property"> = ‘S_s’</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_s.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.radiation.S_s.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.leaf.radiation.S_s.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-essm.variables.leaf.water_vapour">
+<span id="water-vapour"></span><h4>Water Vapour<a class="headerlink" href="#module-essm.variables.leaf.water_vapour" title="Permalink to this headline">¶</a></h4>
+<p>Leaf water vapour exchange and energy balance.</p>
+<dl class="class">
+<dt id="essm.variables.leaf.water_vapour.B_l">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.water_vapour.</code><code class="descname">B_l</code><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Boundary layer thickness</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.water_vapour.B_l.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.water_vapour.B_l.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘B_l’</em><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.water_vapour.B_l.name">
+<code class="descname">name</code><em class="property"> = ‘B_l’</em><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.water_vapour.B_l.unit">
+<code class="descname">unit</code><em class="property"> = meter</em><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-essm.variables.physics.thermodynamics">
+<span id="physics"></span><h3>Physics<a class="headerlink" href="#module-essm.variables.physics.thermodynamics" title="Permalink to this headline">¶</a></h3>
+<p>General and atmospheric thermodynamics variables.</p>
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.alpha_a">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">alpha_a</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.alpha_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Thermal diffusivity of dry air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.alpha_a.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.alpha_a.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.alpha_a.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘\alpha_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.alpha_a.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.alpha_a.name">
+<code class="descname">name</code><em class="property"> = ‘alpha_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.alpha_a.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.alpha_a.unit">
+<code class="descname">unit</code><em class="property"> = meter^2/second</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.alpha_a.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.c_pa">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">c_pa</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Specific heat of dry air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pa.default">
+<code class="descname">default</code><em class="property"> = 1010.0</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pa.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pa.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pa.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pa.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘c_{pa}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pa.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pa.name">
+<code class="descname">name</code><em class="property"> = ‘c_pa’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pa.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pa.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin*kilogram)</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pa.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.c_pamol">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">c_pamol</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pamol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar specific heat of dry air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pamol.default">
+<code class="descname">default</code><em class="property"> = 29.19</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pamol.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pamol.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pamol.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pamol.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘c_{pa,mol}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pamol.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pamol.name">
+<code class="descname">name</code><em class="property"> = ‘c_pamol’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pamol.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.c_pamol.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin*mole)</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.c_pamol.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.D_va">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">D_va</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.D_va" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Binary diffusion coefficient of water vapour in air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.D_va.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.D_va.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.D_va.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘D_{va}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.D_va.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.D_va.name">
+<code class="descname">name</code><em class="property"> = ‘D_va’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.D_va.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.D_va.unit">
+<code class="descname">unit</code><em class="property"> = meter^2/second</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.D_va.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.g">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">g</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.g" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Gravitational acceleration.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.g.default">
+<code class="descname">default</code><em class="property"> = 9.81</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.g.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.g.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.g.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.g.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘g’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.g.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.g.name">
+<code class="descname">name</code><em class="property"> = ‘g’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.g.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.g.unit">
+<code class="descname">unit</code><em class="property"> = meter/second^2</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.g.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.Gr">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">Gr</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.Gr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Grashof number.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Gr.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Gr.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Gr.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘N_{Gr_L}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Gr.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Gr.name">
+<code class="descname">name</code><em class="property"> = ‘Gr’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Gr.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Gr.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Gr.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.h_c">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">h_c</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.h_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Average 1-sided convective transfer coefficient.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.h_c.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.h_c.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.h_c.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘h_c’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.h_c.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.h_c.name">
+<code class="descname">name</code><em class="property"> = ‘h_c’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.h_c.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.h_c.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin*meter^2*second)</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.h_c.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.k_a">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">k_a</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.k_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Thermal conductivity of dry air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.k_a.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.k_a.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.k_a.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘k_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.k_a.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.k_a.name">
+<code class="descname">name</code><em class="property"> = ‘k_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.k_a.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.k_a.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin*meter*second)</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.k_a.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.lambda_E">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">lambda_E</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.lambda_E" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Latent heat of evaporation.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.lambda_E.default">
+<code class="descname">default</code><em class="property"> = 2450000.0</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.lambda_E.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.lambda_E.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.lambda_E.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.lambda_E.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘\lambda_E’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.lambda_E.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.lambda_E.name">
+<code class="descname">name</code><em class="property"> = ‘lambda_E’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.lambda_E.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.lambda_E.unit">
+<code class="descname">unit</code><em class="property"> = joule/kilogram</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.lambda_E.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.Le">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">Le</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.Le" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Lewis number.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Le.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Le.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Le.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘N_{Le}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Le.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Le.name">
+<code class="descname">name</code><em class="property"> = ‘Le’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Le.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Le.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Le.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.M_N2">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">M_N2</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_N2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar mass of nitrogen.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_N2.default">
+<code class="descname">default</code><em class="property"> = 0.028</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_N2.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_N2.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_N2.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_N2.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘M_{N_2}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_N2.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_N2.name">
+<code class="descname">name</code><em class="property"> = ‘M_N2’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_N2.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_N2.unit">
+<code class="descname">unit</code><em class="property"> = kilogram/mole</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_N2.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.M_O2">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">M_O2</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_O2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar mass of oxygen.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_O2.default">
+<code class="descname">default</code><em class="property"> = 0.032</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_O2.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_O2.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_O2.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_O2.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘M_{O_2}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_O2.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_O2.name">
+<code class="descname">name</code><em class="property"> = ‘M_O2’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_O2.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_O2.unit">
+<code class="descname">unit</code><em class="property"> = kilogram/mole</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_O2.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.M_w">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">M_w</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar mass of water.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_w.default">
+<code class="descname">default</code><em class="property"> = 0.018</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_w.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_w.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_w.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_w.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘M_w’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_w.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_w.name">
+<code class="descname">name</code><em class="property"> = ‘M_w’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_w.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.M_w.unit">
+<code class="descname">unit</code><em class="property"> = kilogram/mole</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.M_w.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.nu_a">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">nu_a</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.nu_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Kinematic viscosity of dry air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.nu_a.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.nu_a.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.nu_a.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘\nu_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.nu_a.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.nu_a.name">
+<code class="descname">name</code><em class="property"> = ‘nu_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.nu_a.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.nu_a.unit">
+<code class="descname">unit</code><em class="property"> = meter^2/second</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.nu_a.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.Nu">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">Nu</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.Nu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Nusselt number.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Nu.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Nu.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Nu.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘N_{Nu_L}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Nu.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Nu.name">
+<code class="descname">name</code><em class="property"> = ‘Nu’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Nu.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Nu.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Nu.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.P_a">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">P_a</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Air pressure.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_a.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_a.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_a.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘P_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_a.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_a.name">
+<code class="descname">name</code><em class="property"> = ‘P_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_a.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_a.unit">
+<code class="descname">unit</code><em class="property"> = pascal</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_a.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.Pr">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">Pr</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.Pr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Prandtl number (0.71 for air).</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Pr.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Pr.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Pr.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘N_{Pr}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Pr.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Pr.name">
+<code class="descname">name</code><em class="property"> = ‘Pr’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Pr.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Pr.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Pr.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.P_N2">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">P_N2</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_N2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Partial pressure of nitrogen.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_N2.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_N2.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_N2.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘P_{N2}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_N2.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_N2.name">
+<code class="descname">name</code><em class="property"> = ‘P_N2’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_N2.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_N2.unit">
+<code class="descname">unit</code><em class="property"> = pascal</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_N2.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.P_O2">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">P_O2</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_O2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Partial pressure of oxygen.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_O2.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_O2.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_O2.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘P_{O2}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_O2.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_O2.name">
+<code class="descname">name</code><em class="property"> = ‘P_O2’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_O2.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_O2.unit">
+<code class="descname">unit</code><em class="property"> = pascal</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_O2.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.P_wa">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">P_wa</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_wa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Vapour pressure in the atmosphere.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_wa.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_wa.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_wa.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘P_{wa}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_wa.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_wa.name">
+<code class="descname">name</code><em class="property"> = ‘P_wa’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_wa.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_wa.unit">
+<code class="descname">unit</code><em class="property"> = pascal</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_wa.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.P_was">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">P_was</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_was" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Saturation vapour pressure at air temperature.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_was.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_was.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_was.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘P_{was}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_was.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_was.name">
+<code class="descname">name</code><em class="property"> = ‘P_was’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_was.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.P_was.unit">
+<code class="descname">unit</code><em class="property"> = pascal</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.P_was.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.Re_c">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">Re_c</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Critical Reynolds number for the onset of turbulence.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Re_c.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re_c.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Re_c.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘N_{Re_c}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re_c.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Re_c.name">
+<code class="descname">name</code><em class="property"> = ‘Re_c’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re_c.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Re_c.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re_c.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.Re">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">Re</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Reynolds number.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Re.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Re.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘N_{Re_L}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Re.name">
+<code class="descname">name</code><em class="property"> = ‘Re’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Re.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Re.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.rho_a">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">rho_a</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.rho_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Density of dry air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.rho_a.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.rho_a.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.rho_a.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘\rho_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.rho_a.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.rho_a.name">
+<code class="descname">name</code><em class="property"> = ‘rho_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.rho_a.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.rho_a.unit">
+<code class="descname">unit</code><em class="property"> = kilogram/meter^3</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.rho_a.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.R_mol">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">R_mol</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_mol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Molar gas constant.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_mol.default">
+<code class="descname">default</code><em class="property"> = 8.314472</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_mol.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_mol.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_mol.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_mol.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘R_{mol}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_mol.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_mol.name">
+<code class="descname">name</code><em class="property"> = ‘R_mol’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_mol.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_mol.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin*mole)</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_mol.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.R_s">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">R_s</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Solar shortwave flux per area.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_s.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_s.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_s.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘R_s’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_s.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_s.name">
+<code class="descname">name</code><em class="property"> = ‘R_s’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_s.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.R_s.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter^2*second)</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.R_s.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.Sh">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">Sh</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.Sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Sherwood number.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Sh.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Sh.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Sh.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘N_{Sh_L}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Sh.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Sh.name">
+<code class="descname">name</code><em class="property"> = ‘Sh’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Sh.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.Sh.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.Sh.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.sigm">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">sigm</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.sigm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Stefan-Boltzmann constant.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.sigm.default">
+<code class="descname">default</code><em class="property"> = 5.67e-08</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.sigm.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.sigm.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.sigm.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.sigm.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘\sigma’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.sigm.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.sigm.name">
+<code class="descname">name</code><em class="property"> = ‘sigm’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.sigm.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.sigm.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin^4*meter^2*second)</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.sigm.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.T_a">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">T_a</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.T_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Air temperature.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.T_a.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.T_a.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.T_a.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘T_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.T_a.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.T_a.name">
+<code class="descname">name</code><em class="property"> = ‘T_a’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.T_a.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.T_a.unit">
+<code class="descname">unit</code><em class="property"> = kelvin</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.T_a.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.v_w">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">v_w</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.v_w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Wind velocity.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.v_w.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.v_w.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.v_w.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘v_w’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.v_w.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.v_w.name">
+<code class="descname">name</code><em class="property"> = ‘v_w’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.v_w.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.v_w.unit">
+<code class="descname">unit</code><em class="property"> = meter/second</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.v_w.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.x_N2">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">x_N2</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_N2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Mole fraction of nitrogen in dry air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_N2.default">
+<code class="descname">default</code><em class="property"> = 0.79</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_N2.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_N2.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_N2.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_N2.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘x_{N2}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_N2.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_N2.name">
+<code class="descname">name</code><em class="property"> = ‘x_N2’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_N2.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_N2.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_N2.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.physics.thermodynamics.x_O2">
+<em class="property">class </em><code class="descclassname">essm.variables.physics.thermodynamics.</code><code class="descname">x_O2</code><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_O2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.variables._core.Variable</span></code></p>
+<p>Mole fraction of oxygen in dry air.</p>
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_O2.default">
+<code class="descname">default</code><em class="property"> = 0.21</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_O2.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_O2.domain">
+<code class="descname">domain</code><em class="property"> = ‘real’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_O2.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_O2.latex_name">
+<code class="descname">latex_name</code><em class="property"> = ‘x_{N2}’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_O2.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_O2.name">
+<code class="descname">name</code><em class="property"> = ‘x_O2’</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_O2.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.physics.thermodynamics.x_O2.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.physics.thermodynamics.x_O2.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-essm.variables.units">
+<span id="units"></span><h3>Units<a class="headerlink" href="#module-essm.variables.units" title="Permalink to this headline">¶</a></h3>
+<p>Define unit symbols.</p>
+<dl class="function">
+<dt id="essm.variables.units.markdown">
+<code class="descclassname">essm.variables.units.</code><code class="descname">markdown</code><span class="sig-paren">(</span><em>unit</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/units.html#markdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.units.markdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return markdown representaion of a unit.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-essm.equations">
+<span id="equations"></span><h2>Equations<a class="headerlink" href="#module-essm.equations" title="Permalink to this headline">¶</a></h2>
+<p>Define equations.</p>
+<div class="section" id="id1">
+<h3>Chamber<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-essm.equations.chamber"></span><div class="section" id="id2">
+<h4>Insulation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<span class="target" id="module-essm.equations.chamber.insulation"></span><dl class="class">
+<dt id="essm.equations.chamber.insulation.eq_Qi">
+<em class="property">class </em><code class="descclassname">essm.equations.chamber.insulation.</code><code class="descname">eq_Qi</code><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.equations._core.Equation</span></code></p>
+<p>Calculate ….</p>
+<p><a class="reference internal" href="index.html#schymanski-leaf-scale-2016" id="id3">[SO16]</a></p>
+<dl class="attribute">
+<dt id="essm.equations.chamber.insulation.eq_Qi.expr">
+<code class="descname">expr</code><em class="property"> = Q_i == A_i*dT_i*lambda_i/L_i</em><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi.expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describe how you got the equation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="essm.equations.chamber.insulation.eq_Qi.name">
+<code class="descname">name</code><em class="property"> = ‘eq_Qi’</em><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Leaf<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-essm.equations.leaf"></span><p>General physics variables.</p>
+<div class="section" id="energy-water">
+<h4>Energy Water<a class="headerlink" href="#energy-water" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>Physics<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Docs</a><ul>
+<li><a class="reference internal" href="#module-essm.variables">Variables</a><ul>
+<li><a class="reference internal" href="#module-essm.variables.chamber">Chamber</a><ul>
+<li><a class="reference internal" href="#module-essm.variables.chamber.mass">Mass</a></li>
+<li><a class="reference internal" href="#module-essm.variables.chamber.insulation">Insulation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-essm.variables.leaf">Leaf</a><ul>
+<li><a class="reference internal" href="#module-essm.variables.leaf.radiation">Radiation</a></li>
+<li><a class="reference internal" href="#module-essm.variables.leaf.water_vapour">Water Vapour</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-essm.variables.physics.thermodynamics">Physics</a></li>
+<li><a class="reference internal" href="#module-essm.variables.units">Units</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-essm.equations">Equations</a><ul>
+<li><a class="reference internal" href="#id1">Chamber</a><ul>
+<li><a class="reference internal" href="#id2">Insulation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">Leaf</a><ul>
+<li><a class="reference internal" href="#energy-water">Energy Water</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">Physics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="usage.html" title="previous chapter">Usage</a></li>
+      <li>Next: <a href="license.html" title="next chapter">License</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Stan Schymanski.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

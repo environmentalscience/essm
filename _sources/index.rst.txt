@@ -1,103 +1,42 @@
-.. ESSM documentation master file, created by
-   sphinx-quickstart on Tue May 16 14:29:58 2017.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. include:: ../README.rst
 
-Welcome to ESSM's documentation!
-================================
+User's Guide
+============
+
+This part of the documentation will show you how to get started in using
+ESSM.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   installation
+   usage
 
-FIXME: Example Plot
--------------------
+API Reference
+=============
 
-.. plot::
+If you are looking for information on a specific function, class or method,
+this part of the documentation is for you.
 
-   import matplotlib.pyplot as plt
-   import numpy as np
-   x = np.random.randn(1000)
-   plt.hist( x, 20)
-   plt.grid()
-   plt.title(r'Normal: $\mu=%.2f, \sigma=%.2f$'%(x.mean(), x.std()))
-   plt.show()
+.. toctree::
+   :maxdepth: 3
 
+   api
 
-Variables
-=========
+Additional Notes
+================
 
-Chamber
--------
+Notes on how to contribute, legal information and changes are here for the
+interested.
 
-Mass
-~~~~
+.. toctree::
+   :maxdepth: 1
 
-.. automodule:: essm.variables.chamber.mass
-   :members:
+   license
+   ../AUTHORS
 
-Insulation
-~~~~~~~~~~
-
-.. automodule:: essm.variables.chamber.insulation
-   :members:
-
-Leaf
-----
-
-Radiation
-~~~~~~~~~
-
-.. automodule:: essm.variables.leaf.radiation
-   :members:
-
-Water Vapour
-~~~~~~~~~~~~
-
-.. automodule:: essm.variables.leaf.water_vapour
-   :members:
-
-Physics
--------
-
-.. automodule:: essm.variables.physics.thermodynamics
-   :members:
-
-Units
------
-
-.. automodule:: essm.variables.units
-   :members:
-
-Equations
-=========
-
-Chamber
--------
-
-Insulation
-~~~~~~~~~~
-
-.. automodule:: essm.equations.chamber.insulation
-   :members:
-
-Leaf
-----
-
-Energy Water
-~~~~~~~~~~~~
-
-.. automodule:: essm.equations.leaf.energy_water
-   :members:
-
-Physics
--------
-
-.. automodule:: essm.equations.physics.thermodynamics
-   :members:
-
-.. rubric:: References
+References
+==========
 
 .. bibliography:: refs.bib
 
