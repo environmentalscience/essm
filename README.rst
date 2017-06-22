@@ -18,7 +18,7 @@ Environmental Science for SageMath
         :target: https://github.com/environmentalscience/essm/blob/master/LICENSE
 
 This package contains helpers to deal with physical variables and units
-in SageMatch.
+in SageMath.
 
 The documentation is available on
 https://environmentalscience.github.io/essm/
