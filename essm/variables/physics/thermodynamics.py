@@ -20,8 +20,7 @@
 """General and atmospheric thermodynamics variables."""
 
 from essm.variables import Variable
-from essm.variables.units import (
-    joule, kelvin, kilogram, meter, mole, pascal, second)
+from essm.variables.units import joule, kelvin, kilogram, meter, mole, pascal, second, watt
 
 
 class alpha_a(Variable):
@@ -42,12 +41,35 @@ class c_pa(Variable):
 
 
 class c_pamol(Variable):
-    """Molar specific heat of dry air."""
+    """Molar specific heat of dry air.  
+
+    https://en.wikipedia.org/wiki/Heat_capacity#Specific_heat_capacity 
+    """
     name = 'c_pamol'
     unit = joule / (kelvin * mole)
     domain = 'real'
     latex_name = 'c_{pa,mol}'
     default = 29.1900000000000
+
+
+class c_pv(Variable):
+    """Specific heat of water vapour at 300 K.   
+
+    http://www.engineeringtoolbox.com/water-vapor-d_979.html 
+    """
+    name = 'c_pv'
+    unit = joule / (kelvin * kilogram)
+    domain = 'real'
+    latex_name = 'c_{pv}'
+    default = 1864
+
+
+class C_wa(Variable):
+    """Concentration of water in air."""
+    name = 'C_wa'
+    unit = mole / meter**3
+    domain = 'real'
+    latex_name = 'C_{wa}'
 
 
 class D_va(Variable):
@@ -76,7 +98,7 @@ class Gr(Variable):
 
 
 class h_c(Variable):
-    """Average 1-sided convective transfer coefficient."""
+    """Average 1-sided convective heat transfer coefficient."""
     name = 'h_c'
     unit = joule / (kelvin * meter**2 * second)
     domain = 'real'
@@ -106,6 +128,18 @@ class Le(Variable):
     unit = 1 / 1
     domain = 'real'
     latex_name = 'N_{Le}'
+
+
+class M_air(Variable):
+    """Molar mass of air.  
+
+    http://www.engineeringtoolbox.com/molecular-mass-air-d_679.html 
+    """
+    name = 'M_air'
+    unit = kilogram / mole
+    domain = 'real'
+    latex_name = 'M_{air}'
+    default = 0.0289700000000000
 
 
 class M_N2(Variable):
@@ -144,7 +178,7 @@ class nu_a(Variable):
 
 
 class Nu(Variable):
-    """Nusselt number."""
+    """Average Nusselt number over given length."""
     name = 'Nu'
     unit = 1 / 1
     domain = 'real'
@@ -184,7 +218,7 @@ class P_O2(Variable):
 
 
 class P_wa(Variable):
-    """Vapour pressure in the atmosphere."""
+    """Water vapour pressure in the atmosphere."""
     name = 'P_wa'
     unit = pascal
     domain = 'real'
@@ -192,11 +226,19 @@ class P_wa(Variable):
 
 
 class P_was(Variable):
-    """Saturation vapour pressure at air temperature."""
+    """Saturation water vapour pressure at air temperature."""
     name = 'P_was'
     unit = pascal
     domain = 'real'
     latex_name = 'P_{was}'
+
+
+class R_d(Variable):
+    """Downwelling global radiation."""
+    name = 'R_d'
+    unit = watt / meter**2
+    domain = 'real'
+    latex_name = 'R_d'
 
 
 class Re_c(Variable):
@@ -208,7 +250,7 @@ class Re_c(Variable):
 
 
 class Re(Variable):
-    """Reynolds number."""
+    """Average Reynolds number over given length."""
     name = 'Re'
     unit = 1 / 1
     domain = 'real'
@@ -221,6 +263,14 @@ class rho_a(Variable):
     unit = kilogram / meter**3
     domain = 'real'
     latex_name = '\\rho_a'
+
+
+class R_u(Variable):
+    """Upwelling global radiation."""
+    name = 'R_u'
+    unit = watt / meter**2
+    domain = 'real'
+    latex_name = 'R_u'
 
 
 class R_mol(Variable):
@@ -240,14 +290,6 @@ class R_s(Variable):
     latex_name = 'R_s'
 
 
-class Sh(Variable):
-    """Sherwood number."""
-    name = 'Sh'
-    unit = 1 / 1
-    domain = 'real'
-    latex_name = 'N_{Sh_L}'
-
-
 class sigm(Variable):
     """Stefan-Boltzmann constant."""
     name = 'sigm'
@@ -255,6 +297,15 @@ class sigm(Variable):
     domain = 'real'
     latex_name = '\\sigma'
     default = 5.67000000000000e-8
+
+
+class T0(Variable):
+    """Freezing point in Kelvin."""
+    name = 'T0'
+    unit = kelvin
+    domain = 'real'
+    latex_name = 'T_0'
+    default = 273.150000000000
 
 
 class T_a(Variable):
@@ -292,7 +343,7 @@ class x_O2(Variable):
 
 
 __all__ = (
-    'alpha_a', 'c_pa', 'c_pamol', 'D_va', 'g', 'Gr', 'h_c', 'k_a', 'lambda_E',
-    'Le', 'M_N2', 'M_O2', 'M_w', 'nu_a', 'Nu', 'P_a', 'Pr', 'P_N2', 'P_O2',
-    'P_wa', 'P_was', 'Re_c', 'Re', 'rho_a', 'R_mol', 'R_s', 'Sh', 'sigm',
-    'T_a', 'v_w', 'x_N2', 'x_O2', )
+    'alpha_a', 'c_pa', 'c_pamol', 'c_pv', 'C_wa', 'D_va', 'g', 'Gr', 'h_c',
+    'k_a', 'lambda_E', 'Le', 'M_air', 'M_N2', 'M_O2', 'M_w', 'nu_a', 'Nu',
+    'P_a', 'Pr', 'P_N2', 'P_O2', 'P_wa', 'P_was', 'R_d', 'Re_c', 'Re', 'rho_a',
+    'R_u', 'R_mol', 'R_s', 'sigm', 'T0', 'T_a', 'v_w', 'x_N2', 'x_O2', )
