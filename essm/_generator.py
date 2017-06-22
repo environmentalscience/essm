@@ -19,8 +19,10 @@
 # MA 02111-1307, USA.
 """Generator for equation definitions."""
 
-import re
 import datetime
+import os
+import pkg_resources
+import re
 from collections import defaultdict
 
 from sage import all as sage_all
@@ -70,6 +72,33 @@ SAGE_IMPORTS = re.compile(
     r'\b({0})\b'.format(
         '|'.join(name for name in dir(sage_all) if not name.startswith('_'))))
 """Regular expression to find sage-specific constants and functions."""
+
+
+def create_module(name, doc=None, folder=None, overwrite=False):
+    """Create folder with init file."""
+    name_path = (name.replace('.', os.path.sep), ) \
+        if not instance(name, (tuple, list)) \
+        else name
+    folder = folder or pkg_resources.resource_filename('essm', '')
+    path = os.path.join(folder, name_path)
+    try:
+        os.makedirs(path)
+        print 'Created new folder: {0}'.format(path)
+    except OSError as e1:
+        print e1
+        print 'Folder {0} already exists.'.format(path)
+        pass
+
+    init_path = os.path.join(path, '__init__.py')
+    if os.path.isfile(init_path):
+        print '{0} already exists. Use `overwrite=True` to overwrite.'.format(init_path)
+
+    if overwrite or not os.path.isfile(init_path):
+        with open(init_path, 'w') as file_out:
+            file_out.write(
+                LICENSE_TPL.format(year=datetime.datetime.now().year))
+            file_out.write('"""{0}"""'.format(doc))
+        print 'Created file {0}.'.format(init_path)
 
 
 class VariableWriter(object):
