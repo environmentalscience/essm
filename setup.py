@@ -77,7 +77,7 @@ setup(
     license='GPLv2',
     author='Stan Schymanski',
     author_email='schymans@gmail.com',
-    url='https://github.com/schymans/environmental-science-for-sagemath',
+    url='https://github.com/environmentalscience/essm',
     packages=packages,
     zip_safe=False,
     include_package_data=True,

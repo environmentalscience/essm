@@ -100,7 +100,7 @@ def build_instance_expression(instance, expr, back=1):
             if isinstance(data, BaseVariable):
                 f_locals[name] = data
         expr = eval(class_def.expr, f_globals, f_locals)
-    except TypeError:  # pragma: no cover
+    except IOError, TypeError:  # pragma: no cover
         pass
 
     return expr

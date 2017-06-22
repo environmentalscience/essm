@@ -62,7 +62,8 @@ def test_remove_variable_from_registry():
     class removable(Variable):
         """Should be removed."""
 
-    del Variable[removable]
+    with pytest.warns(UserWarning):
+        del Variable[removable]
 
     assert removable not in Variable.__registry__
 

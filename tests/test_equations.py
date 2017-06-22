@@ -86,9 +86,10 @@ def test_double_registration():
 
     assert Equation.__registry__[demo_double].__doc__ == 'First.'
 
-    class demo_double(Equation):  # ignore: W0232
-        """Second."""
+    with pytest.warns(UserWarning):
+        class demo_double(Equation):  # ignore: W0232
+            """Second."""
 
-        expr = demo_g = demo_g
+            expr = demo_g = demo_g
 
     assert Equation.__registry__[demo_double].__doc__ == 'Second.'
