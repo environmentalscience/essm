@@ -4,6 +4,7 @@
     "science",
     "environmental-modelling"
   ],
+  "license": "GPL-2.0",
   "title":"Environmental Science for SageMath",
   "creators":[
     {
