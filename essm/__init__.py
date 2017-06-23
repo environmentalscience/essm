@@ -40,19 +40,22 @@ latex_name, and unit, e.g.:
     ...    unit = meter ** 3
     ...    default = 1
 
-Now, `demo_chamber_volume` is displayed as `V_c` and you can type
-`help(demo_chamber_volume)`.
+    >>> class demo_chamber_length(Variable):
+    ...    '''Length of chamber.'''
+    ...    latex_name = 'L_c'
+    ...    domain = 'real'
+    ...    name = 'L_c'
+    ...    unit = meter
+    ...    default = 1
+
+Now, `demo_chamber_volume` is displayed as `V_c` and
+`demo_chamber_length` is displayed as `L_c`.
+You can type `help(demo_chamber_volume)` to inspects its metadata.
 
 `Variable.__defaults__` returns a dictionary with all variables and
 their default values, `Variable.__units__` returns their units, and
 `demo_chamber_volume.short_unit()` can be used to obtain the units
 in short notation.
-
-You can import pre-defined variables as e.g.:
-
-    >>> from essm.variables.chamber.insulation import *
-    >>> from essm.variables.chamber.mass import *
-    >>> from essm.variables.leaf.water_vapour import *
 
 Creating equations
 ==================
@@ -64,14 +67,19 @@ To create custom equations, proceed similarly to avove, i.e. first import
 
 Then define an equation, e.g.:
 
-    >>> class demo_eq_Qi(Equation):
-    ...    '''Calculate heat conduction through insulation material.
+    >>> class demo_eq_volume(Equation):
+    ...    '''Calculate chamber volume.
     ...
-    ...    Uses :math:`Q_{i}` as a function of temperature difference
-    ...    :math:`dT_{i}`, and material properties.
+    ...    Uses :math:`V_{l}` and assumes cubic shape.
     ...    '''
-    ...    expr = Q_i == dT_i * lambda_i * A_i / L_i
+    ...    expr = demo_chamber_volume == demo_chamber_length ** 3
 
+Importing variables and equations
+=================================
+You can import pre-defined variables and equations as e.g.:
+
+    >>> from essm.variables.physics.thermodynamics import *
+    >>> from essm.equations.physics.thermodynamics import *
 """
 
 from __future__ import absolute_import

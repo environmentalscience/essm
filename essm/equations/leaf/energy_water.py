@@ -29,7 +29,7 @@ from sage.all import e
 
 
 class eq_Rs_enbal(Equation):
-    """Calculate R_s from energy balance. 
+    """Calculate R_s from energy balance.
 
     (Eq. 1 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -38,7 +38,7 @@ class eq_Rs_enbal(Equation):
 
 
 class eq_Rll(Equation):
-    """R_ll as function of T_l and T_w. 
+    """R_ll as function of T_l and T_w.
 
     (Eq. 2 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -47,7 +47,7 @@ class eq_Rll(Equation):
 
 
 class eq_Hl(Equation):
-    """H_l as function of T_l. 
+    """H_l as function of T_l.
 
     (Eq. 3 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -56,7 +56,7 @@ class eq_Hl(Equation):
 
 
 class eq_El(Equation):
-    """E_l as function of E_lmol. 
+    """E_l as function of E_lmol.
 
     (Eq. 4 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -65,7 +65,7 @@ class eq_El(Equation):
 
 
 class eq_Elmol(Equation):
-    """E_lmol as functino of g_tw and C_wl. 
+    """E_lmol as functino of g_tw and C_wl.
 
     (Eq. 5 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -74,7 +74,7 @@ class eq_Elmol(Equation):
 
 
 class eq_gtw(Equation):
-    """g_tw from g_sw and g_bw. 
+    """g_tw from g_sw and g_bw.
 
     (Eq. 6 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -83,7 +83,7 @@ class eq_gtw(Equation):
 
 
 class eq_gbw_hc(Equation):
-    """g_bw as function of h_c. 
+    """g_bw as function of h_c.
 
     (Eq. B2 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -92,7 +92,7 @@ class eq_gbw_hc(Equation):
 
 
 class eq_Cwl(Equation):
-    """C_wl as function of P_wl and T_l. 
+    """C_wl as function of P_wl and T_l.
 
     (Eq. B4 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -101,7 +101,7 @@ class eq_Cwl(Equation):
 
 
 class eq_Pwl(Equation):
-    """Clausius-Clapeyron P_wl as function of T_l. 
+    """Clausius-Clapeyron P_wl as function of T_l.
 
     (Eq. B3 in :cite:`hartmann_global_1994`)
     """
@@ -126,7 +126,7 @@ class eq_Pwl(Equation):
 
 
 class eq_Elmol_conv(Equation):
-    """E_lmol as function of g_twmol and P_wl. 
+    """E_lmol as function of g_twmol and P_wl.
 
     (Eq. B6 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -136,7 +136,9 @@ class eq_Elmol_conv(Equation):
 
 class eq_gtwmol_gtw(eq_Elmol.definition, eq_Cwl.definition,
                     eq_Elmol_conv.definition):
-    """g_twmol as a function of g_tw, using eq_Elmol, eq_Cwl and eq_Elmol_conv."""
+    """g_twmol as a function of g_tw, using
+    eq_Elmol, eq_Cwl and eq_Elmol_conv.
+    """
 
     expr = g_twmol == -(P_a * P_wl * T_a - P_a * P_wa * T_l) * g_tw / ((
         P_wa - P_wl) * R_mol * T_a * T_l)
@@ -149,7 +151,7 @@ class eq_gtwmol_gtw_iso(eq_gtwmol_gtw.definition):
 
 
 class eq_hc(Equation):
-    """h_c as a function of Nu and L_l. 
+    """h_c as a function of Nu and L_l.
 
     (Eq. B10 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -158,7 +160,7 @@ class eq_hc(Equation):
 
 
 class eq_Re(Equation):
-    """Re as a function of v_w and L_l. 
+    """Re as a function of v_w and L_l.
 
     (Eq. B11 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -167,7 +169,7 @@ class eq_Re(Equation):
 
 
 class eq_Gr(Equation):
-    """Gr as function of air density within and outside of leaf. 
+    """Gr as function of air density within and outside of leaf.
 
     (Eq. B12 in :cite:`schymanski_leaf-scale_2017`)
     """

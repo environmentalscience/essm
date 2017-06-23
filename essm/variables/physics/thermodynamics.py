@@ -41,9 +41,9 @@ class c_pa(Variable):
 
 
 class c_pamol(Variable):
-    """Molar specific heat of dry air.  
+    """Molar specific heat of dry air.
 
-    https://en.wikipedia.org/wiki/Heat_capacity#Specific_heat_capacity 
+    https://en.wikipedia.org/wiki/Heat_capacity#Specific_heat_capacity
     """
     name = 'c_pamol'
     unit = joule / (kelvin * mole)
@@ -53,9 +53,9 @@ class c_pamol(Variable):
 
 
 class c_pv(Variable):
-    """Specific heat of water vapour at 300 K.   
+    """Specific heat of water vapour at 300 K.
 
-    http://www.engineeringtoolbox.com/water-vapor-d_979.html 
+    http://www.engineeringtoolbox.com/water-vapor-d_979.html
     """
     name = 'c_pv'
     unit = joule / (kelvin * kilogram)
@@ -131,9 +131,9 @@ class Le(Variable):
 
 
 class M_air(Variable):
-    """Molar mass of air.  
+    """Molar mass of air.
 
-    http://www.engineeringtoolbox.com/molecular-mass-air-d_679.html 
+    http://www.engineeringtoolbox.com/molecular-mass-air-d_679.html
     """
     name = 'M_air'
     unit = kilogram / mole

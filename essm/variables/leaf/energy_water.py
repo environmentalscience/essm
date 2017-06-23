@@ -32,7 +32,9 @@ class alpha_l(Variable):
 
 
 class a_s(Variable):
-    """Fraction of one-sided leaf area covered by stomata (1 if stomata are on one side only, 2 if they are on both sides)."""
+    """Fraction of one-sided leaf area covered by stomata
+    (1 if stomata are on one side only, 2 if they are on both sides).
+    """
     name = 'a_s'
     unit = 1
     domain = 'real'
