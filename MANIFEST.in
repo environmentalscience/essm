@@ -1,0 +1,12 @@
+include *.rst
+include *.sh
+include *.yapf
+include LICENSE
+recursive-include docs *.bib
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile
+recursive-include essm *.yapf
+recursive-include tests *.py
+
+prune .vscode
