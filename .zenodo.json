@@ -1,0 +1,20 @@
+{
+  "keywords":[
+    "sagemath",
+    "science",
+    "environmental-modelling"
+  ],
+  "title":"Environmental Science for SageMath",
+  "creators":[
+    {
+      "orcid":"0000-0002-0950-2942",
+      "name":"Stanislaus J. Schymanski",
+      "affiliation":"ETH Zurich, Swiss Data Science Center"
+    },
+    {
+      "orcid":"0000-0002-3995-3795",
+      "affiliation":"ETH Zurich, Swiss Data Science Center",
+      "name":"Jiří Kunčar"
+    }
+  ]
+}
