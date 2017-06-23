@@ -25,8 +25,8 @@ from .units import markdown
 def generate_metadata_table(variables=None, include_header=True):
     """Generate table of variables, default values and units.
 
-    If variables not provided in list ``variables``, table
-    will contain all variables in ``Variables.__registry__``.
+    If variables not provided in list ``variables``, table will contain
+    all variables in ``Variables.__registry__``.
     """
     from ._core import Variable
     variables = variables or Variable.__registry__.keys()

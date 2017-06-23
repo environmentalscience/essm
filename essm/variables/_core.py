@@ -97,6 +97,7 @@ class VariableMeta(type):
 
 class Variable(object):
     """Base type for all physical variables."""
+
     __metaclass__ = VariableMeta
     __registry__ = {}
     __defaults__ = {}

@@ -1,3 +1,4 @@
+include *.json
 include *.rst
 include *.sh
 include *.yapf
