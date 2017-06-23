@@ -67,18 +67,22 @@ latex_name, and unit, e.g.:</p>
 <span class="gp">... </span>   <span class="n">default</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<p>Now, <cite>demo_chamber_volume</cite> is displayed as <cite>V_c</cite> and you can type
-<cite>help(demo_chamber_volume)</cite>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_chamber_length</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="sd">&#39;&#39;&#39;Length of chamber.&#39;&#39;&#39;</span>
+<span class="gp">... </span>   <span class="n">latex_name</span> <span class="o">=</span> <span class="s1">&#39;L_c&#39;</span>
+<span class="gp">... </span>   <span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;real&#39;</span>
+<span class="gp">... </span>   <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;L_c&#39;</span>
+<span class="gp">... </span>   <span class="n">unit</span> <span class="o">=</span> <span class="n">meter</span>
+<span class="gp">... </span>   <span class="n">default</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Now, <cite>demo_chamber_volume</cite> is displayed as <cite>V_c</cite> and
+<cite>demo_chamber_length</cite> is displayed as <cite>L_c</cite>.
+You can type <cite>help(demo_chamber_volume)</cite> to inspects its metadata.</p>
 <p><cite>Variable.__defaults__</cite> returns a dictionary with all variables and
 their default values, <cite>Variable.__units__</cite> returns their units, and
 <cite>demo_chamber_volume.short_unit()</cite> can be used to obtain the units
 in short notation.</p>
-<p>You can import pre-defined variables as e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.chamber.insulation</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.chamber.mass</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.leaf.water_vapour</span> <span class="k">import</span> <span class="o">*</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="creating-equations">
 <h2>Creating equations<a class="headerlink" href="#creating-equations" title="Permalink to this headline">¶</a></h2>
@@ -88,13 +92,20 @@ in short notation.</p>
 </pre></div>
 </div>
 <p>Then define an equation, e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_eq_Qi</span><span class="p">(</span><span class="n">Equation</span><span class="p">):</span>
-<span class="gp">... </span>   <span class="sd">&#39;&#39;&#39;Calculate heat conduction through insulation material.</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_eq_volume</span><span class="p">(</span><span class="n">Equation</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="sd">&#39;&#39;&#39;Calculate chamber volume.</span>
 <span class="gp">...</span><span class="sd"></span>
-<span class="gp">... </span><span class="sd">   Uses :math:`Q_{i}` as a function of temperature difference</span>
-<span class="gp">... </span><span class="sd">   :math:`dT_{i}`, and material properties.</span>
+<span class="gp">... </span><span class="sd">   Uses :math:`V_{l}` and assumes cubic shape.</span>
 <span class="gp">... </span><span class="sd">   &#39;&#39;&#39;</span>
-<span class="gp">... </span>   <span class="n">expr</span> <span class="o">=</span> <span class="n">Q_i</span> <span class="o">==</span> <span class="n">dT_i</span> <span class="o">*</span> <span class="n">lambda_i</span> <span class="o">*</span> <span class="n">A_i</span> <span class="o">/</span> <span class="n">L_i</span>
+<span class="gp">... </span>   <span class="n">expr</span> <span class="o">=</span> <span class="n">demo_chamber_volume</span> <span class="o">==</span> <span class="n">demo_chamber_length</span> <span class="o">**</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-variables-and-equations">
+<h2>Importing variables and equations<a class="headerlink" href="#importing-variables-and-equations" title="Permalink to this headline">¶</a></h2>
+<p>You can import pre-defined variables and equations as e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 <dl class="function">
@@ -123,6 +134,7 @@ in short notation.</p>
 <li><a class="reference internal" href="#">Usage</a><ul>
 <li><a class="reference internal" href="#creating-variables">Creating variables</a></li>
 <li><a class="reference internal" href="#creating-equations">Creating equations</a></li>
+<li><a class="reference internal" href="#importing-variables-and-equations">Importing variables and equations</a></li>
 </ul>
 </li>
 </ul>
