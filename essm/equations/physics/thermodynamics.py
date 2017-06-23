@@ -28,7 +28,7 @@ from sage.all import sqrt
 
 
 class eq_Le(Equation):
-    """Le as function of alpha_a and D_va. 
+    """Le as function of alpha_a and D_va.
 
     (Eq. B3 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -37,7 +37,7 @@ class eq_Le(Equation):
 
 
 class eq_Cwa(Equation):
-    """C_wa as a function of P_wa and T_a. 
+    """C_wa as a function of P_wa and T_a.
 
     (Eq. B9 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -46,7 +46,7 @@ class eq_Cwa(Equation):
 
 
 class eq_Nu_forced_all(Equation):
-    """Nu as function of Re and Re_c under forced conditions. 
+    """Nu as function of Re and Re_c under forced conditions.
 
     (Eqs. B13--B15 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -57,7 +57,7 @@ class eq_Nu_forced_all(Equation):
 
 
 class eq_Dva(Equation):
-    """D_va as a function of air temperature. 
+    """D_va as a function of air temperature.
 
     (Table A.3 in :cite:`monteith_principles_2007`)
     """
@@ -82,7 +82,7 @@ class eq_Dva(Equation):
 
 
 class eq_alphaa(Equation):
-    """alpha_a as a function of air temperature. 
+    """alpha_a as a function of air temperature.
 
     (Table A.3 in :cite:`monteith_principles_2007`)
     """
@@ -107,7 +107,7 @@ class eq_alphaa(Equation):
 
 
 class eq_ka(Equation):
-    """k_a as a function of air temperature. 
+    """k_a as a function of air temperature.
 
     (Table A.3 in :cite:`monteith_principles_2007`)
     """
@@ -132,7 +132,7 @@ class eq_ka(Equation):
 
 
 class eq_nua(Equation):
-    """nu_a as a function of air temperature. 
+    """nu_a as a function of air temperature.
 
     (Table A.3 in :cite:`monteith_principles_2007`)
     """
@@ -157,7 +157,7 @@ class eq_nua(Equation):
 
 
 class eq_rhoa_Pwa_Ta(Equation):
-    """rho_a as a function of P_wa and T_a. 
+    """rho_a as a function of P_wa and T_a.
 
     (Eq. B20 in :cite:`schymanski_leaf-scale_2017`)
     """
@@ -166,13 +166,17 @@ class eq_rhoa_Pwa_Ta(Equation):
 
 
 class eq_Pa(Equation):
-    """Calculate air pressure from partial pressures of N2, O2 and H2O, following Dalton's law of partial pressures."""
+    """Calculate air pressure from partial pressures of N2, O2 and H2O,
+    following Dalton's law of partial pressures.
+    """
 
     expr = P_a == P_N2 + P_O2 + P_wa
 
 
 class eq_PN2_PO2(Equation):
-    """Calculate P_N2 as a function of P_O2, following Dalton's law of partial pressures."""
+    """Calculate P_N2 as a function of P_O2, following
+    Dalton's law of partial pressures.
+    """
 
     expr = P_N2 == P_O2 * x_N2 / x_O2
 
