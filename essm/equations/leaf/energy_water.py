@@ -113,6 +113,7 @@ class eq_Pwl(Equation):
 
     class p_CC1(Variable):
         """Internal parameter of eq_Pwl."""
+
         name = 'p_CC1'
         unit = pascal
         domain = 'real'
@@ -121,6 +122,7 @@ class eq_Pwl(Equation):
 
     class p_CC2(Variable):
         """Internal parameter of eq_Pwl."""
+
         name = 'p_CC2'
         unit = kelvin
         domain = 'real'
@@ -141,8 +143,9 @@ class eq_Elmol_conv(Equation):
 
 class eq_gtwmol_gtw(eq_Elmol.definition, eq_Cwl.definition,
                     eq_Elmol_conv.definition):
-    """g_twmol as a function of g_tw, using
-    eq_Elmol, eq_Cwl and eq_Elmol_conv.
+    """g_twmol as a function of g_tw.
+
+    It uses eq_Elmol, eq_Cwl and eq_Elmol_conv.
     """
 
     expr = g_twmol == -(P_a * P_wl * T_a - P_a * P_wa * T_l) * g_tw / ((
@@ -150,7 +153,7 @@ class eq_gtwmol_gtw(eq_Elmol.definition, eq_Cwl.definition,
 
 
 class eq_gtwmol_gtw_iso(eq_gtwmol_gtw.definition):
-    """g_twmol as a function of g_tw at isothermal conditions"""
+    """g_twmol as a function of g_tw at isothermal conditions."""
 
     expr = g_twmol == P_a * g_tw / (R_mol * T_a)
 

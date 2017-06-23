@@ -17,6 +17,8 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
+"""Chamber insulation."""
+
 from __future__ import absolute_import
 
 from ...variables.chamber.insulation import A_i, L_i, Q_i, dT_i, lambda_i
@@ -28,6 +30,7 @@ class eq_Qi(Equation):
 
     :cite:`schymanski_leaf-scale_2016`
     """
+
     expr = Q_i == dT_i * lambda_i * A_i / L_i
     """Describe how you got the equation."""
 

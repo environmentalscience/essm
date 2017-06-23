@@ -67,6 +67,7 @@ class eq_Dva(Equation):
 
     class p_Dva1(Variable):
         """Internal parameter of eq_Dva."""
+
         name = 'p_Dva1'
         unit = meter**2 / (kelvin * second)
         domain = 'real'
@@ -75,6 +76,7 @@ class eq_Dva(Equation):
 
     class p_Dva2(Variable):
         """Internal parameter of eq_Dva."""
+
         name = 'p_Dva2'
         unit = meter**2 / second
         domain = 'real'
@@ -92,6 +94,7 @@ class eq_alphaa(Equation):
 
     class p_alpha1(Variable):
         """Internal parameter of eq_alphaa."""
+
         name = 'p_alpha1'
         unit = meter**2 / (kelvin * second)
         domain = 'real'
@@ -100,6 +103,7 @@ class eq_alphaa(Equation):
 
     class p_alpha2(Variable):
         """Internal parameter of eq_alphaa."""
+
         name = 'p_alpha2'
         unit = meter**2 / second
         domain = 'real'
@@ -117,6 +121,7 @@ class eq_ka(Equation):
 
     class p_ka1(Variable):
         """Internal parameter of eq_ka."""
+
         name = 'p_ka1'
         unit = joule / (kelvin**2 * meter * second)
         domain = 'real'
@@ -125,6 +130,7 @@ class eq_ka(Equation):
 
     class p_ka2(Variable):
         """Internal parameter of eq_ka."""
+
         name = 'p_ka2'
         unit = joule / (kelvin * meter * second)
         domain = 'real'
@@ -142,6 +148,7 @@ class eq_nua(Equation):
 
     class p_nua1(Variable):
         """Internal parameter of eq_nua."""
+
         name = 'p_nua1'
         unit = meter**2 / (kelvin * second)
         domain = 'real'
@@ -150,6 +157,7 @@ class eq_nua(Equation):
 
     class p_nua2(Variable):
         """Internal parameter of eq_nua."""
+
         name = 'p_nua2'
         unit = meter**2 / second
         domain = 'real'
@@ -169,16 +177,19 @@ class eq_rhoa_Pwa_Ta(Equation):
 
 
 class eq_Pa(Equation):
-    """Calculate air pressure from partial pressures of N2, O2 and H2O,
-    following Dalton's law of partial pressures.
+    """Calculate air pressure.
+
+    From partial pressures of N2, O2 and H2O, following Dalton's law of
+    partial pressures.
     """
 
     expr = P_a == P_N2 + P_O2 + P_wa
 
 
 class eq_PN2_PO2(Equation):
-    """Calculate P_N2 as a function of P_O2, following
-    Dalton's law of partial pressures.
+    """Calculate P_N2 as a function of P_O2.
+
+    It follows Dalton's law of partial pressures.
     """
 
     expr = P_N2 == P_O2 * x_N2 / x_O2

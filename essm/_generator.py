@@ -60,6 +60,7 @@ LICENSE_TPL = """# -*- coding: utf-8 -*-
 EQUATION_TPL = """
 class {name}({parents}):
     \"\"\"{doc}\"\"\"
+
     {variables}
     expr = {expr}
 """
@@ -67,6 +68,7 @@ class {name}({parents}):
 VARIABLE_TPL = """
 class {name}(Variable):
     \"\"\"{doc}\"\"\"
+
     name = {name!r}
     unit = {units}
     domain = {domain!r}
@@ -118,8 +120,6 @@ class VariableWriter(object):
 
     .. code-block:: python
         from essm._generator import VariableWriter
-
-
     """
 
     TPL = VARIABLE_TPL
@@ -128,6 +128,7 @@ class VariableWriter(object):
         'essm.variables': {'Variable'}, }
 
     def __init__(self, docstring=None):
+        """Initialize variable writer."""
         self.docstring = docstring
         self._imports = defaultdict(set)
         self._imports.update(**self.default_imports)
@@ -135,11 +136,13 @@ class VariableWriter(object):
 
     @property
     def imports(self):
+        """Yield used imports."""
         for key, values in sorted(self._imports.items()):
             yield 'from {key} import {names}'.format(
                 key=key, names=', '.join(sorted(values)))
 
     def __str__(self):
+        """Serialize itself to string."""
         result = ''
         if self.docstring:
             result += self.LICENSE_TPL.format(
@@ -163,6 +166,7 @@ class VariableWriter(object):
             domain='real',
             latexname=None,
             value=None):
+        """Add new variable."""
         if not latexname:
             latexname = name
         if value is None:
@@ -189,6 +193,7 @@ class VariableWriter(object):
                     self._imports['essm.variables.units'].add(str(arg))
 
     def write(self, filename):
+        """Serialize itself to a filename."""
         with open(filename, 'w') as out:
             out.write(str(self))
 
@@ -230,6 +235,7 @@ class EquationWriter(object):
     """Set up default imports, including standard division."""
 
     def __init__(self, docstring=None):
+        """Initialise equation writer."""
         self.docstring = docstring
         self._imports = defaultdict(set)
         self._imports.update(**self.default_imports)
@@ -237,11 +243,13 @@ class EquationWriter(object):
 
     @property
     def imports(self):
+        """Yield registered imports."""
         for key, values in sorted(self._imports.items()):
             yield 'from {key} import {names}'.format(
                 key=key, names=', '.join(sorted(values)))
 
     def __str__(self):
+        """Return string representation."""
         result = ''
         if self.docstring:
             result += self.LICENSE_TPL.format(
@@ -256,6 +264,7 @@ class EquationWriter(object):
         return reformatted_result[0]
 
     def eq(self, name, expr, doc='', parents=None, variables=None):
+        """Add new equation."""
         if parents:
             parents = ', '.join(parent + '.definition' for parent in parents)
         else:
@@ -300,5 +309,6 @@ class EquationWriter(object):
             self._imports['sage.all'].add(match.group())
 
     def write(self, filename):
+        """Serialize itself to a filename."""
         with open(filename, 'w') as out:
             out.write(str(self))

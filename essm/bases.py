@@ -83,6 +83,7 @@ class BaseExpression(Expression):
         return self.expand_units().subs(SHORT_UNIT_SYMBOLS)
 
     def convert(self):
+        """Convert itself using custom ``convert`` function."""
         return convert(self)
 
 

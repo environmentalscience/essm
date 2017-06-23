@@ -57,11 +57,13 @@ class EquationMeta(type):
 
 class Equation(object):
     """Base type for all equations."""
+
     __metaclass__ = EquationMeta
     __registry__ = {}
 
     @classmethod
     def args(cls):
+        """Return equation arguments from registry if exist."""
         return tuple(
             Variable.__registry__.get(arg, arg) for arg in cls.expr.args())
 
