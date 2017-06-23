@@ -98,7 +98,7 @@ def create_module(name, doc=None, folder=None, overwrite=False):
         with open(init_path, 'w') as file_out:
             file_out.write(
                 LICENSE_TPL.format(year=datetime.datetime.now().year))
-            file_out.write('"""{0}"""'.format(doc))
+            file_out.write('"""{0}"""\n'.format(doc))
         print 'Created file {0}.'.format(init_path)
 
     return path
