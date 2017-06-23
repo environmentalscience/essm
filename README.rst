@@ -2,6 +2,9 @@
 Environmental Science for SageMath
 ==================================
 
+.. image:: https://zenodo.org/badge/90965956.svg
+        :target: https://zenodo.org/badge/latestdoi/90965956
+
 .. image:: https://img.shields.io/travis/environmentalscience/essm.svg
         :target: https://travis-ci.org/environmentalscience/essm
 
