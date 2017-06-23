@@ -3,10 +3,10 @@
 
 import pytest
 
-from sage.all import solve
 from essm.equations import Equation
 from essm.variables import Variable
-from essm.variables.units import joule, kelvin, mole, meter, second
+from essm.variables.units import joule, kelvin, meter, mole, second
+from sage.all import solve
 
 
 class demo_g(Variable):
