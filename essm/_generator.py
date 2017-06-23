@@ -25,13 +25,13 @@ import re
 from collections import defaultdict
 
 import pkg_resources
+from yapf.yapflib.yapf_api import FormatCode
 
 from sage import all as sage_all
-from yapf.yapflib.yapf_api import FormatCode
 
 from .variables import Variable
 
-PATH_ESSM = pkg_resources.resource_filename('essm', '')
+STYLE_YAPF = pkg_resources.resource_filename('essm', 'style.yapf')
 
 LICENSE_TPL = """# -*- coding: utf-8 -*-
 #
@@ -70,43 +70,6 @@ class {name}(Variable):
     latex_name = {latexname!r}
     {default}
 """
-
-YAPF_STYLE = '{based_on_style: pep8, \
-              align_closing_bracket_with_visual_indent: True,\
-              allow_multiline_dictionary_keys: True,\
-              allow_multiline_lambdas: True,\
-              blank_line_before_class_docstring: False,\
-              blank_line_before_nested_class_or_def: True,\
-              coalesce_brackets: True,\
-              column_limit: 79,\
-              continuation_indent_width: 4,\
-              dedent_closing_brackets: True,\
-              each_dict_entry_on_separate_line: True,\
-              indent_dictionary_value: True,\
-              indent_width: 4,\
-              join_multiple_lines: False,\
-              spaces_around_default_or_named_assign: False,\
-              spaces_around_power_operator: False,\
-              spaces_before_comment: 2,\
-              space_between_ending_comma_and_closing_bracket: True,\
-              split_arguments_when_comma_terminated: False,\
-              split_before_bitwise_operator: False,\
-              split_before_dict_set_generator: True,\
-              split_before_first_argument: True,\
-              split_before_logical_operator: False,\
-              split_before_named_assigns: True,\
-              split_penalty_after_opening_bracket: 30,\
-              split_penalty_after_unary_operator: 10000,\
-              split_penalty_before_if_expr: 0,\
-              split_penalty_bitwise_operator: 300,\
-              split_penalty_excess_character: 4500,\
-              split_penalty_for_added_line_split: 30,\
-              split_penalty_import_names: 0,\
-              split_penalty_logical_operator: 300,\
-              use_tabs: False}'
-
-
-
 
 # CONSTANTS = re.compile(r'\b(e|pi)\b')
 SAGE_IMPORTS = re.compile(
@@ -185,8 +148,7 @@ class VariableWriter(object):
             result += '\n\n__all__ = (\n{0}\n)'.format(
                 '\n'.join(
                     "    '{0}',".format(var['name']) for var in self.vars))
-        stylefile = PATH_ESSM + '/style.yapf'
-        reformatted_result = FormatCode(result, style_config=stylefile)
+        reformatted_result = FormatCode(result, style_config=STYLE_YAPF)
         return reformatted_result[0]
 
     def var(
@@ -286,7 +248,8 @@ class EquationWriter(object):
             self.TPL.format(**eq).replace('^', '**') for eq in self.eqs)
         result += '\n\n__all__ = (\n{0}\n)'.format(
             '\n'.join("    '{0}',".format(eq['name']) for eq in self.eqs))
-        return result
+        reformatted_result = FormatCode(result, style_config=STYLE_YAPF)
+        return reformatted_result[0]
 
     def eq(self, name, expr, doc='', parents=None, variables=None):
         if parents:
