@@ -201,7 +201,6 @@ class eq_rhoa(eq_rhoa_Pwa_Ta.definition, eq_PN2.definition, eq_PO2.definition):
                          R_mol * T_a * x_N2 + R_mol * T_a * x_O2)
 
 
-__all__ = (
-    'eq_Le', 'eq_Cwa', 'eq_Nu_forced_all', 'eq_Dva', 'eq_alphaa', 'eq_ka',
-    'eq_nua', 'eq_rhoa_Pwa_Ta', 'eq_Pa', 'eq_PN2_PO2', 'eq_PO2', 'eq_PN2',
-    'eq_rhoa', )
+__all__ = ('eq_Le', 'eq_Cwa', 'eq_Nu_forced_all', 'eq_Dva', 'eq_alphaa',
+           'eq_ka', 'eq_nua', 'eq_rhoa_Pwa_Ta', 'eq_Pa', 'eq_PN2_PO2',
+           'eq_PO2', 'eq_PN2', 'eq_rhoa', )
