@@ -44,6 +44,7 @@ before_install:
         SageMath/sage -pip install -U pip setuptools;
       fi
   - travis_retry SageMath/sage -pip install twine wheel coveralls
+  - travis_retry pip install check-manifest pydocstyle
 
 install:
   - SageMath/sage -pip install -e .[all]
@@ -51,6 +52,8 @@ install:
 script:
   - SageMath/sage setup.py test
   - SageMath/sage setup.py build_sphinx
+  - pydocstyle essm
+  - check-manifest
 
 after_script:
   - SageMath/sage -sh -c coveralls

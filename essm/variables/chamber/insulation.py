@@ -41,37 +41,37 @@ class c_pi(Variable):
 
 
 class lambda_i(Variable):
-    """Heat conductivity of insulation material"""
+    """Heat conductivity of insulation material."""
 
     unit = joule / second / meter / kelvin
 
 
 class rho_i(Variable):
-    """Density of insulation material"""
+    """Density of insulation material."""
 
     unit = kilogram / meter**3
 
 
 class L_i(Variable):
-    """Thickness of insulation material"""
+    """Thickness of insulation material."""
 
     unit = meter
 
 
 class A_i(Variable):
-    """Conducting area of insulation material"""
+    """Conducting area of insulation material."""
 
     unit = meter**2
 
 
 class Q_i(Variable):
-    """Heat conduction through insulation material"""
+    """Heat conduction through insulation material."""
 
     unit = joule / second
 
 
 class dT_i(Variable):
-    """Temperature increment of insulation material"""
+    """Temperature increment of insulation material."""
 
     unit = kelvin
 

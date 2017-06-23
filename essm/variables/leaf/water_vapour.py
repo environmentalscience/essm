@@ -30,7 +30,7 @@ meter = units.length.meter
 
 
 class B_l(Variable):
-    """Boundary layer thickness"""
+    """Boundary layer thickness."""
 
     unit = meter
 

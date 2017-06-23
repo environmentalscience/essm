@@ -35,58 +35,58 @@ watt = units.power.watt
 
 
 class alpha_l(Variable):
-    """Leaf albedo, fraction of shortwave radiation reflected by the leaf"""
+    """Leaf albedo, fraction of shortwave radiation reflected by the leaf."""
 
     unit = watt / watt
 
 
 class R_d(Variable):
-    """Downwelling global radiation"""
+    """Downwelling global radiation."""
 
     unit = joule / second / meter**2
 
 
 class R_la(Variable):
-    """Longwave radiation absorbed by leaf"""
+    """Longwave radiation absorbed by leaf."""
 
     unit = joule / second / meter**2
     latex_name = 'R_{la}'
 
 
 class R_ld(Variable):
-    """Downwards emitted/reflected global radiation from leaf"""
+    """Downwards emitted/reflected global radiation from leaf."""
 
     unit = joule / second / meter**2
     latex_name = 'R_{ld}'
 
 
 class R_lu(Variable):
-    """Upwards emitted/reflected global radiation from leaf"""
+    """Upwards emitted/reflected global radiation from leaf."""
 
     unit = joule / second / meter**2
     latex_name = 'R_{lu}'
 
 
 class R_u(Variable):
-    """Upwelling global radiation"""
+    """Upwelling global radiation."""
 
     unit = joule / second / meter**2
 
 
 class S_a(Variable):
-    """Radiation sensor above leaf reading"""
+    """Radiation sensor above leaf reading."""
 
     unit = joule / second / meter**2
 
 
 class S_b(Variable):
-    """Radiation sensor below leaf reading"""
+    """Radiation sensor below leaf reading."""
 
     unit = joule / second / meter**2
 
 
 class S_s(Variable):
-    """Radiation sensor beside leaf reading"""
+    """Radiation sensor beside leaf reading."""
 
     unit = joule / second / meter**2
 

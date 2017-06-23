@@ -17,7 +17,7 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
-"""Unsorted variables related to leaf model"""
+"""Unsorted variables related to leaf model."""
 
 from essm.variables import Variable
 from essm.variables.units import (
@@ -26,6 +26,7 @@ from essm.variables.units import (
 
 class alpha_l(Variable):
     """Leaf albedo, fraction of shortwave radiation reflected by the leaf."""
+
     name = 'alpha_l'
     unit = 1
     domain = 'real'
@@ -33,9 +34,11 @@ class alpha_l(Variable):
 
 
 class a_s(Variable):
-    """Fraction of one-sided leaf area covered by stomata
+    """Fraction of one-sided leaf area covered by stomata.
+
     (1 if stomata are on one side only, 2 if they are on both sides).
     """
+
     name = 'a_s'
     unit = 1
     domain = 'real'
@@ -44,6 +47,7 @@ class a_s(Variable):
 
 class a_sh(Variable):
     """Fraction of projected area exchanging sensible heat with the air."""
+
     name = 'a_sh'
     unit = 1
     domain = 'real'
@@ -53,6 +57,7 @@ class a_sh(Variable):
 
 class C_wl(Variable):
     """Concentration of water in the leaf air space."""
+
     name = 'C_wl'
     unit = mole / meter**3
     domain = 'real'
@@ -61,6 +66,7 @@ class C_wl(Variable):
 
 class E_lmol(Variable):
     """Transpiration rate in molar units."""
+
     name = 'E_lmol'
     unit = mole / (meter**2 * second)
     domain = 'real'
@@ -69,6 +75,7 @@ class E_lmol(Variable):
 
 class E_l(Variable):
     """Latent heat flux from leaf."""
+
     name = 'E_l'
     unit = joule / (meter**2 * second)
     domain = 'real'
@@ -77,6 +84,7 @@ class E_l(Variable):
 
 class epsilon_l(Variable):
     """Longwave emmissivity of the leaf surface."""
+
     name = 'epsilon_l'
     unit = 1
     domain = 'real'
@@ -86,6 +94,7 @@ class epsilon_l(Variable):
 
 class g_bw(Variable):
     """Boundary layer conductance to water vapour."""
+
     name = 'g_bw'
     unit = meter / second
     domain = 'real'
@@ -94,6 +103,7 @@ class g_bw(Variable):
 
 class g_bwmol(Variable):
     """Boundary layer conductance to water vapour."""
+
     name = 'g_bwmol'
     unit = mole / (meter**2 * second)
     domain = 'real'
@@ -102,6 +112,7 @@ class g_bwmol(Variable):
 
 class Gr(Variable):
     """Grashof number."""
+
     name = 'Gr'
     unit = 1 / 1
     domain = 'real'
@@ -110,6 +121,7 @@ class Gr(Variable):
 
 class g_sw(Variable):
     """Stomatal conductance to water vapour."""
+
     name = 'g_sw'
     unit = meter / second
     domain = 'real'
@@ -118,6 +130,7 @@ class g_sw(Variable):
 
 class g_swmol(Variable):
     """Stomatal conductance to water vapour."""
+
     name = 'g_swmol'
     unit = mole / (meter**2 * second)
     domain = 'real'
@@ -126,6 +139,7 @@ class g_swmol(Variable):
 
 class g_tw(Variable):
     """Total leaf conductance to water vapour."""
+
     name = 'g_tw'
     unit = meter / second
     domain = 'real'
@@ -134,6 +148,7 @@ class g_tw(Variable):
 
 class g_twmol(Variable):
     """Total leaf layer conductance to water vapour."""
+
     name = 'g_twmol'
     unit = mole / (meter**2 * second)
     domain = 'real'
@@ -142,6 +157,7 @@ class g_twmol(Variable):
 
 class h_c(Variable):
     """Average 1-sided convective heat transfer coefficient."""
+
     name = 'h_c'
     unit = joule / (kelvin * meter**2 * second)
     domain = 'real'
@@ -150,6 +166,7 @@ class h_c(Variable):
 
 class H_l(Variable):
     """Sensible heat flux from leaf."""
+
     name = 'H_l'
     unit = joule / (meter**2 * second)
     domain = 'real'
@@ -158,6 +175,7 @@ class H_l(Variable):
 
 class L_A(Variable):
     """Leaf area."""
+
     name = 'L_A'
     unit = meter**2
     domain = 'real'
@@ -166,6 +184,7 @@ class L_A(Variable):
 
 class L_l(Variable):
     """Leaf width as characteristic length scale for convection."""
+
     name = 'L_l'
     unit = meter
     domain = 'real'
@@ -174,6 +193,7 @@ class L_l(Variable):
 
 class P_wl(Variable):
     """Water vapour pressure inside the leaf."""
+
     name = 'P_wl'
     unit = pascal
     domain = 'real'
@@ -182,6 +202,7 @@ class P_wl(Variable):
 
 class r_bw(Variable):
     """Boundary layer resistance to water vapour, inverse of $g_{bw}$."""
+
     name = 'r_bw'
     unit = second / meter
     domain = 'real'
@@ -190,6 +211,7 @@ class r_bw(Variable):
 
 class r_sw(Variable):
     """Stomatal resistance to water vapour, inverse of $g_{sw}$."""
+
     name = 'r_sw'
     unit = second / meter
     domain = 'real'
@@ -198,6 +220,7 @@ class r_sw(Variable):
 
 class r_tw(Variable):
     """Total leaf resistance to water vapour, $r_{bv} + r_{sv}$."""
+
     name = 'r_tw'
     unit = second / meter
     domain = 'real'
@@ -206,6 +229,7 @@ class r_tw(Variable):
 
 class rho_al(Variable):
     """Density of air at the leaf surface."""
+
     name = 'rho_al'
     unit = kilogram / meter**3
     domain = 'real'
@@ -214,6 +238,7 @@ class rho_al(Variable):
 
 class R_la(Variable):
     """Longwave radiation absorbed by leaf."""
+
     name = 'R_la'
     unit = watt / meter**2
     domain = 'real'
@@ -222,6 +247,7 @@ class R_la(Variable):
 
 class R_ll(Variable):
     """Longwave radiation away from leaf."""
+
     name = 'R_ll'
     unit = watt / meter**2
     domain = 'real'
@@ -230,6 +256,7 @@ class R_ll(Variable):
 
 class R_ld(Variable):
     """Downwards emitted/reflected global radiation from leaf."""
+
     name = 'R_ld'
     unit = watt / meter**2
     domain = 'real'
@@ -238,6 +265,7 @@ class R_ld(Variable):
 
 class R_lu(Variable):
     """Upwards emitted/reflected global radiation from leaf."""
+
     name = 'R_lu'
     unit = watt / meter**2
     domain = 'real'
@@ -246,6 +274,7 @@ class R_lu(Variable):
 
 class T_l(Variable):
     """Leaf temperature."""
+
     name = 'T_l'
     unit = kelvin
     domain = 'real'
@@ -254,6 +283,7 @@ class T_l(Variable):
 
 class T_w(Variable):
     """Radiative temperature of objects surrounding the leaf."""
+
     name = 'T_w'
     unit = kelvin
     domain = 'real'
