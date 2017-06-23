@@ -20,9 +20,12 @@
 """General and atmospheric thermodynamics equations."""
 
 from __future__ import division
+
 from essm.equations import Equation
 from essm.variables import Variable
-from essm.variables.physics.thermodynamics import C_wa, D_va, Le, M_N2, M_O2, M_w, Nu, P_N2, P_O2, P_a, P_wa, Pr, R_mol, Re, Re_c, T_a, alpha_a, k_a, nu_a, rho_a, x_N2, x_O2
+from essm.variables.physics.thermodynamics import (
+    M_N2, M_O2, P_N2, P_O2, C_wa, D_va, Le, M_w, Nu, P_a, P_wa, Pr, R_mol, Re,
+    Re_c, T_a, alpha_a, k_a, nu_a, rho_a, x_N2, x_O2)
 from essm.variables.units import joule, kelvin, meter, second
 from sage.all import sqrt
 
@@ -52,8 +55,8 @@ class eq_Nu_forced_all(Equation):
     """
 
     expr = Nu == -1 / 1000 * Pr**(1 / 3) * (
-        37 * (Re + Re_c - 1 / 2 * abs(Re - Re_c))**(4 / 5) - 37 * Re**
-        (4 / 5) - 664 * sqrt(Re + Re_c - 1 / 2 * abs(Re - Re_c)))
+        37 * (Re + Re_c - 1 / 2 * abs(Re - Re_c))**(4 / 5) - 37 *
+        Re**(4 / 5) - 664 * sqrt(Re + Re_c - 1 / 2 * abs(Re - Re_c)))
 
 
 class eq_Dva(Equation):
@@ -201,6 +204,7 @@ class eq_rhoa(eq_rhoa_Pwa_Ta.definition, eq_PN2.definition, eq_PO2.definition):
                          R_mol * T_a * x_N2 + R_mol * T_a * x_O2)
 
 
-__all__ = ('eq_Le', 'eq_Cwa', 'eq_Nu_forced_all', 'eq_Dva', 'eq_alphaa',
-           'eq_ka', 'eq_nua', 'eq_rhoa_Pwa_Ta', 'eq_Pa', 'eq_PN2_PO2',
-           'eq_PO2', 'eq_PN2', 'eq_rhoa', )
+__all__ = (
+    'eq_Le', 'eq_Cwa', 'eq_Nu_forced_all', 'eq_Dva', 'eq_alphaa', 'eq_ka',
+    'eq_nua', 'eq_rhoa_Pwa_Ta', 'eq_Pa', 'eq_PN2_PO2', 'eq_PO2', 'eq_PN2',
+    'eq_rhoa', )

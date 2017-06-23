@@ -20,10 +20,15 @@
 """Leaf energy and water balance equations."""
 
 from __future__ import division
+
 from essm.equations import Equation
 from essm.variables import Variable
-from essm.variables.leaf.energy_water import C_wl, E_l, E_lmol, Gr, H_l, L_l, P_wl, R_ll, T_l, T_w, a_s, a_sh, epsilon_l, g_bw, g_sw, g_tw, g_twmol, h_c, rho_al
-from essm.variables.physics.thermodynamics import C_wa, Le, M_w, Nu, P_a, P_wa, R_mol, R_s, Re, T_a, c_pa, g, k_a, lambda_E, nu_a, rho_a, sigm, v_w
+from essm.variables.leaf.energy_water import (
+    C_wl, E_l, E_lmol, Gr, H_l, L_l, P_wl, R_ll, T_l, T_w, a_s, a_sh,
+    epsilon_l, g_bw, g_sw, g_tw, g_twmol, h_c, rho_al)
+from essm.variables.physics.thermodynamics import (
+    C_wa, Le, M_w, Nu, P_a, P_wa, R_mol, R_s, Re, T_a, c_pa, g, k_a, lambda_E,
+    nu_a, rho_a, sigm, v_w)
 from essm.variables.units import kelvin, pascal
 from sage.all import e
 

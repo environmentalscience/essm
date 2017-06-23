@@ -20,7 +20,8 @@
 """General and atmospheric thermodynamics variables."""
 
 from essm.variables import Variable
-from essm.variables.units import joule, kelvin, kilogram, meter, mole, pascal, second, watt
+from essm.variables.units import (
+    joule, kelvin, kilogram, meter, mole, pascal, second, watt)
 
 
 class alpha_a(Variable):
