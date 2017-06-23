@@ -20,6 +20,7 @@
 """Generator for equation definitions."""
 
 import datetime
+import logging
 import os
 import re
 from collections import defaultdict
@@ -30,6 +31,8 @@ from yapf.yapflib.yapf_api import FormatCode
 from sage import all as sage_all
 
 from .variables import Variable
+
+logger = logging.getLogger()
 
 STYLE_YAPF = pkg_resources.resource_filename('essm', 'style.yapf')
 
@@ -87,22 +90,23 @@ def create_module(name, doc=None, folder=None, overwrite=False):
     path = os.path.join(folder, *name_path)
     try:
         os.makedirs(path)
-        print 'Created new folder: {0}'.format(path)
+        logger.info('Created new folder: {0}'.format(path))
     except OSError as e1:
-        print e1
-        pass
+        logger.error('Could not create new folder: {0}'.format(path))
 
     init_path = os.path.join(path, '__init__.py')
+
     if os.path.isfile(init_path):
-        print '{0} already exists. Use `overwrite=True` to overwrite.'.format(
-            init_path)
+        logger.info(
+            '{0} already exists. Use `overwrite=True` to overwrite.'.format(
+                init_path))
 
     if overwrite or not os.path.isfile(init_path):
         with open(init_path, 'w') as file_out:
             file_out.write(
                 LICENSE_TPL.format(year=datetime.datetime.now().year))
             file_out.write('"""{0}"""\n'.format(doc))
-        print 'Created file {0}.'.format(init_path)
+        logger.debug('Created file {0}.'.format(init_path))
 
     return path
 
