@@ -28,7 +28,7 @@ from .._core import Equation
 class eq_Qi(Equation):
     """Calculate ....
 
-    :cite:`schymanski_leaf-scale_2016`
+    :cite:`schymanski_leaf-scale_2017`
     """
 
     expr = Q_i == dT_i * lambda_i * A_i / L_i
