@@ -69,7 +69,7 @@ def process_base(app, objtype, membername, member, skip, options):
 
 def setup(app):
     app.connect('autodoc-skip-member', process_base)
-    app.add_autodocumenter(BaseDocumenter)
+    AutoDirective._registry['base_expression'] = BaseDocumenter
 
     def get_attr(obj, value, *args, **kwargs):
         return getattr(obj.definition, value)
@@ -83,6 +83,9 @@ def setup(app):
 # If your documentation needs a minimal Sphinx version, state it here.
 #
 # needs_sphinx = '1.0'
+
+# Do not warn on external images.
+suppress_warnings = ['image.nonlocal_uri', 'ref.citation']
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -162,13 +165,35 @@ html_theme = 'alabaster'
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    'description': 'This package contains helpers to deal with physical variables '
+                   'and units in SageMath.',
+    'github_user': 'environmentalscience',
+    'github_repo': 'essm',
+    'github_button': False,
+    'github_banner': True,
+    'show_powered_by': False,
+    'extra_nav_links': {
+        'essm@GitHub': 'https://github.com/environmentalscience/essm',
+        'essm@PyPI': 'https://pypi.python.org/pypi/essm/',
+    }
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+# html_static_path = ['_static']
 
+# Custom sidebar templates, maps document names to template names.
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+        'donate.html',
+    ]
+}
 
 # -- Options for HTMLHelp output ------------------------------------------
 

@@ -33,12 +33,13 @@ interested.
    :maxdepth: 1
 
    license
-   ../AUTHORS
+   authors
 
 References
 ==========
 
 .. bibliography:: refs.bib
+   :cited:
 
 Indices and tables
 ==================
