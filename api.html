@@ -48,6 +48,13 @@
 <div class="section" id="module-essm.variables">
 <span id="variables"></span><h2>Variables<a class="headerlink" href="#module-essm.variables" title="Permalink to this headline">¶</a></h2>
 <p>Define useful variables and symbols.</p>
+<dl class="class">
+<dt id="essm.variables.Variable">
+<em class="property">class </em><code class="descclassname">essm.variables.</code><code class="descname">Variable</code><a class="reference internal" href="_modules/essm/variables/_core.html#Variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Base type for all physical variables.</p>
+</dd></dl>
+
 <div class="section" id="module-essm.variables.chamber">
 <span id="chamber"></span><h3>Chamber<a class="headerlink" href="#module-essm.variables.chamber" title="Permalink to this headline">¶</a></h3>
 <p>Chamber related variables.</p>
@@ -2134,6 +2141,19 @@
 <div class="section" id="module-essm.equations">
 <span id="equations"></span><h2>Equations<a class="headerlink" href="#module-essm.equations" title="Permalink to this headline">¶</a></h2>
 <p>Define equations.</p>
+<dl class="class">
+<dt id="essm.equations.Equation">
+<em class="property">class </em><code class="descclassname">essm.equations.</code><code class="descname">Equation</code><a class="reference internal" href="_modules/essm/equations/_core.html#Equation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.equations.Equation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Base type for all equations.</p>
+<dl class="classmethod">
+<dt id="essm.equations.Equation.args">
+<em class="property">classmethod </em><code class="descname">args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/equations/_core.html#Equation.args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.equations.Equation.args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return equation arguments from registry if exist.</p>
+</dd></dl>
+
+</dd></dl>
+
 <div class="section" id="id1">
 <h3>Chamber<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-essm.equations.chamber"></span><p>Chamber.</p>
@@ -2145,7 +2165,7 @@
 <em class="property">class </em><code class="descclassname">essm.equations.chamber.insulation.</code><code class="descname">eq_Qi</code><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">essm.equations._core.Equation</span></code></p>
 <p>Calculate ….</p>
-<p>[schymanski_leaf-scale_2016]</p>
+<p><a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id3">[SO17]</a></p>
 <dl class="attribute">
 <dt id="essm.equations.chamber.insulation.eq_Qi.expr">
 <code class="descname">expr</code><em class="property"> = Q_i == A_i*dT_i*lambda_i/L_i</em><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi.expr" title="Permalink to this definition">¶</a></dt>
@@ -2733,38 +2753,55 @@ partial pressures.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">API Docs</a><ul>
-<li><a class="reference internal" href="#module-essm.variables">Variables</a><ul>
-<li><a class="reference internal" href="#module-essm.variables.chamber">Chamber</a><ul>
-<li><a class="reference internal" href="#module-essm.variables.chamber.mass">Mass</a></li>
-<li><a class="reference internal" href="#module-essm.variables.chamber.insulation">Insulation</a></li>
+<h1 class="logo"><a href="index.html">ESSM</a></h1>
+
+
+
+<p class="blurb">This package contains helpers to deal with physical variables and units in SageMath.</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-essm.variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-essm.variables.chamber">Chamber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-essm.variables.leaf">Leaf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-essm.variables.physics.thermodynamics">Physics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-essm.variables.units">Units</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-essm.variables.leaf">Leaf</a><ul>
-<li><a class="reference internal" href="#module-essm.variables.leaf.radiation">Radiation</a></li>
-<li><a class="reference internal" href="#module-essm.variables.leaf.water_vapour">Water Vapour</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-essm.variables.physics.thermodynamics">Physics</a></li>
-<li><a class="reference internal" href="#module-essm.variables.units">Units</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-essm.equations">Equations</a><ul>
-<li><a class="reference internal" href="#id1">Chamber</a><ul>
-<li><a class="reference internal" href="#id2">Insulation</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id4">Leaf</a><ul>
-<li><a class="reference internal" href="#module-essm.equations.leaf.energy_water">Energy Water</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id18">Physics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-essm.equations">Equations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Chamber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Leaf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Physics</a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Authors</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
 </ul>
 <div class="relations">
 <h3>Related Topics</h3>
@@ -2775,13 +2812,6 @@ partial pressures.</p>
   </ul></li>
 </ul>
 </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/api.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -2800,14 +2830,14 @@ partial pressures.</p>
       &copy;2017, Stan Schymanski.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
-      
-      |
       <a href="_sources/api.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
+    
+    <a href="https://github.com/environmentalscience/essm" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
     
 
     

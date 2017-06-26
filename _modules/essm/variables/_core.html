@@ -139,14 +139,14 @@
             <span class="n">expr</span><span class="o">.</span><span class="n">set_domain</span><span class="p">()</span>
 
 
-<span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Variable"><a class="viewcode-back" href="../../../api.html#essm.variables.Variable">[docs]</a><span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base type for all physical variables.&quot;&quot;&quot;</span>
 
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">VariableMeta</span>
     <span class="n">__registry__</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">__defaults__</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">__units__</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">__expressions__</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">__expressions__</span> <span class="o">=</span> <span class="p">{}</span></div>
 
 
 <span class="k">class</span> <span class="nc">BaseVariable</span><span class="p">(</span><span class="n">BaseExpression</span><span class="p">):</span>
@@ -185,7 +185,43 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">ESSM</a></h1>
+
+
+
+<p class="blurb">This package contains helpers to deal with physical variables and units in SageMath.</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Docs</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Authors</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+</ul>
+<div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../../index.html">Documentation overview</a><ul>
@@ -211,12 +247,12 @@
     <div class="footer">
       &copy;2017, Stan Schymanski.
       
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
-      
     </div>
 
+    
+    <a href="https://github.com/environmentalscience/essm" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
     
 
     
