@@ -31,7 +31,15 @@ from ..variables._core import BaseVariable
 
 
 class EquationMeta(type):
-    """Equation interface."""
+    """Equation interface.
+    
+    :raises ValueError: if the message_body exceeds 160 characters
+        Example:
+        .. code-block:: python
+
+           class test:
+               pass 
+    """
 
     def __new__(cls, name, parents, dct):
         """Build and register new variable."""
@@ -76,4 +84,4 @@ class BaseEquation(BaseExpression):
         return self.definition.__doc__
 
 
-__all__ = ('Equation', )
+__all__ = ('Equation', 'EquationMeta')

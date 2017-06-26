@@ -277,8 +277,10 @@ class EquationWriter(object):
 
             # Serialize the internal variables.
             writer = VariableWriter()
+            internal_variables = set()
             for variable in variables:
                 writer.var(**variable)
+                internal_variables.add(variable['name'])
             variables = re.sub(
                 r'^',
                 4 * ' ',
@@ -291,6 +293,7 @@ class EquationWriter(object):
         else:
             variables = ''
             writer = None
+            internal_variables = set()
 
         context = {
             '_variable_writer': writer,
@@ -303,7 +306,7 @@ class EquationWriter(object):
 
         # register all imports
         for arg in expr.args():
-            if arg in Variable.__registry__:
+            if str(arg) not in internal_variables and arg in Variable.__registry__:
                 self._imports[Variable.__registry__[arg].__module__].add(
                     str(arg))
 
