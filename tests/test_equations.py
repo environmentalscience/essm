@@ -3,10 +3,11 @@
 
 import pytest
 
+from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import joule, kelvin, meter, mole, second
-from sage.all import solve
+from sage.all import solve, var
 
 
 class demo_g(Variable):
@@ -93,3 +94,29 @@ def test_double_registration():
             expr = demo_g = demo_g
 
     assert Equation.__registry__[demo_double].__doc__ == 'Second.'
+
+
+def test_equation_writer(tmpdir):
+    """EquationWriter creates importable file with internal variables."""
+    g = {}
+    d = var('d')
+    t = var('t')
+    writer_td = EquationWriter(docstring='Test of Equation_writer.')
+    writer_td.eq(
+        'demo_fall',
+        demo_g == d / t ** 2,
+        doc='Test equation.\n\n    (Some reference)\n    ',
+        variables=[{
+            "name": "d",
+            "value": '0.9',
+            "units": meter,
+            "latexname": 'p_1'}, {
+                "name": "t",
+                "units": second,
+                "latexname": 'p_2'}])
+    eq_file = tmpdir.mkdir('test').join('test_equations.py')
+    writer_td.write(eq_file.strpath)
+    writer_td.write('/home/sschyman/rubbish/test.py')
+
+    execfile(eq_file.strpath, g)
+    assert g['demo_fall'].definition.d.definition.default == 0.9
