@@ -306,7 +306,8 @@ class EquationWriter(object):
 
         # register all imports
         for arg in expr.args():
-            if str(arg) not in internal_variables and arg in Variable.__registry__:
+            if str(arg) not in internal_variables and\
+                    arg in Variable.__registry__:
                 self._imports[Variable.__registry__[arg].__module__].add(
                     str(arg))
 
