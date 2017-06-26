@@ -32,13 +32,13 @@ from ..variables._core import BaseVariable
 
 class EquationMeta(type):
     """Equation interface.
-    
+
     :raises ValueError: if the message_body exceeds 160 characters
         Example:
         .. code-block:: python
 
            class test:
-               pass 
+               pass
     """
 
     def __new__(cls, name, parents, dct):
