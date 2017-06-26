@@ -85,3 +85,7 @@ Physics
 
 .. automodule:: essm.equations.physics.thermodynamics
    :members:
+
+
+.. automodule:: essm.equations._core
+   :members:
