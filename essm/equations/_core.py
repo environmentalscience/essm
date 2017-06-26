@@ -32,7 +32,7 @@ from ..variables._core import BaseVariable
 
 class EquationMeta(type):
     r"""Equation interface.
-    
+
     Defines an equation with a docstring and internal variables,
     if needed.
 
@@ -41,7 +41,7 @@ class EquationMeta(type):
     .. code-block:: python
 
        from ..variables.units import meter, second
-       
+
        class test(Equation):
            \"\"\"Test equation.\"\"\"
 
@@ -66,7 +66,7 @@ class EquationMeta(type):
         .. code-block:: python
 
            from ..variables.units import meter, second
-           
+
            class test(Equation):
                \"\"\"Test equation with inconsistent units.\"\"\"
 
