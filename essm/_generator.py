@@ -155,8 +155,8 @@ class VariableWriter(object):
             result += '\n\n__all__ = (\n{0}\n)'.format(
                 '\n'.join(
                     "    '{0}',".format(var['name']) for var in self.vars))
-        reformatted_result = FormatCode(result, style_config=STYLE_YAPF)
-        return reformatted_result[0]
+            result = FormatCode(result, style_config=STYLE_YAPF)[0]
+        return result
 
     def var(
             self,
@@ -290,8 +290,10 @@ class EquationWriter(object):
                 self._imports[key] |= value
         else:
             variables = ''
+            writer = None
 
         context = {
+            '_variable_writer': writer,
             "name": name,
             "doc": doc,
             "expr": expr,
