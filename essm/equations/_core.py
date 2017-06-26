@@ -31,30 +31,33 @@ from ..variables._core import BaseVariable
 
 
 class EquationMeta(type):
-    """Equation interface. Defines an equation with a docstring
-    and internal variables, if needed.
+    r"""Equation interface.
+    
+    Defines an equation with a docstring and internal variables,
+    if needed.
 
-        Example:
+    Example:
 
-        .. code-block:: python
+    .. code-block:: python
 
-           from ..variables.units import meter, second
-           class test(Equation):
-               \"\"\"Test equation.\"\"\"
+       from ..variables.units import meter, second
+       
+       class test(Equation):
+           \"\"\"Test equation.\"\"\"
 
-               class d(Variable):
-                   \"\"\"Test variable.\"\"\"
-                   unit = meter
+           class d(Variable):
+               \"\"\"Test variable.\"\"\"
+               unit = meter
 
-               class t(Variable):
-                   \"\"\"Test variable.\"\"\"
-                   unit = second
+           class t(Variable):
+               \"\"\"Test variable.\"\"\"
+               unit = second
 
-               class v(Variable):
-                   \"\"\"Test variable.\"\"\"
-                   unit = meter/second
+           class v(Variable):
+               \"\"\"Test variable.\"\"\"
+               unit = meter/second
 
-               expr = v == d / t
+           expr = v == d / t
 
     :raises ValueError: if the units are inconsistent.
 
@@ -63,6 +66,7 @@ class EquationMeta(type):
         .. code-block:: python
 
            from ..variables.units import meter, second
+           
            class test(Equation):
                \"\"\"Test equation with inconsistent units.\"\"\"
 
