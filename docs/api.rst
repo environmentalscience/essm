@@ -87,5 +87,11 @@ Physics
    :members:
 
 
+Internals
+=========
+
+.. automodule:: essm.variables._core
+   :members:
+   
 .. automodule:: essm.equations._core
    :members:
