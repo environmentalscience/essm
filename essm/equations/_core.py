@@ -31,14 +31,54 @@ from ..variables._core import BaseVariable
 
 
 class EquationMeta(type):
-    """Equation interface.
+    """Equation interface. Defines an equation with a docstring
+    and internal variables, if needed.
 
-    :raises ValueError: if the message_body exceeds 160 characters
         Example:
+
         .. code-block:: python
 
-           class test:
-               pass
+           from ..variables.units import meter, second
+           class test(Equation):
+               \"\"\"Test equation.\"\"\"
+
+               class d(Variable):
+                   \"\"\"Test variable.\"\"\"
+                   unit = meter
+
+               class t(Variable):
+                   \"\"\"Test variable.\"\"\"
+                   unit = second
+
+               class v(Variable):
+                   \"\"\"Test variable.\"\"\"
+                   unit = meter/second
+
+               expr = v == d / t
+
+    :raises ValueError: if the units are inconsistent.
+
+        Example:
+
+        .. code-block:: python
+
+           from ..variables.units import meter, second
+           class test(Equation):
+               \"\"\"Test equation with inconsistent units.\"\"\"
+
+               class d(Variable):
+                   \"\"\"Test variable.\"\"\"
+                   unit = meter
+
+               class t(Variable):
+                   \"\"\"Test variable.\"\"\"
+                   unit = second
+
+               class v(Variable):
+                   \"\"\"Test variable.\"\"\"
+                   unit = meter/second
+
+               expr = v == d * t
     """
 
     def __new__(cls, name, parents, dct):
