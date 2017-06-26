@@ -116,7 +116,5 @@ def test_equation_writer(tmpdir):
                 "latexname": 'p_2'}])
     eq_file = tmpdir.mkdir('test').join('test_equations.py')
     writer_td.write(eq_file.strpath)
-    writer_td.write('/home/sschyman/rubbish/test.py')
-
     execfile(eq_file.strpath, g)
     assert g['demo_fall'].definition.d.definition.default == 0.9
