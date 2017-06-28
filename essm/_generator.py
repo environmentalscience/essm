@@ -28,6 +28,7 @@ from collections import defaultdict
 import pkg_resources
 from yapf.yapflib.yapf_api import FormatCode
 
+from isort import SortImports
 from sage import all as sage_all
 
 from .variables import Variable
@@ -81,6 +82,13 @@ SAGE_IMPORTS = re.compile(
     r'\b({0})\b'.format(
         '|'.join(name for name in dir(sage_all) if not name.startswith('_'))))
 """Regular expression to find sage-specific constants and functions."""
+
+
+def _lint_content(content):
+    """Automatically lint the generated code."""
+    content = SortImports(file_contents=content).output
+    content = FormatCode(content, style_config=STYLE_YAPF)[0]
+    return content
 
 
 def create_module(name, doc=None, folder=None, overwrite=False):
@@ -155,7 +163,7 @@ class VariableWriter(object):
             result += '\n\n__all__ = (\n{0}\n)'.format(
                 '\n'.join(
                     "    '{0}',".format(var['name']) for var in self.vars))
-            result = FormatCode(result, style_config=STYLE_YAPF)[0]
+            result = _lint_content(result)
         return result
 
     def var(
@@ -260,8 +268,8 @@ class EquationWriter(object):
             self.TPL.format(**eq).replace('^', '**') for eq in self.eqs)
         result += '\n\n__all__ = (\n{0}\n)'.format(
             '\n'.join("    '{0}',".format(eq['name']) for eq in self.eqs))
-        reformatted_result = FormatCode(result, style_config=STYLE_YAPF)
-        return reformatted_result[0]
+        reformatted_result = _lint_content(result)
+        return reformatted_result
 
     def eq(self, name, expr, doc='', parents=None, variables=None):
         """Add new equation."""
