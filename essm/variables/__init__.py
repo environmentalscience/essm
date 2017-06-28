@@ -35,15 +35,22 @@ To define units, you must first import these units from the library:
     >>> from essm.variables.units import joule, kelvin, meter
 
 Then you can define a custom variable with its name, description, domain,
-latex_name, unit, and an optional default value, e.g.:
+latex_name, unit, and an optional default value.
 
-    >>> class demo_chamber_volume1(Variable):
-    ...    '''Volume of Chamber 1.'''
-    ...    latex_name = 'V_c1'
-    ...    domain = 'real'
-    ...    name = 'V_{c1}'
-    ...    unit = meter ** 3
-    ...    default = 1
+Example:
+
+.. code-block:: python
+
+   from .variables.units import meter
+
+   class demo_chamber_volume1(Variable):
+      '''Volume of Chamber 1.'''
+
+       name = 'V_c1'
+       domain = 'real'
+       latex_name = 'V_{c1}'
+       unit = meter ** 3
+       default = 1
 
 Now, demo_chamber_volume is displayed as V_c1 and it will be
 nicely rendered in LaTeX as :math:`V_{c1}`.
@@ -57,9 +64,9 @@ in short notation.
 
 This module also contains libraries of pre-defined variables, which
 can be imported into your SageMath session, e.g.:
+
      >>> from essm.variables.physics.thermodynamics import *
      >>> from essm.variables.leaf.energy_water import *
-
 
 """
 
