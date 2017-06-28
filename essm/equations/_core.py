@@ -36,53 +36,57 @@ class EquationMeta(type):
     Defines an equation with a docstring and internal variables,
     if needed.
 
-    Example:
-
-    .. code-block:: python
-
-       from ..variables.units import meter, second
-
-       class test(Equation):
-           \"\"\"Test equation.\"\"\"
-
-           class d(Variable):
-               \"\"\"Test variable.\"\"\"
-               unit = meter
-
-           class t(Variable):
-               \"\"\"Test variable.\"\"\"
-               unit = second
-
-           class v(Variable):
-               \"\"\"Test variable.\"\"\"
-               unit = meter/second
-
-           expr = v == d / t
-
-    :raises ValueError: if the units are inconsistent.
-
         Example:
 
         .. code-block:: python
 
            from ..variables.units import meter, second
-
            class test(Equation):
-               \"\"\"Test equation with inconsistent units.\"\"\"
+               '''Test equation.'''
 
                class d(Variable):
-                   \"\"\"Test variable.\"\"\"
+                   '''Internal variable.'''
                    unit = meter
 
                class t(Variable):
-                   \"\"\"Test variable.\"\"\"
+                   '''Internal variable.'''
                    unit = second
 
                class v(Variable):
-                   \"\"\"Test variable.\"\"\"
+                   '''Internal variable.'''
+                   unit = meter/second
+
+               expr = v == d / t
+
+    :raises ValueError: if the units are inconsistent.
+
+        Example:
+
+        .. testcode:: python
+
+           from ..variables.units import meter, second
+           class test(Equation):
+               '''Test equation with inconsistent units.'''
+
+               class d(Variable):
+                   '''Internal variable.'''
+                   unit = meter
+
+               class t(Variable):
+                   '''Internal variable.'''
+                   unit = second
+
+               class v(Variable):
+                   '''Internal variable.'''
                    unit = meter/second
 
                expr = v == d * t
+
+        Since the units of v and d*t are not the same, this returns:
+
+        .. testoutput::
+
+           ValueError: Invalid expression units: meter/second == meter*second
     """
 
     def __new__(cls, name, parents, dct):
