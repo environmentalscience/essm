@@ -17,7 +17,7 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
-"""Core equation type."""
+"""Core equation type. Contains class definitions related to equations."""
 
 from __future__ import absolute_import
 
@@ -36,27 +36,27 @@ class EquationMeta(type):
     Defines an equation with a docstring and internal variables,
     if needed.
 
-        Example:
+    Example:
 
-        .. code-block:: python
+    .. code-block:: python
 
-           from ..variables.units import meter, second
-           class test(Equation):
-               '''Test equation.'''
+        from ..variables.units import meter, second
+        class test(Equation):
+            '''Test equation.'''
 
-               class d(Variable):
-                   '''Internal variable.'''
-                   unit = meter
+            class d(Variable):
+                '''Internal variable.'''
+                unit = meter
 
-               class t(Variable):
-                   '''Internal variable.'''
-                   unit = second
+            class t(Variable):
+                '''Internal variable.'''
+                unit = second
 
-               class v(Variable):
-                   '''Internal variable.'''
-                   unit = meter/second
+            class v(Variable):
+                '''Internal variable.'''
+                unit = meter/second
 
-               expr = v == d / t
+            expr = v == d / t
 
     :raises ValueError: if the units are inconsistent.
 

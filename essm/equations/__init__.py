@@ -17,7 +17,25 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
-"""Define equations."""
+"""Equations module to deal with physical equations.
+
+It allows attaching docstrings to equation names (including references)
+and defining internal variables.
+
+Creating equations
+==================
+
+To create custom equations, first import `Equation` and variables needed:
+
+    >>> from essm.equations import Equation
+    >>> from essm.variables.physics.thermodynamics import *
+
+Importing pre-defined equations
+=================================
+You can import pre-defined equations as e.g.:
+
+    >>> from essm.equations.physics.thermodynamics import *
+"""
 
 from __future__ import absolute_import
 
