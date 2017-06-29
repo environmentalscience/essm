@@ -1,6 +1,6 @@
-==================================
-Environmental Science for SageMath
-==================================
+=========================================
+Environmental Science using Symbolic Math
+=========================================
 
 .. image:: https://zenodo.org/badge/90965956.svg
         :target: https://zenodo.org/badge/latestdoi/90965956
