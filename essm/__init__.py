@@ -17,7 +17,12 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
-"""ESSM contains helpers to deal with physical variables and units.
+"""Variables module to deal with physical variables and units.
+
+It allows attaching docstrings to variable names, defining their domains
+(e.g. integer, real or complex), their units and LaTeX representations.
+You can also provide a default value, which is particularly useful for
+physical constants.
 
 Creating variables
 ==================
@@ -25,12 +30,12 @@ To create custom variables, first import `Variable`:
 
     >>> from essm.variables import Variable
 
-To define units, you can either import these units from the library:
+To define units, you must first import these units from the library:
 
     >>> from essm.variables.units import joule, kelvin, meter
 
 Then you can define a custom variable with its name, description, domain,
-latex_name, and unit, e.g.:
+latex_name, unit, and an optional default value, e.g.:
 
     >>> class demo_chamber_volume(Variable):
     ...    '''Volume of chamber.'''
@@ -60,7 +65,7 @@ in short notation.
 Creating equations
 ==================
 
-To create custom equations, proceed similarly to avove, i.e. first import
+To create custom equations, proceed similarly to above, i.e. first import
 `Equation`:
 
     >>> from essm.equations import Equation
