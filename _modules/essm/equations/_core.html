@@ -61,7 +61,7 @@
 <span class="c1"># along with essm; if not, write to the</span>
 <span class="c1"># Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,</span>
 <span class="c1"># MA 02111-1307, USA.</span>
-<span class="sd">&quot;&quot;&quot;Core equation type.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;Core equation type. Contains class definitions related to equations.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 
@@ -84,49 +84,53 @@
 
 <span class="sd">    .. code-block:: python</span>
 
-<span class="sd">       from ..variables.units import meter, second</span>
+<span class="sd">        from ..variables.units import meter, second</span>
+<span class="sd">        class test(Equation):</span>
+<span class="sd">            &#39;&#39;&#39;Test equation.&#39;&#39;&#39;</span>
 
-<span class="sd">       class test(Equation):</span>
-<span class="sd">           \&quot;\&quot;\&quot;Test equation.\&quot;\&quot;\&quot;</span>
+<span class="sd">            class d(Variable):</span>
+<span class="sd">                &#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
+<span class="sd">                unit = meter</span>
 
-<span class="sd">           class d(Variable):</span>
-<span class="sd">               \&quot;\&quot;\&quot;Test variable.\&quot;\&quot;\&quot;</span>
-<span class="sd">               unit = meter</span>
+<span class="sd">            class t(Variable):</span>
+<span class="sd">                &#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
+<span class="sd">                unit = second</span>
 
-<span class="sd">           class t(Variable):</span>
-<span class="sd">               \&quot;\&quot;\&quot;Test variable.\&quot;\&quot;\&quot;</span>
-<span class="sd">               unit = second</span>
+<span class="sd">            class v(Variable):</span>
+<span class="sd">                &#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
+<span class="sd">                unit = meter/second</span>
 
-<span class="sd">           class v(Variable):</span>
-<span class="sd">               \&quot;\&quot;\&quot;Test variable.\&quot;\&quot;\&quot;</span>
-<span class="sd">               unit = meter/second</span>
-
-<span class="sd">           expr = v == d / t</span>
+<span class="sd">            expr = v == d / t</span>
 
 <span class="sd">    :raises ValueError: if the units are inconsistent.</span>
 
 <span class="sd">        Example:</span>
 
-<span class="sd">        .. code-block:: python</span>
+<span class="sd">        .. testcode:: python</span>
 
 <span class="sd">           from ..variables.units import meter, second</span>
-
 <span class="sd">           class test(Equation):</span>
-<span class="sd">               \&quot;\&quot;\&quot;Test equation with inconsistent units.\&quot;\&quot;\&quot;</span>
+<span class="sd">               &#39;&#39;&#39;Test equation with inconsistent units.&#39;&#39;&#39;</span>
 
 <span class="sd">               class d(Variable):</span>
-<span class="sd">                   \&quot;\&quot;\&quot;Test variable.\&quot;\&quot;\&quot;</span>
+<span class="sd">                   &#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
 <span class="sd">                   unit = meter</span>
 
 <span class="sd">               class t(Variable):</span>
-<span class="sd">                   \&quot;\&quot;\&quot;Test variable.\&quot;\&quot;\&quot;</span>
+<span class="sd">                   &#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
 <span class="sd">                   unit = second</span>
 
 <span class="sd">               class v(Variable):</span>
-<span class="sd">                   \&quot;\&quot;\&quot;Test variable.\&quot;\&quot;\&quot;</span>
+<span class="sd">                   &#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
 <span class="sd">                   unit = meter/second</span>
 
 <span class="sd">               expr = v == d * t</span>
+
+<span class="sd">        Since the units of v and d*t are not the same, this returns:</span>
+
+<span class="sd">        .. testoutput::</span>
+
+<span class="sd">           ValueError: Invalid expression units: meter/second == meter*second</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>

@@ -45,19 +45,23 @@
             
   <div class="section" id="module-essm">
 <span id="usage"></span><h1>Usage<a class="headerlink" href="#module-essm" title="Permalink to this headline">¶</a></h1>
-<p>ESSM contains helpers to deal with physical variables and units.</p>
+<p>Variables module to deal with physical variables and units.</p>
+<p>It allows attaching docstrings to variable names, defining their domains
+(e.g. integer, real or complex), their units and LaTeX representations.
+You can also provide a default value, which is particularly useful for
+physical constants.</p>
 <div class="section" id="creating-variables">
 <h2>Creating variables<a class="headerlink" href="#creating-variables" title="Permalink to this headline">¶</a></h2>
 <p>To create custom variables, first import <cite>Variable</cite>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
 </pre></div>
 </div>
-<p>To define units, you can either import these units from the library:</p>
+<p>To define units, you must first import these units from the library:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.units</span> <span class="k">import</span> <span class="n">joule</span><span class="p">,</span> <span class="n">kelvin</span><span class="p">,</span> <span class="n">meter</span>
 </pre></div>
 </div>
 <p>Then you can define a custom variable with its name, description, domain,
-latex_name, and unit, e.g.:</p>
+latex_name, unit, and an optional default value, e.g.:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_chamber_volume</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
 <span class="gp">... </span>   <span class="sd">&#39;&#39;&#39;Volume of chamber.&#39;&#39;&#39;</span>
 <span class="gp">... </span>   <span class="n">latex_name</span> <span class="o">=</span> <span class="s1">&#39;V_c&#39;</span>
@@ -86,7 +90,7 @@ in short notation.</p>
 </div>
 <div class="section" id="creating-equations">
 <h2>Creating equations<a class="headerlink" href="#creating-equations" title="Permalink to this headline">¶</a></h2>
-<p>To create custom equations, proceed similarly to avove, i.e. first import
+<p>To create custom equations, proceed similarly to above, i.e. first import
 <cite>Equation</cite>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations</span> <span class="k">import</span> <span class="n">Equation</span>
 </pre></div>

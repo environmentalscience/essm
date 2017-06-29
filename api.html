@@ -47,7 +47,49 @@
 <h1>API Docs<a class="headerlink" href="#api-docs" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-essm.variables">
 <span id="variables"></span><h2>Variables<a class="headerlink" href="#module-essm.variables" title="Permalink to this headline">¶</a></h2>
-<p>Define useful variables and symbols.</p>
+<p>Variables module to deal with physical variables and units.</p>
+<p>It allows attaching docstrings to variable names, defining their domains
+(e.g. integer, real or complex), their units and LaTeX representations.
+You can also provide a default value, which is particularly useful for
+physical constants.</p>
+<div class="section" id="creating-variables">
+<h3>Creating variables<a class="headerlink" href="#creating-variables" title="Permalink to this headline">¶</a></h3>
+<p>To create custom variables, first import <cite>Variable</cite>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
+</pre></div>
+</div>
+<p>To define units, you must first import these units from the library:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.units</span> <span class="k">import</span> <span class="n">joule</span><span class="p">,</span> <span class="n">kelvin</span><span class="p">,</span> <span class="n">meter</span>
+</pre></div>
+</div>
+<p>Then you can define a custom variable with its name, description, domain,
+latex_name, unit, and an optional default value.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.variables.units</span> <span class="kn">import</span> <span class="n">meter</span>
+
+<span class="k">class</span> <span class="nc">demo_chamber_volume1</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+   <span class="sd">&#39;&#39;&#39;Volume of Chamber 1.&#39;&#39;&#39;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;V_c1&#39;</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;real&#39;</span>
+    <span class="n">latex_name</span> <span class="o">=</span> <span class="s1">&#39;V_{c1}&#39;</span>
+    <span class="n">unit</span> <span class="o">=</span> <span class="n">meter</span> <span class="o">**</span> <span class="mi">3</span>
+    <span class="n">default</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Now, demo_chamber_volume is displayed as V_c1 and it will be
+nicely rendered in LaTeX as <span class="math">\(V_{c1}\)</span>.</p>
+<p>You can type <cite>help(demo_chamber_volume)</cite> to inspects its metadata.</p>
+<p><cite>Variable.__defaults__</cite> returns a dictionary with all variables and
+their default values, <cite>Variable.__units__</cite> returns their units, and
+<cite>demo_chamber_volume.short_unit()</cite> can be used to obtain the units
+in short notation.</p>
+<p>This module also contains libraries of pre-defined variables, which
+can be imported into your SageMath session, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.leaf.energy_water</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
 <dl class="class">
 <dt id="essm.variables.Variable">
 <em class="property">class </em><code class="descclassname">essm.variables.</code><code class="descname">Variable</code><a class="reference internal" href="_modules/essm/variables/_core.html#Variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable" title="Permalink to this definition">¶</a></dt>
@@ -55,6 +97,7 @@
 <p>Base type for all physical variables.</p>
 </dd></dl>
 
+</div>
 <div class="section" id="module-essm.variables.chamber">
 <span id="chamber"></span><h3>Chamber<a class="headerlink" href="#module-essm.variables.chamber" title="Permalink to this headline">¶</a></h3>
 <p>Chamber related variables.</p>
@@ -2140,7 +2183,23 @@
 </div>
 <div class="section" id="module-essm.equations">
 <span id="equations"></span><h2>Equations<a class="headerlink" href="#module-essm.equations" title="Permalink to this headline">¶</a></h2>
-<p>Define equations.</p>
+<p>Equations module to deal with physical equations.</p>
+<p>It allows attaching docstrings to equation names (including references)
+and defining internal variables.</p>
+<div class="section" id="creating-equations">
+<h3>Creating equations<a class="headerlink" href="#creating-equations" title="Permalink to this headline">¶</a></h3>
+<p>To create custom equations, first import <cite>Equation</cite> and variables needed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations</span> <span class="k">import</span> <span class="n">Equation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="importing-pre-defined-equations">
+<h3>Importing pre-defined equations<a class="headerlink" href="#importing-pre-defined-equations" title="Permalink to this headline">¶</a></h3>
+<p>You can import pre-defined equations as e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
 <dl class="class">
 <dt id="essm.equations.Equation">
 <em class="property">class </em><code class="descclassname">essm.equations.</code><code class="descname">Equation</code><a class="reference internal" href="_modules/essm/equations/_core.html#Equation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.equations.Equation" title="Permalink to this definition">¶</a></dt>
@@ -2154,6 +2213,7 @@
 
 </dd></dl>
 
+</div>
 <div class="section" id="id1">
 <h3>Chamber<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-essm.equations.chamber"></span><p>Chamber.</p>
@@ -2755,7 +2815,7 @@ partial pressures.</p>
 <p>Base type for all physical variables.</p>
 </dd></dl>
 
-<span class="target" id="module-essm.equations._core"></span><p>Core equation type.</p>
+<span class="target" id="module-essm.equations._core"></span><p>Core equation type. Contains class definitions related to equations.</p>
 <dl class="class">
 <dt id="essm.equations._core.Equation">
 <em class="property">class </em><code class="descclassname">essm.equations._core.</code><code class="descname">Equation</code><a class="reference internal" href="_modules/essm/equations/_core.html#Equation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.equations._core.Equation" title="Permalink to this definition">¶</a></dt>
@@ -2778,20 +2838,19 @@ partial pressures.</p>
 if needed.</p>
 <p>Example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">..variables.units</span> <span class="kn">import</span> <span class="n">meter</span><span class="p">,</span> <span class="n">second</span>
-
 <span class="k">class</span> <span class="nc">test</span><span class="p">(</span><span class="n">Equation</span><span class="p">):</span>
-    \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Test equation.</span><span class="se">\&quot;\&quot;\&quot;</span>
+    <span class="sd">&#39;&#39;&#39;Test equation.&#39;&#39;&#39;</span>
 
     <span class="k">class</span> <span class="nc">d</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
-        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Test variable.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="sd">&#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="n">meter</span>
 
     <span class="k">class</span> <span class="nc">t</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
-        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Test variable.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="sd">&#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="n">second</span>
 
     <span class="k">class</span> <span class="nc">v</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
-        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Test variable.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="sd">&#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="n">meter</span><span class="o">/</span><span class="n">second</span>
 
     <span class="n">expr</span> <span class="o">=</span> <span class="n">v</span> <span class="o">==</span> <span class="n">d</span> <span class="o">/</span> <span class="n">t</span>
@@ -2803,24 +2862,27 @@ if needed.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>ValueError</strong> – <p>if the units are inconsistent.</p>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">..variables.units</span> <span class="kn">import</span> <span class="n">meter</span><span class="p">,</span> <span class="n">second</span>
-
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">..variables.units</span> <span class="k">import</span> <span class="n">meter</span><span class="p">,</span> <span class="n">second</span>
 <span class="k">class</span> <span class="nc">test</span><span class="p">(</span><span class="n">Equation</span><span class="p">):</span>
-    \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Test equation with inconsistent units.</span><span class="se">\&quot;\&quot;\&quot;</span>
+    <span class="sd">&#39;&#39;&#39;Test equation with inconsistent units.&#39;&#39;&#39;</span>
 
     <span class="k">class</span> <span class="nc">d</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
-        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Test variable.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="sd">&#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="n">meter</span>
 
     <span class="k">class</span> <span class="nc">t</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
-        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Test variable.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="sd">&#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="n">second</span>
 
     <span class="k">class</span> <span class="nc">v</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
-        \<span class="s2">&quot;</span><span class="se">\&quot;\&quot;</span><span class="s2">Test variable.</span><span class="se">\&quot;\&quot;\&quot;</span>
+        <span class="sd">&#39;&#39;&#39;Internal variable.&#39;&#39;&#39;</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="n">meter</span><span class="o">/</span><span class="n">second</span>
 
     <span class="n">expr</span> <span class="o">=</span> <span class="n">v</span> <span class="o">==</span> <span class="n">d</span> <span class="o">*</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p>Since the units of v and d*t are not the same, this returns:</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>ValueError: Invalid expression units: meter/second == meter*second
 </pre></div>
 </div>
 </td>
@@ -2860,6 +2922,7 @@ if needed.</p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Docs</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-essm.variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-variables">Creating variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-essm.variables.chamber">Chamber</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-essm.variables.leaf">Leaf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-essm.variables.physics.thermodynamics">Physics</a></li>
@@ -2867,6 +2930,8 @@ if needed.</p>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-essm.equations">Equations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-equations">Creating equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importing-pre-defined-equations">Importing pre-defined equations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Chamber</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">Leaf</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id18">Physics</a></li>
