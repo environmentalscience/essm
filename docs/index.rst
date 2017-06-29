@@ -32,6 +32,7 @@ interested.
 .. toctree::
    :maxdepth: 1
 
+   changes
    license
    authors
 
