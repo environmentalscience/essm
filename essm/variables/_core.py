@@ -94,6 +94,12 @@ class VariableMeta(type):
         for expr in cls.__registry__:
             expr.set_domain()
 
+    @property
+    def function(cls):
+        """Return a symbolic function."""
+        from sage.symbolic.function_factory import function_factory
+        return function_factory(cls.name + '_function')
+
 
 class Variable(object):
     """Base type for all physical variables."""
@@ -110,6 +116,10 @@ class BaseVariable(BaseExpression):
 
     __registry__ = Variable.__registry__
     __units__ = Variable.__units__
+
+    def __call__(self, *args):
+        """Return function."""
+        return self.definition.function(*args)
 
     @property
     def __doc__(self):
