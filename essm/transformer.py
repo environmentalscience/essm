@@ -25,10 +25,35 @@ import ast
 import inspect
 import sys
 
-from sage.rings import integer, real_mpfr
+try:
+    from sage.rings import integer, real_mpfr
 
-_Integer = ast.parse('integer.Integer', mode='eval').body
-_Float = ast.parse('real_mpfr.RR', mode='eval').body
+    _Integer = ast.parse('integer.Integer', mode='eval').body
+    _Float = ast.parse('real_mpfr.RR', mode='eval').body
+
+    def get_num_func(node):
+        """Get number wrapper."""
+        if isinstance(node.n, float):
+            return _Float
+        return _Integer
+
+    def extend_globals(f_globals):
+        """Extend globals."""
+        f_globals.setdefault('integer', integer)
+        f_globals.setdefault('real_mpfr', real_mpfr)
+
+except ImportError:
+    from sympy.core import numbers
+
+    _Number = ast.parse('numbers.Number', mode='eval').body
+
+    def get_num_func(node):
+        """Get number wrapper."""
+        return _Number
+
+    def extend_globals(f_globals):
+        """Extend globals."""
+        f_globals.setdefault('numbers', numbers)
 
 
 class Numbers(ast.NodeTransformer):
@@ -36,9 +61,11 @@ class Numbers(ast.NodeTransformer):
 
     def visit_Num(self, node):
         """Rewrite int / int to Fraction(int, int)."""
-        func = _Integer
-        if isinstance(node.n, float):
-            func = _Float
+        func = get_num_func(node)
+
+        if func is None:
+            return node
+
         return ast.copy_location(
             ast.Call(
                 func=func,
@@ -90,8 +117,7 @@ def build_instance_expression(instance, expr, back=1):
 
         # Include names used during number replacement.
         f_globals = frame.f_globals.copy()
-        f_globals.setdefault('integer', integer)
-        f_globals.setdefault('real_mpfr', real_mpfr)
+        extend_globals(f_globals)
 
         # Include locally defined variables.
         f_locals = frame.f_locals.copy()

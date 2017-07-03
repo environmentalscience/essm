@@ -21,17 +21,9 @@
 
 from __future__ import absolute_import
 
-from sage.symbolic.units import units
+from essm.variables.units import kelvin, meter, mole, pascal, second, watt
 
 from .._core import Variable
-
-# Used units
-kelvin = units.temperature.kelvin
-meter = units.length.meter
-mole = units.amount_of_substance.mole
-pascal = units.pressure.pascal
-second = units.time.second
-watt = units.power.watt
 
 
 class W_c(Variable):
@@ -55,7 +47,7 @@ class H_c(Variable):
 class V_c(Variable):
     """Chamber volume."""
 
-    unit = meter**3
+    unit = meter ** 3
 
 
 class n_c(Variable):
@@ -67,7 +59,7 @@ class n_c(Variable):
 class F_in_v(Variable):
     """Volumetric flow rate into chamber."""
 
-    unit = meter**3 / second
+    unit = meter ** 3 / second
     latex_name = 'F_{in,v}'
 
 
@@ -102,7 +94,7 @@ class F_out_molw(Variable):
 class F_out_v(Variable):
     """Volumetric flow rate out of chamber."""
 
-    unit = meter**3 / second
+    unit = meter ** 3 / second
     latex_name = 'F_{out,v}'
 
 
@@ -157,7 +149,7 @@ class R_H_in(Variable):
 class L_A(Variable):
     """Leaf area."""
 
-    unit = meter**2
+    unit = meter ** 2
 
 
 __all__ = (

@@ -59,7 +59,8 @@ setup_requires = [
 ]
 
 install_requires = [
-    # 'sage>=7.6',
+    'sympy>=1.1rc1',
+    'six>=1.10.0',
 ]
 
 packages = find_packages()

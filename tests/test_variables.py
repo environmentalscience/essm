@@ -26,11 +26,11 @@ def test_variable_definition():
     assert demo_expression_variable.subs(Variable.__expressions__) \
         == 2 * demo_variable
     assert demo_expression_variable.definition.unit == meter
-    assert str(demo_expression_variable.short_units()) == 'm'
 
 
 def test_local_definition():
     """Test local variable definition."""
+
     class local_definition(Variable):
         """Local definition."""
 
@@ -47,11 +47,13 @@ def test_local_definition():
 
 def test_unit_check():
     """Test unit validation."""
+
     class valid_unit(Variable):
         expr = 3 * demo_variable
         unit = meter
 
     with pytest.raises(ValueError):
+
         class invalid_unit(Variable):
             expr = 4 * demo_variable
             unit = second
@@ -59,6 +61,7 @@ def test_unit_check():
 
 def test_remove_variable_from_registry():
     """Check is the variable is removed from registry."""
+
     class removable(Variable):
         """Should be removed."""
 
@@ -69,8 +72,3 @@ def test_remove_variable_from_registry():
 
     with pytest.raises(KeyError):
         del Variable[removable]
-
-
-def test_short_unit():
-    """Test formatted short unit."""
-    assert str(demo_variable.short_unit()) == 'm'

@@ -89,6 +89,5 @@ You can import pre-defined variables and equations as e.g.:
 
 from __future__ import absolute_import
 
-from .bases import convert, expand_units
-
-__all__ = ('convert', 'expand_units')
+from sympy import E as e
+from sympy import Eq, solve, sqrt

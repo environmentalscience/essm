@@ -93,6 +93,7 @@ suppress_warnings = ['image.nonlocal_uri', 'ref.citation']
 extensions = ['matplotlib.sphinxext.plot_directive',
               'sphinxcontrib.bibtex',
               'sphinx.ext.autodoc',
+              'sphinx.ext.autosummary',
               'sphinx.ext.doctest',
               'sphinx.ext.intersphinx',
               'sphinx.ext.todo',

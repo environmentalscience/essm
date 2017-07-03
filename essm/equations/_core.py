@@ -21,16 +21,19 @@
 
 from __future__ import absolute_import
 
-from sage.all import SR
-from sage.misc.latex import latex
+import warnings
 
-from ..bases import BaseExpression, convert
+import six
+from sympy.core.relational import Eq
+
+from ..bases import RegistryType
 from ..transformer import build_instance_expression
 from ..variables import Variable
 from ..variables._core import BaseVariable
+from ..variables.units import derive_quantity, unit_symbols
 
 
-class EquationMeta(type):
+class EquationMeta(RegistryType):
     r"""Equation interface.
 
     Defines an equation with a docstring and internal variables,
@@ -97,35 +100,38 @@ class EquationMeta(type):
 
             instance = super(EquationMeta, cls).__new__(
                 cls, name, parents, dct)
-            instance.expr = expr = BaseEquation(
-                build_instance_expression(instance, expr),
-                instance,
-                units=Variable.__units__, ).register()
+            expr = build_instance_expression(instance, expr)
+            instance.expr = expr = BaseEquation(instance, expr)
+            instance[expr] = instance
 
-            expanded_units = expr.expand_units()
-            if not expanded_units:
-                raise ValueError(
-                    'Invalid expression units: {0}'.format(expanded_units))
             return expr
 
         return super(EquationMeta, cls).__new__(cls, name, parents, dct)
 
 
+@six.add_metaclass(EquationMeta)
 class Equation(object):
     """Base type for all equations."""
 
-    __metaclass__ = EquationMeta
     __registry__ = {}
 
     @classmethod
     def args(cls):
         """Return equation arguments from registry if exist."""
         return tuple(
-            Variable.__registry__.get(arg, arg) for arg in cls.expr.args())
+            Variable.__registry__.get(arg, arg)
+            for arg in cls.expr.atoms(BaseVariable))
 
 
-class BaseEquation(BaseExpression):
+class BaseEquation(Eq):
     """Add definition and short unit."""
+
+    def __new__(cls, definition, expr):
+        if not isinstance(expr, Eq):
+            return expr
+        self = super(BaseEquation, cls).__new__(cls, *expr.args)
+        self.definition = definition
+        return self
 
     @property
     def __doc__(self):
