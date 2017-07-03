@@ -21,13 +21,13 @@
 
 from __future__ import division
 
+from essm import Eq, sqrt
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.physics.thermodynamics import (
     M_N2, M_O2, P_N2, P_O2, C_wa, D_va, Le, M_w, Nu, P_a, P_wa, Pr, R_mol, Re,
     Re_c, T_a, alpha_a, k_a, nu_a, rho_a, x_N2, x_O2)
 from essm.variables.units import joule, kelvin, meter, second
-from sage.all import sqrt
 
 
 class eq_Le(Equation):
@@ -36,7 +36,7 @@ class eq_Le(Equation):
     (Eq. B3 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = Le == alpha_a / D_va
+    expr = Eq(Le, alpha_a / D_va)
 
 
 class eq_Cwa(Equation):
@@ -45,7 +45,7 @@ class eq_Cwa(Equation):
     (Eq. B9 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = C_wa == P_wa / (R_mol * T_a)
+    expr = Eq(C_wa, P_wa / (R_mol * T_a))
 
 
 class eq_Nu_forced_all(Equation):
@@ -54,9 +54,10 @@ class eq_Nu_forced_all(Equation):
     (Eqs. B13--B15 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = Nu == -1 / 1000 * Pr**(1 / 3) * (
-        37 * (Re + Re_c - 1 / 2 * abs(Re - Re_c))**(4 / 5) - 37 *
-        Re**(4 / 5) - 664 * sqrt(Re + Re_c - 1 / 2 * abs(Re - Re_c)))
+    expr = Eq(
+        Nu, -1 / 1000 * Pr ** (1 / 3) * (
+            37 * (Re + Re_c - 1 / 2 * abs(Re - Re_c)) ** (4 / 5) - 37 * Re **
+            (4 / 5) - 664 * sqrt(Re + Re_c - 1 / 2 * abs(Re - Re_c))))
 
 
 class eq_Dva(Equation):
@@ -69,7 +70,7 @@ class eq_Dva(Equation):
         """Internal parameter of eq_Dva."""
 
         name = 'p_Dva1'
-        unit = meter**2 / (kelvin * second)
+        unit = meter ** 2 / (kelvin * second)
         domain = 'real'
         latex_name = 'p_1'
         default = 1.49e-07
@@ -78,12 +79,12 @@ class eq_Dva(Equation):
         """Internal parameter of eq_Dva."""
 
         name = 'p_Dva2'
-        unit = meter**2 / second
+        unit = meter ** 2 / second
         domain = 'real'
         latex_name = 'p_2'
         default = 1.96e-05
 
-    expr = D_va == T_a * p_Dva1 - p_Dva2
+    expr = Eq(D_va, T_a * p_Dva1 - p_Dva2)
 
 
 class eq_alphaa(Equation):
@@ -96,7 +97,7 @@ class eq_alphaa(Equation):
         """Internal parameter of eq_alphaa."""
 
         name = 'p_alpha1'
-        unit = meter**2 / (kelvin * second)
+        unit = meter ** 2 / (kelvin * second)
         domain = 'real'
         latex_name = 'p_1'
         default = 1.32e-07
@@ -105,12 +106,12 @@ class eq_alphaa(Equation):
         """Internal parameter of eq_alphaa."""
 
         name = 'p_alpha2'
-        unit = meter**2 / second
+        unit = meter ** 2 / second
         domain = 'real'
         latex_name = 'p_2'
         default = 1.73e-05
 
-    expr = alpha_a == T_a * p_alpha1 - p_alpha2
+    expr = Eq(alpha_a, T_a * p_alpha1 - p_alpha2)
 
 
 class eq_ka(Equation):
@@ -123,7 +124,7 @@ class eq_ka(Equation):
         """Internal parameter of eq_ka."""
 
         name = 'p_ka1'
-        unit = joule / (kelvin**2 * meter * second)
+        unit = joule / (kelvin ** 2 * meter * second)
         domain = 'real'
         latex_name = 'p_1'
         default = 6.84e-05
@@ -137,7 +138,7 @@ class eq_ka(Equation):
         latex_name = 'p_2'
         default = 5.63e-03
 
-    expr = k_a == T_a * p_ka1 + p_ka2
+    expr = Eq(k_a, T_a * p_ka1 + p_ka2)
 
 
 class eq_nua(Equation):
@@ -150,7 +151,7 @@ class eq_nua(Equation):
         """Internal parameter of eq_nua."""
 
         name = 'p_nua1'
-        unit = meter**2 / (kelvin * second)
+        unit = meter ** 2 / (kelvin * second)
         domain = 'real'
         latex_name = 'p_1'
         default = 9.e-08
@@ -159,12 +160,12 @@ class eq_nua(Equation):
         """Internal parameter of eq_nua."""
 
         name = 'p_nua2'
-        unit = meter**2 / second
+        unit = meter ** 2 / second
         domain = 'real'
         latex_name = 'p_2'
         default = 1.13e-05
 
-    expr = nu_a == T_a * p_nua1 - p_nua2
+    expr = Eq(nu_a, T_a * p_nua1 - p_nua2)
 
 
 class eq_rhoa_Pwa_Ta(Equation):
@@ -173,7 +174,7 @@ class eq_rhoa_Pwa_Ta(Equation):
     (Eq. B20 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = rho_a == (M_N2 * P_N2 + M_O2 * P_O2 + M_w * P_wa) / (R_mol * T_a)
+    expr = Eq(rho_a, (M_N2 * P_N2 + M_O2 * P_O2 + M_w * P_wa) / (R_mol * T_a))
 
 
 class eq_Pa(Equation):
@@ -183,7 +184,7 @@ class eq_Pa(Equation):
     partial pressures.
     """
 
-    expr = P_a == P_N2 + P_O2 + P_wa
+    expr = Eq(P_a, P_N2 + P_O2 + P_wa)
 
 
 class eq_PN2_PO2(Equation):
@@ -192,27 +193,28 @@ class eq_PN2_PO2(Equation):
     It follows Dalton's law of partial pressures.
     """
 
-    expr = P_N2 == P_O2 * x_N2 / x_O2
+    expr = Eq(P_N2, P_O2 * x_N2 / x_O2)
 
 
 class eq_PO2(eq_Pa.definition, eq_PN2_PO2.definition):
     """Calculate P_O2 as a function of P_a, P_N2 and P_wa."""
 
-    expr = P_O2 == (P_a * x_O2 - P_wa * x_O2) / (x_N2 + x_O2)
+    expr = Eq(P_O2, (P_a * x_O2 - P_wa * x_O2) / (x_N2 + x_O2))
 
 
 class eq_PN2(eq_Pa.definition, eq_PN2_PO2.definition):
     """Calculate P_N2 as a function of P_a, P_O2 and P_wa."""
 
-    expr = P_N2 == (P_a * x_N2 - P_wa * x_N2) / (x_N2 + x_O2)
+    expr = Eq(P_N2, (P_a * x_N2 - P_wa * x_N2) / (x_N2 + x_O2))
 
 
 class eq_rhoa(eq_rhoa_Pwa_Ta.definition, eq_PN2.definition, eq_PO2.definition):
     """Calculate rho_a from T_a, P_a and P_wa."""
 
-    expr = rho_a == ((M_N2 * P_a - (M_N2 - M_w) * P_wa) * x_N2 +
-                     (M_O2 * P_a - (M_O2 - M_w) * P_wa) * x_O2) / (
-                         R_mol * T_a * x_N2 + R_mol * T_a * x_O2)
+    expr = Eq(
+        rho_a, ((M_N2 * P_a - (M_N2 - M_w) * P_wa) * x_N2 +
+                (M_O2 * P_a - (M_O2 - M_w) * P_wa) * x_O2) /
+        (R_mol * T_a * x_N2 + R_mol * T_a * x_O2))
 
 
 __all__ = (

@@ -73,6 +73,6 @@ can be imported into your SageMath session, e.g.:
 from __future__ import absolute_import
 
 from ._core import Variable
-from .units import SHORT_UNIT_SYMBOLS
+from .units import unit_symbols
 
-__all__ = ('SHORT_UNIT_SYMBOLS', 'Variable', )
+__all__ = ('unit_symbols', 'Variable', )

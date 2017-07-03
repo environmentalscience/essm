@@ -21,6 +21,7 @@
 
 from __future__ import division
 
+from essm import Eq, e
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.leaf.energy_water import (
@@ -30,7 +31,6 @@ from essm.variables.physics.thermodynamics import (
     C_wa, Le, M_w, Nu, P_a, P_wa, R_mol, R_s, Re, T_a, c_pa, g, k_a, lambda_E,
     nu_a, rho_a, sigm, v_w)
 from essm.variables.units import kelvin, pascal
-from sage.all import e
 
 
 class eq_Rs_enbal(Equation):
@@ -39,7 +39,7 @@ class eq_Rs_enbal(Equation):
     (Eq. 1 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = R_s == E_l + H_l + R_ll
+    expr = Eq(R_s, E_l + H_l + R_ll)
 
 
 class eq_Rll(Equation):
@@ -48,7 +48,7 @@ class eq_Rll(Equation):
     (Eq. 2 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = R_ll == (T_l**4 - T_w**4) * a_sh * epsilon_l * sigm
+    expr = Eq(R_ll, (T_l ** 4 - T_w ** 4) * a_sh * epsilon_l * sigm)
 
 
 class eq_Hl(Equation):
@@ -57,7 +57,7 @@ class eq_Hl(Equation):
     (Eq. 3 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = H_l == -(T_a - T_l) * a_sh * h_c
+    expr = Eq(H_l, -(T_a - T_l) * a_sh * h_c)
 
 
 class eq_El(Equation):
@@ -66,7 +66,7 @@ class eq_El(Equation):
     (Eq. 4 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = E_l == E_lmol * M_w * lambda_E
+    expr = Eq(E_l, E_lmol * M_w * lambda_E)
 
 
 class eq_Elmol(Equation):
@@ -75,7 +75,7 @@ class eq_Elmol(Equation):
     (Eq. 5 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = E_lmol == -(C_wa - C_wl) * g_tw
+    expr = Eq(E_lmol, -(C_wa - C_wl) * g_tw)
 
 
 class eq_gtw(Equation):
@@ -84,7 +84,7 @@ class eq_gtw(Equation):
     (Eq. 6 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = g_tw == (1 / (1 / g_bw + 1 / g_sw))
+    expr = Eq(g_tw, (1 / (1 / g_bw + 1 / g_sw)))
 
 
 class eq_gbw_hc(Equation):
@@ -93,7 +93,7 @@ class eq_gbw_hc(Equation):
     (Eq. B2 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = g_bw == a_s * h_c / (Le**(2 / 3) * c_pa * rho_a)
+    expr = Eq(g_bw, a_s * h_c / (Le ** (2 / 3) * c_pa * rho_a))
 
 
 class eq_Cwl(Equation):
@@ -102,7 +102,7 @@ class eq_Cwl(Equation):
     (Eq. B4 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = C_wl == P_wl / (R_mol * T_l)
+    expr = Eq(C_wl, P_wl / (R_mol * T_l))
 
 
 class eq_Pwl(Equation):
@@ -129,7 +129,8 @@ class eq_Pwl(Equation):
         latex_name = 'p_2'
         default = 273.
 
-    expr = P_wl == p_CC1 * e**(-M_w * lambda_E * (1 / T_l - 1 / p_CC2) / R_mol)
+    expr = Eq(
+        P_wl, p_CC1 * e ** (-M_w * lambda_E * (1 / T_l - 1 / p_CC2) / R_mol))
 
 
 class eq_Elmol_conv(Equation):
@@ -138,7 +139,7 @@ class eq_Elmol_conv(Equation):
     (Eq. B6 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = E_lmol == -(P_wa - P_wl) * g_twmol / P_a
+    expr = Eq(E_lmol, -(P_wa - P_wl) * g_twmol / P_a)
 
 
 class eq_gtwmol_gtw(eq_Elmol.definition, eq_Cwl.definition,
@@ -148,14 +149,15 @@ class eq_gtwmol_gtw(eq_Elmol.definition, eq_Cwl.definition,
     It uses eq_Elmol, eq_Cwl and eq_Elmol_conv.
     """
 
-    expr = g_twmol == -(P_a * P_wl * T_a - P_a * P_wa * T_l) * g_tw / ((
-        P_wa - P_wl) * R_mol * T_a * T_l)
+    expr = Eq(
+        g_twmol, -(P_a * P_wl * T_a - P_a * P_wa * T_l) * g_tw /
+        ((P_wa - P_wl) * R_mol * T_a * T_l))
 
 
 class eq_gtwmol_gtw_iso(eq_gtwmol_gtw.definition):
     """g_twmol as a function of g_tw at isothermal conditions."""
 
-    expr = g_twmol == P_a * g_tw / (R_mol * T_a)
+    expr = Eq(g_twmol, P_a * g_tw / (R_mol * T_a))
 
 
 class eq_hc(Equation):
@@ -164,7 +166,7 @@ class eq_hc(Equation):
     (Eq. B10 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = h_c == Nu * k_a / L_l
+    expr = Eq(h_c, Nu * k_a / L_l)
 
 
 class eq_Re(Equation):
@@ -173,7 +175,7 @@ class eq_Re(Equation):
     (Eq. B11 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = Re == L_l * v_w / nu_a
+    expr = Eq(Re, L_l * v_w / nu_a)
 
 
 class eq_Gr(Equation):
@@ -182,7 +184,7 @@ class eq_Gr(Equation):
     (Eq. B12 in :cite:`schymanski_leaf-scale_2017`)
     """
 
-    expr = Gr == L_l**3 * g * (rho_a - rho_al) / (nu_a**2 * rho_al)
+    expr = Eq(Gr, L_l ** 3 * g * (rho_a - rho_al) / (nu_a ** 2 * rho_al))
 
 
 __all__ = (
