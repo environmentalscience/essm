@@ -5,12 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>essm.equations._core &#8212; ESSM 0.1.0 documentation</title>
-    
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
@@ -24,11 +21,12 @@
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
@@ -65,17 +63,20 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
 
-<span class="kn">from</span> <span class="nn">sage.all</span> <span class="k">import</span> <span class="n">SR</span>
-<span class="kn">from</span> <span class="nn">sage.misc.latex</span> <span class="k">import</span> <span class="n">latex</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
-<span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">BaseExpression</span><span class="p">,</span> <span class="n">convert</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">sympy.core.relational</span> <span class="k">import</span> <span class="n">Eq</span>
+
+<span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">RegistryType</span>
 <span class="kn">from</span> <span class="nn">..transformer</span> <span class="k">import</span> <span class="n">build_instance_expression</span>
 <span class="kn">from</span> <span class="nn">..variables</span> <span class="k">import</span> <span class="n">Variable</span>
 <span class="kn">from</span> <span class="nn">..variables._core</span> <span class="k">import</span> <span class="n">BaseVariable</span>
+<span class="kn">from</span> <span class="nn">..variables.units</span> <span class="k">import</span> <span class="n">derive_quantity</span><span class="p">,</span> <span class="n">unit_symbols</span>
 
 
-<div class="viewcode-block" id="EquationMeta"><a class="viewcode-back" href="../../../api.html#essm.equations.EquationMeta">[docs]</a><span class="k">class</span> <span class="nc">EquationMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-    <span class="sd">r&quot;&quot;&quot;Equation interface.</span>
+<div class="viewcode-block" id="EquationMeta"><a class="viewcode-back" href="../../../api.html#essm.equations.EquationMeta">[docs]</a><span class="k">class</span> <span class="nc">EquationMeta</span><span class="p">(</span><span class="n">RegistryType</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Equation interface.</span>
 
 <span class="sd">    Defines an equation with a docstring and internal variables,</span>
 <span class="sd">    if needed.</span>
@@ -133,47 +134,50 @@
 <span class="sd">           ValueError: Invalid expression units: meter/second == meter*second</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build and register new variable.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s1">&#39;__registry__&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="n">expr</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;expr&#39;</span><span class="p">)</span>
 
-            <span class="n">instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">EquationMeta</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span>
-                <span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
-            <span class="n">instance</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">BaseEquation</span><span class="p">(</span>
-                <span class="n">build_instance_expression</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">expr</span><span class="p">),</span>
-                <span class="n">instance</span><span class="p">,</span>
-                <span class="n">units</span><span class="o">=</span><span class="n">Variable</span><span class="o">.</span><span class="n">__units__</span><span class="p">,</span> <span class="p">)</span><span class="o">.</span><span class="n">register</span><span class="p">()</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">EquationMeta</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span>
+                <span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">build_instance_expression</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+            <span class="n">instance</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">BaseEquation</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+            <span class="n">instance</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance</span>
 
-            <span class="n">expanded_units</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">expand_units</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">expanded_units</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s1">&#39;Invalid expression units: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expanded_units</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">expr</span>
 
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">EquationMeta</span><span class="p">,</span> <span class="n">cls</span><span class="p">)</span><span class="o">.</span><span class="n">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">EquationMeta</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Equation"><a class="viewcode-back" href="../../../api.html#essm.equations.Equation">[docs]</a><span class="k">class</span> <span class="nc">Equation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Equation"><a class="viewcode-back" href="../../../api.html#essm.equations.Equation">[docs]</a><span class="nd">@six</span><span class="o">.</span><span class="n">add_metaclass</span><span class="p">(</span><span class="n">EquationMeta</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Equation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base type for all equations.&quot;&quot;&quot;</span>
 
-    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">EquationMeta</span>
     <span class="n">__registry__</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="Equation.args"><a class="viewcode-back" href="../../../api.html#essm.equations.Equation.args">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return equation arguments from registry if exist.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
-            <span class="n">Variable</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">())</span></div></div>
+            <span class="n">Variable</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">BaseVariable</span><span class="p">))</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">BaseEquation</span><span class="p">(</span><span class="n">BaseExpression</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">BaseEquation</span><span class="p">(</span><span class="n">Eq</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add definition and short unit.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">definition</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Eq</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">expr</span>
+        <span class="bp">self</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">BaseEquation</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
+        <span class="k">return</span> <span class="bp">self</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">__doc__</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="vm">__doc__</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Equation&#39;</span><span class="p">,</span> <span class="s1">&#39;EquationMeta&#39;</span><span class="p">)</span>
