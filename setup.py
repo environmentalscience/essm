@@ -77,7 +77,7 @@ setup(
     version=version,
     description=__doc__,
     long_description=readme + '\n\n' + history,
-    keywords='sagemath environmental science',
+    keywords='symbolic math environmental science',
     license='GPLv2',
     author='Stan Schymanski',
     author_email='schymans@gmail.com',

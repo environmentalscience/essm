@@ -4,7 +4,7 @@ set -e # exit with nonzero exit code if anything fails
 # rm -rf build/sphinx/html || exit 0;
 
 # compile docs
-# sage setup.py sphinx_build
+# python setup.py sphinx_build
 
 # go to the docs directory and create a *new* Git repo
 git clone -b gh-pages --single-branch https://${GH_TOKEN}@${GH_REF} gh-pages
