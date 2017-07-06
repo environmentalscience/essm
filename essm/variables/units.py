@@ -21,7 +21,8 @@
 
 import sympy.physics.units as u
 from sympy.physics.units import Quantity
-from sympy.physics.units.systems import natural
+
+from .SI import SI
 
 joule = u.joule
 kelvin = u.kelvin
@@ -55,7 +56,7 @@ def derive_quantity(expr, name=None):
 
 def derive_unit(expr, name=None):
     """Derive a unit from an expression."""
-    return natural.print_unit_base(derive_quantity(expr, name=name))
+    return SI.print_unit_base(derive_quantity(expr, name=name))
 
 
 __all__ = (
