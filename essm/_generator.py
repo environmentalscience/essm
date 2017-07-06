@@ -81,7 +81,7 @@ class {name}(Variable):
 _IMPORTS = re.compile(
     r'\b({0})\b'.format(
         '|'.join(name for name in dir(essm) if not name.startswith('_'))))
-"""Regular expression to find sage-specific constants and functions."""
+"""Regular expression to find specific constants and functions."""
 
 
 def _lint_content(content):
