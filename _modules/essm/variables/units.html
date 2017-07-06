@@ -27,7 +27,6 @@
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
   
-  
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
@@ -61,48 +60,45 @@
 <span class="c1"># MA 02111-1307, USA.</span>
 <span class="sd">&quot;&quot;&quot;Define unit symbols.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sympy.physics.units</span> <span class="k">as</span> <span class="nn">u</span>
-<span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="k">import</span> <span class="n">Quantity</span>
-<span class="kn">from</span> <span class="nn">sympy.physics.units.systems</span> <span class="k">import</span> <span class="n">MKS</span>
+<span class="kn">from</span> <span class="nn">sage.all</span> <span class="k">import</span> <span class="n">var</span>
+<span class="kn">from</span> <span class="nn">sage.symbolic.units</span> <span class="k">import</span> <span class="n">units</span>
 
-<span class="n">joule</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">joule</span>
-<span class="n">kelvin</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">kelvin</span>
-<span class="n">kilogram</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">kilogram</span>
-<span class="n">meter</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">meter</span>
-<span class="n">mole</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">mole</span>
-<span class="n">pascal</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">pascal</span>
-<span class="n">second</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">second</span>
-<span class="n">watt</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">watt</span>
+<span class="n">joule</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">energy</span><span class="o">.</span><span class="n">joule</span>
+<span class="n">kelvin</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">temperature</span><span class="o">.</span><span class="n">kelvin</span>
+<span class="n">kilogram</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">mass</span><span class="o">.</span><span class="n">kilogram</span>
+<span class="n">meter</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">meter</span>
+<span class="n">mole</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">amount_of_substance</span><span class="o">.</span><span class="n">mole</span>
+<span class="n">pascal</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">pressure</span><span class="o">.</span><span class="n">pascal</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">second</span>
+<span class="n">watt</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">watt</span>
 
-
-<div class="viewcode-block" id="markdown"><a class="viewcode-back" href="../../../api.html#essm.variables.markdown">[docs]</a><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return markdown representation of a unit.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="unit_symbols"><a class="viewcode-back" href="../../../api.html#essm.variables.unit_symbols">[docs]</a><span class="k">def</span> <span class="nf">unit_symbols</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return unit symbols.&quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">essm.variables._core</span> <span class="k">import</span> <span class="n">BaseVariable</span><span class="p">,</span> <span class="n">Variable</span>
-
-    <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">BaseVariable</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Quantity</span><span class="p">):</span>
-            <span class="k">yield</span> <span class="n">unit</span></div>
+<span class="n">SHORT_UNIT_SYMBOLS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">joule</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;J&#39;</span><span class="p">),</span>
+    <span class="n">kelvin</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">),</span>
+    <span class="n">kilogram</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;kg&#39;</span><span class="p">),</span>
+    <span class="n">meter</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">),</span>
+    <span class="n">mole</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;mol&#39;</span><span class="p">),</span>
+    <span class="n">pascal</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;Pa&#39;</span><span class="p">),</span>
+    <span class="n">second</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">),</span>
+    <span class="n">watt</span><span class="p">:</span> <span class="n">var</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">),</span> <span class="p">}</span>
 
 
-<div class="viewcode-block" id="derive_quantity"><a class="viewcode-back" href="../../../api.html#essm.variables.derive_quantity">[docs]</a><span class="k">def</span> <span class="nf">derive_quantity</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Derive a quantity from an expression.&quot;&quot;&quot;</span>
-    <span class="n">factor</span><span class="p">,</span> <span class="n">dimension</span> <span class="o">=</span> <span class="n">Quantity</span><span class="o">.</span><span class="n">_collect_factor_and_dimension</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">name</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="derive_unit"><a class="viewcode-back" href="../../../api.html#essm.variables.derive_unit">[docs]</a><span class="k">def</span> <span class="nf">derive_unit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Derive a unit from an expression.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">MKS</span><span class="o">.</span><span class="n">print_unit_base</span><span class="p">(</span><span class="n">derive_quantity</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span></div>
+<div class="viewcode-block" id="markdown"><a class="viewcode-back" href="../../../api.html#essm.variables.units.markdown">[docs]</a><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return markdown representaion of a unit.&quot;&quot;&quot;</span>
+    <span class="n">facs</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">factor_list</span><span class="p">()</span>
+    <span class="n">str1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">term1</span> <span class="ow">in</span> <span class="n">facs</span><span class="p">:</span>
+        <span class="n">op1</span> <span class="o">=</span> <span class="n">term1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">op1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">str1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">term1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">str1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">str1</span> <span class="o">+=</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1">$^{{</span><span class="si">{1}</span><span class="s1">}}$ &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">markdown</span><span class="p">(</span><span class="n">term1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">markdown</span><span class="p">(</span><span class="n">op1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">str1</span></div>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s1">&#39;derive_unit&#39;</span><span class="p">,</span> <span class="s1">&#39;derive_quantity&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span> <span class="s1">&#39;meter&#39;</span><span class="p">,</span> <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_symbols&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span><span class="p">)</span>
+    <span class="s1">&#39;SHORT_UNIT_SYMBOLS&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span> <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span> <span class="s1">&#39;meter&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span><span class="p">)</span>
 </pre></div>
 
           </div>
@@ -141,9 +137,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
-    
     <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
     
 </ul>
 <div class="relations">
