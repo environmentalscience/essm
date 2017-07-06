@@ -20,12 +20,11 @@ Environmental Science using Symbolic Math
 .. image:: https://img.shields.io/github/license/environmentalscience/essm.svg
         :target: https://github.com/environmentalscience/essm/blob/master/LICENSE
 
-This package contains helpers to deal with physical variables and units
-in SageMath.
+This package contains helpers to deal with physical variables and units.
 
 The documentation is available on
 https://environmentalscience.github.io/essm/
 
 The quick installation for impatient users can be done by running::
 
-    sage -pip install essm
+    pip install essm

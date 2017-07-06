@@ -25,39 +25,23 @@ import ast
 import inspect
 import sys
 
-try:
-    from sage.rings import integer, real_mpfr
+from sympy.core import numbers
 
-    _Integer = ast.parse('integer.Integer', mode='eval').body
-    _Float = ast.parse('real_mpfr.RR', mode='eval').body
+_Number = ast.parse('numbers.Number', mode='eval').body
 
-    def get_num_func(node):
-        """Get number wrapper."""
-        if isinstance(node.n, float):
-            return _Float
-        return _Integer
 
-    def extend_globals(f_globals):
-        """Extend globals."""
-        f_globals.setdefault('integer', integer)
-        f_globals.setdefault('real_mpfr', real_mpfr)
+def get_num_func(node):
+    """Get number wrapper."""
+    return _Number
 
-except ImportError:
-    from sympy.core import numbers
 
-    _Number = ast.parse('numbers.Number', mode='eval').body
-
-    def get_num_func(node):
-        """Get number wrapper."""
-        return _Number
-
-    def extend_globals(f_globals):
-        """Extend globals."""
-        f_globals.setdefault('numbers', numbers)
+def extend_globals(f_globals):
+    """Extend globals."""
+    f_globals.setdefault('numbers', numbers)
 
 
 class Numbers(ast.NodeTransformer):
-    """Change Python numbers to Sage numbers."""
+    """Change Python numbers to 'symbolic' numbers."""
 
     def visit_Num(self, node):
         """Rewrite int / int to Fraction(int, int)."""

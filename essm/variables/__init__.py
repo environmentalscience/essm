@@ -63,7 +63,7 @@ their default values, `Variable.__units__` returns their units, and
 in short notation.
 
 This module also contains libraries of pre-defined variables, which
-can be imported into your SageMath session, e.g.:
+can be imported into your session, e.g.:
 
      >>> from essm.variables.physics.thermodynamics import *
      >>> from essm.variables.leaf.energy_water import *

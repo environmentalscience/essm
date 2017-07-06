@@ -168,7 +168,7 @@ html_theme = 'alabaster'
 #
 html_theme_options = {
     'description': 'This package contains helpers to deal with physical variables '
-                   'and units in SageMath.',
+                   'and units.',
     'github_user': 'environmentalscience',
     'github_repo': 'essm',
     'github_button': False,

@@ -5,7 +5,7 @@ ESSM is on PyPI so all you need is:
 
 .. code-block:: console
 
-   $ sage -pip install essm
+   $ pip install essm
 
 Development
 -----------
@@ -17,4 +17,4 @@ or equations, please install the package in development mode:
 
    $ git clone https://github.com/environmentalscience/essm
    $ cd environmental-science-for-sagemath
-   $ sage -pip install -e .
+   $ pip install -e .[all]
