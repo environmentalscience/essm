@@ -29,6 +29,18 @@ class demo_fall(Equation):
     expr = Eq(d, 1 / 2 * demo_g * t ** 2)
 
 
+class demo_velocity(Equation):
+    """Test equation."""
+    
+    class v(Variable):
+        unit = meter/second
+        
+    class t(Variable):
+        unit = meter
+    
+    expr = Eq(v, demo_g * t)
+
+
 def test_equation():
     """Test variable definition."""
     assert demo_fall.__doc__ == demo_fall.definition.__doc__
@@ -54,6 +66,12 @@ def test_args():
         demo_g.definition,
         demo_fall.definition.d.definition,
         demo_fall.definition.t.definition, }
+
+
+def test_free_symbols():
+    """Test free symbols."""
+    assert set(demo_velocity.free_symbols) == {
+        v, t, demo_g}
 
 
 def test_unit_check():
