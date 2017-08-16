@@ -22,6 +22,7 @@ class demo_expression_variable(Variable):
 
 def test_variable_definition():
     """Test variable definition."""
+
     assert demo_variable.definition.default == 1
     assert demo_expression_variable.subs(Variable.__expressions__) \
         == 2 * demo_variable
