@@ -4,7 +4,7 @@
 import pytest
 
 from essm.variables import Variable
-from essm.variables.units import meter, second
+from essm.variables.units import derive_unit, joule, kilogram, meter, second
 
 
 class demo_variable(Variable):
@@ -58,6 +58,18 @@ def test_unit_check():
         class invalid_unit(Variable):
             expr = 4 * demo_variable
             unit = second
+
+
+def test_derive_unit():
+    """Test derive_unit from expression."""
+
+    class lambda_E(Variable):
+        unit = joule / kilogram
+
+    class E_l(Variable):
+        unit = joule / (meter ** 2 * second)
+
+    assert derive_unit(lambda_E * E_l) == kilogram * meter ** 2 / second ** 5
 
 
 def test_remove_variable_from_registry():

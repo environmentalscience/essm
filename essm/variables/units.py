@@ -77,7 +77,7 @@ def derive_unit(expr, name=None):
             units1.append(eval('u.' + unit) ** dimensional_dependencies[dim1])
         units_dim = functools.reduce(operator.mul, units1)
         units[dim] = units_dim
-    return dim_expr.subs(units)
+    return dim_expr.xreplace(units)
 
 
 __all__ = (
