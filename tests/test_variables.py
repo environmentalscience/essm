@@ -69,7 +69,8 @@ def test_derive_unit():
     class E_l(Variable):
         unit = joule / (meter ** 2 * second)
 
-    assert derive_unit(lambda_E * E_l) == kilogram * meter ** 2 / second ** 5
+    assert derive_unit(2 * lambda_E * E_l) \
+        == kilogram * meter ** 2 / second ** 5
 
 
 def test_remove_variable_from_registry():
