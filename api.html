@@ -83,7 +83,7 @@ their default values, <cite>Variable.__units__</cite> returns their units, and
 <cite>demo_chamber_volume.short_unit()</cite> can be used to obtain the units
 in short notation.</p>
 <p>This module also contains libraries of pre-defined variables, which
-can be imported into your SageMath session, e.g.:</p>
+can be imported into your session, e.g.:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.leaf.energy_water</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
@@ -2180,7 +2180,7 @@ can be imported into your SageMath session, e.g.:</p>
 <dl class="function">
 <dt id="essm.variables.units.derive_unit">
 <code class="descclassname">essm.variables.units.</code><code class="descname">derive_unit</code><span class="sig-paren">(</span><em>expr</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/units.html#derive_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.units.derive_unit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Derive a unit from an expression.</p>
+<dd><p>Derive SI-unit from an expression, omitting scale factors.</p>
 </dd></dl>
 
 <dl class="function">
@@ -2251,7 +2251,8 @@ and defining internal variables.</p>
 <dl class="attribute">
 <dt id="essm.equations.chamber.insulation.eq_Qi.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Q_i, A_i*dT_i*lambda_i/L_i)</em><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi.expr" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Describe how you got the equation.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="essm.equations.chamber.insulation.eq_Qi.name">
@@ -2926,7 +2927,7 @@ if needed.</p>
 
 
 
-<p class="blurb">This package contains helpers to deal with physical variables and units in SageMath.</p>
+<p class="blurb">This package contains helpers to deal with physical variables and units.</p>
 
 
 
@@ -2972,9 +2973,9 @@ if needed.</p>
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
-    
     <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
     
 </ul>
 <div class="relations">
