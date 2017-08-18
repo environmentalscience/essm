@@ -70,6 +70,7 @@ def test_derive_unit():
 
     assert derive_unit(2 * lambda_E * E_l) \
         == kilogram * meter ** 2 / second ** 5
+    assert derive_unit(E_l/E_l) == 1
 
 
 def test_remove_variable_from_registry():
