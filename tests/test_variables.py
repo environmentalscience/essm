@@ -72,6 +72,11 @@ def test_derive_unit():
         == kilogram * meter ** 2 / second ** 5
     assert derive_unit(E_l/E_l) == 1
 
+    class dimensionless(Variable):
+        expr = demo_variable / demo_expression_variable
+
+    assert dimensionless.definition.unit == 1
+
 
 def test_remove_variable_from_registry():
     """Check is the variable is removed from registry."""

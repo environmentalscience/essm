@@ -62,12 +62,11 @@ def derive_quantity(expr, name=None):
 def derive_unit(expr, name=None):
     """Derive SI-unit from an expression, omitting scale factors."""
     dim = Dimension(Quantity.get_dimensional_expr(expr))
-    if dim == Dimension(1):
-        return 1
     return functools.reduce(
         operator.mul, (
             SI_DIMENSIONS[d] ** p
-            for d, p in Dimension.get_dimensional_dependencies(dim).items()))
+            for d, p in Dimension.get_dimensional_dependencies(dim).items()),
+        1)
 
 
 __all__ = (
