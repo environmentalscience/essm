@@ -134,10 +134,6 @@ class BaseVariable(Quantity):
     def __doc__(self):
         return self.definition.__doc__
 
-    @property
-    def free_symbols(self):
-        return {self}
-
 
 def _Quantity_constructor_postprocessor_Add(expr):
     # Construction postprocessor for the addition,

@@ -20,6 +20,8 @@
 """Utility function for variables."""
 
 from .units import markdown
+from ._core import BaseVariable
+from sympy import preorder_traversal
 
 
 def generate_metadata_table(variables=None, include_header=True):
@@ -40,3 +42,12 @@ def generate_metadata_table(variables=None, include_header=True):
         val = str(Variable.__defaults__.get(variable, '-'))
 
         yield (symbol, name, doc, val, markdown(variable.short_unit))
+
+
+def get_variables(expr):
+    """Traverses through expression and returns set of variables as list."""
+    variables = []
+    for arg in preorder_traversal(expr):
+        if isinstance(arg, BaseVariable):
+            variables.append(arg)
+    return list(set(variables))

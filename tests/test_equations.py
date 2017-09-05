@@ -8,6 +8,7 @@ from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import joule, kelvin, meter, mole, second
+from essm.variables.utils import get_variables
 
 
 class demo_g(Variable):
@@ -22,7 +23,7 @@ class demo_v(Variable):
 
 
 class demo_t(Variable):
-    unit = meter
+    unit = second
 
 
 class demo_fall(Equation):
@@ -70,9 +71,9 @@ def test_args():
         demo_fall.definition.t.definition, }
 
 
-def test_free_symbols():
+def test_get_variables():
     """Test free symbols."""
-    assert set(demo_velocity.free_symbols) == {
+    assert set(get_variables(demo_velocity)) == {
         demo_v, demo_t, demo_g}
 
 
