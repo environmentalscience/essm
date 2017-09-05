@@ -8,6 +8,7 @@ from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import joule, kelvin, meter, mole, second
+from essm.variables.utils import get_variables
 
 
 class demo_g(Variable):
@@ -15,6 +16,14 @@ class demo_g(Variable):
 
     default = 9.8
     unit = meter / second ** 2
+
+
+class demo_v(Variable):
+    unit = meter/second
+
+
+class demo_t(Variable):
+    unit = second
 
 
 class demo_fall(Equation):
@@ -27,6 +36,12 @@ class demo_fall(Equation):
         unit = second
 
     expr = Eq(d, 1 / 2 * demo_g * t ** 2)
+
+
+class demo_velocity(Equation):
+    """Test equation."""
+
+    expr = Eq(demo_v, demo_g * demo_t)
 
 
 def test_equation():
@@ -54,6 +69,12 @@ def test_args():
         demo_g.definition,
         demo_fall.definition.d.definition,
         demo_fall.definition.t.definition, }
+
+
+def test_get_variables():
+    """Test free variables."""
+    assert set(get_variables(demo_velocity)) == {
+        demo_v, demo_t, demo_g}
 
 
 def test_unit_check():
