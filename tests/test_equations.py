@@ -72,7 +72,7 @@ def test_args():
 
 
 def test_get_variables():
-    """Test free symbols."""
+    """Test free variables."""
     assert set(get_variables(demo_velocity)) == {
         demo_v, demo_t, demo_g}
 
