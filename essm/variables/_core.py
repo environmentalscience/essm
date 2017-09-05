@@ -138,6 +138,7 @@ class BaseVariable(Quantity):
     def free_symbols(self):
         return {self}
 
+
 def _Quantity_constructor_postprocessor_Add(expr):
     # Construction postprocessor for the addition,
     # checks for dimension mismatches of the addends, thus preventing
