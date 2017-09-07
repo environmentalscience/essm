@@ -8,6 +8,8 @@ from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import joule, kelvin, meter, mole, second
+from essm.variables.utils import get_variables
+from sympy import S
 
 
 class demo_g(Variable):
@@ -26,7 +28,7 @@ class demo_fall(Equation):
     class t(Variable):
         unit = second
 
-    expr = Eq(d, 1 / 2 * demo_g * t ** 2)
+    expr = Eq(d, S(1) / S(2) * demo_g * t ** 2)
 
 
 def test_equation():
@@ -54,6 +56,15 @@ def test_args():
         demo_g.definition,
         demo_fall.definition.d.definition,
         demo_fall.definition.t.definition, }
+
+
+def test_get_variables():
+    """Test extract variables."""
+    # Injecting local variables in global name space
+    globals().update(**{str(v): v for v in Variable.__registry__})
+    # Testing that all variables in demo_fall are returned
+    assert (set(get_variables(demo_fall))) == \
+        {d, demo_g, t}
 
 
 def test_unit_check():

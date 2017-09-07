@@ -20,6 +20,8 @@
 """Utility function for variables."""
 
 from .units import markdown
+from _core import BaseVariable
+from sympy import preorder_traversal
 
 
 def generate_metadata_table(variables=None, include_header=True):
