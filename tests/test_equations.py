@@ -8,8 +8,8 @@ from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import joule, kelvin, meter, mole, second
-from essm.variables.utils import get_variables
-from sympy import S
+from essm.variables.utils import get_vars, subs_vars
+from sympy import S, Symbol
 
 
 class demo_g(Variable):
@@ -58,13 +58,19 @@ def test_args():
         demo_fall.definition.t.definition, }
 
 
-def test_get_variables():
-    """Test extract variables."""
-    # Injecting local variables in global name space
-    globals().update(**{str(v): v for v in Variable.__registry__})
-    # Testing that all variables in demo_fall are returned
-    assert (set(get_variables(demo_fall))) == \
-        {d, demo_g, t}
+def test_get_vars():
+    """Test extract variables from expression."""
+    expr = demo_fall.rhs
+    assert (set(get_vars(expr))) == \
+        {demo_g, demo_fall.definition.t}
+
+
+def test_subs_vars():
+    """Test substitute variables into expression."""
+    expr = demo_fall.rhs
+    vdict = Variable.__defaults__.copy()
+    vdict[demo_fall.definition.t] = 1
+    assert (subs_vars(expr, vdict)) == 4.9
 
 
 def test_unit_check():

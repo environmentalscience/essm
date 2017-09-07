@@ -44,10 +44,31 @@ def generate_metadata_table(variables=None, include_header=True):
         yield (symbol, name, doc, val, markdown(variable.short_unit))
 
 
-def get_variables(expr):
+def get_vars(expr):
     """Traverses through expression and returns set of variables as list."""
-    variables = []
+    vars = []
     for arg in preorder_traversal(expr):
         if isinstance(arg, BaseVariable):
-            variables.append(arg)
-    return list(set(variables))
+            vars.append(arg)
+    return list(set(vars))
+
+
+def subs_vars(expr, vdict={}):
+    '''Replaces all variables in expression by
+    their names and then by their expressions in vdict
+    (keys in vdict are variables)'''
+    def replace_names(expr):
+        '''Replaces all variables in expression by their names.'''
+        try:
+            return expr.replace(
+                lambda expr: isinstance(expr, BaseVariable),
+                lambda expr: expr._name)
+        except:
+            return expr
+
+    expr1 = replace_names(expr)
+    sdict = dict(
+        (key._name, replace_names(vdict[key]))
+        for key in vdict.keys()
+    )
+    return expr1.xreplace(sdict)
