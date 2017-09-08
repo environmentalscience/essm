@@ -54,11 +54,12 @@ def get_vars(expr):
 
 
 def subs_vars(expr, vdict={}):
-    '''Replaces all variables in expression by
+    """Replace all variables in expression by
     their names and then by their expressions in vdict
-    (keys in vdict are variables)'''
+    (keys in vdict are variables).
+    """
     def replace_names(expr):
-        '''Replaces all variables in expression by their names.'''
+        """Replace all variables in expression by their names."""
         try:
             return expr.replace(
                 lambda expr: isinstance(expr, BaseVariable),
