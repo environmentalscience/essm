@@ -20,7 +20,7 @@
 """Utility function for variables."""
 
 from .units import markdown
-from _core import BaseVariable
+from essm.variables._core import BaseVariable
 from sympy import preorder_traversal
 
 
