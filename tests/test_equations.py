@@ -2,14 +2,14 @@
 """Test equations."""
 
 import pytest
+from sympy import S
 
-from essm import Eq, solve
+from essm import Eq
 from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import joule, kelvin, meter, mole, second
-from essm.variables.utils import get_vars, subs_vars
-from sympy import S, Symbol
+from essm.variables.utils import extract_variables, replace_variables
 
 
 class demo_g(Variable):
@@ -58,19 +58,18 @@ def test_args():
         demo_fall.definition.t.definition, }
 
 
-def test_get_vars():
+def test_variable_extraction():
     """Test extract variables from expression."""
     expr = demo_fall.rhs
-    assert (set(get_vars(expr))) == \
-        {demo_g, demo_fall.definition.t}
+    assert extract_variables(expr) == {demo_g, demo_fall.definition.t}
 
 
-def test_subs_vars():
+def test_variable_replacement():
     """Test substitute variables into expression."""
     expr = demo_fall.rhs
     vdict = Variable.__defaults__.copy()
     vdict[demo_fall.definition.t] = 1
-    assert (subs_vars(expr, vdict)) == 4.9
+    assert replace_variables(expr, vdict) == 4.9
 
 
 def test_unit_check():
@@ -145,7 +144,6 @@ def test_equation_writer_linebreaks(tmpdir):
     from essm.variables.physics.thermodynamics import alpha_a, D_va, P_wa, \
         R_mol, T_a, M_O2, P_O2, P_N2, M_N2, M_w, Le, C_wa, rho_a, P_a
 
-    contents = {}
     writer_td = EquationWriter(docstring='Test of Equation_writer.')
     writer_td.eq(
         'eq_Le',
