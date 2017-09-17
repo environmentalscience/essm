@@ -19,9 +19,12 @@
 # MA 02111-1307, USA.
 """Utility function for variables."""
 
-from .units import markdown
-from essm.variables._core import BaseVariable
 from sympy import preorder_traversal
+from sympy.core.expr import Expr
+
+from essm.variables._core import BaseVariable
+
+from .units import markdown
 
 
 def generate_metadata_table(variables=None, include_header=True):
@@ -44,32 +47,21 @@ def generate_metadata_table(variables=None, include_header=True):
         yield (symbol, name, doc, val, markdown(variable.short_unit))
 
 
-def get_vars(expr):
-    """Traverses through expression and returns set of variables as list."""
-    vars = []
-    for arg in preorder_traversal(expr):
-        if isinstance(arg, BaseVariable):
-            vars.append(arg)
-    return list(set(vars))
+def extract_variables(expr):
+    """Traverse through expression and return set of variables."""
+    return {arg for arg in preorder_traversal(expr)
+            if isinstance(arg, BaseVariable)}
 
 
-def subs_vars(expr, vdict={}):
-    """Replace all variables in expression by
-    their names and then by their expressions in vdict
-    (keys in vdict are variables).
-    """
-    def replace_names(expr):
-        """Replace all variables in expression by their names."""
-        try:
-            return expr.replace(
-                lambda expr: isinstance(expr, BaseVariable),
-                lambda expr: expr._name)
-        except:
-            return expr
+def replace_variables(expr, variables=None):
+    """Replace all base variables in expression."""
+    if not isinstance(expr, Expr):  # stop recursion
+        return expr
 
-    expr1 = replace_names(expr)
-    sdict = dict(
-        (key._name, replace_names(vdict[key]))
-        for key in vdict.keys()
-    )
-    return expr1.xreplace(sdict)
+    variables = {
+        key._name: replace_variables(value)
+        for key, value in (variables or {}).items()}
+
+    return expr.replace(
+        lambda expr: isinstance(expr, BaseVariable),
+        lambda expr: variables.get(expr._name, expr._name))
