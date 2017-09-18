@@ -68,7 +68,7 @@ def test_variable_replacement():
     """Test replace variables by values and symbols in expression."""
     expr = demo_fall.rhs
     vdict = Variable.__defaults__.copy()
-    assert (replace_variables(expr, vdict)) ==\
+    assert replace_variables(expr, vdict) == \
         4.9 * demo_fall.definition.t._name ** 2
 
 
