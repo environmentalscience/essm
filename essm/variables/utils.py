@@ -54,12 +54,14 @@ def extract_variables(expr):
 
 
 def replace_variables(expr, variables=None):
-    """Replace all base variables in expression."""
+    """Replace all base variables in expression by symbols and substitute
+    dictionary `variables`."""
     if not isinstance(expr, Expr):  # stop recursion
         return expr
 
     variables = {
-        key._name: replace_variables(value)
+        key._name if isinstance(key, BaseVariable) else
+        key: replace_variables(value)
         for key, value in (variables or {}).items()}
 
     return expr.replace(
