@@ -2,7 +2,7 @@
 """Test equations."""
 
 import pytest
-from sympy import S
+from sympy import S, Symbol
 
 from essm import Eq
 from essm._generator import EquationWriter
@@ -68,6 +68,7 @@ def test_variable_replacement():
     """Test replace variables by values and symbols in expression."""
     expr = demo_fall.rhs
     vdict = Variable.__defaults__.copy()
+    vdict[Symbol('x')] = 1
     assert replace_variables(expr, vdict) == \
         4.9 * demo_fall.definition.t._name ** 2
 
