@@ -60,8 +60,7 @@ def replace_variables(expr, variables=None):
         return expr
 
     variables = {
-        key._name if isinstance(key, BaseVariable) else
-        key: replace_variables(value)
+        getattr(key, '_name', key): replace_variables(value)
         for key, value in (variables or {}).items()}
 
     return expr.replace(
