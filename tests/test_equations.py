@@ -19,16 +19,17 @@ class demo_g(Variable):
     unit = meter / second ** 2
 
 
+class demo_d(Variable):
+    """Test variable."""
+    unit = meter
+
+
 class demo_fall(Equation):
     """Test equation."""
-
-    class d(Variable):
-        unit = meter
-
     class t(Variable):
         unit = second
 
-    expr = Eq(d, S(1) / S(2) * demo_g * t ** 2)
+    expr = Eq(demo_d, S(1) / S(2) * demo_g * t ** 2)
 
 
 def test_equation():
@@ -54,7 +55,7 @@ def test_args():
     """Test defined args."""
     assert set(demo_fall.definition.args()) == {
         demo_g.definition,
-        demo_fall.definition.d.definition,
+        demo_d.definition,
         demo_fall.definition.t.definition, }
 
 
@@ -66,11 +67,11 @@ def test_variable_extraction():
 
 def test_variable_replacement():
     """Test replace variables by values and symbols in expression."""
-    expr = demo_fall.rhs
+    expr = demo_fall
     vdict = Variable.__defaults__.copy()
     vdict[Symbol('x')] = 1
     assert replace_variables(expr, vdict) == \
-        4.9 * demo_fall.definition.t._name ** 2
+        Eq(demo_d._name, 4.9 * demo_fall.definition.t._name ** 2)
 
 
 def test_unit_check():
