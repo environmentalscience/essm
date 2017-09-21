@@ -21,13 +21,13 @@ class demo_g(Variable):
 
 class demo_d(Variable):
     """Test variable."""
-    
+
     unit = meter
 
 
 class demo_fall(Equation):
     """Test equation."""
-    
+
     class t(Variable):
         unit = second
 
