@@ -53,6 +53,15 @@ def test_units():
             expr = Eq(demo_g, x)
 
 
+def test_integral():
+    """Test that variables behave as symbols."""
+    from sympy import integrate
+
+    assert demo_g in demo_fall.free_symbols
+    assert demo_g * demo_fall.definition.t**S(3) / S(6) == integrate(
+        demo_fall.rhs, demo_fall.definition.t)
+
+
 def test_args():
     """Test defined args."""
     assert set(demo_fall.definition.args()) == {
