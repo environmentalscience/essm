@@ -50,8 +50,8 @@ class VariableMeta(RegistryType):
             dct.setdefault('latex_name', dct['name'])
             dct.setdefault('unit', unit)
 
-            instance = super(VariableMeta, cls).__new__(
-                cls, name, parents, dct)
+            instance = super(VariableMeta,
+                             cls).__new__(cls, name, parents, dct)
 
             # Variable with definition expression.
             if definition is not None:
@@ -64,14 +64,17 @@ class VariableMeta(RegistryType):
                 if unit != instance.unit:
                     raise ValueError(
                         'Invalid expression units {0} should be {1}'.format(
-                            instance.unit, unit))
+                            instance.unit, unit
+                        )
+                    )
 
             expr = BaseVariable(
                 instance,
                 dct['name'],
                 Dimension(Quantity.get_dimensional_expr(unit)),
                 unit or S.One,
-                abbrev=dct['latex_name'], )
+                abbrev=dct['latex_name'],
+            )
             instance[expr] = instance
 
             # Store definition as variable expression.
@@ -118,14 +121,16 @@ class BaseVariable(Quantity):
             dimension,
             scale_factor=S.One,
             abbrev=None,
-            **assumptions):
+            **assumptions
+    ):
         self = super(BaseVariable, cls).__new__(
             cls,
             name,
             dimension,
             scale_factor=scale_factor,
             abbrev=abbrev,
-            **assumptions)
+            **assumptions
+        )
         self.definition = definition
         return self
 
@@ -135,6 +140,7 @@ class BaseVariable(Quantity):
 
 
 Basic._constructor_postprocessor_mapping[BaseVariable] = {
-     "Add": [_Quantity_constructor_postprocessor_Add], }
+    "Add": [_Quantity_constructor_postprocessor_Add],
+}
 
 __all__ = ('Variable', )
