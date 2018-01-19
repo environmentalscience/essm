@@ -139,6 +139,12 @@
             <span class="k">if</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">registry</span><span class="p">:</span>
                 <span class="k">del</span> <span class="n">registry</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a symbolic function.&quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">sage.symbolic.function_factory</span> <span class="k">import</span> <span class="n">function_factory</span>
+        <span class="k">return</span> <span class="n">function_factory</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_function&#39;</span><span class="p">)</span>
+
 
 <div class="viewcode-block" id="Variable"><a class="viewcode-back" href="../../../api.html#essm.variables.Variable">[docs]</a><span class="nd">@six</span><span class="o">.</span><span class="n">add_metaclass</span><span class="p">(</span><span class="n">VariableMeta</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -170,6 +176,10 @@
             <span class="o">**</span><span class="n">assumptions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
         <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return function.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -218,9 +228,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">
