@@ -23,46 +23,60 @@ from __future__ import absolute_import
 
 import warnings
 
-from sage.all import SR, Expression
+import six
+from sympy import Basic, S
+from sympy.physics.units import Dimension, Quantity
+from sympy.physics.units.quantities import \
+    _Quantity_constructor_postprocessor_Add
 
-from ..bases import BaseExpression
+from .units import derive_unit
+from ..bases import RegistryType
 from ..transformer import build_instance_expression
-from .units import SHORT_UNIT_SYMBOLS
 
 
-class VariableMeta(type):
+class VariableMeta(RegistryType):
     """Variable interface."""
 
     def __new__(cls, name, parents, dct):
         """Build and register new variable."""
         if '__registry__' not in dct:
             unit = dct.pop('unit', None)
+            if unit == 1:
+                unit = S.One
             definition = dct.pop('expr', None)
 
             dct.setdefault('name', name)
             dct.setdefault('domain', 'real')
             dct.setdefault('latex_name', dct['name'])
-            dct.setdefault('unit', unit or 1 / 1)
+            dct.setdefault('unit', unit)
 
             instance = super(VariableMeta, cls).__new__(
                 cls, name, parents, dct)
 
-            # In the below, domain=None is to avoid slow assume() process.
-            expr = BaseVariable(
-                SR.var(name, domain=None, latex_name=dct['latex_name']),
-                instance, ).register()
-
             # Variable with definition expression.
             if definition is not None:
-                definition = BaseVariable(
-                    build_instance_expression(instance, definition),
-                    instance, )
-                instance.unit = definition.expand_units()
-                if unit is not None and bool(unit != instance.unit):
+                definition = build_instance_expression(instance, definition)
+                derived_unit = derive_unit(definition, name=name)
+
+                unit = unit or derived_unit  # only if unit is None
+                instance.expr, instance.unit = definition, derived_unit
+
+                if unit != instance.unit:
                     raise ValueError(
                         'Invalid expression units {0} should be {1}'.format(
                             instance.unit, unit))
-                instance.__expressions__[expr] = instance.expr = definition
+
+            expr = BaseVariable(
+                instance,
+                dct['name'],
+                Dimension(Quantity.get_dimensional_expr(unit)),
+                unit or S.One,
+                abbrev=dct['latex_name'], )
+            instance[expr] = instance
+
+            # Store definition as variable expression.
+            if definition is not None:
+                instance.__expressions__[expr] = definition
 
             # Store default variable only if it is defined.
             if 'default' in dct:
@@ -70,29 +84,18 @@ class VariableMeta(type):
 
             # Store unit for each variable:
             instance.__units__[expr] = instance.unit
+
             return expr
 
         return super(VariableMeta, cls).__new__(cls, name, parents, dct)
 
     def __delitem__(cls, expr):
         """Remove a variable from the registry."""
-        if expr in cls.__registry__:
-            warnings.warn(
-                'Variable "{0}" will be unregistered.'.format(
-                    cls.__registry__[expr].__module__),
-                stacklevel=2)
-            del cls.__registry__[expr]
-        else:
-            raise KeyError(expr)
-        if expr in cls.__units__:
-            del cls.__units__[expr]
-        if expr in cls.__defaults__:
-            del cls.__defaults__[expr]
-
-    def set_domain(cls):
-        """Set domain for all registered variables."""
-        for expr in cls.__registry__:
-            expr.set_domain()
+        super(VariableMeta, cls).__delitem__(expr)
+        for name in ('__units__', '__defaults__', '__expressions__'):
+            registry = getattr(cls, name)
+            if expr in registry:
+                del registry[expr]
 
     @property
     def function(cls):
@@ -101,21 +104,36 @@ class VariableMeta(type):
         return function_factory(cls.name + '_function')
 
 
+@six.add_metaclass(VariableMeta)
 class Variable(object):
     """Base type for all physical variables."""
 
-    __metaclass__ = VariableMeta
     __registry__ = {}
     __defaults__ = {}
     __units__ = {}
     __expressions__ = {}
 
 
-class BaseVariable(BaseExpression):
+class BaseVariable(Quantity):
     """Physical variable."""
 
-    __registry__ = Variable.__registry__
-    __units__ = Variable.__units__
+    def __new__(
+            cls,
+            definition,
+            name,
+            dimension,
+            scale_factor=S.One,
+            abbrev=None,
+            **assumptions):
+        self = super(BaseVariable, cls).__new__(
+            cls,
+            name,
+            dimension,
+            scale_factor=scale_factor,
+            abbrev=abbrev,
+            **assumptions)
+        self.definition = definition
+        return self
 
     def __call__(self, *args):
         """Return function."""
@@ -125,23 +143,8 @@ class BaseVariable(BaseExpression):
     def __doc__(self):
         return self.definition.__doc__
 
-    @property
-    def short_unit(self):
-        """Return short unit."""
-        return (self * self.definition.unit / self).subs(SHORT_UNIT_SYMBOLS)
 
-    def set_domain(self, domain=None):
-        """Set domain to current variable."""
-        if domain is not None:
-            self.definition.domain = domain
-        self.rebuild_symbol()
-
-    def rebuild_symbol(self):
-        """Rebuild symbolic representation."""
-        SR.var(
-            self.definition.name,
-            domain=self.definition.domain,
-            latex_name=self.definition.latex_name, )
-
+Basic._constructor_postprocessor_mapping[BaseVariable] = {
+     "Add": [_Quantity_constructor_postprocessor_Add], }
 
 __all__ = ('Variable', )

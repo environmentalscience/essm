@@ -19,42 +19,56 @@
 # MA 02111-1307, USA.
 """Define unit symbols."""
 
-from sage.all import var
-from sage.symbolic.units import units
+import functools
+import operator
 
-joule = units.energy.joule
-kelvin = units.temperature.kelvin
-kilogram = units.mass.kilogram
-meter = units.length.meter
-mole = units.amount_of_substance.mole
-pascal = units.pressure.pascal
-second = units.time.second
-watt = units.power.watt
+import sympy.physics.units as u
+from sympy.physics.units import Dimension, Quantity, find_unit
+from sympy.physics.units.systems import SI
 
-SHORT_UNIT_SYMBOLS = {
-    joule: var('J'),
-    kelvin: var('K'),
-    kilogram: var('kg'),
-    meter: var('m'),
-    mole: var('mol'),
-    pascal: var('Pa'),
-    second: var('s'),
-    watt: var('W'), }
+joule = u.joule
+kelvin = u.kelvin
+kilogram = u.kilogram
+meter = u.meter
+mole = u.mole
+pascal = u.pascal
+second = u.second
+watt = u.watt
+
+SI_DIMENSIONS = {str(d._dimension.name): d for d in SI._base_units}
 
 
 def markdown(unit):
-    """Return markdown representaion of a unit."""
-    facs = unit.factor_list()
-    str1 = ''
-    for term1 in facs:
-        op1 = term1[1]
-        if op1 == 1:
-            str1 = str(term1[0]) + ' ' + str1
-        else:
-            str1 += ' {0}$^{{{1}}}$ '.format(markdown(term1[0]), markdown(op1))
-    return str1
+    """Return markdown representation of a unit."""
+    return str(unit)
+
+
+def unit_symbols(expr):
+    """Return unit symbols."""
+    from essm.variables._core import BaseVariable, Variable
+
+    for variable in expr.atoms(BaseVariable):
+        for unit in variable.definition.unit.atoms(Quantity):
+            yield unit
+
+
+def derive_quantity(expr, name=None):
+    """Derive a quantity from an expression."""
+    factor, dimension = Quantity._collect_factor_and_dimension(expr)
+    return Quantity(name or str(expr), dimension, factor)
+
+
+def derive_unit(expr, name=None):
+    """Derive SI-unit from an expression, omitting scale factors."""
+    from sympy.physics.units.dimensions import dimsys_SI
+    dim = Dimension(Quantity.get_dimensional_expr(expr))
+    return functools.reduce(
+        operator.mul, (
+            SI_DIMENSIONS[d] ** p
+            for d, p in dimsys_SI.get_dimensional_dependencies(dim).items()),
+        1)
 
 
 __all__ = (
-    'SHORT_UNIT_SYMBOLS', 'markdown', 'joule', 'kelvin', 'kilogram', 'meter',
-    'mole', 'pascal', 'second', 'watt')
+    'derive_unit', 'derive_quantity', 'markdown', 'joule', 'kelvin',
+    'kilogram', 'meter', 'mole', 'pascal', 'second', 'unit_symbols', 'watt')

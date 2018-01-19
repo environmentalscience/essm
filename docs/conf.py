@@ -93,6 +93,7 @@ suppress_warnings = ['image.nonlocal_uri', 'ref.citation']
 extensions = ['matplotlib.sphinxext.plot_directive',
               'sphinxcontrib.bibtex',
               'sphinx.ext.autodoc',
+              'sphinx.ext.autosummary',
               'sphinx.ext.doctest',
               'sphinx.ext.intersphinx',
               'sphinx.ext.todo',
@@ -167,7 +168,7 @@ html_theme = 'alabaster'
 #
 html_theme_options = {
     'description': 'This package contains helpers to deal with physical variables '
-                   'and units in SageMath.',
+                   'and units.',
     'github_user': 'environmentalscience',
     'github_repo': 'essm',
     'github_button': False,

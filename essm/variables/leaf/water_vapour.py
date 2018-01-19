@@ -21,12 +21,9 @@
 
 from __future__ import absolute_import
 
-from sage.symbolic.units import units
+from essm.variables.units import meter
 
 from .._core import Variable
-
-# Used units
-meter = units.length.meter
 
 
 class B_l(Variable):

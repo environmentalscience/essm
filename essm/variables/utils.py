@@ -19,6 +19,12 @@
 # MA 02111-1307, USA.
 """Utility function for variables."""
 
+from sympy import Eq, preorder_traversal
+from sympy.core.expr import Expr
+
+from essm.equations._core import BaseEquation
+from essm.variables._core import BaseVariable
+
 from .units import markdown
 
 
@@ -40,3 +46,23 @@ def generate_metadata_table(variables=None, include_header=True):
         val = str(Variable.__defaults__.get(variable, '-'))
 
         yield (symbol, name, doc, val, markdown(variable.short_unit))
+
+
+def extract_variables(expr):
+    """Traverse through expression and return set of variables."""
+    return {arg for arg in preorder_traversal(expr)
+            if isinstance(arg, BaseVariable)}
+
+
+def replace_variables(expr, variables=None):
+    """Replace all base variables in expression by ``variables``."""
+    if not isinstance(expr, Expr):  # stop recursion
+        return expr
+    symbols = {key: getattr(key, '_name', key)
+               for key in extract_variables(expr)}
+    variables = {getattr(key, '_name', key): replace_variables(value)
+                 for key, value in (variables or {}).items()}
+    if isinstance(expr, BaseEquation):
+        return Eq(expr.lhs.xreplace(symbols).xreplace(variables),
+                  expr.rhs.xreplace(symbols).xreplace(variables))
+    return expr.xreplace(symbols).xreplace(variables)

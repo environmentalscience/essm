@@ -21,16 +21,9 @@
 
 from __future__ import absolute_import
 
-from sage.symbolic.units import units
+from essm.variables.units import joule, kelvin, kilogram, meter, second
 
 from .._core import Variable
-
-# Used units
-joule = units.energy.joule
-kilogram = units.mass.kilogram
-kelvin = units.temperature.kelvin
-meter = units.length.meter
-second = units.time.second
 
 
 class c_pi(Variable):
@@ -49,7 +42,7 @@ class lambda_i(Variable):
 class rho_i(Variable):
     """Density of insulation material."""
 
-    unit = kilogram / meter**3
+    unit = kilogram / meter ** 3
 
 
 class L_i(Variable):
@@ -61,7 +54,7 @@ class L_i(Variable):
 class A_i(Variable):
     """Conducting area of insulation material."""
 
-    unit = meter**2
+    unit = meter ** 2
 
 
 class Q_i(Variable):

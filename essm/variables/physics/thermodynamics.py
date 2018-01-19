@@ -28,7 +28,7 @@ class alpha_a(Variable):
     """Thermal diffusivity of dry air."""
 
     name = 'alpha_a'
-    unit = meter**2 / second
+    unit = meter ** 2 / second
     domain = 'real'
     latex_name = '\\alpha_a'
 
@@ -73,7 +73,7 @@ class C_wa(Variable):
     """Concentration of water in air."""
 
     name = 'C_wa'
-    unit = mole / meter**3
+    unit = mole / meter ** 3
     domain = 'real'
     latex_name = 'C_{wa}'
 
@@ -82,7 +82,7 @@ class D_va(Variable):
     """Binary diffusion coefficient of water vapour in air."""
 
     name = 'D_va'
-    unit = meter**2 / second
+    unit = meter ** 2 / second
     domain = 'real'
     latex_name = 'D_{va}'
 
@@ -91,7 +91,7 @@ class g(Variable):
     """Gravitational acceleration."""
 
     name = 'g'
-    unit = meter / second**2
+    unit = meter / second ** 2
     domain = 'real'
     latex_name = 'g'
     default = 9.81000000000000
@@ -101,7 +101,6 @@ class Gr(Variable):
     """Grashof number."""
 
     name = 'Gr'
-    unit = 1 / 1
     domain = 'real'
     latex_name = 'N_{Gr_L}'
 
@@ -110,7 +109,7 @@ class h_c(Variable):
     """Average 1-sided convective heat transfer coefficient."""
 
     name = 'h_c'
-    unit = joule / (kelvin * meter**2 * second)
+    unit = joule / (kelvin * meter ** 2 * second)
     domain = 'real'
     latex_name = 'h_c'
 
@@ -138,7 +137,6 @@ class Le(Variable):
     """Lewis number."""
 
     name = 'Le'
-    unit = 1 / 1
     domain = 'real'
     latex_name = 'N_{Le}'
 
@@ -190,7 +188,7 @@ class nu_a(Variable):
     """Kinematic viscosity of dry air."""
 
     name = 'nu_a'
-    unit = meter**2 / second
+    unit = meter ** 2 / second
     domain = 'real'
     latex_name = '\\nu_a'
 
@@ -199,7 +197,6 @@ class Nu(Variable):
     """Average Nusselt number over given length."""
 
     name = 'Nu'
-    unit = 1 / 1
     domain = 'real'
     latex_name = 'N_{Nu_L}'
 
@@ -217,7 +214,6 @@ class Pr(Variable):
     """Prandtl number (0.71 for air)."""
 
     name = 'Pr'
-    unit = 1 / 1
     domain = 'real'
     latex_name = 'N_{Pr}'
 
@@ -262,7 +258,7 @@ class R_d(Variable):
     """Downwelling global radiation."""
 
     name = 'R_d'
-    unit = watt / meter**2
+    unit = watt / meter ** 2
     domain = 'real'
     latex_name = 'R_d'
 
@@ -271,7 +267,6 @@ class Re_c(Variable):
     """Critical Reynolds number for the onset of turbulence."""
 
     name = 'Re_c'
-    unit = 1 / 1
     domain = 'real'
     latex_name = 'N_{Re_c}'
 
@@ -280,7 +275,6 @@ class Re(Variable):
     """Average Reynolds number over given length."""
 
     name = 'Re'
-    unit = 1 / 1
     domain = 'real'
     latex_name = 'N_{Re_L}'
 
@@ -289,7 +283,7 @@ class rho_a(Variable):
     """Density of dry air."""
 
     name = 'rho_a'
-    unit = kilogram / meter**3
+    unit = kilogram / meter ** 3
     domain = 'real'
     latex_name = '\\rho_a'
 
@@ -298,7 +292,7 @@ class R_u(Variable):
     """Upwelling global radiation."""
 
     name = 'R_u'
-    unit = watt / meter**2
+    unit = watt / meter ** 2
     domain = 'real'
     latex_name = 'R_u'
 
@@ -317,7 +311,7 @@ class R_s(Variable):
     """Solar shortwave flux per area."""
 
     name = 'R_s'
-    unit = joule / (meter**2 * second)
+    unit = joule / (meter ** 2 * second)
     domain = 'real'
     latex_name = 'R_s'
 
@@ -326,7 +320,7 @@ class sigm(Variable):
     """Stefan-Boltzmann constant."""
 
     name = 'sigm'
-    unit = joule / (kelvin**4 * meter**2 * second)
+    unit = joule / (kelvin ** 4 * meter ** 2 * second)
     domain = 'real'
     latex_name = '\\sigma'
     default = 5.67000000000000e-8
@@ -364,7 +358,6 @@ class x_N2(Variable):
     """Mole fraction of nitrogen in dry air."""
 
     name = 'x_N2'
-    unit = 1
     domain = 'real'
     latex_name = 'x_{N2}'
     default = 0.790000000000000
@@ -374,7 +367,6 @@ class x_O2(Variable):
     """Mole fraction of oxygen in dry air."""
 
     name = 'x_O2'
-    unit = 1
     domain = 'real'
     latex_name = 'x_{N2}'
     default = 0.210000000000000

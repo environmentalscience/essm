@@ -28,7 +28,6 @@ class alpha_l(Variable):
     """Leaf albedo, fraction of shortwave radiation reflected by the leaf."""
 
     name = 'alpha_l'
-    unit = 1
     domain = 'real'
     latex_name = '\\alpha_l'
 
@@ -40,7 +39,6 @@ class a_s(Variable):
     """
 
     name = 'a_s'
-    unit = 1
     domain = 'real'
     latex_name = 'a_s'
 
@@ -49,7 +47,6 @@ class a_sh(Variable):
     """Fraction of projected area exchanging sensible heat with the air."""
 
     name = 'a_sh'
-    unit = 1
     domain = 'real'
     latex_name = 'a_{sh}'
     default = 2.00000000000000
@@ -59,7 +56,7 @@ class C_wl(Variable):
     """Concentration of water in the leaf air space."""
 
     name = 'C_wl'
-    unit = mole / meter**3
+    unit = mole / meter ** 3
     domain = 'real'
     latex_name = 'C_{wl}'
 
@@ -68,7 +65,7 @@ class E_lmol(Variable):
     """Transpiration rate in molar units."""
 
     name = 'E_lmol'
-    unit = mole / (meter**2 * second)
+    unit = mole / (meter ** 2 * second)
     domain = 'real'
     latex_name = 'E_{l,mol}'
 
@@ -77,7 +74,7 @@ class E_l(Variable):
     """Latent heat flux from leaf."""
 
     name = 'E_l'
-    unit = joule / (meter**2 * second)
+    unit = joule / (meter ** 2 * second)
     domain = 'real'
     latex_name = 'E_l'
 
@@ -86,7 +83,6 @@ class epsilon_l(Variable):
     """Longwave emmissivity of the leaf surface."""
 
     name = 'epsilon_l'
-    unit = 1
     domain = 'real'
     latex_name = '\\epsilon_l'
     default = 1.00000000000000
@@ -105,7 +101,7 @@ class g_bwmol(Variable):
     """Boundary layer conductance to water vapour."""
 
     name = 'g_bwmol'
-    unit = mole / (meter**2 * second)
+    unit = mole / (meter ** 2 * second)
     domain = 'real'
     latex_name = 'g_{bw,mol}'
 
@@ -114,7 +110,6 @@ class Gr(Variable):
     """Grashof number."""
 
     name = 'Gr'
-    unit = 1 / 1
     domain = 'real'
     latex_name = 'N_{Gr_L}'
 
@@ -132,7 +127,7 @@ class g_swmol(Variable):
     """Stomatal conductance to water vapour."""
 
     name = 'g_swmol'
-    unit = mole / (meter**2 * second)
+    unit = mole / (meter ** 2 * second)
     domain = 'real'
     latex_name = 'g_{sw,mol}'
 
@@ -150,7 +145,7 @@ class g_twmol(Variable):
     """Total leaf layer conductance to water vapour."""
 
     name = 'g_twmol'
-    unit = mole / (meter**2 * second)
+    unit = mole / (meter ** 2 * second)
     domain = 'real'
     latex_name = 'g_{tw,mol}'
 
@@ -159,7 +154,7 @@ class h_c(Variable):
     """Average 1-sided convective heat transfer coefficient."""
 
     name = 'h_c'
-    unit = joule / (kelvin * meter**2 * second)
+    unit = joule / (kelvin * meter ** 2 * second)
     domain = 'real'
     latex_name = 'h_c'
 
@@ -168,7 +163,7 @@ class H_l(Variable):
     """Sensible heat flux from leaf."""
 
     name = 'H_l'
-    unit = joule / (meter**2 * second)
+    unit = joule / (meter ** 2 * second)
     domain = 'real'
     latex_name = 'H_l'
 
@@ -177,7 +172,7 @@ class L_A(Variable):
     """Leaf area."""
 
     name = 'L_A'
-    unit = meter**2
+    unit = meter ** 2
     domain = 'real'
     latex_name = 'L_A'
 
@@ -231,7 +226,7 @@ class rho_al(Variable):
     """Density of air at the leaf surface."""
 
     name = 'rho_al'
-    unit = kilogram / meter**3
+    unit = kilogram / meter ** 3
     domain = 'real'
     latex_name = '\\rho_{al}'
 
@@ -240,7 +235,7 @@ class R_la(Variable):
     """Longwave radiation absorbed by leaf."""
 
     name = 'R_la'
-    unit = watt / meter**2
+    unit = watt / meter ** 2
     domain = 'real'
     latex_name = 'R_{la}'
 
@@ -249,7 +244,7 @@ class R_ll(Variable):
     """Longwave radiation away from leaf."""
 
     name = 'R_ll'
-    unit = watt / meter**2
+    unit = watt / meter ** 2
     domain = 'real'
     latex_name = 'R_{ll}'
 
@@ -258,7 +253,7 @@ class R_ld(Variable):
     """Downwards emitted/reflected global radiation from leaf."""
 
     name = 'R_ld'
-    unit = watt / meter**2
+    unit = watt / meter ** 2
     domain = 'real'
     latex_name = 'R_{ld}'
 
@@ -267,7 +262,7 @@ class R_lu(Variable):
     """Upwards emitted/reflected global radiation from leaf."""
 
     name = 'R_lu'
-    unit = watt / meter**2
+    unit = watt / meter ** 2
     domain = 'real'
     latex_name = 'R_{lu}'
 

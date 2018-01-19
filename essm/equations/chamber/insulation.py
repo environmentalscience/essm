@@ -21,6 +21,8 @@
 
 from __future__ import absolute_import
 
+from essm import Eq
+
 from ...variables.chamber.insulation import A_i, L_i, Q_i, dT_i, lambda_i
 from .._core import Equation
 
@@ -31,7 +33,7 @@ class eq_Qi(Equation):
     :cite:`schymanski_leaf-scale_2017`
     """
 
-    expr = Q_i == dT_i * lambda_i * A_i / L_i
+    expr = Eq(Q_i, dT_i * lambda_i * A_i / L_i)
     """Describe how you got the equation."""
 
 

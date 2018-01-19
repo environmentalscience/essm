@@ -26,10 +26,10 @@ import re
 from collections import defaultdict
 
 import pkg_resources
+from isort import SortImports
 from yapf.yapflib.yapf_api import FormatCode
 
-from isort import SortImports
-from sage import all as sage_all
+import essm
 
 from .variables import Variable
 
@@ -78,10 +78,10 @@ class {name}(Variable):
 """
 
 # CONSTANTS = re.compile(r'\b(e|pi)\b')
-SAGE_IMPORTS = re.compile(
+_IMPORTS = re.compile(
     r'\b({0})\b'.format(
-        '|'.join(name for name in dir(sage_all) if not name.startswith('_'))))
-"""Regular expression to find sage-specific constants and functions."""
+        '|'.join(name for name in dir(essm) if not name.startswith('_'))))
+"""Regular expression to find specific constants and functions."""
 
 
 def _lint_content(content):
@@ -197,7 +197,7 @@ class VariableWriter(object):
         # register all imports of units
         if units:
             if units != 1:
-                for arg in units.args():
+                for arg in units.args:
                     self._imports['essm.variables.units'].add(str(arg))
 
     def write(self, filename):
@@ -313,14 +313,14 @@ class EquationWriter(object):
         self.eqs.append(context)
 
         # register all imports
-        for arg in expr.args():
+        for arg in expr.args:
             if str(arg) not in internal_variables and\
                     arg in Variable.__registry__:
                 self._imports[Variable.__registry__[arg].__module__].add(
                     str(arg))
 
-        for match in re.finditer(SAGE_IMPORTS, str(expr)) or []:
-            self._imports['sage.all'].add(match.group())
+        for match in re.finditer(_IMPORTS, str(expr)) or []:
+            self._imports['essm'].add(match.group())
 
     def write(self, filename):
         """Serialize itself to a filename."""
