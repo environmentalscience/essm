@@ -26,9 +26,8 @@ import warnings
 import six
 from sympy import Basic, S
 from sympy.physics.units import Dimension, Quantity
-# FIXME use SymPy 1.1
-# from sympy.physics.units.quantities import \
-#     _Quantity_constructor_postprocessor_Add
+from sympy.physics.units.quantities import \
+    _Quantity_constructor_postprocessor_Add
 
 from .units import derive_unit
 from ..bases import RegistryType
@@ -135,31 +134,7 @@ class BaseVariable(Quantity):
         return self.definition.__doc__
 
 
-def _Quantity_constructor_postprocessor_Add(expr):
-    # Construction postprocessor for the addition,
-    # checks for dimension mismatches of the addends, thus preventing
-    # expressions like `meter + second` to be created.
-
-    deset = {
-        tuple(
-            sorted(
-                Dimension(Quantity.get_dimensional_expr(i))
-                .get_dimensional_dependencies().items()))
-        for i in expr.args
-        if i.free_symbols == set() and  # do not raise if there are symbols
-        # (free symbols could contain the units corrections)
-        not i.is_number}
-    # If `deset` has more than one element, then some dimensions do not
-    # match in the sum:
-    if len(deset) > 1:
-        raise ValueError("summation of quantities of incompatible dimensions")
-    return expr
-
-
-Basic._constructor_postprocessor_mapping[Quantity] = {
-    "Add": [_Quantity_constructor_postprocessor_Add], }
-
 Basic._constructor_postprocessor_mapping[BaseVariable] = {
-    "Add": [_Quantity_constructor_postprocessor_Add], }
+     "Add": [_Quantity_constructor_postprocessor_Add], }
 
 __all__ = ('Variable', )
