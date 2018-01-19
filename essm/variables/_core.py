@@ -97,6 +97,12 @@ class VariableMeta(RegistryType):
             if expr in registry:
                 del registry[expr]
 
+    @property
+    def function(cls):
+        """Return a symbolic function."""
+        from sage.symbolic.function_factory import function_factory
+        return function_factory(cls.name + '_function')
+
 
 @six.add_metaclass(VariableMeta)
 class Variable(object):
@@ -128,6 +134,10 @@ class BaseVariable(Quantity):
             **assumptions)
         self.definition = definition
         return self
+
+    def __call__(self, *args):
+        """Return function."""
+        return self.definition.function(*args)
 
     @property
     def __doc__(self):
