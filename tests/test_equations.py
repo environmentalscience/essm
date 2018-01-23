@@ -56,7 +56,7 @@ def test_units():
 def test_integral():
     """Test that variables behave as symbols."""
     from sympy import integrate
-    
+
     assert demo_g * demo_fall.definition.t**S(3) / S(6) == integrate(
         demo_fall.rhs, demo_fall.definition.t)
 
