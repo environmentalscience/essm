@@ -116,6 +116,22 @@ def test_double_registration():
     assert Equation.__registry__[demo_double].__doc__ == 'Second.'
 
 
+def test_solve():
+    """Check solving equation for variable."""
+    from sympy import solve
+
+    class m_CO2(Variable):
+        """Test variable"""
+        unit = meter
+
+    class m_OC(Variable):
+        """test variable"""
+        unit = meter
+
+    assert solve(10 ** 6 * m_CO2 - 0.031 * (m_OC * 10 ** 6) + 0.168 *
+                 meter, m_CO2) == [0.031*m_OC - 1.68e-7*meter]
+
+
 @pytest.mark.skip(reason="needs rewrite for SymPy")
 def test_equation_writer(tmpdir):
     """EquationWriter creates importable file with internal variables."""
