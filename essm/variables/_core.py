@@ -26,6 +26,7 @@ import warnings
 import six
 from sympy import Basic, S
 from sympy.physics.units import Dimension, Quantity
+from sympy.physics.units.dimensions import dimsys_default
 from sympy.physics.units.quantities import \
     _Quantity_constructor_postprocessor_Add
 
@@ -71,7 +72,8 @@ class VariableMeta(RegistryType):
                 dct['name'],
                 Dimension(Quantity.get_dimensional_expr(unit)),
                 unit or S.One,
-                abbrev=dct['latex_name'], )
+                abbrev=dct['latex_name'],
+                dim_sys=dimsys_default,)
             instance[expr] = instance
 
             # Store definition as variable expression.

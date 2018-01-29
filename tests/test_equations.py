@@ -3,6 +3,7 @@
 
 import pytest
 from sympy import S, Symbol
+from sympy.physics.units import Quantity, length, meter
 
 from essm import Eq
 from essm._generator import EquationWriter
@@ -20,6 +21,12 @@ class demo_g(Variable):
 
 
 class demo_d(Variable):
+    """Test variable."""
+
+    unit = meter
+
+
+class demo_d1(Variable):
     """Test variable."""
 
     unit = meter
@@ -116,20 +123,22 @@ def test_double_registration():
     assert Equation.__registry__[demo_double].__doc__ == 'Second.'
 
 
-def test_solve():
+def test_solve_quantity():
     """Check solving equation for variable."""
     from sympy import solve
 
-    class m_CO2(Variable):
-        """Test variable"""
-        unit = meter
+    res = solve(10 ** 6 * demo_d1 - 0.031e6 *
+                Quantity('demo_d', length, meter) + 0.168 *
+                meter, demo_d1)
 
-    class m_OC(Variable):
-        """test variable"""
-        unit = meter
 
-    assert solve(10 ** 6 * m_CO2 - 0.031 * (m_OC * 10 ** 6) + 0.168 *
-                 meter, m_CO2) == [0.031*m_OC - 1.68e-7*meter]
+def test_solve_variable():
+    """Check solving equation for variable."""
+    from sympy import solve
+
+    res = solve(10 ** 6 * demo_d1 - 0.031e6 * demo_d + 0.168 *
+                meter, demo_d1)
+    assert res == [0.031*demo_d - 1.68e-7*meter]
 
 
 @pytest.mark.skip(reason="needs rewrite for SymPy")
