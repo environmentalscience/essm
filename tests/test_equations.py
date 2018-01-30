@@ -130,6 +130,7 @@ def test_solve_quantity():
     res = solve(10 ** 6 * demo_d1 - 0.031e6 *
                 Quantity('demo_d', length, meter) + 0.168 *
                 meter, demo_d1)
+    assert res == [0.031*Quantity('demo_d', length, meter) - 1.68e-7*meter]
 
 
 def test_solve_variable():
