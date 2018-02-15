@@ -4,20 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Usage &#8212; ESSM 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1.0',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -32,8 +24,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-  </head>
-  <body>
+  </head><body>
   
 
     <div class="document">
@@ -51,16 +42,16 @@ physical constants.</p>
 <div class="section" id="creating-variables">
 <h2>Creating variables<a class="headerlink" href="#creating-variables" title="Permalink to this headline">¶</a></h2>
 <p>To create custom variables, first import <cite>Variable</cite>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
 </pre></div>
 </div>
 <p>To define units, you must first import these units from the library:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.units</span> <span class="k">import</span> <span class="n">joule</span><span class="p">,</span> <span class="n">kelvin</span><span class="p">,</span> <span class="n">meter</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.units</span> <span class="k">import</span> <span class="n">joule</span><span class="p">,</span> <span class="n">kelvin</span><span class="p">,</span> <span class="n">meter</span>
 </pre></div>
 </div>
 <p>Then you can define a custom variable with its name, description, domain,
 latex_name, unit, and an optional default value, e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_chamber_volume</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_chamber_volume</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
 <span class="gp">... </span>   <span class="sd">&#39;&#39;&#39;Volume of chamber.&#39;&#39;&#39;</span>
 <span class="gp">... </span>   <span class="n">latex_name</span> <span class="o">=</span> <span class="s1">&#39;V_c&#39;</span>
 <span class="gp">... </span>   <span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;real&#39;</span>
@@ -69,7 +60,7 @@ latex_name, unit, and an optional default value, e.g.:</p>
 <span class="gp">... </span>   <span class="n">default</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 </div>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_chamber_length</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_chamber_length</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
 <span class="gp">... </span>   <span class="sd">&#39;&#39;&#39;Length of chamber.&#39;&#39;&#39;</span>
 <span class="gp">... </span>   <span class="n">latex_name</span> <span class="o">=</span> <span class="s1">&#39;L_c&#39;</span>
 <span class="gp">... </span>   <span class="n">domain</span> <span class="o">=</span> <span class="s1">&#39;real&#39;</span>
@@ -90,11 +81,11 @@ in short notation.</p>
 <h2>Creating equations<a class="headerlink" href="#creating-equations" title="Permalink to this headline">¶</a></h2>
 <p>To create custom equations, proceed similarly to above, i.e. first import
 <cite>Equation</cite>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations</span> <span class="k">import</span> <span class="n">Equation</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations</span> <span class="k">import</span> <span class="n">Equation</span>
 </pre></div>
 </div>
 <p>Then define an equation, e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_eq_volume</span><span class="p">(</span><span class="n">Equation</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">demo_eq_volume</span><span class="p">(</span><span class="n">Equation</span><span class="p">):</span>
 <span class="gp">... </span>   <span class="sd">&#39;&#39;&#39;Calculate chamber volume.</span>
 <span class="gp">...</span><span class="sd"></span>
 <span class="gp">... </span><span class="sd">   Uses :math:`V_{l}` and assumes cubic shape.</span>
@@ -106,7 +97,7 @@ in short notation.</p>
 <div class="section" id="importing-variables-and-equations">
 <h2>Importing variables and equations<a class="headerlink" href="#importing-variables-and-equations" title="Permalink to this headline">¶</a></h2>
 <p>You can import pre-defined variables and equations as e.g.:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 </div>
@@ -171,12 +162,14 @@ in short notation.</p>
 </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
