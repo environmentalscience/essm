@@ -40,7 +40,7 @@ class VariableMeta(RegistryType):
     def __new__(cls, name, parents, dct):
         """Build and register new variable."""
         if '__registry__' not in dct:
-            unit = dct.pop('unit', None)
+            unit = dct.pop('unit', S.One)
             if unit == 1:
                 unit = S.One
             definition = dct.pop('expr', None)
@@ -58,7 +58,8 @@ class VariableMeta(RegistryType):
                 definition = build_instance_expression(instance, definition)
                 derived_unit = derive_unit(definition, name=name)
 
-                unit = unit or derived_unit  # only if unit is None
+                if unit == S.One:
+                    unit = derived_unit  # only if unit is None
                 instance.expr, instance.unit = definition, derived_unit
 
                 if unit != instance.unit:
