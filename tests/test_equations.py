@@ -139,16 +139,6 @@ def test_double_registration():
     assert Equation.__registry__[demo_double].__doc__ == 'Second.'
 
 
-def test_solve_quantity():
-    """Check solving equation for variable."""
-    from sympy import solve
-
-    res = solve(10 ** 6 * demo_d1 - 0.031e6 *
-                Quantity('demo_d', length, meter) + 0.168 *
-                meter, demo_d1)
-    assert res == [0.031*Quantity('demo_d', length, meter) - 1.68e-7*meter]
-
-
 @pytest.mark.skip(reason="needs rewrite for SymPy")
 def test_equation_writer(tmpdir):
     """EquationWriter creates importable file with internal variables."""

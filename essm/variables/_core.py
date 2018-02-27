@@ -72,9 +72,9 @@ class VariableMeta(RegistryType):
             expr = BaseVariable(
                 instance,
                 dct['name'],
-                Dimension(Quantity.get_dimensional_expr(unit)),
-                unit or S.One,
                 abbrev=dct['latex_name'],
+                dimension=Dimension(Quantity.get_dimensional_expr(unit)),
+                scale_factor=unit or S.One,
             )
             instance[expr] = instance
 
@@ -119,17 +119,17 @@ class BaseVariable(Quantity):
             cls,
             definition,
             name,
+            abbrev,
             dimension,
             scale_factor=S.One,
-            abbrev=None,
             **assumptions
     ):
         self = super(BaseVariable, cls).__new__(
             cls,
             name,
-            dimension,
-            scale_factor=scale_factor,
             abbrev=abbrev,
+            dimension=dimension,
+            scale_factor=scale_factor,
             **assumptions
         )
         self.definition = definition
