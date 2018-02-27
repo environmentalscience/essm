@@ -3,13 +3,15 @@
 
 import pytest
 from sympy import S, Symbol
+from sympy.physics.units import Quantity, length, meter
 
 from essm import Eq
 from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import joule, kelvin, meter, mole, second
-from essm.variables.utils import extract_variables, replace_variables
+from essm.variables.utils import extract_variables, replace_variables,\
+     replace_defaults
 
 
 class demo_g(Variable):
@@ -20,6 +22,12 @@ class demo_g(Variable):
 
 
 class demo_d(Variable):
+    """Test variable."""
+
+    unit = meter
+
+
+class demo_d1(Variable):
     """Test variable."""
 
     unit = meter
@@ -54,7 +62,7 @@ def test_units():
 
 
 def test_integral():
-    """Test that variables behave as symbols."""
+    """Test that variables can be used as integration symbols."""
     from sympy import integrate
 
     assert demo_g * demo_fall.definition.t**S(3) / S(6) == integrate(
@@ -82,6 +90,13 @@ def test_variable_replacement():
     vdict[Symbol('x')] = 1
     assert replace_variables(expr, vdict) == \
         Eq(demo_d._name, 4.9 * demo_fall.definition.t._name ** 2)
+
+
+def test_variable_defaults():
+    """Test replace variables in expression by their default values."""
+    expr = demo_fall
+    assert replace_defaults(expr) == \
+        Eq(demo_d, 4.9*demo_fall.definition.t**2*meter/second**2)
 
 
 def test_unit_check():
@@ -122,6 +137,16 @@ def test_double_registration():
             expr = Eq(demo_g, demo_g)
 
     assert Equation.__registry__[demo_double].__doc__ == 'Second.'
+
+
+def test_solve_quantity():
+    """Check solving equation for variable."""
+    from sympy import solve
+
+    res = solve(10 ** 6 * demo_d1 - 0.031e6 *
+                Quantity('demo_d', length, meter) + 0.168 *
+                meter, demo_d1)
+    assert res == [0.031*Quantity('demo_d', length, meter) - 1.68e-7*meter]
 
 
 @pytest.mark.skip(reason="needs rewrite for SymPy")
