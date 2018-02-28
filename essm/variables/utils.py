@@ -69,7 +69,7 @@ def replace_variables(expr, variables=None):
 
 
 def replace_defaults(expr):
-    '''Replace variables in expression by their default values.'''
+    """Replace variables in expression by their default values."""
     if hasattr(expr, 'lhs'):
         expr1 = expr.lhs
         lhs = expr1.replace(
