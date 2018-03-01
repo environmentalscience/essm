@@ -35,7 +35,8 @@ pascal = u.pascal
 second = u.second
 watt = u.watt
 
-SI_DIMENSIONS = {str(d._dimension.name): d for d in SI._base_units}
+SI_DIMENSIONS = {
+    str(Quantity.get_dimensional_expr(d)): d for d in SI._base_units}
 
 
 def markdown(unit):

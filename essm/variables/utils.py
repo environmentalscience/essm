@@ -66,3 +66,25 @@ def replace_variables(expr, variables=None):
         return Eq(expr.lhs.xreplace(symbols).xreplace(variables),
                   expr.rhs.xreplace(symbols).xreplace(variables))
     return expr.xreplace(symbols).xreplace(variables)
+
+
+def replace_defaults(expr):
+    """Replace variables in expression by their default values."""
+    if hasattr(expr, 'lhs'):
+        expr1 = expr.lhs
+        lhs = expr1.replace(
+            lambda expr1: isinstance(expr1, BaseVariable),
+            lambda expr1: expr1.definition.unit*expr1.definition.default
+            if hasattr(expr1.definition, 'default') else expr1)
+        expr1 = expr.rhs
+        rhs = expr1.replace(
+            lambda expr1: isinstance(expr1, BaseVariable),
+            lambda expr1: expr1.definition.unit*expr1.definition.default
+            if hasattr(expr1.definition, 'default') else expr1)
+        return Eq(lhs, rhs)
+    else:
+        expr1 = expr
+        return expr1.replace(
+            lambda expr1: isinstance(expr1, BaseVariable),
+            lambda expr1: expr1.definition.unit*expr1.definition.default
+            if hasattr(expr1.definition, 'default') else expr1)
