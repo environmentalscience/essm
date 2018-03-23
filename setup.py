@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of essm.
-# Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2017, 2018 ETH Zurich, Swiss Data Science Center.
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -23,8 +23,8 @@ import os
 
 from setuptools import find_packages, setup
 
-readme = ''  # open('README.rst').read()
-history = ''  # open('CHANGES.rst').read()
+readme = open('README.rst').read()
+history = open('CHANGES.rst').read()
 
 tests_require = [
     'check-manifest>=0.25',
@@ -59,7 +59,7 @@ setup_requires = [
 ]
 
 install_requires = [
-    'sympy>=1.1rc1',
+    'sympy>=1.1.2.dev',
     'six>=1.10.0',
 ]
 

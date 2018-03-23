@@ -41,7 +41,7 @@ env:
 before_install:
   - travis_retry pip install twine wheel coveralls
   - travis_retry pip install check-manifest pydocstyle
-  - travis_retry pip install https://github.com/sympy/sympy/zipball/master
+  - travis_retry pip install -r requirements-devel.txt
 
 install:
   - pip install -e .[all]
