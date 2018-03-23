@@ -24,7 +24,8 @@ import operator
 
 import sympy.physics.units as u
 from sympy.physics.units import Dimension, Quantity, find_unit
-from sympy.physics.units.systems import SI
+
+from .SI import SI
 
 joule = u.joule
 kelvin = u.kelvin
