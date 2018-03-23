@@ -119,22 +119,42 @@ class BaseVariable(Quantity):
             cls,
             definition,
             name,
-            abbrev,
-            dimension,
+            abbrev=None,
+            dimension=None,
             scale_factor=S.One,
             unit_system='SI',
             **assumptions
     ):
+        from sympy.physics.units.dimensions import dimsys_SI
+        abbrev = abbrev or name
         self = super(BaseVariable, cls).__new__(
             cls,
             name,
             abbrev=abbrev,
             **assumptions
         )
+
+        if dimension is None:
+            #: This is possible only because the custom dimension property
+            dimension = self.dimension
+
         self.set_dimension(dimension, unit_system=unit_system)
         self.set_scale_factor(scale_factor)
         self.definition = definition
         return self
+
+    def set_dimension(self, dimension, unit_system='SI'):
+        """Update dimension map."""
+        super(BaseVariable, self).set_dimension(dimension, unit_system=unit_system)
+        Quantity.SI_quantity_dimension_map[self.name] = dimension
+
+    @property
+    def dimension(self):
+        """Get a dimension from a map."""
+        try:
+            return super(BaseVariable, self).dimension
+        except KeyError:
+            return Quantity.SI_quantity_dimension_map[self.name]
 
     @property
     def __doc__(self):

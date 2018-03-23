@@ -143,10 +143,12 @@ def test_solve_quantity():
     """Check solving equation for variable."""
     from sympy import solve
 
-    res = solve(10 ** 6 * demo_d1 - 0.031e6 *
-                Quantity('demo_d', length, meter) + 0.168 *
-                meter, demo_d1)
-    assert res == [0.031*Quantity('demo_d', length, meter) - 1.68e-7*meter]
+    q_d = Quantity('q_d')
+    q_d.set_dimension(length, unit_system='SI')
+    q_d.set_scale_factor(meter.scale_factor)
+
+    res = solve(10 ** 6 * demo_d1 - 0.031e6 * q_d + 0.168 * meter, demo_d1)
+    assert res == [0.031*q_d - 1.68e-7*meter]
 
 
 def test_solve_variable():
