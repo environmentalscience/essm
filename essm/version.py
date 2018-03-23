@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of essm.
-# Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2017, 2018 ETH Zurich, Swiss Data Science Center.
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -22,4 +22,4 @@
 This file is imported by ``essm.__init__``, and parsed by ``setup.py``.
 """
 
-__version__ = "0.1.0"
+__version__ = "1.1.0.dev20180323"
