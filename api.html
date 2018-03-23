@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>API Docs &#8212; ESSM 0.1.0 documentation</title>
+    <title>API Docs &#8212; ESSM 1.1.0.dev20180323 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" src="_static/documentation_options.js"></script>
@@ -2405,39 +2405,11 @@ and defining internal variables.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="essm.equations.leaf.energy_water.eq_Pwl">
-<em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Pwl</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Pwl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
-<p>Clausius-Clapeyron P_wl as function of T_l.</p>
-<p>(Eq. B3 in <a class="reference internal" href="index.html#hartmann-global-1994" id="id13">[Har94]</a>)</p>
-<dl class="attribute">
-<dt id="essm.equations.leaf.energy_water.eq_Pwl.expr">
-<code class="descname">expr</code><em class="property"> = Eq(P_wl, p_CC1*exp(-M_w*lambda_E*(-1/p_CC2 + 1/T_l)/R_mol))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Pwl.expr" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="essm.equations.leaf.energy_water.eq_Pwl.name">
-<code class="descname">name</code><em class="property"> = 'eq_Pwl'</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Pwl.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="essm.equations.leaf.energy_water.eq_Pwl.p_CC1">
-<code class="descname">p_CC1</code><em class="property"> = p_CC1</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Pwl.p_CC1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="essm.equations.leaf.energy_water.eq_Pwl.p_CC2">
-<code class="descname">p_CC2</code><em class="property"> = p_CC2</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Pwl.p_CC2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="essm.equations.leaf.energy_water.eq_Elmol_conv">
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Elmol_conv</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Elmol_conv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>E_lmol as function of g_twmol and P_wl.</p>
-<p>(Eq. B6 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id14">[SO17]</a>)</p>
+<p>(Eq. B6 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id13">[SO17]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Elmol_conv.expr">
 <code class="descname">expr</code><em class="property"> = Eq(E_lmol, g_twmol*(-P_wa + P_wl)/P_a)</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Elmol_conv.expr" title="Permalink to this definition">¶</a></dt>
@@ -2490,7 +2462,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_hc</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_hc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>h_c as a function of Nu and L_l.</p>
-<p>(Eq. B10 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id15">[SO17]</a>)</p>
+<p>(Eq. B10 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id14">[SO17]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_hc.expr">
 <code class="descname">expr</code><em class="property"> = Eq(h_c, Nu*k_a/L_l)</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_hc.expr" title="Permalink to this definition">¶</a></dt>
@@ -2508,7 +2480,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Re</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Re" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Re as a function of v_w and L_l.</p>
-<p>(Eq. B11 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id16">[SO17]</a>)</p>
+<p>(Eq. B11 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id15">[SO17]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Re.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Re, L_l*v_w/nu_a)</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Re.expr" title="Permalink to this definition">¶</a></dt>
@@ -2526,7 +2498,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Gr</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Gr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Gr as function of air density within and outside of leaf.</p>
-<p>(Eq. B12 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id17">[SO17]</a>)</p>
+<p>(Eq. B12 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id16">[SO17]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Gr.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Gr, L_l**3*g*(rho_a - rho_al)/(nu_a**2*rho_al))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Gr.expr" title="Permalink to this definition">¶</a></dt>
@@ -2541,15 +2513,15 @@ and defining internal variables.</p>
 
 </div>
 </div>
-<div class="section" id="id18">
-<h3>Physics<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h3>Physics<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-essm.equations.physics.thermodynamics"></span><p>General and atmospheric thermodynamics equations.</p>
 <dl class="class">
 <dt id="essm.equations.physics.thermodynamics.eq_Le">
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_Le</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Le" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Le as function of alpha_a and D_va.</p>
-<p>(Eq. B3 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id19">[SO17]</a>)</p>
+<p>(Eq. B3 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id18">[SO17]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_Le.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Le, alpha_a/D_va)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Le.expr" title="Permalink to this definition">¶</a></dt>
@@ -2567,7 +2539,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_Cwa</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Cwa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>C_wa as a function of P_wa and T_a.</p>
-<p>(Eq. B9 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id20">[SO17]</a>)</p>
+<p>(Eq. B9 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id19">[SO17]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_Cwa.expr">
 <code class="descname">expr</code><em class="property"> = Eq(C_wa, P_wa/(R_mol*T_a))</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Cwa.expr" title="Permalink to this definition">¶</a></dt>
@@ -2585,7 +2557,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_Nu_forced_all</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Nu_forced_all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Nu as function of Re and Re_c under forced conditions.</p>
-<p>(Eqs. B13–B15 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id21">[SO17]</a>)</p>
+<p>(Eqs. B13–B15 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id20">[SO17]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_Nu_forced_all.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Nu, -Pr**(1/3)*(-37*Re**(4/5) + 37*(Re + Re_c - Abs(Re - Re_c)/2)**(4/5) - 664*sqrt(Re + Re_c - Abs(Re - Re_c)/2))/1000)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Nu_forced_all.expr" title="Permalink to this definition">¶</a></dt>
@@ -2603,7 +2575,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_Dva</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Dva" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>D_va as a function of air temperature.</p>
-<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id22">[MU07]</a>)</p>
+<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id21">[MU07]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_Dva.expr">
 <code class="descname">expr</code><em class="property"> = Eq(D_va, T_a*p_Dva1 - p_Dva2)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Dva.expr" title="Permalink to this definition">¶</a></dt>
@@ -2631,7 +2603,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_alphaa</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_alphaa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>alpha_a as a function of air temperature.</p>
-<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id23">[MU07]</a>)</p>
+<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id22">[MU07]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_alphaa.expr">
 <code class="descname">expr</code><em class="property"> = Eq(alpha_a, T_a*p_alpha1 - p_alpha2)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_alphaa.expr" title="Permalink to this definition">¶</a></dt>
@@ -2659,7 +2631,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_ka</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_ka" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>k_a as a function of air temperature.</p>
-<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id24">[MU07]</a>)</p>
+<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id23">[MU07]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_ka.expr">
 <code class="descname">expr</code><em class="property"> = Eq(k_a, T_a*p_ka1 + p_ka2)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_ka.expr" title="Permalink to this definition">¶</a></dt>
@@ -2687,7 +2659,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_nua</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_nua" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>nu_a as a function of air temperature.</p>
-<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id25">[MU07]</a>)</p>
+<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id24">[MU07]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_nua.expr">
 <code class="descname">expr</code><em class="property"> = Eq(nu_a, T_a*p_nua1 - p_nua2)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_nua.expr" title="Permalink to this definition">¶</a></dt>
@@ -2715,7 +2687,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_rhoa_Pwa_Ta</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_rhoa_Pwa_Ta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>rho_a as a function of P_wa and T_a.</p>
-<p>(Eq. B20 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id26">[SO17]</a>)</p>
+<p>(Eq. B20 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id25">[SO17]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_rhoa_Pwa_Ta.expr">
 <code class="descname">expr</code><em class="property"> = Eq(rho_a, (M_N2*P_N2 + M_O2*P_O2 + M_w*P_wa)/(R_mol*T_a))</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_rhoa_Pwa_Ta.expr" title="Permalink to this definition">¶</a></dt>
@@ -2947,7 +2919,7 @@ if needed.</p>
 <li class="toctree-l3"><a class="reference internal" href="#importing-pre-defined-equations">Importing pre-defined equations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Chamber</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">Leaf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id18">Physics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Physics</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-essm.variables._core">Internals</a></li>
@@ -2964,9 +2936,9 @@ if needed.</p>
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">
