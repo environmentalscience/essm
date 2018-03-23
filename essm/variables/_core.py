@@ -122,16 +122,17 @@ class BaseVariable(Quantity):
             abbrev,
             dimension,
             scale_factor=S.One,
+            unit_system='SI',
             **assumptions
     ):
         self = super(BaseVariable, cls).__new__(
             cls,
             name,
             abbrev=abbrev,
-            dimension=dimension,
-            scale_factor=scale_factor,
             **assumptions
         )
+        self.set_dimension(dimension, unit_system=unit_system)
+        self.set_scale_factor(scale_factor)
         self.definition = definition
         return self
 
