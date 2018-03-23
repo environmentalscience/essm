@@ -105,32 +105,33 @@ class eq_Cwl(Equation):
     expr = Eq(C_wl, P_wl / (R_mol * T_l))
 
 
-class eq_Pwl(Equation):
-    """Clausius-Clapeyron P_wl as function of T_l.
-
-    (Eq. B3 in :cite:`hartmann_global_1994`)
-    """
-
-    class p_CC1(Variable):
-        """Internal parameter of eq_Pwl."""
-
-        name = 'p_CC1'
-        unit = pascal
-        domain = 'real'
-        latex_name = 'p_1'
-        default = 611.
-
-    class p_CC2(Variable):
-        """Internal parameter of eq_Pwl."""
-
-        name = 'p_CC2'
-        unit = kelvin
-        domain = 'real'
-        latex_name = 'p_2'
-        default = 273.
-
-    expr = Eq(
-        P_wl, p_CC1 * e ** (-M_w * lambda_E * (1 / T_l - 1 / p_CC2) / R_mol))
+# FIXME unsupported exponent
+# class eq_Pwl(Equation):
+#     """Clausius-Clapeyron P_wl as function of T_l.
+#
+#     (Eq. B3 in :cite:`hartmann_global_1994`)
+#     """
+#
+#     class p_CC1(Variable):
+#         """Internal parameter of eq_Pwl."""
+#
+#         name = 'p_CC1'
+#         unit = pascal
+#         domain = 'real'
+#         latex_name = 'p_1'
+#         default = 611.
+#
+#     class p_CC2(Variable):
+#         """Internal parameter of eq_Pwl."""
+#
+#         name = 'p_CC2'
+#         unit = kelvin
+#         domain = 'real'
+#         latex_name = 'p_2'
+#         default = 273.
+#
+#     expr = Eq(
+#         P_wl, p_CC1 * e ** (-M_w * lambda_E * (1 / T_l - 1 / p_CC2) / R_mol))
 
 
 class eq_Elmol_conv(Equation):
@@ -189,5 +190,5 @@ class eq_Gr(Equation):
 
 __all__ = (
     'eq_Rs_enbal', 'eq_Rll', 'eq_Hl', 'eq_El', 'eq_Elmol', 'eq_gtw',
-    'eq_gbw_hc', 'eq_Cwl', 'eq_Pwl', 'eq_Elmol_conv', 'eq_gtwmol_gtw',
+    'eq_gbw_hc', 'eq_Cwl', 'eq_Elmol_conv', 'eq_gtwmol_gtw',  # FIXME eq_Pwl
     'eq_gtwmol_gtw_iso', 'eq_hc', 'eq_Re', 'eq_Gr', )
