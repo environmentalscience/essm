@@ -1,6 +1,7 @@
 include *.json
 include *.rst
 include *.sh
+include *.txt
 include *.yapf
 include LICENSE
 recursive-include docs *.bib
