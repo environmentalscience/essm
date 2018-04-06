@@ -2,7 +2,7 @@
 """Test equations."""
 
 import pytest
-from sympy import S, Symbol
+from sympy import S, Symbol, solve
 from sympy.physics.units import Quantity, length, meter
 
 from essm import Eq
@@ -137,6 +137,14 @@ def test_double_registration():
             expr = Eq(demo_g, demo_g)
 
     assert Equation.__registry__[demo_double].__doc__ == 'Second.'
+
+
+def test_solve():
+    """Check that equation solving works"""
+
+    demo_d2 = type('demo_d2', (Variable,), {'unit': meter})
+    assert solve(10 ** 6 * demo_d1 - 0.031e6 * demo_d + 0.168 *
+                 demo_d2, demo_d1) == [0.031*demo_d - 1.68e-7*demo_d2]
 
 
 @pytest.mark.skip(reason="needs rewrite for SymPy")
