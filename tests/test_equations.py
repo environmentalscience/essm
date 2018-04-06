@@ -89,7 +89,7 @@ def test_variable_replacement():
     vdict = Variable.__defaults__.copy()
     vdict[Symbol('x')] = 1
     assert replace_variables(expr, vdict) == \
-        Eq(demo_d._name, 4.9 * demo_fall.definition.t._name ** 2)
+        Eq(demo_d, 4.9 * demo_fall.definition.t ** 2)
 
 
 def test_variable_defaults():

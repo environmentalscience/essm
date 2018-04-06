@@ -66,7 +66,7 @@ def derive_unit(expr, name=None):
     dict_units = {}
     for variable in variables:
         dict_units[variable] = variable.definition.unit
-    expr_units = expr.xreplace(dict_units)    
+    expr_units = expr.xreplace(dict_units)
     from sympy.physics.units.dimensions import dimsys_SI
     dim = Dimension(Quantity.get_dimensional_expr(expr_units))
     return functools.reduce(

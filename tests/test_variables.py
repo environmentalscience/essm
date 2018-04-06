@@ -61,7 +61,7 @@ def test_unit_check():
 
 
 def test_symbolic():
-    """Test behaviour like symbols"""
+    """Test that variables behave like symbols"""
 
     class l1(Variable):
         """Length"""
@@ -71,7 +71,7 @@ def test_symbolic():
         """Length"""
         unit = meter
 
-    assert Eq(l1, -l2)
+    assert Eq(l1, -l2) is not False
 
 
 def test_derive_unit():
