@@ -60,3 +60,6 @@ target/
 
 # Vim swapfiles
 .*.sw?
+
+# Pytest
+.pytest_cache/*
