@@ -70,7 +70,6 @@ class VariableMeta(RegistryType):
                     )
 
             expr = BaseVariable(
-                instance,
                 dct['name'],
                 abbrev=dct['latex_name'],
                 dimension=Dimension(Quantity.get_dimensional_expr(unit)),
@@ -117,7 +116,6 @@ class BaseVariable(Quantity):
 
     def __new__(
             cls,
-            definition,
             name,
             abbrev=None,
             dimension=None,
@@ -140,12 +138,17 @@ class BaseVariable(Quantity):
 
         self.set_dimension(dimension, unit_system=unit_system)
         self.set_scale_factor(scale_factor)
-        self.definition = definition
         return self
+
+    @property
+    def definition(self):
+        """Return variable definition."""
+        return Variable.__registry__[self]
 
     def set_dimension(self, dimension, unit_system='SI'):
         """Update dimension map."""
-        super(BaseVariable, self).set_dimension(dimension, unit_system=unit_system)
+        super(BaseVariable, self).set_dimension(dimension,
+                                                unit_system=unit_system)
         Quantity.SI_quantity_dimension_map[self.name] = dimension
 
     @property
