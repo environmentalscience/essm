@@ -26,6 +26,7 @@ import warnings
 import six
 from sympy import Abs, Add, Basic, Derivative, Function, Mul, Pow, S, Symbol
 from sympy.physics.units import Dimension, Quantity
+from sympy.physics.units.dimensions import dimsys_default
 from sympy.physics.units.quantities import \
     _Quantity_constructor_postprocessor_Add
 
@@ -112,7 +113,6 @@ class Variable(object):
     __units__ = {}
     __expressions__ = {}
 
-
     @staticmethod
     def get_dimensional_expr(expr):
         """Returns dimensions of expression"""
@@ -138,6 +138,34 @@ class Variable(object):
             return Quantity.get_dimensional_expr(expr.definition.unit)
         return S.One
 
+    @staticmethod
+    def check_unit(expr):
+        """Construction postprocessor for the addition,
+        checks for dimension mismatches of the addends, thus preventing
+        expressions like `meter + second` to be created.
+        """
+
+        deset = {
+            tuple(
+                sorted(
+                    dimsys_default.get_dimensional_dependencies(
+                        Dimension(
+                            Variable.get_dimensional_expr(i)
+                            if not i.is_number else 1
+                        )
+                    ).items()
+                )
+            )
+            for i in expr.args
+        }
+        # If `deset` has more than one element, then some dimensions do not
+        # match in the sum:
+        if len(deset) > 1:
+            raise ValueError(
+                "summation of quantities of incompatible dimensions"
+            )
+        return expr
+
 
 class BaseVariable(Symbol):
     """Physical variable."""
@@ -158,8 +186,8 @@ class BaseVariable(Symbol):
             abbrev=abbrev,
             **assumptions
         )
-        #self.set_dimension(dimension, unit_system=unit_system)
-        #self.set_scale_factor(scale_factor)
+        # self.set_dimension(dimension, unit_system=unit_system)
+        # self.set_scale_factor(scale_factor)
         self.definition = definition
         return self
 
