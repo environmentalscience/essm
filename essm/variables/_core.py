@@ -24,7 +24,7 @@ from __future__ import absolute_import
 import warnings
 
 import six
-from sympy import Basic, S
+from sympy import Basic, S, Symbol
 from sympy.physics.units import Dimension, Quantity
 from sympy.physics.units.quantities import \
     _Quantity_constructor_postprocessor_Add
@@ -112,7 +112,7 @@ class Variable(object):
     __expressions__ = {}
 
 
-class BaseVariable(Quantity):
+class BaseVariable(Symbol):
     """Physical variable."""
 
     def __new__(
@@ -131,8 +131,8 @@ class BaseVariable(Quantity):
             abbrev=abbrev,
             **assumptions
         )
-        self.set_dimension(dimension, unit_system=unit_system)
-        self.set_scale_factor(scale_factor)
+        #self.set_dimension(dimension, unit_system=unit_system)
+        #self.set_scale_factor(scale_factor)
         self.definition = definition
         return self
 

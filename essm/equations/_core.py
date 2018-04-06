@@ -30,7 +30,7 @@ from ..bases import RegistryType
 from ..transformer import build_instance_expression
 from ..variables import Variable
 from ..variables._core import BaseVariable
-from ..variables.units import derive_quantity, unit_symbols
+from ..variables.units import unit_symbols
 
 
 class EquationMeta(RegistryType):
