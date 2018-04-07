@@ -63,3 +63,6 @@ target/
 
 # Pytest
 .pytest_cache/*
+
+# src folder with sympy installed
+.src/*
