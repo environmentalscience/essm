@@ -125,7 +125,7 @@ class Variable(object):
         elif isinstance(expr, Derivative):
             dim = Variable.get_dimensional_expr(expr.expr)
             for independent, count in expr.variable_count:
-                dim /= get_dimensional_expr(independent)**count
+                dim /= Variable.get_dimensional_expr(independent)**count
             return dim
         elif isinstance(expr, Function):
             args = [Variable.get_dimensional_expr(arg) for arg in expr.args]

@@ -2,7 +2,7 @@
 """Test equations."""
 
 import pytest
-from sympy import S, Symbol, solve
+from sympy import Derivative, S, Symbol, solve
 from sympy.physics.units import Quantity, length, meter
 
 from essm import Eq
@@ -33,6 +33,12 @@ class demo_d1(Variable):
     unit = meter
 
 
+class demo_v(Variable):
+    """Test variable."""
+
+    unit = meter/second
+
+
 class demo_fall(Equation):
     """Test equation."""
 
@@ -59,6 +65,19 @@ def test_units():
                 unit = meter
 
             expr = Eq(demo_g, x)
+
+
+def test_units_derivative():
+    """Check units of derivative."""
+    class valid_units(Equation):
+
+        expr = Eq(demo_v, Derivative(demo_d, demo_fall.definition.t))
+
+    with pytest.raises(ValueError):
+
+        class invalid_units_derivative(Equation):
+
+            expr = Eq(demo_g, Derivative(demo_d, demo_fall.definition.t))
 
 
 def test_integral():
