@@ -115,7 +115,7 @@ class Variable(object):
 
     @staticmethod
     def get_dimensional_expr(expr):
-        """Returns dimensions of expression"""
+        """Return dimensions of expression."""
         if isinstance(expr, Mul):
             return Mul(*[Variable.get_dimensional_expr(i) for i in expr.args])
         elif isinstance(expr, Pow):
@@ -140,11 +140,11 @@ class Variable(object):
 
     @staticmethod
     def check_unit(expr):
-        """Construction postprocessor for the addition,
-        checks for dimension mismatches of the addends, thus preventing
+        """Construct postprocessor for the addition.
+
+        Checks for dimension mismatches of the addends, thus preventing
         expressions like `meter + second` to be created.
         """
-
         deset = {
             tuple(
                 sorted(
