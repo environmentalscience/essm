@@ -62,8 +62,8 @@
 <span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">RegistryType</span>
 <span class="kn">from</span> <span class="nn">..transformer</span> <span class="k">import</span> <span class="n">build_instance_expression</span>
 <span class="kn">from</span> <span class="nn">..variables</span> <span class="k">import</span> <span class="n">Variable</span>
-<span class="kn">from</span> <span class="nn">..variables._core</span> <span class="k">import</span> <span class="n">BaseVariable</span>
-<span class="kn">from</span> <span class="nn">..variables.units</span> <span class="k">import</span> <span class="n">derive_quantity</span><span class="p">,</span> <span class="n">unit_symbols</span>
+<span class="kn">from</span> <span class="nn">..variables._core</span> <span class="k">import</span> <span class="n">BaseVariable</span><span class="p">,</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">..variables.units</span> <span class="k">import</span> <span class="n">unit_symbols</span>
 
 
 <div class="viewcode-block" id="EquationMeta"><a class="viewcode-back" href="../../../api.html#essm.equations.EquationMeta">[docs]</a><span class="k">class</span> <span class="nc">EquationMeta</span><span class="p">(</span><span class="n">RegistryType</span><span class="p">):</span>
@@ -162,6 +162,8 @@
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">definition</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Eq</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">expr</span>
+        <span class="c1"># The below raises an error if units are not consistent</span>
+        <span class="n">Variable</span><span class="o">.</span><span class="n">check_unit</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">lhs</span> <span class="o">+</span> <span class="n">expr</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
         <span class="bp">self</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">BaseEquation</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
         <span class="k">return</span> <span class="bp">self</span>
@@ -210,9 +212,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">

@@ -90,6 +90,20 @@ can be imported into your session, e.g.:</p>
 <em class="property">class </em><code class="descclassname">essm.variables.</code><code class="descname">Variable</code><a class="reference internal" href="_modules/essm/variables/_core.html#Variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base type for all physical variables.</p>
+<dl class="staticmethod">
+<dt id="essm.variables.Variable.check_unit">
+<em class="property">static </em><code class="descname">check_unit</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.check_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable.check_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct postprocessor for the addition.</p>
+<p>Checks for dimension mismatches of the addends, thus preventing
+expressions like <cite>meter + second</cite> to be created.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="essm.variables.Variable.get_dimensional_expr">
+<em class="property">static </em><code class="descname">get_dimensional_expr</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.get_dimensional_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable.get_dimensional_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dimensions of expression.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -2826,6 +2840,20 @@ partial pressures.</p>
 <em class="property">class </em><code class="descclassname">essm.variables._core.</code><code class="descname">Variable</code><a class="reference internal" href="_modules/essm/variables/_core.html#Variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables._core.Variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base type for all physical variables.</p>
+<dl class="staticmethod">
+<dt id="essm.variables._core.Variable.check_unit">
+<em class="property">static </em><code class="descname">check_unit</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.check_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables._core.Variable.check_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct postprocessor for the addition.</p>
+<p>Checks for dimension mismatches of the addends, thus preventing
+expressions like <cite>meter + second</cite> to be created.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="essm.variables._core.Variable.get_dimensional_expr">
+<em class="property">static </em><code class="descname">get_dimensional_expr</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.get_dimensional_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables._core.Variable.get_dimensional_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dimensions of expression.</p>
+</dd></dl>
+
 </dd></dl>
 
 <span class="target" id="module-essm.equations._core"></span><p>Core equation type. Contains class definitions related to equations.</p>
@@ -2964,9 +2992,9 @@ if needed.</p>
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">
