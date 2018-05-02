@@ -61,13 +61,11 @@ def derive_quantity(expr, name=None):
 
 def derive_unit(expr, name=None):
     """Derive SI-unit from an expression, omitting scale factors."""
+    from essm.variables import Variable
     from essm.variables.utils import extract_variables
-    variables = extract_variables(expr)
-    dict_units = {}
-    for variable in variables:
-        dict_units[variable] = variable.definition.unit
-    expr_units = expr.xreplace(dict_units)
     from sympy.physics.units.dimensions import dimsys_SI
+    variables = extract_variables(expr)
+    expr_units = expr.xreplace(Variable.__units__)
     dim = Dimension(Quantity.get_dimensional_expr(expr_units))
     return functools.reduce(
         operator.mul, (
