@@ -21,7 +21,6 @@
 
 from sympy import Eq, preorder_traversal
 from sympy.core.expr import Expr
-from sympy.physics.units import Dimension
 
 from essm.equations._core import BaseEquation
 from essm.variables._core import BaseVariable
