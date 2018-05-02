@@ -60,3 +60,9 @@ target/
 
 # Vim swapfiles
 .*.sw?
+
+# Pytest
+.pytest_cache/*
+
+# src folder with sympy installed
+.src/*

@@ -24,12 +24,14 @@ from __future__ import absolute_import
 import warnings
 
 import six
-from sympy import Basic, S
+from sympy import Abs, Add, Basic, Derivative, Function, Mul, Pow, S, Symbol
 from sympy.physics.units import Dimension, Quantity
+from sympy.physics.units.dimensions import dimsys_default
 from sympy.physics.units.quantities import \
     _Quantity_constructor_postprocessor_Add
 
 from .units import derive_unit
+
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
 
@@ -111,8 +113,61 @@ class Variable(object):
     __units__ = {}
     __expressions__ = {}
 
+    @staticmethod
+    def get_dimensional_expr(expr):
+        """Return dimensions of expression."""
+        if isinstance(expr, Mul):
+            return Mul(*[Variable.get_dimensional_expr(i) for i in expr.args])
+        elif isinstance(expr, Pow):
+            return Variable.get_dimensional_expr(expr.base) ** expr.exp
+        elif isinstance(expr, Add):
+            return Variable.get_dimensional_expr(expr.args[0])
+        elif isinstance(expr, Derivative):
+            dim = Variable.get_dimensional_expr(expr.expr)
+            for independent, count in expr.variable_count:
+                dim /= Variable.get_dimensional_expr(independent)**count
+            return dim
+        elif isinstance(expr, Function):
+            args = [Variable.get_dimensional_expr(arg) for arg in expr.args]
+            if all(i == 1 for i in args):
+                return S.One
+            return expr.func(*args)
+        elif isinstance(expr, Quantity):
+            return expr.dimension.name
+        elif isinstance(expr, BaseVariable):
+            return Quantity.get_dimensional_expr(expr.definition.unit)
+        return S.One
 
-class BaseVariable(Quantity):
+    @staticmethod
+    def check_unit(expr):
+        """Construct postprocessor for the addition.
+
+        Checks for dimension mismatches of the addends, thus preventing
+        expressions like `meter + second` to be created.
+        """
+        deset = {
+            tuple(
+                sorted(
+                    dimsys_default.get_dimensional_dependencies(
+                        Dimension(
+                            Variable.get_dimensional_expr(i)
+                            if not i.is_number else 1
+                        )
+                    ).items()
+                )
+            )
+            for i in expr.args
+        }
+        # If `deset` has more than one element, then some dimensions do not
+        # match in the sum:
+        if len(deset) > 1:
+            raise ValueError(
+                "summation of quantities of incompatible dimensions"
+            )
+        return expr
+
+
+class BaseVariable(Symbol):
     """Physical variable."""
 
     def __new__(
@@ -131,8 +186,8 @@ class BaseVariable(Quantity):
             abbrev=abbrev,
             **assumptions
         )
-        self.set_dimension(dimension, unit_system=unit_system)
-        self.set_scale_factor(scale_factor)
+        # self.set_dimension(dimension, unit_system=unit_system)
+        # self.set_scale_factor(scale_factor)
         self.definition = definition
         return self
 

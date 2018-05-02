@@ -5,6 +5,7 @@ import pytest
 
 from essm.variables import Variable
 from essm.variables.units import derive_unit, joule, kilogram, meter, second
+from sympy import Eq
 
 
 class demo_variable(Variable):
@@ -57,6 +58,20 @@ def test_unit_check():
         class invalid_unit(Variable):
             expr = 4 * demo_variable
             unit = second
+
+
+def test_symbolic():
+    """Test that variables behave like symbols"""
+
+    class l1(Variable):
+        """Length"""
+        unit = meter
+
+    class l2(Variable):
+        """Length"""
+        unit = meter
+
+    assert Eq(l1, -l2) is not False
 
 
 def test_derive_unit():

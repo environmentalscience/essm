@@ -2,7 +2,7 @@
 """Test equations."""
 
 import pytest
-from sympy import S, Symbol
+from sympy import Derivative, S, Symbol, solve
 from sympy.physics.units import Quantity, length, meter
 
 from essm import Eq
@@ -33,6 +33,12 @@ class demo_d1(Variable):
     unit = meter
 
 
+class demo_v(Variable):
+    """Test variable."""
+
+    unit = meter/second
+
+
 class demo_fall(Equation):
     """Test equation."""
 
@@ -59,6 +65,19 @@ def test_units():
                 unit = meter
 
             expr = Eq(demo_g, x)
+
+
+def test_units_derivative():
+    """Check units of derivative."""
+    class valid_units(Equation):
+
+        expr = Eq(demo_v, Derivative(demo_d, demo_fall.definition.t))
+
+    with pytest.raises(ValueError):
+
+        class invalid_units_derivative(Equation):
+
+            expr = Eq(demo_g, Derivative(demo_d, demo_fall.definition.t))
 
 
 def test_integral():
@@ -89,7 +108,7 @@ def test_variable_replacement():
     vdict = Variable.__defaults__.copy()
     vdict[Symbol('x')] = 1
     assert replace_variables(expr, vdict) == \
-        Eq(demo_d._name, 4.9 * demo_fall.definition.t._name ** 2)
+        Eq(demo_d, 4.9 * demo_fall.definition.t ** 2)
 
 
 def test_variable_defaults():
@@ -137,6 +156,14 @@ def test_double_registration():
             expr = Eq(demo_g, demo_g)
 
     assert Equation.__registry__[demo_double].__doc__ == 'Second.'
+
+
+def test_solve():
+    """Check that equation solving works"""
+
+    demo_d2 = type('demo_d2', (Variable,), {'unit': meter})
+    assert solve(10 ** 6 * demo_d1 - 0.031e6 * demo_d + 0.168 *
+                 demo_d2, demo_d1) == [0.031*demo_d - 1.68e-7*demo_d2]
 
 
 @pytest.mark.skip(reason="needs rewrite for SymPy")
