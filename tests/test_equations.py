@@ -118,6 +118,12 @@ def test_variable_defaults():
         Eq(demo_d, 4.9*demo_fall.definition.t**2*meter/second**2)
 
 
+def test_substitution():
+    """Test if .subs() method gives the same result as replace_variables."""
+    assert demo_fall.subs(demo_d, demo_d1) == \
+        replace_variables(demo_fall, {demo_d: demo_d1})
+
+
 def test_unit_check():
     """Check unit test involving temperature."""
 
