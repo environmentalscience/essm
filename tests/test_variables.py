@@ -111,5 +111,4 @@ def test_remove_variable_from_registry():
 
 def test_markdown():
     """Check markdown representation of units."""
-
     assert markdown(kilogram*meter/second**2) == 'kg m s$^{-2}$'
