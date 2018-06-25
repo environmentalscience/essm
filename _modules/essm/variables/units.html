@@ -76,7 +76,33 @@
 
 <div class="viewcode-block" id="markdown"><a class="viewcode-back" href="../../../api.html#essm.variables.markdown">[docs]</a><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return markdown representation of a unit.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span></div>
+    <span class="kn">from</span> <span class="nn">sympy.printing</span> <span class="k">import</span> <span class="n">StrPrinter</span>
+    <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+    <span class="c1"># displays short units (m instead of meter)</span>
+    <span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Quantity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">abbrev</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">unit</span><span class="o">.</span><span class="n">is_Pow</span><span class="p">:</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">args</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">$^{{</span><span class="si">{1}</span><span class="s1">}}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">unit</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+        <span class="n">str1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">tuples</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">allargs</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">args</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">allargs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_Pow</span><span class="p">:</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">args</span>
+                <span class="n">tuples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
+                <span class="n">tuples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">tuples</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">tuples</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tuples</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">str1</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">str1</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">+</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1">$^{{</span><span class="si">{1}</span><span class="s1">}}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">str1</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="unit_symbols"><a class="viewcode-back" href="../../../api.html#essm.variables.unit_symbols">[docs]</a><span class="k">def</span> <span class="nf">unit_symbols</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
@@ -151,9 +177,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">
