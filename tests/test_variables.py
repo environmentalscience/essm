@@ -4,7 +4,8 @@
 import pytest
 
 from essm.variables import Variable
-from essm.variables.units import derive_unit, joule, kilogram, meter, second
+from essm.variables.units import derive_unit, joule, kilogram, markdown,\
+    meter, second
 from sympy import Eq
 
 
@@ -106,3 +107,8 @@ def test_remove_variable_from_registry():
 
     with pytest.raises(KeyError):
         del Variable[removable]
+
+
+def test_markdown():
+    """Check markdown representation of units."""
+    assert markdown(kilogram*meter/second**2) == 'kg m s$^{-2}$'

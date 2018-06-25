@@ -41,7 +41,33 @@ SI_DIMENSIONS = {
 
 def markdown(unit):
     """Return markdown representation of a unit."""
-    return str(unit)
+    from sympy.printing import StrPrinter
+    from operator import itemgetter
+    # displays short units (m instead of meter)
+    StrPrinter._print_Quantity = lambda self, expr: str(expr.abbrev)
+    if unit.is_Pow:
+        item = unit.args
+        return '{0}$^{{{1}}}$'.format(item[0], item[1])
+    if unit.is_Mul:
+        str1 = ''
+        tuples = []
+        allargs = unit.args
+        for arg in allargs:
+            if arg.is_Pow:
+                args = arg.args
+                tuples.append((str(args[0]), args[1]))
+            if isinstance(arg, Quantity):
+                tuples.append((str(arg), 1))
+        tuples.sort(key=itemgetter(1), reverse=True)
+        tuples.sort(key=itemgetter(0))
+        for item in tuples:
+            if item[1] == 1:
+                str1 = str1 + ' ' + item[0]
+            else:
+                str1 = str1 + ' {0}$^{{{1}}}$'.format(item[0], item[1])
+        return str1.strip()
+    else:
+        return str(unit)
 
 
 def unit_symbols(expr):
