@@ -114,13 +114,11 @@ def test_remove_variable_from_registry():
 
 def test_markdown():
     """Check markdown representation of units."""
-
     assert markdown(kilogram * meter / second ** 2) == 'kg m s$^{-2}$'
 
 
 def test_generate_metadata_table():
     """Check display of table of units."""
-
     assert generate_metadata_table([E_l, lambda_E]) \
         == [['Symbol', 'Name', 'Description', 'Default value', 'Units'],
             ['$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.',
