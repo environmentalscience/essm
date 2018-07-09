@@ -41,7 +41,7 @@ class ListTable(list):
     >>> table
     [['Column1', 'Column2'], ['1', '2']]
     """
-    
+
     def _repr_html_(self):
         html = ["<table>"]
         for row in self:
