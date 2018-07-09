@@ -37,7 +37,7 @@ class ListTable(list):
     Source: https://calebmadrigal.com/display-list-as-table-in-ipython-notebook
 
     Example:
-    
+
     >>> table = ListTable()
     >>> table.append(['Column1', 'Column2'])
     >>> table.append(['1', '2'])
