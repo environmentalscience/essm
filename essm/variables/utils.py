@@ -31,10 +31,13 @@ from .units import markdown
 class ListTable(list):
     """Override list class to render HTML Table in Jupyter notbook.
 
-    Takes a 2-dimensional list of the form [[1,2,3],[4,5,6]],
-    and renders an HTML Table in IPython Notebook. Source:
-    From: https://calebmadrigal.com/display-list-as-table-in-ipython-notebook
+    Takes a 2-dimensional list of the form ``[[1, 2, 3], [4, 5, 6]],``
+    and renders an HTML Table in IPython Notebook.
+
+    Source: https://calebmadrigal.com/display-list-as-table-in-ipython-notebook
+
     Example:
+    
     >>> table = ListTable()
     >>> table.append(['Column1', 'Column2'])
     >>> table.append(['1', '2'])
@@ -63,8 +66,8 @@ def generate_metadata_table(variables=None, include_header=True):
     table = ListTable()
     variables = variables or Variable.__registry__.keys()
     if include_header:
-        table.append(['Symbol', 'Name', 'Description',
-                      'Default value', 'Units'])
+        table.append(('Symbol', 'Name', 'Description',
+                      'Default value', 'Units'))
 
     for variable in sorted(variables, key=lambda x:
                            x.definition.latex_name.lower()):
@@ -73,8 +76,8 @@ def generate_metadata_table(variables=None, include_header=True):
         doc = variable.__doc__
         val = str(Variable.__defaults__.get(variable, '-'))
 
-        table.append([symbol, name, doc, val,
-                      markdown(variable.definition.unit)])
+        table.append((symbol, name, doc, val,
+                      markdown(variable.definition.unit)))
     return table
 
 
