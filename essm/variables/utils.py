@@ -29,9 +29,9 @@ from .units import markdown
 
 
 class ListTable(list):
-    """ Overridden list class which takes a 2-dimensional list of
-        the form [[1,2,3],[4,5,6]], and renders an HTML Table in
-        IPython Notebook.
+    """ Override list class to render HTML Table in Jupyter notbook.
+        Takes a 2-dimensional list of the form [[1,2,3],[4,5,6]],
+        and renders an HTML Table in IPython Notebook. Source:
         https://calebmadrigal.com/display-list-as-table-in-ipython-notebook/
         Example:
         >>> table = ListTable()
@@ -40,7 +40,6 @@ class ListTable(list):
         >>> table
         [['Column1', 'Column2'], ['1', '2']]
     """
-
     def _repr_html_(self):
         html = ["<table>"]
         for row in self:
