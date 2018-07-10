@@ -6,6 +6,7 @@ import pytest
 from essm.variables import Variable
 from essm.variables.units import derive_unit, joule, kilogram, markdown,\
     meter, second
+from essm.variables.utils import generate_metadata_table
 from sympy import Eq
 
 
@@ -20,6 +21,14 @@ class demo_expression_variable(Variable):
     """Test expression variable."""
 
     expr = 2 * demo_variable
+
+
+class lambda_E(Variable):
+    unit = joule / kilogram
+
+
+class E_l(Variable):
+    unit = joule / (meter ** 2 * second)
 
 
 def test_variable_definition():
@@ -78,15 +87,9 @@ def test_symbolic():
 def test_derive_unit():
     """Test derive_unit from expression."""
 
-    class lambda_E(Variable):
-        unit = joule / kilogram
-
-    class E_l(Variable):
-        unit = joule / (meter ** 2 * second)
-
     assert derive_unit(2 * lambda_E * E_l) \
         == kilogram * meter ** 2 / second ** 5
-    assert derive_unit(E_l/E_l) == 1
+    assert derive_unit(E_l / E_l) == 1
 
     class dimensionless(Variable):
         expr = demo_variable / demo_expression_variable
@@ -111,4 +114,13 @@ def test_remove_variable_from_registry():
 
 def test_markdown():
     """Check markdown representation of units."""
-    assert markdown(kilogram*meter/second**2) == 'kg m s$^{-2}$'
+    assert markdown(kilogram * meter / second ** 2) == 'kg m s$^{-2}$'
+
+
+def test_generate_metadata_table():
+    """Check display of table of units."""
+    assert generate_metadata_table([E_l, lambda_E]) \
+        == [('Symbol', 'Name', 'Description', 'Default value', 'Units'),
+            ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.',
+            '2450000.0', 'J kg$^{-1}$'), ('$E_l$', 'E_l',
+            'Latent heat flux from leaf.', '-', 'J m$^{-2}$ s$^{-1}$')]
