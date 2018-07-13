@@ -17,6 +17,13 @@ class demo_variable(Variable):
     unit = meter
 
 
+class demo_variable1(Variable):
+    """Test variable."""
+
+    default = 1
+    unit = meter
+
+
 class demo_expression_variable(Variable):
     """Test expression variable."""
 
@@ -90,6 +97,8 @@ def test_derive_unit():
     assert derive_unit(2 * lambda_E * E_l) \
         == kilogram * meter ** 2 / second ** 5
     assert derive_unit(E_l / E_l) == 1
+    assert(derive_unit(demo_variable - demo_variable1)) \
+        == meter
 
     class dimensionless(Variable):
         expr = demo_variable / demo_expression_variable
