@@ -124,10 +124,17 @@
     <span class="sd">&quot;&quot;&quot;Derive SI-unit from an expression, omitting scale factors.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
     <span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="k">import</span> <span class="n">extract_variables</span>
+    <span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="k">import</span> <span class="n">Dimension</span>
     <span class="kn">from</span> <span class="nn">sympy.physics.units.dimensions</span> <span class="k">import</span> <span class="n">dimsys_SI</span>
+
     <span class="n">variables</span> <span class="o">=</span> <span class="n">extract_variables</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
-    <span class="n">expr_units</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">Variable</span><span class="o">.</span><span class="n">__units__</span><span class="p">)</span>
-    <span class="n">dim</span> <span class="o">=</span> <span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">expr_units</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">var1</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+        <span class="n">q1</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="s1">&#39;q_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var1</span><span class="p">))</span>
+        <span class="n">q1</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span>
+            <span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
+        <span class="n">q1</span><span class="o">.</span><span class="n">set_scale_factor</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">var1</span><span class="p">:</span> <span class="n">q1</span><span class="p">})</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
         <span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="p">(</span>
             <span class="n">SI_DIMENSIONS</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">**</span> <span class="n">p</span>
@@ -177,9 +184,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">
