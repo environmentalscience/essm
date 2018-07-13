@@ -92,8 +92,6 @@ def derive_unit(expr, name=None):
     from sympy.physics.units import Dimension
     from sympy.physics.units.dimensions import dimsys_SI
 
-    SI_DIMENSIONS = {str(Quantity.get_dimensional_expr(d)):
-                     d for d in SI._base_units}
     variables = extract_variables(expr)
     for var1 in variables:
         q1 = Quantity('q_' + str(var1))
