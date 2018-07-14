@@ -138,6 +138,13 @@ def test_unit_check():
         expr = Eq(x_mol, x_J / x_M / x_K)
 
 
+def test_check_unit():
+    """Make sure that check_unit works with terms that are not equations."""
+
+    assert Variable.check_unit(demo_fall.rhs) == \
+        S(1) / S(2) * demo_g * demo_fall.definition.t ** 2
+
+
 def test_double_registration():
     """Check double registration warning."""
 
