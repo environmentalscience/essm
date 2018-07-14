@@ -2,6 +2,7 @@
 #
 # This file is part of essm.
 # Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2018 LIST (Luxembourg Institute of Science and Technology).
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
