@@ -121,6 +121,18 @@ def test_remove_variable_from_registry():
         del Variable[removable]
 
 
+def test_latex():
+    """Test latex representaiton of variables."""
+
+    from sympy import latex
+
+    class lmbda(Variable):
+        """Test variable."""
+        latex_name = 'L'
+
+    assert latex(lmbda) == 'L'
+
+
 def test_markdown():
     """Check markdown representation of units."""
     assert markdown(kilogram * meter / second ** 2) == 'kg m s$^{-2}$'
