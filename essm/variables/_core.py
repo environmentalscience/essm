@@ -195,6 +195,9 @@ class BaseVariable(Symbol):
     def __doc__(self):
         return self.definition.__doc__
 
+    def _latex(self, printer):
+        return self.definition.latex_name
+
 
 Basic._constructor_postprocessor_mapping[BaseVariable] = {
     "Add": [_Quantity_constructor_postprocessor_Add],
