@@ -59,6 +59,7 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
+
 <span class="kn">from</span> <span class="nn">sympy.core.relational</span> <span class="k">import</span> <span class="n">Eq</span>
 
 <span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">RegistryType</span>
@@ -133,8 +134,8 @@
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="n">expr</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;expr&#39;</span><span class="p">)</span>
 
-            <span class="n">instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">EquationMeta</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span>
-                <span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">EquationMeta</span><span class="p">,</span>
+                             <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
             <span class="n">expr</span> <span class="o">=</span> <span class="n">build_instance_expression</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
             <span class="n">instance</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">BaseEquation</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
             <span class="n">instance</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance</span>
@@ -155,7 +156,8 @@
         <span class="sd">&quot;&quot;&quot;Return equation arguments from registry if exist.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
             <span class="n">Variable</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">BaseVariable</span><span class="p">))</span></div></div>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">BaseVariable</span><span class="p">)</span>
+        <span class="p">)</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">BaseEquation</span><span class="p">(</span><span class="n">Eq</span><span class="p">):</span>

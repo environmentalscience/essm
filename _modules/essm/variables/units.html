@@ -58,20 +58,52 @@
 <span class="kn">import</span> <span class="nn">operator</span>
 
 <span class="kn">import</span> <span class="nn">sympy.physics.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Symbol</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="k">import</span> <span class="n">Dimension</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">find_unit</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.units.dimensions</span> <span class="k">import</span> <span class="p">(</span><span class="n">amount_of_substance</span><span class="p">,</span> <span class="n">capacitance</span><span class="p">,</span>
+                                            <span class="n">charge</span><span class="p">,</span> <span class="n">conductance</span><span class="p">,</span> <span class="n">dimsys_SI</span><span class="p">,</span>
+                                            <span class="n">energy</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span>
+                                            <span class="n">inductance</span><span class="p">,</span> <span class="n">luminous_intensity</span><span class="p">,</span>
+                                            <span class="n">magnetic_density</span><span class="p">,</span> <span class="n">magnetic_flux</span><span class="p">,</span>
+                                            <span class="n">power</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span>
+                                            <span class="n">voltage</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.units.systems</span> <span class="k">import</span> <span class="n">SI</span>
 
+<span class="n">candela</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">candela</span>
+<span class="n">coulomb</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">coulomb</span>
+<span class="n">farad</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">farad</span>
+<span class="n">gray</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">gray</span>
+<span class="n">henry</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">henry</span>
 <span class="n">joule</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">joule</span>
+<span class="n">katal</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">katal</span>
 <span class="n">kelvin</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">kelvin</span>
 <span class="n">kilogram</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">kilogram</span>
+<span class="n">lux</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">lux</span>
 <span class="n">meter</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">meter</span>
-<span class="n">mole</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">mole</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">mole</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">mol</span>
+<span class="n">newton</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">newton</span>
+<span class="n">ohm</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">ohm</span>
 <span class="n">pascal</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">pascal</span>
 <span class="n">second</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">second</span>
+<span class="n">siemens</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">siemens</span>
+<span class="n">tesla</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">tesla</span>
+<span class="n">volt</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">volt</span>
 <span class="n">watt</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">watt</span>
+<span class="n">weber</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">weber</span>
 
-<span class="n">SI_DIMENSIONS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nb">str</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">d</span><span class="p">)):</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">SI</span><span class="o">.</span><span class="n">_base_units</span><span class="p">}</span>
+<span class="n">SI_BASE_DIMENSIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">d</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">SI</span><span class="o">.</span><span class="n">_base_units</span>
+<span class="p">}</span>
+
+<span class="n">SI_EXTENDED_UNITS</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">SI</span><span class="o">.</span><span class="n">_base_units</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span>
+    <span class="n">kelvin</span><span class="p">,</span> <span class="n">candela</span><span class="p">,</span> <span class="n">lux</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">newton</span><span class="p">,</span> <span class="n">pascal</span><span class="p">,</span> <span class="n">joule</span><span class="p">,</span> <span class="n">watt</span><span class="p">,</span> <span class="n">coulomb</span><span class="p">,</span> <span class="n">volt</span><span class="p">,</span>
+    <span class="n">farad</span><span class="p">,</span> <span class="n">ohm</span><span class="p">,</span> <span class="n">siemens</span><span class="p">,</span> <span class="n">weber</span><span class="p">,</span> <span class="n">tesla</span><span class="p">,</span> <span class="n">henry</span>
+<span class="p">]</span>
+<span class="n">SI_EXTENDED_DIMENSIONS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">d</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">SI_EXTENDED_UNITS</span>
+<span class="p">}</span>
 
 
 <div class="viewcode-block" id="markdown"><a class="viewcode-back" href="../../../api.html#essm.variables.markdown">[docs]</a><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
@@ -121,7 +153,16 @@
 
 
 <div class="viewcode-block" id="derive_unit"><a class="viewcode-back" href="../../../api.html#essm.variables.derive_unit">[docs]</a><span class="k">def</span> <span class="nf">derive_unit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Derive SI-unit from an expression, omitting scale factors.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Derive SI unit from an expression, omitting scale factors.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
+    <span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="k">import</span> <span class="n">extract_variables</span>
+
+    <span class="n">dim</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dim</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">SI_EXTENDED_DIMENSIONS</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">derive_baseunit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Derive SI base unit from an expression, omitting scale factors.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
     <span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="k">import</span> <span class="n">extract_variables</span>
     <span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="k">import</span> <span class="n">Dimension</span>
@@ -130,21 +171,24 @@
     <span class="n">variables</span> <span class="o">=</span> <span class="n">extract_variables</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">var1</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
         <span class="n">q1</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="s1">&#39;q_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var1</span><span class="p">))</span>
-        <span class="n">q1</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span><span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span>
-            <span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
+        <span class="n">q1</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span>
+            <span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+        <span class="p">)</span>
         <span class="n">q1</span><span class="o">.</span><span class="n">set_scale_factor</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">var1</span><span class="p">:</span> <span class="n">q1</span><span class="p">})</span>
     <span class="n">dim</span> <span class="o">=</span> <span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
         <span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="p">(</span>
-            <span class="n">SI_DIMENSIONS</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">**</span> <span class="n">p</span>
-            <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">dimsys_SI</span><span class="o">.</span><span class="n">get_dimensional_dependencies</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span>
-        <span class="mi">1</span><span class="p">)</span></div>
+            <span class="n">SI_BASE_DIMENSIONS</span><span class="p">[</span><span class="n">Symbol</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span> <span class="o">**</span> <span class="n">p</span>
+            <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">dimsys_SI</span><span class="o">.</span><span class="n">get_dimensional_dependencies</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">),</span> <span class="mi">1</span>
+    <span class="p">)</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s1">&#39;derive_unit&#39;</span><span class="p">,</span> <span class="s1">&#39;derive_quantity&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span> <span class="s1">&#39;meter&#39;</span><span class="p">,</span> <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_symbols&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span><span class="p">)</span>
+    <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span> <span class="s1">&#39;meter&#39;</span><span class="p">,</span> <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_symbols&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span>
+<span class="p">)</span>
 </pre></div>
 
           </div>
