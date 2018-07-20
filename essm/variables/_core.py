@@ -25,16 +25,16 @@ from __future__ import absolute_import
 import warnings
 
 import six
+
 from sympy import Abs, Add, Basic, Derivative, Function, Mul, Pow, S, Symbol
-from sympy.physics.units import convert_to, Dimension, Quantity
-from sympy.physics.units.dimensions import dimsys_SI, dimsys_default
+from sympy.physics.units import Dimension, Quantity, convert_to
+from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
 from sympy.physics.units.quantities import \
     _Quantity_constructor_postprocessor_Add
 
-from .units import derive_unit
-
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
+from .units import derive_unit
 
 
 class VariableMeta(RegistryType):
@@ -66,9 +66,11 @@ class VariableMeta(RegistryType):
                 instance.expr, instance.unit = definition, unit
 
                 dim_derived = dimsys_SI.get_dimensional_dependencies(
-                    Quantity.get_dimensional_expr(derived_unit))
+                    Quantity.get_dimensional_expr(derived_unit)
+                )
                 dim_unit = dimsys_SI.get_dimensional_dependencies(
-                    Quantity.get_dimensional_expr(unit))
+                    Quantity.get_dimensional_expr(unit)
+                )
                 if dim_derived != dim_unit:
                     raise ValueError(
                         'Invalid expression units {0} should be {1}'.format(
@@ -131,7 +133,7 @@ class Variable(object):
         elif isinstance(expr, Derivative):
             dim = Variable.get_dimensional_expr(expr.expr)
             for independent, count in expr.variable_count:
-                dim /= Variable.get_dimensional_expr(independent)**count
+                dim /= Variable.get_dimensional_expr(independent) ** count
             return dim
         elif isinstance(expr, Function):
             args = [Variable.get_dimensional_expr(arg) for arg in expr.args]
@@ -189,10 +191,7 @@ class BaseVariable(Symbol):
             **assumptions
     ):
         self = super(BaseVariable, cls).__new__(
-            cls,
-            name,
-            abbrev=abbrev,
-            **assumptions
+            cls, name, abbrev=abbrev, **assumptions
         )
         # self.set_dimension(dimension, unit_system=unit_system)
         # self.set_scale_factor(scale_factor)

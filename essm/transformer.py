@@ -56,7 +56,9 @@ class Numbers(ast.NodeTransformer):
                 args=[ast.Str(str(node.n))],
                 keywords=[],
                 starargs=None,
-                kwargs=None, ), node)
+                kwargs=None,
+            ), node
+        )
 
 
 class ClassDef(ast.NodeVisitor):

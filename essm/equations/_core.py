@@ -24,6 +24,7 @@ from __future__ import absolute_import
 import warnings
 
 import six
+
 from sympy.core.relational import Eq
 
 from ..bases import RegistryType
@@ -98,8 +99,8 @@ class EquationMeta(RegistryType):
             dct.setdefault('name', name)
             expr = dct.pop('expr')
 
-            instance = super(EquationMeta, cls).__new__(
-                cls, name, parents, dct)
+            instance = super(EquationMeta,
+                             cls).__new__(cls, name, parents, dct)
             expr = build_instance_expression(instance, expr)
             instance.expr = expr = BaseEquation(instance, expr)
             instance[expr] = instance
@@ -120,7 +121,8 @@ class Equation(object):
         """Return equation arguments from registry if exist."""
         return tuple(
             Variable.__registry__.get(arg, arg)
-            for arg in cls.expr.atoms(BaseVariable))
+            for arg in cls.expr.atoms(BaseVariable)
+        )
 
 
 class BaseEquation(Eq):

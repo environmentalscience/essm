@@ -84,4 +84,13 @@ class S_s(Variable):
 
 
 __all__ = (
-    'alpha_l', 'R_d', 'R_la', 'R_ld', 'R_lu', 'R_u', 'S_a', 'S_b', 'S_s', )
+    'alpha_l',
+    'R_d',
+    'R_la',
+    'R_ld',
+    'R_lu',
+    'R_u',
+    'S_a',
+    'S_b',
+    'S_s',
+)

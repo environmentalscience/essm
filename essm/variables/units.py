@@ -25,12 +25,14 @@ import operator
 import sympy.physics.units as u
 from sympy import Symbol
 from sympy.physics.units import Dimension, Quantity, find_unit
+from sympy.physics.units.dimensions import (amount_of_substance, capacitance,
+                                            charge, conductance, dimsys_SI,
+                                            energy, force, frequency,
+                                            inductance, luminous_intensity,
+                                            magnetic_density, magnetic_flux,
+                                            power, pressure, temperature, time,
+                                            voltage)
 from sympy.physics.units.systems import SI
-from sympy.physics.units.dimensions import (
-    dimsys_SI, amount_of_substance, luminous_intensity, temperature,
-    frequency, force, pressure, energy, power, charge, voltage,
-    capacitance, conductance, magnetic_flux, magnetic_density,
-    inductance, luminous_intensity, time)
 
 candela = u.candela
 coulomb = u.coulomb
@@ -55,15 +57,17 @@ watt = u.watt
 weber = u.weber
 
 SI_BASE_DIMENSIONS = {
-    Quantity.get_dimensional_expr(d): d for d in SI._base_units}
+    Quantity.get_dimensional_expr(d): d
+    for d in SI._base_units
+}
 
 SI_EXTENDED_UNITS = list(SI._base_units) + [
-    kelvin, candela, lux, mol, newton, pascal,
-    joule, watt, coulomb, volt, farad, ohm, siemens, weber, tesla,
-    henry
+    kelvin, candela, lux, mol, newton, pascal, joule, watt, coulomb, volt,
+    farad, ohm, siemens, weber, tesla, henry
 ]
 SI_EXTENDED_DIMENSIONS = {
-    Quantity.get_dimensional_expr(d): d for d in SI_EXTENDED_UNITS
+    Quantity.get_dimensional_expr(d): d
+    for d in SI_EXTENDED_UNITS
 }
 
 
@@ -132,18 +136,21 @@ def derive_baseunit(expr, name=None):
     variables = extract_variables(expr)
     for var1 in variables:
         q1 = Quantity('q_' + str(var1))
-        q1.set_dimension(Dimension(Quantity.get_dimensional_expr(
-            var1.definition.unit)))
+        q1.set_dimension(
+            Dimension(Quantity.get_dimensional_expr(var1.definition.unit))
+        )
         q1.set_scale_factor(var1.definition.unit)
         expr = expr.xreplace({var1: q1})
     dim = Dimension(Quantity.get_dimensional_expr(expr))
     return functools.reduce(
         operator.mul, (
             SI_BASE_DIMENSIONS[Symbol(d)] ** p
-            for d, p in dimsys_SI.get_dimensional_dependencies(dim).items()),
-        1)
+            for d, p in dimsys_SI.get_dimensional_dependencies(dim).items()
+        ), 1
+    )
 
 
 __all__ = (
     'derive_unit', 'derive_quantity', 'markdown', 'joule', 'kelvin',
-    'kilogram', 'meter', 'mole', 'pascal', 'second', 'unit_symbols', 'watt')
+    'kilogram', 'meter', 'mole', 'pascal', 'second', 'unit_symbols', 'watt'
+)

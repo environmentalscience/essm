@@ -24,12 +24,14 @@ from __future__ import division
 from essm import Eq, e
 from essm.equations import Equation
 from essm.variables import Variable
-from essm.variables.leaf.energy_water import (
-    C_wl, E_l, E_lmol, Gr, H_l, L_l, P_wl, R_ll, T_l, T_w, a_s, a_sh,
-    epsilon_l, g_bw, g_sw, g_tw, g_twmol, h_c, rho_al)
-from essm.variables.physics.thermodynamics import (
-    C_wa, Le, M_w, Nu, P_a, P_wa, R_mol, R_s, Re, T_a, c_pa, g, k_a, lambda_E,
-    nu_a, rho_a, sigm, v_w)
+from essm.variables.leaf.energy_water import (C_wl, E_l, E_lmol, Gr, H_l, L_l,
+                                              P_wl, R_ll, T_l, T_w, a_s, a_sh,
+                                              epsilon_l, g_bw, g_sw, g_tw,
+                                              g_twmol, h_c, rho_al)
+from essm.variables.physics.thermodynamics import (C_wa, Le, M_w, Nu, P_a,
+                                                   P_wa, R_mol, R_s, Re, T_a,
+                                                   c_pa, g, k_a, lambda_E,
+                                                   nu_a, rho_a, sigm, v_w)
 from essm.variables.units import kelvin, pascal
 
 
@@ -130,7 +132,8 @@ class eq_Pwl(Equation):
         default = 273.
 
     expr = Eq(
-        P_wl, p_CC1 * e ** (-M_w * lambda_E * (1 / T_l - 1 / p_CC2) / R_mol))
+        P_wl, p_CC1 * e ** (-M_w * lambda_E * (1 / T_l - 1 / p_CC2) / R_mol)
+    )
 
 
 class eq_Elmol_conv(Equation):
@@ -151,7 +154,8 @@ class eq_gtwmol_gtw(eq_Elmol.definition, eq_Cwl.definition,
 
     expr = Eq(
         g_twmol, -(P_a * P_wl * T_a - P_a * P_wa * T_l) * g_tw /
-        ((P_wa - P_wl) * R_mol * T_a * T_l))
+        ((P_wa - P_wl) * R_mol * T_a * T_l)
+    )
 
 
 class eq_gtwmol_gtw_iso(eq_gtwmol_gtw.definition):
@@ -188,6 +192,19 @@ class eq_Gr(Equation):
 
 
 __all__ = (
-    'eq_Rs_enbal', 'eq_Rll', 'eq_Hl', 'eq_El', 'eq_Elmol', 'eq_gtw',
-    'eq_gbw_hc', 'eq_Cwl', 'eq_Pwl', 'eq_Elmol_conv', 'eq_gtwmol_gtw',
-    'eq_gtwmol_gtw_iso', 'eq_hc', 'eq_Re', 'eq_Gr', )
+    'eq_Rs_enbal',
+    'eq_Rll',
+    'eq_Hl',
+    'eq_El',
+    'eq_Elmol',
+    'eq_gtw',
+    'eq_gbw_hc',
+    'eq_Cwl',
+    'eq_Pwl',
+    'eq_Elmol_conv',
+    'eq_gtwmol_gtw',
+    'eq_gtwmol_gtw_iso',
+    'eq_hc',
+    'eq_Re',
+    'eq_Gr',
+)
