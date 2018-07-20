@@ -4,8 +4,8 @@
 import pytest
 
 from essm.variables import Variable
-from essm.variables.units import (
-    derive_baseunit, derive_unit, joule, kilogram, markdown, meter, second)
+from essm.variables.units import (derive_baseunit, derive_unit, joule,
+                                  kilogram, markdown, meter, second)
 from essm.variables.utils import generate_metadata_table
 from sympy import Eq
 

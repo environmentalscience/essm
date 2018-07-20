@@ -16,15 +16,17 @@
 import os
 import sys
 
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-sys.path.insert(0, os.path.abspath('..'))
-
 from sphinx.domains.python import PyModulelevel
 from sphinx.ext.autodoc import AutoDirective, ClassDocumenter
 
 from essm.equations._core import BaseEquation
 from essm.variables._core import BaseVariable
+
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
+sys.path.insert(0, os.path.abspath('..'))
+
+
 
 
 class BaseDocumenter(ClassDocumenter):
@@ -90,17 +92,12 @@ suppress_warnings = ['image.nonlocal_uri', 'ref.citation']
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['matplotlib.sphinxext.plot_directive',
-              'sphinxcontrib.bibtex',
-              'sphinx.ext.autodoc',
-              'sphinx.ext.autosummary',
-              'sphinx.ext.doctest',
-              'sphinx.ext.intersphinx',
-              'sphinx.ext.todo',
-              'sphinx.ext.coverage',
-              'sphinx.ext.mathjax',
-              'sphinx.ext.viewcode',
-              'sphinx.ext.githubpages']
+extensions = [
+    'matplotlib.sphinxext.plot_directive', 'sphinxcontrib.bibtex',
+    'sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'sphinx.ext.doctest',
+    'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.coverage',
+    'sphinx.ext.mathjax', 'sphinx.ext.viewcode', 'sphinx.ext.githubpages'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -127,8 +124,7 @@ author = 'Stan Schymanski'
 
 # Get the version string. Cannot be done with import!
 g = {}
-with open(os.path.join(os.path.dirname(__file__), '..',
-                       'essm', 'version.py'),
+with open(os.path.join(os.path.dirname(__file__), '..', 'essm', 'version.py'),
           'rt') as fp:
     exec(fp.read(), g)
     version = g['__version__']
@@ -154,7 +150,6 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
-
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -167,8 +162,9 @@ html_theme = 'alabaster'
 # documentation.
 #
 html_theme_options = {
-    'description': 'This package contains helpers to deal with physical variables '
-                   'and units.',
+    'description':
+        'This package contains helpers to deal with physical variables '
+        'and units.',
     'github_user': 'environmentalscience',
     'github_repo': 'essm',
     'github_button': False,
@@ -201,7 +197,6 @@ html_sidebars = {
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'ESSMdoc'
 
-
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
@@ -226,20 +221,17 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'ESSM.tex', 'ESSM Documentation',
-     'Stan Schymanski', 'manual'),
+    (
+        master_doc, 'ESSM.tex', 'ESSM Documentation', 'Stan Schymanski',
+        'manual'
+    ),
 ]
-
 
 # -- Options for manual page output ---------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'essm', 'ESSM Documentation',
-     [author], 1)
-]
-
+man_pages = [(master_doc, 'essm', 'ESSM Documentation', [author], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 
@@ -247,11 +239,11 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'ESSM', 'ESSM Documentation',
-     author, 'ESSM', 'One line description of project.',
-     'Miscellaneous'),
+    (
+        master_doc, 'ESSM', 'ESSM Documentation', author, 'ESSM',
+        'One line description of project.', 'Miscellaneous'
+    ),
 ]
-
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}

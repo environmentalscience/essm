@@ -34,8 +34,10 @@ class RegistryType(type):
                 '"{0}" will be overridden by "{1}"'.format(
                     cls.__registry__[expr].__module__ + ':' +
                     cls.__registry__[expr].name,
-                    definition.__module__ + ':' + str(cls), ),
-                stacklevel=2)
+                    definition.__module__ + ':' + str(cls),
+                ),
+                stacklevel=2
+            )
         cls.__registry__[expr] = definition
 
     def __delitem__(cls, expr):
@@ -43,8 +45,10 @@ class RegistryType(type):
         if expr in cls.__registry__:
             warnings.warn(
                 '"{0}" will be unregistered.'.format(
-                    cls.__registry__[expr].__module__),
-                stacklevel=2)
+                    cls.__registry__[expr].__module__
+                ),
+                stacklevel=2
+            )
             del cls.__registry__[expr]
         else:
             raise KeyError(expr)

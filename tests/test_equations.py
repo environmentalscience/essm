@@ -2,16 +2,16 @@
 """Test equations."""
 
 import pytest
-from sympy import Derivative, S, Symbol, solve
-from sympy.physics.units import Quantity, length, meter
 
 from essm import Eq
 from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import joule, kelvin, meter, mole, second
-from essm.variables.utils import extract_variables, replace_variables,\
-     replace_defaults
+from essm.variables.utils import (extract_variables, replace_defaults,
+                                  replace_variables)
+from sympy import Derivative, S, Symbol, solve
+from sympy.physics.units import Quantity, length, meter
 
 
 class demo_g(Variable):
@@ -36,7 +36,7 @@ class demo_d1(Variable):
 class demo_v(Variable):
     """Test variable."""
 
-    unit = meter/second
+    unit = meter / second
 
 
 class demo_fall(Equation):
@@ -51,8 +51,8 @@ class demo_fall(Equation):
 def test_equation():
     """Test variable definition."""
     assert demo_fall.__doc__ == demo_fall.definition.__doc__
-    assert demo_fall.subs(Variable.__defaults__).evalf(
-        subs={demo_fall.definition.t: 1}) == 4.9
+    assert demo_fall.subs(Variable.__defaults__
+                          ).evalf(subs={demo_fall.definition.t: 1}) == 4.9
 
 
 def test_units():
@@ -69,6 +69,7 @@ def test_units():
 
 def test_units_derivative():
     """Check units of derivative."""
+
     class valid_units(Equation):
 
         expr = Eq(demo_v, Derivative(demo_d, demo_fall.definition.t))
@@ -84,8 +85,9 @@ def test_integral():
     """Test that variables can be used as integration symbols."""
     from sympy import integrate
 
-    assert demo_g * demo_fall.definition.t**S(3) / S(6) == integrate(
-        demo_fall.rhs, demo_fall.definition.t)
+    assert demo_g * demo_fall.definition.t ** S(3) / S(6) == integrate(
+        demo_fall.rhs, demo_fall.definition.t
+    )
 
 
 def test_args():
@@ -93,7 +95,8 @@ def test_args():
     assert set(demo_fall.definition.args()) == {
         demo_g.definition,
         demo_d.definition,
-        demo_fall.definition.t.definition, }
+        demo_fall.definition.t.definition,
+    }
 
 
 def test_variable_extraction():
@@ -174,9 +177,10 @@ def test_double_registration():
 def test_solve():
     """Check that equation solving works"""
 
-    demo_d2 = type('demo_d2', (Variable,), {'unit': meter})
-    assert solve(10 ** 6 * demo_d1 - 0.031e6 * demo_d + 0.168 *
-                 demo_d2, demo_d1) == [0.031*demo_d - 1.68e-7*demo_d2]
+    demo_d2 = type('demo_d2', (Variable, ), {'unit': meter})
+    assert solve(
+        10 ** 6 * demo_d1 - 0.031e6 * demo_d + 0.168 * demo_d2, demo_d1
+    ) == [0.031 * demo_d - 1.68e-7 * demo_d2]
 
 
 @pytest.mark.skip(reason="needs rewrite for SymPy")
@@ -195,10 +199,13 @@ def test_equation_writer(tmpdir):
             "name": "d",
             "value": '0.9',
             "units": meter,
-            "latexname": 'p_1'}, {
-                "name": "t",
-                "units": second,
-                "latexname": 'p_2'}])
+            "latexname": 'p_1'
+        }, {
+            "name": "t",
+            "units": second,
+            "latexname": 'p_2'
+        }]
+    )
     eq_file = tmpdir.mkdir('test').join('test_equations.py')
     writer_td.write(eq_file.strpath)
     execfile(eq_file.strpath, g)
@@ -215,23 +222,28 @@ def test_equation_writer_linebreaks(tmpdir):
     writer_td.eq(
         'eq_Le',
         Eq(Le, alpha_a / D_va),
-        doc='Le as function of alpha_a and D_va.')
+        doc='Le as function of alpha_a and D_va.'
+    )
     writer_td.eq(
         'eq_Cwa',
         Eq(C_wa, P_wa / (R_mol * T_a)),
-        doc='C_wa as a function of P_wa and T_a.')
+        doc='C_wa as a function of P_wa and T_a.'
+    )
     writer_td.eq(
         'eq_rhoa_Pwa_Ta',
         Eq(rho_a, (M_w * P_wa + M_N2 * P_N2 + M_O2 * P_O2) / (R_mol * T_a)),
-        doc='rho_a as a function of P_wa and T_a.')
+        doc='rho_a as a function of P_wa and T_a.'
+    )
     writer_td.eq(
         'eq_Pa',
         Eq(P_a, P_N2 + P_O2 + P_wa),
-        doc='Calculate air pressure from partial pressures.')
+        doc='Calculate air pressure from partial pressures.'
+    )
     writer_td.eq(
         'eq_PN2_PO2',
         Eq(P_N2, x_N2 / x_O2 * P_O2),
-        doc='Calculate P_N2 as a function of P_O2')
+        doc='Calculate P_N2 as a function of P_O2'
+    )
 
     eq_file = tmpdir.mkdir('test').join('test_equations.py')
     writer_td.write(eq_file.strpath)

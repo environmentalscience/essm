@@ -75,4 +75,7 @@ from __future__ import absolute_import
 from ._core import Variable
 from .units import unit_symbols
 
-__all__ = ('unit_symbols', 'Variable', )
+__all__ = (
+    'unit_symbols',
+    'Variable',
+)
