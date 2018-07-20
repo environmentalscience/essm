@@ -80,7 +80,9 @@ class {name}(Variable):
 # CONSTANTS = re.compile(r'\b(e|pi)\b')
 _IMPORTS = re.compile(
     r'\b({0})\b'.format(
-        '|'.join(name for name in dir(essm) if not name.startswith('_'))))
+        '|'.join(name for name in dir(essm) if not name.startswith('_'))
+    )
+)
 """Regular expression to find specific constants and functions."""
 
 
@@ -108,13 +110,15 @@ def create_module(name, doc=None, folder=None, overwrite=False):
 
     if os.path.isfile(init_path):
         logger.info(
-            '{0} already exists. Use `overwrite=True` to overwrite.'.format(
-                init_path))
+            '{0} already exists. Use `overwrite=True` to overwrite.'.
+            format(init_path)
+        )
 
     if overwrite or not os.path.isfile(init_path):
         with open(init_path, 'w') as file_out:
             file_out.write(
-                LICENSE_TPL.format(year=datetime.datetime.now().year))
+                LICENSE_TPL.format(year=datetime.datetime.now().year)
+            )
             file_out.write('"""{0}"""\n'.format(doc))
         logger.debug('Created file {0}.'.format(init_path))
 
@@ -133,7 +137,8 @@ class VariableWriter(object):
     TPL = VARIABLE_TPL
     LICENSE_TPL = LICENSE_TPL
     default_imports = {
-        'essm.variables': {'Variable'}, }
+        'essm.variables': {'Variable'},
+    }
 
     def __init__(self, docstring=None):
         """Initialize variable writer."""
@@ -147,22 +152,27 @@ class VariableWriter(object):
         """Yield used imports."""
         for key, values in sorted(self._imports.items()):
             yield 'from {key} import {names}'.format(
-                key=key, names=', '.join(sorted(values)))
+                key=key, names=', '.join(sorted(values))
+            )
 
     def __str__(self):
         """Serialize itself to string."""
         result = ''
         if self.docstring:
             result += self.LICENSE_TPL.format(
-                year=datetime.datetime.now().year)
+                year=datetime.datetime.now().year
+            )
             result += '"""' + self.docstring + '"""\n\n'
             result += '\n'.join(self.imports) + '\n'
         result += '\n\n'.join(
-            self.TPL.format(**var).replace('^', '**') for var in self.vars)
+            self.TPL.format(**var).replace('^', '**') for var in self.vars
+        )
         if self.docstring:
             result += '\n\n__all__ = (\n{0}\n)'.format(
                 '\n'.join(
-                    "    '{0}',".format(var['name']) for var in self.vars))
+                    "    '{0}',".format(var['name']) for var in self.vars
+                )
+            )
             result = _lint_content(result)
         return result
 
@@ -173,7 +183,8 @@ class VariableWriter(object):
             units=None,
             domain='real',
             latexname=None,
-            value=None):
+            value=None
+    ):
         """Add new variable."""
         if not latexname:
             latexname = name
@@ -183,15 +194,16 @@ class VariableWriter(object):
             default = 'default = ' + str(value)
             # Skip trailing zeroes from real numbers only
             if isinstance(value, type(0.1)):
-                default = 'default = ' + value.str(skip_zeroes=True).replace(
-                    '^', '**')
+                default = 'default = ' + value.str(skip_zeroes=True
+                                                   ).replace('^', '**')
         context = {
             "name": name,
             "doc": doc,
             "units": str(units).replace('^', '**') if units else '1/1',
             "domain": domain,
             "latexname": latexname,
-            "default": default}
+            "default": default
+        }
         self.vars.append(context)
 
         # register all imports of units
@@ -239,7 +251,8 @@ class EquationWriter(object):
     LICENSE_TPL = LICENSE_TPL
     default_imports = {
         '__future__': {'division'},
-        'essm.equations': {'Equation'}}
+        'essm.equations': {'Equation'}
+    }
     """Set up default imports, including standard division."""
 
     def __init__(self, docstring=None):
@@ -254,20 +267,24 @@ class EquationWriter(object):
         """Yield registered imports."""
         for key, values in sorted(self._imports.items()):
             yield 'from {key} import {names}'.format(
-                key=key, names=', '.join(sorted(values)))
+                key=key, names=', '.join(sorted(values))
+            )
 
     def __str__(self):
         """Return string representation."""
         result = ''
         if self.docstring:
             result += self.LICENSE_TPL.format(
-                year=datetime.datetime.now().year)
+                year=datetime.datetime.now().year
+            )
             result += '"""' + self.docstring + '"""\n\n'
         result += '\n'.join(self.imports) + '\n'
         result += '\n'.join(
-            self.TPL.format(**eq).replace('^', '**') for eq in self.eqs)
+            self.TPL.format(**eq).replace('^', '**') for eq in self.eqs
+        )
         result += '\n\n__all__ = (\n{0}\n)'.format(
-            '\n'.join("    '{0}',".format(eq['name']) for eq in self.eqs))
+            '\n'.join("    '{0}',".format(eq['name']) for eq in self.eqs)
+        )
         reformatted_result = _lint_content(result)
         return reformatted_result
 
@@ -293,7 +310,8 @@ class EquationWriter(object):
                 r'^',
                 4 * ' ',
                 str(writer),
-                flags=re.MULTILINE, )
+                flags=re.MULTILINE,
+            )
 
             # Merge all imports from variables (units, Variable).
             for key, value in writer._imports.items():
@@ -309,7 +327,8 @@ class EquationWriter(object):
             "doc": doc,
             "expr": expr,
             "parents": parents,
-            "variables": variables, }
+            "variables": variables,
+        }
         self.eqs.append(context)
 
         # register all imports
@@ -317,7 +336,8 @@ class EquationWriter(object):
             if str(arg) not in internal_variables and\
                     arg in Variable.__registry__:
                 self._imports[Variable.__registry__[arg].__module__].add(
-                    str(arg))
+                    str(arg)
+                )
 
         for match in re.finditer(_IMPORTS, str(expr)) or []:
             self._imports['essm'].add(match.group())

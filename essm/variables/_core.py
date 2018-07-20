@@ -2,6 +2,7 @@
 #
 # This file is part of essm.
 # Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2018 LIST (Luxembourg Institute of Science and Technology).
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -24,16 +25,16 @@ from __future__ import absolute_import
 import warnings
 
 import six
+
 from sympy import Abs, Add, Basic, Derivative, Function, Mul, Pow, S, Symbol
-from sympy.physics.units import Dimension, Quantity
-from sympy.physics.units.dimensions import dimsys_default
+from sympy.physics.units import Dimension, Quantity, convert_to
+from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
 from sympy.physics.units.quantities import \
     _Quantity_constructor_postprocessor_Add
 
-from .units import derive_unit
-
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
+from .units import derive_unit
 
 
 class VariableMeta(RegistryType):
@@ -62,9 +63,15 @@ class VariableMeta(RegistryType):
 
                 if unit == S.One:
                     unit = derived_unit  # only if unit is None
-                instance.expr, instance.unit = definition, derived_unit
+                instance.expr, instance.unit = definition, unit
 
-                if unit != instance.unit:
+                dim_derived = dimsys_SI.get_dimensional_dependencies(
+                    Quantity.get_dimensional_expr(derived_unit)
+                )
+                dim_unit = dimsys_SI.get_dimensional_dependencies(
+                    Quantity.get_dimensional_expr(unit)
+                )
+                if dim_derived != dim_unit:
                     raise ValueError(
                         'Invalid expression units {0} should be {1}'.format(
                             instance.unit, unit
@@ -89,7 +96,7 @@ class VariableMeta(RegistryType):
                 instance.__defaults__[expr] = dct['default']
 
             # Store unit for each variable:
-            instance.__units__[expr] = instance.unit
+            instance.__units__[expr] = unit
 
             return expr
 
@@ -116,6 +123,7 @@ class Variable(object):
     @staticmethod
     def get_dimensional_expr(expr):
         """Return dimensions of expression."""
+        expr = Variable.check_unit(expr)
         if isinstance(expr, Mul):
             return Mul(*[Variable.get_dimensional_expr(i) for i in expr.args])
         elif isinstance(expr, Pow):
@@ -125,7 +133,7 @@ class Variable(object):
         elif isinstance(expr, Derivative):
             dim = Variable.get_dimensional_expr(expr.expr)
             for independent, count in expr.variable_count:
-                dim /= Variable.get_dimensional_expr(independent)**count
+                dim /= Variable.get_dimensional_expr(independent) ** count
             return dim
         elif isinstance(expr, Function):
             args = [Variable.get_dimensional_expr(arg) for arg in expr.args]
@@ -145,6 +153,8 @@ class Variable(object):
         Checks for dimension mismatches of the addends, thus preventing
         expressions like `meter + second` to be created.
         """
+        if not expr.is_Add or expr.is_Equality:
+            return expr
         deset = {
             tuple(
                 sorted(
@@ -181,10 +191,7 @@ class BaseVariable(Symbol):
             **assumptions
     ):
         self = super(BaseVariable, cls).__new__(
-            cls,
-            name,
-            abbrev=abbrev,
-            **assumptions
+            cls, name, abbrev=abbrev, **assumptions
         )
         # self.set_dimension(dimension, unit_system=unit_system)
         # self.set_scale_factor(scale_factor)

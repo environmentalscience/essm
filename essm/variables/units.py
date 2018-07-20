@@ -23,20 +23,52 @@ import functools
 import operator
 
 import sympy.physics.units as u
+from sympy import Symbol
 from sympy.physics.units import Dimension, Quantity, find_unit
+from sympy.physics.units.dimensions import (amount_of_substance, capacitance,
+                                            charge, conductance, dimsys_SI,
+                                            energy, force, frequency,
+                                            inductance, luminous_intensity,
+                                            magnetic_density, magnetic_flux,
+                                            power, pressure, temperature, time,
+                                            voltage)
 from sympy.physics.units.systems import SI
 
+candela = u.candela
+coulomb = u.coulomb
+farad = u.farad
+gray = u.gray
+henry = u.henry
 joule = u.joule
+katal = u.katal
 kelvin = u.kelvin
 kilogram = u.kilogram
+lux = u.lux
 meter = u.meter
-mole = u.mole
+mol = mole = u.mol
+newton = u.newton
+ohm = u.ohm
 pascal = u.pascal
 second = u.second
+siemens = u.siemens
+tesla = u.tesla
+volt = u.volt
 watt = u.watt
+weber = u.weber
 
-SI_DIMENSIONS = {
-    str(Quantity.get_dimensional_expr(d)): d for d in SI._base_units}
+SI_BASE_DIMENSIONS = {
+    Quantity.get_dimensional_expr(d): d
+    for d in SI._base_units
+}
+
+SI_EXTENDED_UNITS = list(SI._base_units) + [
+    kelvin, candela, lux, mol, newton, pascal, joule, watt, coulomb, volt,
+    farad, ohm, siemens, weber, tesla, henry
+]
+SI_EXTENDED_DIMENSIONS = {
+    Quantity.get_dimensional_expr(d): d
+    for d in SI_EXTENDED_UNITS
+}
 
 
 def markdown(unit):
@@ -86,7 +118,16 @@ def derive_quantity(expr, name=None):
 
 
 def derive_unit(expr, name=None):
-    """Derive SI-unit from an expression, omitting scale factors."""
+    """Derive SI unit from an expression, omitting scale factors."""
+    from essm.variables import Variable
+    from essm.variables.utils import extract_variables
+
+    dim = Variable.get_dimensional_expr(expr)
+    return dim.subs(SI_EXTENDED_DIMENSIONS)
+
+
+def derive_baseunit(expr, name=None):
+    """Derive SI base unit from an expression, omitting scale factors."""
     from essm.variables import Variable
     from essm.variables.utils import extract_variables
     from sympy.physics.units import Dimension
@@ -95,18 +136,21 @@ def derive_unit(expr, name=None):
     variables = extract_variables(expr)
     for var1 in variables:
         q1 = Quantity('q_' + str(var1))
-        q1.set_dimension(Dimension(Quantity.get_dimensional_expr(
-            var1.definition.unit)))
+        q1.set_dimension(
+            Dimension(Quantity.get_dimensional_expr(var1.definition.unit))
+        )
         q1.set_scale_factor(var1.definition.unit)
         expr = expr.xreplace({var1: q1})
     dim = Dimension(Quantity.get_dimensional_expr(expr))
     return functools.reduce(
         operator.mul, (
-            SI_DIMENSIONS[d] ** p
-            for d, p in dimsys_SI.get_dimensional_dependencies(dim).items()),
-        1)
+            SI_BASE_DIMENSIONS[Symbol(d)] ** p
+            for d, p in dimsys_SI.get_dimensional_dependencies(dim).items()
+        ), 1
+    )
 
 
 __all__ = (
     'derive_unit', 'derive_quantity', 'markdown', 'joule', 'kelvin',
-    'kilogram', 'meter', 'mole', 'pascal', 'second', 'unit_symbols', 'watt')
+    'kilogram', 'meter', 'mole', 'pascal', 'second', 'unit_symbols', 'watt'
+)

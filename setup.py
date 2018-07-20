@@ -43,16 +43,14 @@ extras_require = {
         'matplotlib>=1.5.1',
         'sphinxcontrib-bibtex>=0.3.5',
     ],
-    'generator': [
-        'yapf>=0.16.2',
-    ],
-    'tests': tests_require,
+    'generator': ['yapf>=0.16.2', ],
+    'tests':
+        tests_require,
 }
 
 extras_require['all'] = []
 for reqs in extras_require.values():
     extras_require['all'].extend(reqs)
-
 
 setup_requires = [
     'pytest-runner>=2.6.2',
@@ -64,7 +62,6 @@ install_requires = [
 ]
 
 packages = find_packages()
-
 
 # Get the version string. Cannot be done with import!
 g = {}
