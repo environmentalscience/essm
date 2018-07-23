@@ -237,6 +237,9 @@
     <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="vm">__doc__</span>
 
+    <span class="k">def</span> <span class="nf">_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printer</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">latex_name</span>
+
 
 <span class="n">Basic</span><span class="o">.</span><span class="n">_constructor_postprocessor_mapping</span><span class="p">[</span><span class="n">BaseVariable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;Add&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">_Quantity_constructor_postprocessor_Add</span><span class="p">],</span>
