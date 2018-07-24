@@ -51,6 +51,7 @@ class demo_fall(Equation):
 def test_equation():
     """Test variable definition."""
     assert demo_fall.__doc__ == demo_fall.definition.__doc__
+
     assert demo_fall.rhs.subs(Variable.__defaults__
                               ).evalf(subs={demo_fall.definition.t: 1}) == 4.9
 
