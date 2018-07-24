@@ -141,5 +141,19 @@ class BaseEquation(Eq):
     def __doc__(self):
         return self.definition.__doc__
 
+    def subs(self, *args, **kwargs):  # should mirror core.basic.subs
+        """Return a new equation with subs applied to both sides.
+
+        Examples
+        ========
+
+        >>> from essm.equations.physics.thermodynamics import eq_Pa
+        >>> from essm.variables.physics.thermodynamics import P_N2, P_O2
+        >>> eq_Pa.subs({P_N2: P_O2})
+        Eq(P_a, 2*P_O2 + P_wa)
+        """
+        return Eq(self.lhs.subs(*args, **kwargs),
+                  self.rhs.subs(*args, **kwargs))
+
 
 __all__ = ('Equation', 'EquationMeta')
