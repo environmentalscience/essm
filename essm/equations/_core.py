@@ -142,7 +142,7 @@ class BaseEquation(Eq):
     def __doc__(self):
         return self.definition.__doc__
 
-    def subs(self, *args, **kwargs):  # should mirror core.basic.subs
+    def subs(self, *args, **kwargs):  # should mirror sympy.core.basic.subs
         """Return a new equation with subs applied to both sides.
 
         Examples
