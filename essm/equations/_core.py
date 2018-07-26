@@ -148,12 +148,19 @@ class BaseEquation(Eq):
         Examples
         ========
 
-        >>> from essm.equations.physics.thermodynamics import eq_Pa
+        >>> from essm.equations.physics.thermodynamics import eq_Pa, eq_PN2_PO2
         >>> from essm.variables.physics.thermodynamics import P_N2, P_O2
         >>> eq_Pa.subs({P_N2: P_O2})
         Eq(P_a, 2*P_O2 + P_wa)
-        
+        >>> eq_Pa.subs(eq_PN2_PO2)
+        Eq(P_a, P_O2*x_N2/x_O2 + P_O2 + P_wa)
+
         """
+        if len(args) == 1:
+            if isinstance(args[0], BaseEquation):
+                arg1 = {args[0].lhs: args[0].rhs}
+                return Eq(self.lhs.subs(arg1, **kwargs),
+                          self.rhs.subs(arg1, **kwargs))
         return Eq(self.lhs.subs(*args, **kwargs),
                   self.rhs.subs(*args, **kwargs))
 
