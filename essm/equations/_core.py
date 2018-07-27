@@ -145,8 +145,7 @@ class BaseEquation(Eq):
     def subs(self, *args, **kwargs):  # should mirror sympy.core.basic.subs
         """Return a new equation with subs applied to both sides.
 
-        Examples
-        ========
+        **Examples:**
 
         >>> from essm.equations.physics.thermodynamics import eq_Pa, eq_PN2_PO2
         >>> from essm.variables.physics.thermodynamics import P_N2, P_O2
@@ -157,7 +156,7 @@ class BaseEquation(Eq):
 
         """
         if len(args) == 1:
-            if isinstance(args[0], BaseEquation):
+            if isinstance(args[0], Eq):
                 arg1 = {args[0].lhs: args[0].rhs}
                 return Eq(self.lhs.subs(arg1, **kwargs),
                           self.rhs.subs(arg1, **kwargs))
