@@ -37,6 +37,7 @@
 <span class="c1">#</span>
 <span class="c1"># This file is part of essm.</span>
 <span class="c1"># Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.</span>
+<span class="c1"># Copyright (C) 2018 LIST (Luxembourg Institute of Science and Technology).</span>
 <span class="c1">#</span>
 <span class="c1"># essm is free software; you can redistribute it</span>
 <span class="c1"># and/or modify it under the terms of the GNU General Public License as</span>
@@ -176,6 +177,27 @@
     <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="vm">__doc__</span>
 
+    <span class="k">def</span> <span class="nf">subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># should mirror sympy.core.basic.subs</span>
+        <span class="sd">&quot;&quot;&quot;Return a new equation with subs applied to both sides.</span>
+
+<span class="sd">        **Examples:**</span>
+
+<span class="sd">        &gt;&gt;&gt; from essm.equations.physics.thermodynamics import eq_Pa, eq_PN2_PO2</span>
+<span class="sd">        &gt;&gt;&gt; from essm.variables.physics.thermodynamics import P_N2, P_O2</span>
+<span class="sd">        &gt;&gt;&gt; eq_Pa.subs({P_N2: P_O2})</span>
+<span class="sd">        Eq(P_a, 2*P_O2 + P_wa)</span>
+<span class="sd">        &gt;&gt;&gt; eq_Pa.subs(eq_PN2_PO2)</span>
+<span class="sd">        Eq(P_a, P_O2*x_N2/x_O2 + P_O2 + P_wa)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Eq</span><span class="p">):</span>
+                <span class="n">arg1</span> <span class="o">=</span> <span class="p">{</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lhs</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="p">}</span>
+                <span class="k">return</span> <span class="n">Eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                  <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Equation&#39;</span><span class="p">,</span> <span class="s1">&#39;EquationMeta&#39;</span><span class="p">)</span>
 </pre></div>
@@ -217,9 +239,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
-    
     <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
     
 </ul>
 <div class="relations">
