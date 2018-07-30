@@ -51,8 +51,6 @@ class demo_fall(Equation):
 def test_equation():
     """Test variable definition."""
     assert demo_fall.__doc__ == demo_fall.definition.__doc__
-    assert demo_fall.subs(Variable.__defaults__
-                          ).evalf(subs={demo_fall.definition.t: 1}) == 4.9
 
 
 def test_units():
@@ -119,6 +117,12 @@ def test_variable_defaults():
     expr = demo_fall
     assert replace_defaults(expr) == \
         Eq(demo_d, 4.9*demo_fall.definition.t**2*meter/second**2)
+
+
+def test_substitution():
+    """Test if .subs() method gives the same result as replace_variables."""
+    assert demo_fall.subs(demo_d, demo_d1) == \
+        replace_variables(demo_fall, {demo_d: demo_d1})
 
 
 def test_unit_check():

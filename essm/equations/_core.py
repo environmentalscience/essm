@@ -2,6 +2,7 @@
 #
 # This file is part of essm.
 # Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2018 LIST (Luxembourg Institute of Science and Technology).
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -140,6 +141,27 @@ class BaseEquation(Eq):
     @property
     def __doc__(self):
         return self.definition.__doc__
+
+    def subs(self, *args, **kwargs):  # should mirror sympy.core.basic.subs
+        """Return a new equation with subs applied to both sides.
+
+        **Examples:**
+
+        >>> from essm.equations.physics.thermodynamics import eq_Pa, eq_PN2_PO2
+        >>> from essm.variables.physics.thermodynamics import P_N2, P_O2
+        >>> eq_Pa.subs({P_N2: P_O2})
+        Eq(P_a, 2*P_O2 + P_wa)
+        >>> eq_Pa.subs(eq_PN2_PO2)
+        Eq(P_a, P_O2*x_N2/x_O2 + P_O2 + P_wa)
+
+        """
+        if len(args) == 1:
+            if isinstance(args[0], Eq):
+                arg1 = {args[0].lhs: args[0].rhs}
+                return Eq(self.lhs.subs(arg1, **kwargs),
+                          self.rhs.subs(arg1, **kwargs))
+        return Eq(self.lhs.subs(*args, **kwargs),
+                  self.rhs.subs(*args, **kwargs))
 
 
 __all__ = ('Equation', 'EquationMeta')
