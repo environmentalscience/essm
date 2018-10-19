@@ -29,8 +29,6 @@ import six
 from sympy import Abs, Add, Basic, Derivative, Function, Mul, Pow, S, Symbol
 from sympy.physics.units import Dimension, Quantity, convert_to
 from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
-from sympy.physics.units.quantities import \
-    _Quantity_constructor_postprocessor_Add
 
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
@@ -204,6 +202,26 @@ class BaseVariable(Symbol):
 
     def _latex(self, printer):
         return self.definition.latex_name
+
+
+def _Quantity_constructor_postprocessor_Add(expr):
+    # Construction postprocessor for the addition,
+    # checks for dimension mismatches of the addends, thus preventing
+    # expressions like `meter + second` to be created.
+
+    deset = {
+        tuple(sorted(Dimension(
+            Quantity.get_dimensional_expr(i) if not i.is_number else 1
+        ).get_dimensional_dependencies().items()))
+        for i in expr.args
+        if i.free_symbols == set()  # do not raise if there are symbols
+        # (free symbols could contain the units corrections)
+    }
+    # If `deset` has more than one element, then some dimensions do not
+    # match in the sum:
+    if len(deset) > 1:
+        raise ValueError("summation of quantities of incompatible dimensions")
+    return expr
 
 
 Basic._constructor_postprocessor_mapping[BaseVariable] = {
