@@ -57,7 +57,7 @@ setup_requires = [
 ]
 
 install_requires = [
-    'sympy>=1.1.2.dev',
+    'sympy>=1.3',
     'six>=1.10.0',
 ]
 
@@ -94,6 +94,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.7',
         'Development Status :: 1 - Planning',
     ],
 )
