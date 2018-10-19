@@ -1,1 +1,1 @@
--e git+https://github.com/sympy/sympy.git#egg=sympy
+-e git+https://github.com/sympy/sympy.git#egg=sympy-1.2
