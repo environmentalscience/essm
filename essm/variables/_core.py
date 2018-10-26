@@ -205,7 +205,7 @@ class BaseVariable(Symbol):
 
 
 def _Quantity_constructor_postprocessor_Add(expr):
-    """Construction postprocessor for the addition.
+    """Construct postprocessor for the addition.
 
     It checks for dimension mismatches of the addends, thus preventing
     expressions like ``meter + second`` to be created.
