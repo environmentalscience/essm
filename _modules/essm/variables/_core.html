@@ -64,8 +64,6 @@
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="k">import</span> <span class="n">Abs</span><span class="p">,</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="k">import</span> <span class="n">Dimension</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">convert_to</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.units.dimensions</span> <span class="k">import</span> <span class="n">dimsys_default</span><span class="p">,</span> <span class="n">dimsys_SI</span>
-<span class="kn">from</span> <span class="nn">sympy.physics.units.quantities</span> <span class="k">import</span> \
-    <span class="n">_Quantity_constructor_postprocessor_Add</span>
 
 <span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">RegistryType</span>
 <span class="kn">from</span> <span class="nn">..transformer</span> <span class="k">import</span> <span class="n">build_instance_expression</span>
@@ -239,6 +237,27 @@
 
     <span class="k">def</span> <span class="nf">_latex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printer</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">latex_name</span>
+
+
+<span class="k">def</span> <span class="nf">_Quantity_constructor_postprocessor_Add</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct postprocessor for the addition.</span>
+
+<span class="sd">    It checks for dimension mismatches of the addends, thus preventing</span>
+<span class="sd">    expressions like ``meter + second`` to be created.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">deset</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Dimension</span><span class="p">(</span>
+            <span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">is_number</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">get_dimensional_dependencies</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">free_symbols</span> <span class="o">==</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># do not raise if there are symbols</span>
+        <span class="c1"># (free symbols could contain the units corrections)</span>
+    <span class="p">}</span>
+    <span class="c1"># If `deset` has more than one element, then some dimensions do not</span>
+    <span class="c1"># match in the sum:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">deset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;summation of quantities of incompatible dimensions&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expr</span>
 
 
 <span class="n">Basic</span><span class="o">.</span><span class="n">_constructor_postprocessor_mapping</span><span class="p">[</span><span class="n">BaseVariable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
