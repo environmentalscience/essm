@@ -47,7 +47,7 @@ class VariableMeta(RegistryType):
             definition = dct.pop('expr', None)
 
             dct.setdefault('name', name)
-            dct.setdefault('assumptions', {'real':True})
+            dct.setdefault('assumptions', {'real': True})
             dct.setdefault('latex_name', dct['name'])
             dct.setdefault('unit', unit)
 

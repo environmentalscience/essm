@@ -97,6 +97,16 @@ def test_symbolic():
     assert Eq(l1, -l2) is not False
 
 
+def test_assumption():
+    """Test that assumptions passed to Variable are stored"""
+    class x(Variable):
+        """Positive real variable."""
+
+        assumptions = {'positive': True, 'real': True}
+
+    assert x.is_positive is True
+
+
 def test_derive_unit():
     """Test derive_unit from expression."""
 
