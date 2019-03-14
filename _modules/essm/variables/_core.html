@@ -83,7 +83,7 @@
             <span class="n">definition</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;expr&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
-            <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;domain&#39;</span><span class="p">,</span> <span class="s1">&#39;real&#39;</span><span class="p">)</span>
+            <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;assumptions&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;real&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;latex_name&#39;</span><span class="p">,</span> <span class="n">dct</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
 
@@ -118,6 +118,7 @@
                 <span class="n">abbrev</span><span class="o">=</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;latex_name&#39;</span><span class="p">],</span>
                 <span class="n">dimension</span><span class="o">=</span><span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">unit</span><span class="p">)),</span>
                 <span class="n">scale_factor</span><span class="o">=</span><span class="n">unit</span> <span class="ow">or</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">dct</span><span class="p">[</span><span class="s1">&#39;assumptions&#39;</span><span class="p">]</span>
             <span class="p">)</span>
             <span class="n">instance</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance</span>
 
