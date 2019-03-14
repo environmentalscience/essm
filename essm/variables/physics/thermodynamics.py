@@ -368,7 +368,7 @@ class x_O2(Variable):
 
     name = 'x_O2'
     domain = 'real'
-    latex_name = 'x_{N2}'
+    latex_name = 'x_{O2}'
     default = 0.210000000000000
 
 
