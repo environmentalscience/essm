@@ -47,7 +47,7 @@ class VariableMeta(RegistryType):
             definition = dct.pop('expr', None)
 
             dct.setdefault('name', name)
-            dct.setdefault('domain', 'real')
+            dct.setdefault('assumptions', {'real': True})
             dct.setdefault('latex_name', dct['name'])
             dct.setdefault('unit', unit)
 
@@ -82,6 +82,7 @@ class VariableMeta(RegistryType):
                 abbrev=dct['latex_name'],
                 dimension=Dimension(Quantity.get_dimensional_expr(unit)),
                 scale_factor=unit or S.One,
+                **dct['assumptions']
             )
             instance[expr] = instance
 
