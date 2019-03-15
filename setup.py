@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of essm.
-# Copyright (C) 2017, 2018 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2017-2019 ETH Zurich, Swiss Data Science Center.
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -19,6 +19,7 @@
 # MA 02111-1307, USA.
 """Environmental Science using Symbolic Math."""
 
+import datetime
 import os
 
 from setuptools import find_packages, setup
@@ -54,6 +55,7 @@ for reqs in extras_require.values():
 
 setup_requires = [
     'pytest-runner>=2.6.2',
+    'setuptools_scm>=3.1.0',
 ]
 
 install_requires = [
@@ -63,17 +65,41 @@ install_requires = [
 
 packages = find_packages()
 
-# Get the version string. Cannot be done with import!
-g = {}
-with open(os.path.join('essm', 'version.py'), 'rt') as fp:
-    exec(fp.read(), g)
-    version = g['__version__']
+version_template = """\
+# -*- coding: utf-8 -*-
+#
+# This file is part of essm.
+# Copyright (C) 2017-%d ETH Zurich, Swiss Data Science Center.
+#
+# essm is free software; you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of the
+# License, or (at your option) any later version.
+#
+# essm is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with essm; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307, USA.
+\"\"\"Version information for ESSM.\"\"\"
+
+__version__ = {version!r}
+""" % (datetime.date.today().year, )
 
 setup(
     name='essm',
-    version=version,
+    use_scm_version={
+        'local_scheme': 'dirty-tag',
+        'write_to': os.path.join('essm', 'version.py'),
+        'write_to_template': version_template,
+    },
     description=__doc__,
     long_description=readme + '\n\n' + history,
+    long_description_content_type='text/x-rst',
     keywords='symbolic math environmental science',
     license='GPLv2',
     author='Stan Schymanski',
@@ -96,6 +122,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Development Status :: 1 - Planning',
     ],
 )
