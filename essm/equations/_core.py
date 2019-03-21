@@ -142,6 +142,18 @@ class BaseEquation(Eq):
     def __doc__(self):
         return self.definition.__doc__
 
+    def __add__(self, other):
+        """Combite two equations."""
+        if not isinstance(other, Eq):
+            raise TypeError(other)
+
+        other_definition = getattr(other, 'definition', other)
+        return type(
+            str(self.definition) + '_and_' + str(other_definition),
+            (self.definition, other_definition),
+            {'expr': Eq(self.lhs + other.lhs, self.rhs + other.rhs)},
+        )
+
     def subs(self, *args, **kwargs):  # should mirror sympy.core.basic.subs
         """Return a new equation with subs applied to both sides.
 
@@ -160,8 +172,9 @@ class BaseEquation(Eq):
                 arg1 = {args[0].lhs: args[0].rhs}
                 return Eq(self.lhs.subs(arg1, **kwargs),
                           self.rhs.subs(arg1, **kwargs))
-        return Eq(self.lhs.subs(*args, **kwargs),
-                  self.rhs.subs(*args, **kwargs))
+        return Eq(
+            self.lhs.subs(*args, **kwargs), self.rhs.subs(*args, **kwargs)
+        )
 
 
 __all__ = ('Equation', 'EquationMeta')

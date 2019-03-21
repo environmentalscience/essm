@@ -145,6 +145,28 @@ def test_unit_check():
         expr = Eq(x_mol, x_J / x_M / x_K)
 
 
+def test_addition():
+    """Check addition of equations."""
+
+    class x(Variable):
+        unit = kelvin
+
+    class y(Variable):
+        unit = kelvin
+
+    class z(Variable):
+        unit = kelvin
+
+    class first(Equation):
+        expr = Eq(x, y)
+
+    class second(Equation):
+        expr = Eq(y, z)
+
+    assert solve(first + second)[0][x] == z
+    assert solve(first + second + first + second)[0][x] == z
+
+
 def test_check_unit():
     """Make sure that check_unit works with terms that are not equations."""
 
