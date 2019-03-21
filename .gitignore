@@ -66,3 +66,6 @@ target/
 
 # src folder with sympy installed
 .src/*
+
+# version.py
+essm/version.py
