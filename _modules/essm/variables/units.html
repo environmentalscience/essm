@@ -147,12 +147,6 @@
             <span class="k">yield</span> <span class="n">unit</span></div>
 
 
-<div class="viewcode-block" id="derive_quantity"><a class="viewcode-back" href="../../../api.html#essm.variables.derive_quantity">[docs]</a><span class="k">def</span> <span class="nf">derive_quantity</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Derive a quantity from an expression.&quot;&quot;&quot;</span>
-    <span class="n">factor</span><span class="p">,</span> <span class="n">dimension</span> <span class="o">=</span> <span class="n">Quantity</span><span class="o">.</span><span class="n">_collect_factor_and_dimension</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">name</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">dimension</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span></div>
-
-
 <div class="viewcode-block" id="derive_unit"><a class="viewcode-back" href="../../../api.html#essm.variables.derive_unit">[docs]</a><span class="k">def</span> <span class="nf">derive_unit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Derive SI unit from an expression, omitting scale factors.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
@@ -187,7 +181,7 @@
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s1">&#39;derive_unit&#39;</span><span class="p">,</span> <span class="s1">&#39;derive_quantity&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;derive_unit&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span>
     <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span> <span class="s1">&#39;meter&#39;</span><span class="p">,</span> <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_symbols&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span>
 <span class="p">)</span>
 </pre></div>

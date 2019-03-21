@@ -248,9 +248,9 @@
 <span class="sd">    expressions like ``meter + second`` to be created.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">deset</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Dimension</span><span class="p">(</span>
+        <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dimsys_default</span><span class="o">.</span><span class="n">get_dimensional_dependencies</span><span class="p">(</span><span class="n">Dimension</span><span class="p">(</span>
             <span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">is_number</span> <span class="k">else</span> <span class="mi">1</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">get_dimensional_dependencies</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
+        <span class="p">))</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span>
         <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">free_symbols</span> <span class="o">==</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># do not raise if there are symbols</span>
         <span class="c1"># (free symbols could contain the units corrections)</span>
