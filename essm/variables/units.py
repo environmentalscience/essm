@@ -111,12 +111,6 @@ def unit_symbols(expr):
             yield unit
 
 
-def derive_quantity(expr, name=None):
-    """Derive a quantity from an expression."""
-    factor, dimension = Quantity._collect_factor_and_dimension(expr)
-    return Quantity(name or str(expr), dimension, factor)
-
-
 def derive_unit(expr, name=None):
     """Derive SI unit from an expression, omitting scale factors."""
     from essm.variables import Variable
@@ -151,6 +145,6 @@ def derive_baseunit(expr, name=None):
 
 
 __all__ = (
-    'derive_unit', 'derive_quantity', 'markdown', 'joule', 'kelvin',
+    'derive_unit', 'markdown', 'joule', 'kelvin',
     'kilogram', 'meter', 'mole', 'pascal', 'second', 'unit_symbols', 'watt'
 )
