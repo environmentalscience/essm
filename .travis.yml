@@ -23,6 +23,9 @@ notifications:
 
 language: python
 
+git:
+  depth: false
+
 python:
   - '2.7'
   - '3.6'
@@ -39,6 +42,7 @@ env:
   - secure: KwansI0JAlS1EZe0yPP16mLf16tdy3uT6thiFral7VLA+PsfiEYJbjnkaDBKu/ICB70KK46EA7rJ4bpof0RKDyadTKY1nixDrIVPhFIQaqAuUILmsPmFcS7xzh0DPCz8C1SK01jqJgzutztFCQkQfYjHUL6pHM9x46mImsJLyqmKjT74GGGt29iINkO2jK54WmJWb79G9eWNCGtNCepEXEwQvReD7Bs9oR/ErZULugfZTCsPGMQa40rOt+tW6rYg32hJkGZBU52dUk5VqopLV4eQopkrEvk+5mURewUj+QR59i92jhtHtGqpcl4gGlSRKteII0dNF2KFHLGViOEsSjbKfdcjCnvRawypeEJVvtTizBL2N5zL4Zku56QRZhDSOia/ZyCgXBLQJpxUM/9OxI7c7X87qQGCwvTTg3UqBbYw8NLcuz4UTn0eNXTkguW3w6v9QXpMyiJDIthvSAAuj5JhKKeNrrqCQazSfozjj10YJeZxoMXtm6cjbGhAOJVBBLFEEre33cqv52CrS5aK3Pr5mHIXpNkMVBZpCfzF0e/OHPliSqSsOPeoeKxqLYnJQf/EmGnEPf9LSYSxIxiIdSMrCdlkZf2ysRVSp73BM1w9vOO0vpp2KOQYT58XNc/ex1XE2uh77I48F6SFwYnsTutzyNMKzCqnyTp2STeD/aE=
 
 before_install:
+  - git fetch --tags
   - travis_retry pip install twine wheel coveralls
   - travis_retry pip install check-manifest pydocstyle
   - travis_retry pip install -r requirements-devel.txt
@@ -59,12 +63,16 @@ after_success:
   - ./gh-pages.sh
 
 deploy:
-  provider: pypi
-  user: jirikuncar
-  password:
-    secure: c5KG89yB9qjXmk0uSLpMdEf+5cpLfPBIbsp9DXOLam1SIcvO7S/fNoYiDwxaG0FM93Y6dTwepRT6n8QhVg5hfHX+b5Gr5TkLq5QGUnp/ry/xRENrGbELRqtYW4l2Pgs/rtBG0fNVkg1zEd/psd21RtwM4OAhk0Fr4Scto9nMxxHVhX1MQf3LdSG/j9Ym+qLQATpcvGFKP1FieYU4aPS2XnFgY+lt0iUWRF297Qd2n3LN8ZM6wUp/rYCYWqy1D6xXkxmqkckM5GtLW6i9M5EdUURaeN2ZYzr7zOoScgCt/umHCZmqrHAbgKE3yoCv4mJJope/D+noPFGS2VmPncOSH2viqtcSAD0dyaD3C+6cbmsqyCseSjg6qM/uapoKLvQqKvTNdYKCqp1vS9YRjozeWsfnuZsQiS1uIIGpL70Q3Qu2o/X62ucyhcxI7uuCw9hZxN6QPZDQwz2I/gcSmoieH9N1DVjhVhA5MlBTi4TGbYOG+t4Vh5tqW0zR7LeOa/naDQ0xz6RUtWPwxTvE7/C63WbH0W6HjeYW0iyr4+G59qVQjTA94XKc8rZuWdr2Q0+Y8Ca3axUtxmDrx5KjwfTMvW0VEKZmBLnBZECWAcf3J+V9zUuBmQKXcBBvm5J2WqPhlqyflOuM2vM87TZO0XgGirjjN4uvkrj+T54YF2LoP0E=
-  distributions: "sdist bdist_wheel"
-  on:
-    branch: master
-    python: "3.6"
-    repo: environmentalscience/essm
+  - provider: pypi
+    user: jirikuncar
+    password:
+      secure: c5KG89yB9qjXmk0uSLpMdEf+5cpLfPBIbsp9DXOLam1SIcvO7S/fNoYiDwxaG0FM93Y6dTwepRT6n8QhVg5hfHX+b5Gr5TkLq5QGUnp/ry/xRENrGbELRqtYW4l2Pgs/rtBG0fNVkg1zEd/psd21RtwM4OAhk0Fr4Scto9nMxxHVhX1MQf3LdSG/j9Ym+qLQATpcvGFKP1FieYU4aPS2XnFgY+lt0iUWRF297Qd2n3LN8ZM6wUp/rYCYWqy1D6xXkxmqkckM5GtLW6i9M5EdUURaeN2ZYzr7zOoScgCt/umHCZmqrHAbgKE3yoCv4mJJope/D+noPFGS2VmPncOSH2viqtcSAD0dyaD3C+6cbmsqyCseSjg6qM/uapoKLvQqKvTNdYKCqp1vS9YRjozeWsfnuZsQiS1uIIGpL70Q3Qu2o/X62ucyhcxI7uuCw9hZxN6QPZDQwz2I/gcSmoieH9N1DVjhVhA5MlBTi4TGbYOG+t4Vh5tqW0zR7LeOa/naDQ0xz6RUtWPwxTvE7/C63WbH0W6HjeYW0iyr4+G59qVQjTA94XKc8rZuWdr2Q0+Y8Ca3axUtxmDrx5KjwfTMvW0VEKZmBLnBZECWAcf3J+V9zUuBmQKXcBBvm5J2WqPhlqyflOuM2vM87TZO0XgGirjjN4uvkrj+T54YF2LoP0E=
+    distributions: "sdist bdist_wheel"
+    on: &pypi_on
+      branch: master
+      python: "3.6"
+      repo: environmentalscience/essm
+  - <<: *pypi
+    on:
+      <<: *pypi_on
+      tags: true
