@@ -5,6 +5,9 @@ __pycache__/
 # Idea software family
 .idea/
 
+# Visual Studio Code
+.vscode/
+
 # C extensions
 *.so
 
