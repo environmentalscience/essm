@@ -22,8 +22,7 @@ Environmental Science using Symbolic Math
 
 This package contains helpers to deal with physical variables and units.
 
-The documentation is available on
-https://environmentalscience.github.io/essm/
+The documentation is available on https://essm.rtfd.io/.
 
 The quick installation for impatient users can be done by running::
 

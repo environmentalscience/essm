@@ -105,6 +105,13 @@ setup(
     author='Stan Schymanski',
     author_email='schymans@gmail.com',
     url='https://github.com/environmentalscience/essm',
+    project_urls={
+        'Changelog': (
+            'https://github.com/environmentalscience/essm'
+            '/blob/master/CHANGES.rst'
+        ),
+        'Docs': 'https://essm.rtfd.io/',
+    },
     packages=packages,
     zip_safe=False,
     include_package_data=True,
