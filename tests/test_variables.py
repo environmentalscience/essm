@@ -161,7 +161,8 @@ def test_markdown():
 def test_generate_metadata_table():
     """Check display of table of units."""
     assert generate_metadata_table([E_l, lambda_E]) \
-        == [('Symbol', 'Name', 'Description', 'Default value', 'Units'),
-            ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.',
+        == [('Symbol', 'Name', 'Description', 'Definition', 'Default value',
+             'Units'),
+            ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.', '$$',
             '2450000.0', 'J kg$^{-1}$'), ('$E_l$', 'E_l',
-            'Latent heat flux from leaf.', '-', 'J m$^{-2}$ s$^{-1}$')]
+            'Latent heat flux from leaf.', '$$', '-', 'J m$^{-2}$ s$^{-1}$')]
