@@ -14,6 +14,18 @@ from sympy import Derivative, S, Symbol, solve
 from sympy.physics.units import Quantity, length, meter
 
 
+class demo_1(Variable):
+    """Test variable."""
+
+    unit = S.One
+
+
+class demo_2(Variable):
+    """Test variable."""
+
+    unit = S.One
+
+
 class demo_g(Variable):
     """Test variable."""
 
@@ -86,6 +98,13 @@ def test_integral():
     assert demo_g * demo_fall.definition.t ** S(3) / S(6) == integrate(
         demo_fall.rhs, demo_fall.definition.t
     )
+
+
+def test_exp():
+    """Test that variables can be used in exponent of equation."""
+    class eq_with_var_in_exp(Equation):
+
+        expr = Eq(demo_1, (demo_d1 / demo_d) ** demo_2)
 
 
 def test_args():
