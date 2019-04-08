@@ -159,19 +159,31 @@ class BaseEquation(Eq):
 
         **Examples:**
 
-        >>> from essm.equations.physics.thermodynamics import eq_Pa, eq_PN2_PO2
-        >>> from essm.variables.physics.thermodynamics import P_N2, P_O2
-        >>> eq_Pa.subs({P_N2: P_O2})
-        Eq(P_a, 2*P_O2 + P_wa)
-        >>> eq_Pa.subs(eq_PN2_PO2)
-        Eq(P_a, P_O2*x_N2/x_O2 + P_O2 + P_wa)
-
+        >>> from essm.equations.physics.thermodynamics import eq_Le,\
+            eq_Dva, eq_alphaa
+        >>> from essm.variables.physics.thermodynamics import Le, D_va,\
+            alpha_a, T_a
+        >>> eq_Le.subs(D_va, eq_Dva.rhs)
+        Eq(Le, alpha_a/(T_a*p_Dva1 - p_Dva2))
+        >>> eq_Le.subs({D_va: eq_Dva.rhs, alpha_a: eq_alphaa.rhs})
+        Eq(Le, (T_a*p_alpha1 - p_alpha2)/(T_a*p_Dva1 - p_Dva2))
+        >>> eq_Le.subs(eq_Dva, eq_alphaa)
+        Eq(Le, (T_a*p_alpha1 - p_alpha2)/(T_a*p_Dva1 - p_Dva2))
         """
         if len(args) == 1:
             if isinstance(args[0], Eq):
                 arg1 = {args[0].lhs: args[0].rhs}
                 return Eq(self.lhs.subs(arg1, **kwargs),
                           self.rhs.subs(arg1, **kwargs))
+        else:
+            arg1 = {}
+            for arg in args:
+                if isinstance(arg, Eq):
+                    arg1[arg.lhs] = arg.rhs
+                else:
+                    arg1 = {args[0]: args[1]}
+            return Eq(self.lhs.subs(arg1, **kwargs),
+                      self.rhs.subs(arg1, **kwargs))
         return Eq(
             self.lhs.subs(*args, **kwargs), self.rhs.subs(*args, **kwargs)
         )
