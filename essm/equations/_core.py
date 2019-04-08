@@ -155,7 +155,7 @@ class BaseEquation(Eq):
         )
 
     def subs(self, *args, **kwargs):  # should mirror sympy.core.basic.subs
-        """Return a new equation with subs applied to both sides.
+        r"""Return a new equation with subs applied to both sides.
 
         **Examples:**
 
