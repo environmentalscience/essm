@@ -22,7 +22,7 @@
 
 from essm.equations._core import BaseEquation
 from essm.variables._core import BaseVariable
-from sympy import Eq, preorder_traversal
+from sympy import Eq, latex, preorder_traversal
 from sympy.core.expr import Expr
 
 from .units import markdown
@@ -67,7 +67,8 @@ def generate_metadata_table(variables=None, include_header=True):
     variables = variables or Variable.__registry__.keys()
     if include_header:
         table.append(
-            ('Symbol', 'Name', 'Description', 'Default value', 'Units')
+            ('Symbol', 'Name', 'Description', 'Definition',
+             'Default value', 'Units')
         )
 
     for variable in sorted(variables,
@@ -75,10 +76,11 @@ def generate_metadata_table(variables=None, include_header=True):
         symbol = '$' + variable.definition.latex_name + '$'
         name = str(variable)
         doc = variable.__doc__
+        defn = '$' + latex(Variable.__expressions__.get(variable, '')) + '$'
         val = str(Variable.__defaults__.get(variable, '-'))
 
         table.append(
-            (symbol, name, doc, val, markdown(variable.definition.unit))
+            (symbol, name, doc, defn, val, markdown(variable.definition.unit))
         )
     return table
 
