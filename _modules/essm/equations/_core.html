@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>essm.equations._core &#8212; ESSM 0.2.0.post2.dev9 documentation</title>
+    <title>essm.equations._core &#8212; ESSM 0.2.0.post2.dev10 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -60,8 +60,8 @@
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
-
 <span class="kn">from</span> <span class="nn">sympy.core.relational</span> <span class="k">import</span> <span class="n">Eq</span>
+<span class="kn">from</span> <span class="nn">sympy.series</span> <span class="k">import</span> <span class="n">sequence</span>
 
 <span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">RegistryType</span>
 <span class="kn">from</span> <span class="nn">..transformer</span> <span class="k">import</span> <span class="n">build_instance_expression</span>
@@ -190,25 +190,42 @@
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># should mirror sympy.core.basic.subs</span>
-        <span class="sd">&quot;&quot;&quot;Return a new equation with subs applied to both sides.</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return a new equation with subs applied to both sides.</span>
 
 <span class="sd">        **Examples:**</span>
 
-<span class="sd">        &gt;&gt;&gt; from essm.equations.physics.thermodynamics import eq_Pa, eq_PN2_PO2</span>
-<span class="sd">        &gt;&gt;&gt; from essm.variables.physics.thermodynamics import P_N2, P_O2</span>
-<span class="sd">        &gt;&gt;&gt; eq_Pa.subs({P_N2: P_O2})</span>
-<span class="sd">        Eq(P_a, 2*P_O2 + P_wa)</span>
-<span class="sd">        &gt;&gt;&gt; eq_Pa.subs(eq_PN2_PO2)</span>
-<span class="sd">        Eq(P_a, P_O2*x_N2/x_O2 + P_O2 + P_wa)</span>
-
+<span class="sd">        &gt;&gt;&gt; from essm.equations.leaf.energy_water import (</span>
+<span class="sd">        ... eq_Rs_enbal, eq_El, eq_Hl, eq_Rll )</span>
+<span class="sd">        &gt;&gt;&gt; eq_Rs_enbal.subs(eq_El, eq_Hl, eq_Rll)</span>
+<span class="sd">        Eq(R_s, E_lmol*M_w*lambda_E + a_sh*... + a_sh*h_c*(-T_a + T_l))</span>
+<span class="sd">        &gt;&gt;&gt; from essm.equations.physics.thermodynamics import (</span>
+<span class="sd">        ... eq_Le, eq_Dva, eq_alphaa)</span>
+<span class="sd">        &gt;&gt;&gt; from essm.variables.physics.thermodynamics import (</span>
+<span class="sd">        ... Le, D_va, alpha_a, T_a)</span>
+<span class="sd">        &gt;&gt;&gt; eq_Le.subs(D_va, eq_Dva.rhs)</span>
+<span class="sd">        Eq(Le, alpha_a/(T_a*p_Dva1 - p_Dva2))</span>
+<span class="sd">        &gt;&gt;&gt; eq_Le.subs({D_va: eq_Dva.rhs, alpha_a: eq_alphaa.rhs})</span>
+<span class="sd">        Eq(Le, (T_a*p_alpha1 - p_alpha2)/(T_a*p_Dva1 - p_Dva2))</span>
+<span class="sd">        &gt;&gt;&gt; eq_Le.subs(eq_Dva, eq_alphaa)</span>
+<span class="sd">        Eq(Le, (T_a*p_alpha1 - p_alpha2)/(T_a*p_Dva1 - p_Dva2))</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sequence</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="n">only_eqs</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Eq</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Eq</span><span class="p">):</span>
-                <span class="n">arg1</span> <span class="o">=</span> <span class="p">{</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lhs</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="p">}</span>
-                <span class="k">return</span> <span class="n">Eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
-                          <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+                <span class="n">sequence</span> <span class="o">=</span> <span class="p">({</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lhs</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rhs</span><span class="p">},</span> <span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">only_eqs</span><span class="p">:</span>
+                <span class="n">sequence</span> <span class="o">=</span> <span class="p">({</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]},</span> <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">args</span> <span class="ow">and</span> <span class="n">only_eqs</span><span class="p">:</span>
+            <span class="n">sub_eqs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="n">sub_eqs</span><span class="p">[</span><span class="n">arg</span><span class="o">.</span><span class="n">lhs</span><span class="p">]</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">rhs</span>
+            <span class="n">sequence</span> <span class="o">=</span> <span class="p">(</span><span class="n">sub_eqs</span><span class="p">,</span> <span class="p">)</span>
+
         <span class="k">return</span> <span class="n">Eq</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">lhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">*</span><span class="n">sequence</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="o">*</span><span class="n">sequence</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
         <span class="p">)</span>
 
 
