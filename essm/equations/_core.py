@@ -25,8 +25,8 @@ from __future__ import absolute_import
 import warnings
 
 import six
-
 from sympy.core.relational import Eq
+from sympy.series import sequence
 
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
@@ -155,25 +155,42 @@ class BaseEquation(Eq):
         )
 
     def subs(self, *args, **kwargs):  # should mirror sympy.core.basic.subs
-        """Return a new equation with subs applied to both sides.
+        r"""Return a new equation with subs applied to both sides.
 
         **Examples:**
 
-        >>> from essm.equations.physics.thermodynamics import eq_Pa, eq_PN2_PO2
-        >>> from essm.variables.physics.thermodynamics import P_N2, P_O2
-        >>> eq_Pa.subs({P_N2: P_O2})
-        Eq(P_a, 2*P_O2 + P_wa)
-        >>> eq_Pa.subs(eq_PN2_PO2)
-        Eq(P_a, P_O2*x_N2/x_O2 + P_O2 + P_wa)
-
+        >>> from essm.equations.leaf.energy_water import (
+        ... eq_Rs_enbal, eq_El, eq_Hl, eq_Rll )
+        >>> eq_Rs_enbal.subs(eq_El, eq_Hl, eq_Rll)
+        Eq(R_s, E_lmol*M_w*lambda_E + a_sh*... + a_sh*h_c*(-T_a + T_l))
+        >>> from essm.equations.physics.thermodynamics import (
+        ... eq_Le, eq_Dva, eq_alphaa)
+        >>> from essm.variables.physics.thermodynamics import (
+        ... Le, D_va, alpha_a, T_a)
+        >>> eq_Le.subs(D_va, eq_Dva.rhs)
+        Eq(Le, alpha_a/(T_a*p_Dva1 - p_Dva2))
+        >>> eq_Le.subs({D_va: eq_Dva.rhs, alpha_a: eq_alphaa.rhs})
+        Eq(Le, (T_a*p_alpha1 - p_alpha2)/(T_a*p_Dva1 - p_Dva2))
+        >>> eq_Le.subs(eq_Dva, eq_alphaa)
+        Eq(Le, (T_a*p_alpha1 - p_alpha2)/(T_a*p_Dva1 - p_Dva2))
         """
+        sequence = args
+        only_eqs = all(isinstance(arg, Eq) for arg in args)
+
         if len(args) == 1:
             if isinstance(args[0], Eq):
-                arg1 = {args[0].lhs: args[0].rhs}
-                return Eq(self.lhs.subs(arg1, **kwargs),
-                          self.rhs.subs(arg1, **kwargs))
+                sequence = ({args[0].lhs: args[0].rhs}, )
+        elif len(args) == 2 and not only_eqs:
+                sequence = ({args[0]: args[1]}, )
+        elif args and only_eqs:
+            sub_eqs = {}
+            for arg in args:
+                sub_eqs[arg.lhs] = arg.rhs
+            sequence = (sub_eqs, )
+
         return Eq(
-            self.lhs.subs(*args, **kwargs), self.rhs.subs(*args, **kwargs)
+            self.lhs.subs(*sequence, **kwargs),
+            self.rhs.subs(*sequence, **kwargs),
         )
 
 
