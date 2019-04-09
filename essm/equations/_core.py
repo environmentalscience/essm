@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of essm.
-# Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2017-2019 ETH Zurich, Swiss Data Science Center.
 # Copyright (C) 2018 LIST (Luxembourg Institute of Science and Technology).
 #
 # essm is free software; you can redistribute it
@@ -26,7 +26,6 @@ import warnings
 
 import six
 from sympy.core.relational import Eq
-from sympy.series import sequence
 
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
