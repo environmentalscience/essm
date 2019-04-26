@@ -7,7 +7,7 @@ from essm.variables import Variable
 from essm.variables.units import (derive_baseunit, derive_unit, joule,
                                   kilogram, markdown, meter, second)
 from essm.variables.utils import generate_metadata_table
-from sympy import Eq
+from sympy import Eq, exp
 
 
 class demo_variable(Variable):
@@ -124,6 +124,14 @@ def test_derive_unit():
         expr = demo_variable / demo_expression_variable
 
     assert dimensionless.definition.unit == 1
+
+    class var_joule(Variable):
+        unit = joule
+
+    class var_joule_base(Variable):
+        unit = kilogram * meter ** 2 / second ** 2
+
+    assert derive_baseunit(exp(var_joule / var_joule_base)) == 1
 
 
 def test_remove_variable_from_registry():
