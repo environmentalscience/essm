@@ -159,8 +159,8 @@ class BaseEquation(Eq):
 
         **Examples:**
 
-        >>> from essm.equations.leaf.energy_water import eq_Rs_enbal, eq_El,\
-                                                         eq_Hl, eq_Rll
+        >>> from essm.equations.leaf.energy_water import eq_Rs_enbal, eq_El
+        >>> from essm.equations.leaf.energy_water import eq_Hl, eq_Rll
         >>> eq_Rs_enbal.subs(eq_El, eq_Hl, eq_Rll)
         Eq(R_s, E_lmol*M_w*lambda_E + a_sh*epsilon_l*sigm*(T_l**4 - T_w**4) + a_sh*h_c*(-T_a + T_l))
         """
