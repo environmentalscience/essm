@@ -184,7 +184,6 @@ class Variable(object):
             for addend in expr.args[1:]:
                 addend_factor, addend_dim = \
                     Variable.collect_factor_and_basedimension(addend)
-                print(addend_factor, addend_dim)
                 if dim != addend_dim:
                     raise ValueError(
                         'Dimension of "{0}" is {1}, '
