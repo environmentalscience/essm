@@ -102,15 +102,6 @@ def markdown(unit):
         return str(unit)
 
 
-def unit_symbols(expr):
-    """Return unit symbols."""
-    from essm.variables._core import BaseVariable, Variable
-
-    for variable in expr.atoms(BaseVariable):
-        for unit in variable.definition.unit.atoms(Quantity):
-            yield unit
-
-
 def derive_unit(expr, name=None):
     """Derive SI unit from an expression, omitting scale factors."""
     from essm.variables import Variable
@@ -156,6 +147,5 @@ def derive_base_dimension(dim):
 
 __all__ = (
     'derive_baseunit', 'derive_unit', 'markdown',
-    'joule', 'kelvin', 'kilogram', 'meter', 'mole', 'pascal', 'second',
-    'unit_symbols', 'watt'
+    'joule', 'kelvin', 'kilogram', 'meter', 'mole', 'pascal', 'second', 'watt'
 )

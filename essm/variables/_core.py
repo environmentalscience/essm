@@ -210,35 +210,6 @@ class Variable(object):
             return 1, expr
         else:
             return expr, Dimension(1)
-    # @staticmethod
-    # def check_unit(expr):
-    #     """Construct postprocessor for the addition.
-
-    #     Checks for dimension mismatches of the addends, thus preventing
-    #     expressions like `meter + second` to be created.
-    #     """
-    #     if not expr.is_Add or expr.is_Equality:
-    #         return expr
-    #     deset = {
-    #         tuple(
-    #             sorted(
-    #                 dimsys_default.get_dimensional_dependencies(
-    #                     Dimension(
-    #                         Variable.get_dimensional_expr(i)
-    #                         if not i.is_number else 1
-    #                     )
-    #                 ).items()
-    #             )
-    #         )
-    #         for i in expr.args
-    #     }
-    #     # If `deset` has more than one element, then some dimensions do not
-    #     # match in the sum:
-    #     if len(deset) > 1:
-    #         raise ValueError(
-    #             "summation of quantities of incompatible dimensions"
-    #         )
-    #     return expr
 
 
 class BaseVariable(Symbol):
