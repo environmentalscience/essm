@@ -137,7 +137,7 @@ def derive_baseunit(expr, name=None):
 
 
 def derive_base_dimension(dim):
-    """Derive base dimension of dimension"""
+    """Derive base dimension of dimension."""
     return functools.reduce(
         operator.mul, (
             Dimension(d) ** p
