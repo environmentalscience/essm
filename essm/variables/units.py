@@ -145,7 +145,18 @@ def derive_baseunit(expr, name=None):
     )
 
 
-__all__ = (
-    'derive_unit', 'markdown', 'joule', 'kelvin',
-    'kilogram', 'meter', 'mole', 'pascal', 'second', 'unit_symbols', 'watt'
+    def derive_base_dimension(dim):
+    """Derive base dimension of dimension"""
+    return functools.reduce(
+        operator.mul, (
+            Symbol(d) ** p
+            for d, p in dimsys_SI.get_dimensional_dependencies(dim).items()
+        ), 1
+    )
+
+
+__all__ = 
+    'derive_baseunit', 'derive_basedimension', 'derive_unit', 'markdown',
+    'joule', 'kelvin', 'kilogram', 'meter', 'mole', 'pascal', 'second',
+    'unit_symbols', 'watt'
 )
