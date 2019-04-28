@@ -32,7 +32,7 @@ from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
 
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
-from .units import derive_unit
+from .units import collect_factor_and_basedimension, derive_unit, derive_base_dimension
 
 
 class VariableMeta(RegistryType):
@@ -147,33 +147,44 @@ class Variable(object):
 
     @staticmethod
     def check_unit(expr):
-        """Construct postprocessor for the addition.
+        """Check if base dimensions of expression are consistent.
 
         Checks for dimension mismatches of the addends, thus preventing
         expressions like `meter + second` to be created.
         """
-        if not expr.is_Add or expr.is_Equality:
-            return expr
-        deset = {
-            tuple(
-                sorted(
-                    dimsys_default.get_dimensional_dependencies(
-                        Dimension(
-                            Variable.get_dimensional_expr(i)
-                            if not i.is_number else 1
-                        )
-                    ).items()
-                )
-            )
-            for i in expr.args
-        }
-        # If `deset` has more than one element, then some dimensions do not
-        # match in the sum:
-        if len(deset) > 1:
-            raise ValueError(
-                "summation of quantities of incompatible dimensions"
-            )
+        factor, dim = collect_factor_and_basedimension(expr)
         return expr
+
+
+    # @staticmethod
+    # def check_unit(expr):
+    #     """Construct postprocessor for the addition.
+
+    #     Checks for dimension mismatches of the addends, thus preventing
+    #     expressions like `meter + second` to be created.
+    #     """
+    #     if not expr.is_Add or expr.is_Equality:
+    #         return expr
+    #     deset = {
+    #         tuple(
+    #             sorted(
+    #                 dimsys_default.get_dimensional_dependencies(
+    #                     Dimension(
+    #                         Variable.get_dimensional_expr(i)
+    #                         if not i.is_number else 1
+    #                     )
+    #                 ).items()
+    #             )
+    #         )
+    #         for i in expr.args
+    #     }
+    #     # If `deset` has more than one element, then some dimensions do not
+    #     # match in the sum:
+    #     if len(deset) > 1:
+    #         raise ValueError(
+    #             "summation of quantities of incompatible dimensions"
+    #         )
+    #     return expr
 
 
 class BaseVariable(Symbol):
