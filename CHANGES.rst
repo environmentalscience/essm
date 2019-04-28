@@ -1,6 +1,22 @@
 Changes
 =======
 
+``v0.3.0``
+----------
+*released 2019-04-09*
+
+Bug Fixes
+~~~~~~~~~
+
+-  **equations:** improve substitutions with equations
+   (`79ac37d <https://github.com/environmentalscience/essm/commit/79ac37d>`__)
+
+Features
+~~~~~~~~
+
+-  **utils:** add definition to metadata table
+   (`3ceaa69 <https://github.com/environmentalscience/essm/commit/3ceaa69>`__)
+
 ``v0.2.0``
 ----------
 *released 2019-04-04*

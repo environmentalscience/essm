@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of essm.
-# Copyright (C) 2017 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2017-2019 ETH Zurich, Swiss Data Science Center.
 # Copyright (C) 2018 LIST (Luxembourg Institute of Science and Technology).
 #
 # essm is free software; you can redistribute it
@@ -25,7 +25,6 @@ from __future__ import absolute_import
 import warnings
 
 import six
-
 from sympy.core.relational import Eq
 
 from ..bases import RegistryType
@@ -158,27 +157,38 @@ class BaseEquation(Eq):
 
         **Examples:**
 
-        >>> from essm.equations.leaf.energy_water import eq_Rs_enbal, eq_El
-        >>> from essm.equations.leaf.energy_water import eq_Hl
-        >>> eq_Rs_enbal.subs(eq_El, eq_Hl)
-        Eq(R_s, E_lmol*M_w*lambda_E + R_ll + a_sh*h_c*(-T_a + T_l))
+        >>> from essm.equations.leaf.energy_water import (
+        ... eq_Rs_enbal, eq_El, eq_Hl, eq_Rll )
+        >>> eq_Rs_enbal.subs(eq_El, eq_Hl, eq_Rll)
+        Eq(R_s, E_lmol*M_w*lambda_E + a_sh*... + a_sh*h_c*(-T_a + T_l))
+        >>> from essm.equations.physics.thermodynamics import (
+        ... eq_Le, eq_Dva, eq_alphaa)
+        >>> from essm.variables.physics.thermodynamics import (
+        ... Le, D_va, alpha_a, T_a)
+        >>> eq_Le.subs(D_va, eq_Dva.rhs)
+        Eq(Le, alpha_a/(T_a*p_Dva1 - p_Dva2))
+        >>> eq_Le.subs({D_va: eq_Dva.rhs, alpha_a: eq_alphaa.rhs})
+        Eq(Le, (T_a*p_alpha1 - p_alpha2)/(T_a*p_Dva1 - p_Dva2))
+        >>> eq_Le.subs(eq_Dva, eq_alphaa)
+        Eq(Le, (T_a*p_alpha1 - p_alpha2)/(T_a*p_Dva1 - p_Dva2))
         """
+        sequence = args
+        only_eqs = all(isinstance(arg, Eq) for arg in args)
+
         if len(args) == 1:
             if isinstance(args[0], Eq):
-                arg1 = {args[0].lhs: args[0].rhs}
-                return Eq(self.lhs.subs(arg1, **kwargs),
-                          self.rhs.subs(arg1, **kwargs))
-        else:
-            arg1 = {}
+                sequence = ({args[0].lhs: args[0].rhs}, )
+        elif len(args) == 2 and not only_eqs:
+                sequence = ({args[0]: args[1]}, )
+        elif args and only_eqs:
+            sub_eqs = {}
             for arg in args:
-                if isinstance(arg, Eq):
-                    arg1[arg.lhs] = arg.rhs
-                else:
-                    arg1 = {args[0]: args[1]}
-            return Eq(self.lhs.subs(arg1, **kwargs),
-                      self.rhs.subs(arg1, **kwargs))
+                sub_eqs[arg.lhs] = arg.rhs
+            sequence = (sub_eqs, )
+
         return Eq(
-            self.lhs.subs(*args, **kwargs), self.rhs.subs(*args, **kwargs)
+            self.lhs.subs(*sequence, **kwargs),
+            self.rhs.subs(*sequence, **kwargs),
         )
 
 
