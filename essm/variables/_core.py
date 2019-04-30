@@ -177,7 +177,9 @@ class Variable(object):
                 Variable.collect_factor_and_basedimension(expr.exp)
             if exp_dim.is_dimensionless:
                 exp_dim = 1
-            return factor ** exp_factor, dim ** (exp_factor * exp_dim)
+            return factor ** exp_factor, derive_base_dimension(
+                dim ** (exp_factor * exp_dim)
+                )
         elif isinstance(expr, Add):
             factor, dim = \
                 Variable.collect_factor_and_basedimension(expr.args[0])

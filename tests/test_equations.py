@@ -10,7 +10,7 @@ from essm.variables import Variable
 from essm.variables.units import joule, kelvin, kilogram, meter, mole, second
 from essm.variables.utils import (extract_variables, replace_defaults,
                                   replace_variables)
-from sympy import Derivative, exp, S, Symbol, solve
+from sympy import Derivative, exp, S, Symbol, solve, sqrt
 from sympy.physics.units import Quantity, length, meter
 
 
@@ -89,6 +89,13 @@ def test_units_derivative():
         class invalid_units_derivative(Equation):
 
             expr = Eq(demo_g, Derivative(demo_d, demo_fall.definition.t))
+
+
+def test_units_sqrt():
+    """Check units in sqrt."""
+
+    class valid_units(Equation):
+        expr = Eq(demo_v, sqrt(demo_d * demo_d1) / demo_fall.definition.t)
 
 
 def test_integral():

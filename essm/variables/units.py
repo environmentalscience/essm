@@ -142,7 +142,7 @@ def derive_base_dimension(dim):
         operator.mul, (
             Dimension(d) ** p
             for d, p in dimsys_SI.get_dimensional_dependencies(dim).items()
-        ), 1
+        ), Dimension(1)
     )
 
 __all__ = (
