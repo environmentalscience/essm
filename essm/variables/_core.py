@@ -187,8 +187,8 @@ class Variable(object):
                 if dim != addend_dim:
                     raise ValueError(
                         'Dimension of "{0}" is {1}, '
-                        'but it should be {2}'.format(
-                            addend, addend_dim, dim))
+                        'but it should be the same as {2}, i.e. {3}'.format(
+                            addend, addend_dim, expr.args[0], dim))
                 factor += addend_factor
             return factor, dim
         elif isinstance(expr, Derivative):
