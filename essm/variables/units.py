@@ -114,7 +114,9 @@ def markdown(unit):
                 str1 = str1 + ' {0}$^{{{1}}}$'.format(base1, exp1)
         return str1.strip()
     else:
-        return str(unit.abbrev)
+        if isinstance(unit, Quantity):
+            unit = unit.abbrev
+        return str(unit)
 
 
 def derive_unit(expr, name=None):
