@@ -73,13 +73,16 @@ SI_EXTENDED_DIMENSIONS = {
 
 def markdown(unit):
     """Return markdown representation of a unit."""
-    from sympy.printing import StrPrinter
     from operator import itemgetter
-    # displays short units (m instead of meter)
-    StrPrinter._print_Quantity = lambda self, expr: str(expr.abbrev)
     if unit.is_Pow:
         item = unit.args
-        return '{0}$^{{{1}}}$'.format(item[0], item[1])
+        base1 = item[0]
+        if hasattr(base1, 'abbrev'):
+            base1 = base1.abbrev
+        exp1 = item[1]
+        if hasattr(exp1, 'abbrev'):
+            exp1 = exp1.abbrev
+        return '{0}$^{{{1}}}$'.format(base1, exp1)
     if unit.is_Mul:
         str1 = ''
         tuples = []
@@ -87,28 +90,33 @@ def markdown(unit):
         for arg in allargs:
             if arg.is_Pow:
                 args = arg.args
-                tuples.append((str(args[0]), args[1]))
+                args0 = args[0]
+                if isinstance(args0, Quantity):
+                    args0 = args0.abbrev
+                args1 = args[1]
+                if isinstance(args1, Quantity):
+                    args1 = args1.abbrev
+                tuples.append((str(args0), args1))
             if isinstance(arg, Quantity):
-                tuples.append((str(arg), 1))
+                tuples.append((str(arg.abbrev), 1))
         tuples.sort(key=itemgetter(1), reverse=True)
         tuples.sort(key=itemgetter(0))
         for item in tuples:
             if item[1] == 1:
                 str1 = str1 + ' ' + item[0]
             else:
-                str1 = str1 + ' {0}$^{{{1}}}$'.format(item[0], item[1])
+                base1 = item[0]
+                if hasattr(base1, 'abbrev'):
+                    base1 = base1.abbrev
+                exp1 = item[1]
+                if hasattr(exp1, 'abbrev'):
+                    exp1 = exp1.abbrev
+                str1 = str1 + ' {0}$^{{{1}}}$'.format(base1, exp1)
         return str1.strip()
     else:
+        if isinstance(unit, Quantity):
+            unit = unit.abbrev
         return str(unit)
-
-
-def unit_symbols(expr):
-    """Return unit symbols."""
-    from essm.variables._core import BaseVariable, Variable
-
-    for variable in expr.atoms(BaseVariable):
-        for unit in variable.definition.unit.atoms(Quantity):
-            yield unit
 
 
 def derive_unit(expr, name=None):
@@ -131,7 +139,8 @@ def derive_baseunit(expr, name=None):
     for var1 in variables:
         q1 = Quantity('q_' + str(var1))
         q1.set_dimension(
-            Dimension(Quantity.get_dimensional_expr(var1.definition.unit))
+            Dimension(Quantity.get_dimensional_expr(
+                derive_baseunit(var1.definition.unit)))
         )
         q1.set_scale_factor(var1.definition.unit)
         expr = expr.xreplace({var1: q1})
@@ -144,7 +153,16 @@ def derive_baseunit(expr, name=None):
     )
 
 
+def derive_base_dimension(dim):
+    """Derive base dimension of dimension."""
+    return functools.reduce(
+        operator.mul, (
+            Dimension(d) ** p
+            for d, p in dimsys_SI.get_dimensional_dependencies(dim).items()
+        ), Dimension(1)
+    )
+
 __all__ = (
-    'derive_unit', 'markdown', 'joule', 'kelvin',
-    'kilogram', 'meter', 'mole', 'pascal', 'second', 'unit_symbols', 'watt'
+    'derive_baseunit', 'derive_unit', 'markdown',
+    'joule', 'kelvin', 'kilogram', 'meter', 'mole', 'pascal', 'second', 'watt'
 )

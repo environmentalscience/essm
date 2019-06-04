@@ -32,7 +32,7 @@ from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
 
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
-from .units import derive_unit
+from .units import derive_unit, derive_base_dimension
 
 
 class VariableMeta(RegistryType):
@@ -147,33 +147,70 @@ class Variable(object):
 
     @staticmethod
     def check_unit(expr):
-        """Construct postprocessor for the addition.
+        """Check if base dimensions of expression are consistent.
 
         Checks for dimension mismatches of the addends, thus preventing
         expressions like `meter + second` to be created.
         """
-        if not expr.is_Add or expr.is_Equality:
-            return expr
-        deset = {
-            tuple(
-                sorted(
-                    dimsys_default.get_dimensional_dependencies(
-                        Dimension(
-                            Variable.get_dimensional_expr(i)
-                            if not i.is_number else 1
-                        )
-                    ).items()
-                )
-            )
-            for i in expr.args
-        }
-        # If `deset` has more than one element, then some dimensions do not
-        # match in the sum:
-        if len(deset) > 1:
-            raise ValueError(
-                "summation of quantities of incompatible dimensions"
-            )
+        factor, dim = Variable.collect_factor_and_basedimension(expr)
         return expr
+
+    @staticmethod
+    def collect_factor_and_basedimension(expr):
+        """Return tuple with factor expression and dimension expression."""
+        if isinstance(expr, BaseVariable):
+            expr = expr.definition.unit
+        if isinstance(expr, Quantity):
+            return expr.scale_factor, derive_base_dimension(expr.dimension)
+        elif isinstance(expr, Mul):
+            factor = 1
+            dimension = Dimension(1)
+            for arg in expr.args:
+                arg_factor, arg_dim = \
+                    Variable.collect_factor_and_basedimension(arg)
+                factor *= arg_factor
+                dimension *= arg_dim
+            return factor, dimension
+        elif isinstance(expr, Pow):
+            factor, dim = Variable.collect_factor_and_basedimension(expr.base)
+            exp_factor, exp_dim = \
+                Variable.collect_factor_and_basedimension(expr.exp)
+            if exp_dim.is_dimensionless:
+                exp_dim = 1
+            return factor ** exp_factor, derive_base_dimension(
+                dim ** (exp_factor * exp_dim)
+                )
+        elif isinstance(expr, Add):
+            factor, dim = \
+                Variable.collect_factor_and_basedimension(expr.args[0])
+            for addend in expr.args[1:]:
+                addend_factor, addend_dim = \
+                    Variable.collect_factor_and_basedimension(addend)
+                if dim != addend_dim:
+                    raise ValueError(
+                        'Dimension of "{0}" is {1}, '
+                        'but it should be the same as {2}, i.e. {3}'.format(
+                            addend, addend_dim, expr.args[0], dim))
+                factor += addend_factor
+            return factor, dim
+        elif isinstance(expr, Derivative):
+            factor, dim = \
+                Variable.collect_factor_and_basedimension(expr.args[0])
+            for independent, count in expr.variable_count:
+                ifactor, idim = \
+                    Variable.collect_factor_and_basedimension(independent)
+                factor /= ifactor**count
+                dim /= idim**count
+            return factor, dim
+        elif isinstance(expr, Function):
+            fds = [Variable.collect_factor_and_basedimension(
+                arg) for arg in expr.args]
+            return (expr.func(*(f[0] for f in fds)),
+                    expr.func(*(d[1] for d in fds)))
+        elif isinstance(expr, Dimension):
+            return 1, expr
+        else:
+            return expr, Dimension(1)
 
 
 class BaseVariable(Symbol):
