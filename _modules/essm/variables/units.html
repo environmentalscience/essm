@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>essm.variables.units &#8212; ESSM 0.3.0 documentation</title>
+    <title>essm.variables.units &#8212; ESSM 0.3.1.dev1 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -106,15 +106,18 @@
 <span class="p">}</span>
 
 
-<div class="viewcode-block" id="markdown"><a class="viewcode-back" href="../../../api.html#essm.variables.markdown">[docs]</a><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
+<div class="viewcode-block" id="markdown"><a class="viewcode-back" href="../../../api.html#essm.variables.units.markdown">[docs]</a><span class="k">def</span> <span class="nf">markdown</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return markdown representation of a unit.&quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">sympy.printing</span> <span class="k">import</span> <span class="n">StrPrinter</span>
     <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
-    <span class="c1"># displays short units (m instead of meter)</span>
-    <span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Quantity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">abbrev</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">unit</span><span class="o">.</span><span class="n">is_Pow</span><span class="p">:</span>
         <span class="n">item</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">args</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">$^{{</span><span class="si">{1}</span><span class="s1">}}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">base1</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">base1</span><span class="p">,</span> <span class="s1">&#39;abbrev&#39;</span><span class="p">):</span>
+            <span class="n">base1</span> <span class="o">=</span> <span class="n">base1</span><span class="o">.</span><span class="n">abbrev</span>
+        <span class="n">exp1</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">exp1</span><span class="p">,</span> <span class="s1">&#39;abbrev&#39;</span><span class="p">):</span>
+            <span class="n">exp1</span> <span class="o">=</span> <span class="n">exp1</span><span class="o">.</span><span class="n">abbrev</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">$^{{</span><span class="si">{1}</span><span class="s1">}}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base1</span><span class="p">,</span> <span class="n">exp1</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">unit</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
         <span class="n">str1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="n">tuples</span> <span class="o">=</span> <span class="p">[]</span>
@@ -122,31 +125,36 @@
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">allargs</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_Pow</span><span class="p">:</span>
                 <span class="n">args</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">args</span>
-                <span class="n">tuples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">args0</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args0</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
+                    <span class="n">args0</span> <span class="o">=</span> <span class="n">args0</span><span class="o">.</span><span class="n">abbrev</span>
+                <span class="n">args1</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args1</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
+                    <span class="n">args1</span> <span class="o">=</span> <span class="n">args1</span><span class="o">.</span><span class="n">abbrev</span>
+                <span class="n">tuples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">args0</span><span class="p">),</span> <span class="n">args1</span><span class="p">))</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
-                <span class="n">tuples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">tuples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">abbrev</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">tuples</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">tuples</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tuples</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">str1</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">str1</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">+</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1">$^{{</span><span class="si">{1}</span><span class="s1">}}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">base1</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">base1</span><span class="p">,</span> <span class="s1">&#39;abbrev&#39;</span><span class="p">):</span>
+                    <span class="n">base1</span> <span class="o">=</span> <span class="n">base1</span><span class="o">.</span><span class="n">abbrev</span>
+                <span class="n">exp1</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">exp1</span><span class="p">,</span> <span class="s1">&#39;abbrev&#39;</span><span class="p">):</span>
+                    <span class="n">exp1</span> <span class="o">=</span> <span class="n">exp1</span><span class="o">.</span><span class="n">abbrev</span>
+                <span class="n">str1</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">+</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1">$^{{</span><span class="si">{1}</span><span class="s1">}}$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">base1</span><span class="p">,</span> <span class="n">exp1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">str1</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
+            <span class="n">unit</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">abbrev</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="unit_symbols"><a class="viewcode-back" href="../../../api.html#essm.variables.unit_symbols">[docs]</a><span class="k">def</span> <span class="nf">unit_symbols</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return unit symbols.&quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">essm.variables._core</span> <span class="k">import</span> <span class="n">BaseVariable</span><span class="p">,</span> <span class="n">Variable</span>
-
-    <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">BaseVariable</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Quantity</span><span class="p">):</span>
-            <span class="k">yield</span> <span class="n">unit</span></div>
-
-
-<div class="viewcode-block" id="derive_unit"><a class="viewcode-back" href="../../../api.html#essm.variables.derive_unit">[docs]</a><span class="k">def</span> <span class="nf">derive_unit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="derive_unit"><a class="viewcode-back" href="../../../api.html#essm.variables.units.derive_unit">[docs]</a><span class="k">def</span> <span class="nf">derive_unit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Derive SI unit from an expression, omitting scale factors.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
     <span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="k">import</span> <span class="n">extract_variables</span>
@@ -155,7 +163,7 @@
     <span class="k">return</span> <span class="n">dim</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">SI_EXTENDED_DIMENSIONS</span><span class="p">)</span></div>
 
 
-<span class="k">def</span> <span class="nf">derive_baseunit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="derive_baseunit"><a class="viewcode-back" href="../../../api.html#essm.variables.units.derive_baseunit">[docs]</a><span class="k">def</span> <span class="nf">derive_baseunit</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Derive SI base unit from an expression, omitting scale factors.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
     <span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="k">import</span> <span class="n">extract_variables</span>
@@ -166,7 +174,8 @@
     <span class="k">for</span> <span class="n">var1</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
         <span class="n">q1</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="s1">&#39;q_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var1</span><span class="p">))</span>
         <span class="n">q1</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span>
-            <span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+            <span class="n">Dimension</span><span class="p">(</span><span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span>
+                <span class="n">derive_baseunit</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
         <span class="p">)</span>
         <span class="n">q1</span><span class="o">.</span><span class="n">set_scale_factor</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">var1</span><span class="p">:</span> <span class="n">q1</span><span class="p">})</span>
@@ -176,12 +185,21 @@
             <span class="n">SI_BASE_DIMENSIONS</span><span class="p">[</span><span class="n">Symbol</span><span class="p">(</span><span class="n">d</span><span class="p">)]</span> <span class="o">**</span> <span class="n">p</span>
             <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">dimsys_SI</span><span class="o">.</span><span class="n">get_dimensional_dependencies</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
         <span class="p">),</span> <span class="mi">1</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">derive_base_dimension</span><span class="p">(</span><span class="n">dim</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Derive base dimension of dimension.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
+        <span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="p">(</span>
+            <span class="n">Dimension</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">**</span> <span class="n">p</span>
+            <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">dimsys_SI</span><span class="o">.</span><span class="n">get_dimensional_dependencies</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">),</span> <span class="n">Dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="p">)</span>
 
-
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s1">&#39;derive_unit&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span> <span class="s1">&#39;meter&#39;</span><span class="p">,</span> <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;unit_symbols&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span>
+    <span class="s1">&#39;derive_baseunit&#39;</span><span class="p">,</span> <span class="s1">&#39;derive_unit&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;joule&#39;</span><span class="p">,</span> <span class="s1">&#39;kelvin&#39;</span><span class="p">,</span> <span class="s1">&#39;kilogram&#39;</span><span class="p">,</span> <span class="s1">&#39;meter&#39;</span><span class="p">,</span> <span class="s1">&#39;mole&#39;</span><span class="p">,</span> <span class="s1">&#39;pascal&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="s1">&#39;watt&#39;</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -227,9 +245,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>API Docs &#8212; ESSM 0.3.0 documentation</title>
+    <title>API Docs &#8212; ESSM 0.3.1.dev1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -81,12 +81,6 @@ can be imported into your session, e.g.:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.leaf.energy_water</span> <span class="k">import</span> <span class="o">*</span>
 </pre></div>
 </div>
-<dl class="function">
-<dt id="essm.variables.unit_symbols">
-<code class="descclassname">essm.variables.</code><code class="descname">unit_symbols</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/units.html#unit_symbols"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.unit_symbols" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return unit symbols.</p>
-</dd></dl>
-
 <dl class="class">
 <dt id="essm.variables.Variable">
 <em class="property">class </em><code class="descclassname">essm.variables.</code><code class="descname">Variable</code><a class="reference internal" href="_modules/essm/variables/_core.html#Variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable" title="Permalink to this definition">¶</a></dt>
@@ -95,9 +89,15 @@ can be imported into your session, e.g.:</p>
 <dl class="staticmethod">
 <dt id="essm.variables.Variable.check_unit">
 <em class="property">static </em><code class="descname">check_unit</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.check_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable.check_unit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct postprocessor for the addition.</p>
+<dd><p>Check if base dimensions of expression are consistent.</p>
 <p>Checks for dimension mismatches of the addends, thus preventing
 expressions like <cite>meter + second</cite> to be created.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="essm.variables.Variable.collect_factor_and_basedimension">
+<em class="property">static </em><code class="descname">collect_factor_and_basedimension</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.collect_factor_and_basedimension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable.collect_factor_and_basedimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple with factor expression and dimension expression.</p>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -2370,6 +2370,12 @@ expressions like <cite>meter + second</cite> to be created.</p>
 <span id="units"></span><h3>Units<a class="headerlink" href="#module-essm.variables.units" title="Permalink to this headline">¶</a></h3>
 <p>Define unit symbols.</p>
 <dl class="function">
+<dt id="essm.variables.units.derive_baseunit">
+<code class="descclassname">essm.variables.units.</code><code class="descname">derive_baseunit</code><span class="sig-paren">(</span><em>expr</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/units.html#derive_baseunit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.units.derive_baseunit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derive SI base unit from an expression, omitting scale factors.</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="essm.variables.units.derive_unit">
 <code class="descclassname">essm.variables.units.</code><code class="descname">derive_unit</code><span class="sig-paren">(</span><em>expr</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/units.html#derive_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.units.derive_unit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Derive SI unit from an expression, omitting scale factors.</p>
@@ -2379,12 +2385,6 @@ expressions like <cite>meter + second</cite> to be created.</p>
 <dt id="essm.variables.units.markdown">
 <code class="descclassname">essm.variables.units.</code><code class="descname">markdown</code><span class="sig-paren">(</span><em>unit</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/units.html#markdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.units.markdown" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return markdown representation of a unit.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="essm.variables.units.unit_symbols">
-<code class="descclassname">essm.variables.units.</code><code class="descname">unit_symbols</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/units.html#unit_symbols"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.units.unit_symbols" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return unit symbols.</p>
 </dd></dl>
 
 </div>
@@ -3024,9 +3024,15 @@ partial pressures.</p>
 <dl class="staticmethod">
 <dt id="essm.variables._core.Variable.check_unit">
 <em class="property">static </em><code class="descname">check_unit</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.check_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables._core.Variable.check_unit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Construct postprocessor for the addition.</p>
+<dd><p>Check if base dimensions of expression are consistent.</p>
 <p>Checks for dimension mismatches of the addends, thus preventing
 expressions like <cite>meter + second</cite> to be created.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="essm.variables._core.Variable.collect_factor_and_basedimension">
+<em class="property">static </em><code class="descname">collect_factor_and_basedimension</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.collect_factor_and_basedimension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables._core.Variable.collect_factor_and_basedimension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple with factor expression and dimension expression.</p>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -3179,9 +3185,9 @@ if needed.</p>
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">

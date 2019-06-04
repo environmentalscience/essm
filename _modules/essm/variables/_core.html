@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>essm.variables._core &#8212; ESSM 0.3.0 documentation</title>
+    <title>essm.variables._core &#8212; ESSM 0.3.1.dev1 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -67,7 +67,7 @@
 
 <span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">RegistryType</span>
 <span class="kn">from</span> <span class="nn">..transformer</span> <span class="k">import</span> <span class="n">build_instance_expression</span>
-<span class="kn">from</span> <span class="nn">.units</span> <span class="k">import</span> <span class="n">derive_unit</span>
+<span class="kn">from</span> <span class="nn">.units</span> <span class="k">import</span> <span class="n">derive_unit</span><span class="p">,</span> <span class="n">derive_base_dimension</span>
 
 
 <span class="k">class</span> <span class="nc">VariableMeta</span><span class="p">(</span><span class="n">RegistryType</span><span class="p">):</span>
@@ -182,33 +182,70 @@
 
 <div class="viewcode-block" id="Variable.check_unit"><a class="viewcode-back" href="../../../api.html#essm.variables.Variable.check_unit">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">check_unit</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct postprocessor for the addition.</span>
+        <span class="sd">&quot;&quot;&quot;Check if base dimensions of expression are consistent.</span>
 
 <span class="sd">        Checks for dimension mismatches of the addends, thus preventing</span>
 <span class="sd">        expressions like `meter + second` to be created.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">or</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Equality</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">expr</span>
-        <span class="n">deset</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="nb">tuple</span><span class="p">(</span>
-                <span class="nb">sorted</span><span class="p">(</span>
-                    <span class="n">dimsys_default</span><span class="o">.</span><span class="n">get_dimensional_dependencies</span><span class="p">(</span>
-                        <span class="n">Dimension</span><span class="p">(</span>
-                            <span class="n">Variable</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                            <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">is_number</span> <span class="k">else</span> <span class="mi">1</span>
-                        <span class="p">)</span>
-                    <span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="n">factor</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">expr</span></div>
+
+<div class="viewcode-block" id="Variable.collect_factor_and_basedimension"><a class="viewcode-back" href="../../../api.html#essm.variables.Variable.collect_factor_and_basedimension">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return tuple with factor expression and dimension expression.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">BaseVariable</span><span class="p">):</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">scale_factor</span><span class="p">,</span> <span class="n">derive_base_dimension</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">dimension</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Mul</span><span class="p">):</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">dimension</span> <span class="o">=</span> <span class="n">Dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                <span class="n">arg_factor</span><span class="p">,</span> <span class="n">arg_dim</span> <span class="o">=</span> \
+                    <span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                <span class="n">factor</span> <span class="o">*=</span> <span class="n">arg_factor</span>
+                <span class="n">dimension</span> <span class="o">*=</span> <span class="n">arg_dim</span>
+            <span class="k">return</span> <span class="n">factor</span><span class="p">,</span> <span class="n">dimension</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Pow</span><span class="p">):</span>
+            <span class="n">factor</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">)</span>
+            <span class="n">exp_factor</span><span class="p">,</span> <span class="n">exp_dim</span> <span class="o">=</span> \
+                <span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">exp_dim</span><span class="o">.</span><span class="n">is_dimensionless</span><span class="p">:</span>
+                <span class="n">exp_dim</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">factor</span> <span class="o">**</span> <span class="n">exp_factor</span><span class="p">,</span> <span class="n">derive_base_dimension</span><span class="p">(</span>
+                <span class="n">dim</span> <span class="o">**</span> <span class="p">(</span><span class="n">exp_factor</span> <span class="o">*</span> <span class="n">exp_dim</span><span class="p">)</span>
                 <span class="p">)</span>
-            <span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span>
-        <span class="p">}</span>
-        <span class="c1"># If `deset` has more than one element, then some dimensions do not</span>
-        <span class="c1"># match in the sum:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">deset</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;summation of quantities of incompatible dimensions&quot;</span>
-            <span class="p">)</span>
-        <span class="k">return</span> <span class="n">expr</span></div></div>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Add</span><span class="p">):</span>
+            <span class="n">factor</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> \
+                <span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">addend</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">addend_factor</span><span class="p">,</span> <span class="n">addend_dim</span> <span class="o">=</span> \
+                    <span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">addend</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">dim</span> <span class="o">!=</span> <span class="n">addend_dim</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s1">&#39;Dimension of &quot;</span><span class="si">{0}</span><span class="s1">&quot; is </span><span class="si">{1}</span><span class="s1">, &#39;</span>
+                        <span class="s1">&#39;but it should be the same as </span><span class="si">{2}</span><span class="s1">, i.e. </span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">addend</span><span class="p">,</span> <span class="n">addend_dim</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dim</span><span class="p">))</span>
+                <span class="n">factor</span> <span class="o">+=</span> <span class="n">addend_factor</span>
+            <span class="k">return</span> <span class="n">factor</span><span class="p">,</span> <span class="n">dim</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">):</span>
+            <span class="n">factor</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> \
+                <span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">independent</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">variable_count</span><span class="p">:</span>
+                <span class="n">ifactor</span><span class="p">,</span> <span class="n">idim</span> <span class="o">=</span> \
+                    <span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span><span class="n">independent</span><span class="p">)</span>
+                <span class="n">factor</span> <span class="o">/=</span> <span class="n">ifactor</span><span class="o">**</span><span class="n">count</span>
+                <span class="n">dim</span> <span class="o">/=</span> <span class="n">idim</span><span class="o">**</span><span class="n">count</span>
+            <span class="k">return</span> <span class="n">factor</span><span class="p">,</span> <span class="n">dim</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Function</span><span class="p">):</span>
+            <span class="n">fds</span> <span class="o">=</span> <span class="p">[</span><span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span>
+                <span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fds</span><span class="p">)),</span>
+                    <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">fds</span><span class="p">)))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">,</span> <span class="n">expr</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">expr</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div></div>
 
 
 <span class="k">class</span> <span class="nc">BaseVariable</span><span class="p">(</span><span class="n">Symbol</span><span class="p">):</span>
@@ -310,9 +347,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
-    
     <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
     
 </ul>
 <div class="relations">
