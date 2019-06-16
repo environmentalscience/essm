@@ -140,6 +140,7 @@ def replace_defaults(expr):
 
 def subs_eq(expr, *args):
     r"""Return a new expression with args consecutively substituted into expr.
+    
     If expr is an equality, substitution is performed on both sides. If args
     contain equations, substitution is performed as .subs(eqn.lhs, eqn.rhs)
     for each eqn.
