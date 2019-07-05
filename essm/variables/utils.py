@@ -136,3 +136,43 @@ def replace_defaults(expr):
             definition.unit * expr1.definition.default
             if hasattr(expr1.definition, 'default') else expr1
         )
+
+
+def subs_eq(expr, *args):
+    r"""Return a new expression with args consecutively substituted into expr.
+
+    If expr is an equality, substitution is performed on both sides. If args
+    contain equations, substitution is performed as .subs(eqn.lhs, eqn.rhs)
+    for each eqn.
+
+    **Examples:**
+
+        >>> from essm.variables.physics.thermodynamics import (T_a)
+        >>> from essm.variables.leaf.energy_water import (T_l)
+        >>> from essm.equations.leaf.energy_water import (
+        ... eq_Rs_enbal, eq_El, eq_Elmol, eq_Hl, eq_Rll )
+        >>> subs_eq(eq_Rs_enbal, [eq_El, eq_Hl], eq_Elmol,
+        ... {T_l: 301., T_a: 300.})
+        Eq(R_s, M_w*g_tw*lambda_E*(-C_wa + C_wl) + R_ll + 1.0*a_sh*h_c)
+        >>> subs_eq(eq_Rs_enbal.rhs, [eq_El, eq_Hl], eq_Elmol)
+        M_w*g_tw*lambda_E*(-C_wa + C_wl) + R_ll + a_sh*h_c*(-T_a + T_l)
+
+    """
+    if isinstance(expr, Eq):
+        lhs = expr.lhs
+        rhs = expr.rhs
+    else:
+        lhs = None
+        rhs = expr
+    for arg in args:
+        if isinstance(arg, Eq):
+            arg = {arg.lhs: arg.rhs}
+        if isinstance(arg, list) or isinstance(arg, tuple):
+            arg = {s1.lhs: s1.rhs for s1 in arg}
+        if lhs:
+            lhs = lhs.subs(arg)
+        rhs = rhs.subs(arg)
+    if lhs:
+        return Eq(lhs, rhs)
+    else:
+        return rhs
