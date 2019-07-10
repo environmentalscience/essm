@@ -45,6 +45,18 @@ class demo_d1(Variable):
     unit = meter
 
 
+class demo_t(Variable):
+    """Test variable."""
+
+    unit = second
+
+
+class demo_t1(Variable):
+    """Test variable."""
+
+    unit = second
+
+
 class demo_v(Variable):
     """Test variable."""
 
@@ -98,13 +110,29 @@ def test_units_sqrt():
         expr = Eq(demo_v, sqrt(demo_d * demo_d1) / demo_fall.definition.t)
 
 
-def test_integral():
+def test_integrate():
     """Test that variables can be used as integration symbols."""
     from sympy import integrate
 
     assert demo_g * demo_fall.definition.t ** S(3) / S(6) == integrate(
         demo_fall.rhs, demo_fall.definition.t
     )
+
+
+def test_Integral():
+    """Test that dimensions of Integrals are correct."""
+    from sympy import Integral
+
+    class valid_general_integral(Equation):
+        expr = Eq(demo_d, Integral(demo_v, demo_t))
+
+    class valid_specific_integral(Equation):
+        expr = Eq(demo_d, Integral(demo_v, (demo_t, 0, demo_t1)))
+
+    with pytest.raises(ValueError):
+
+        class invalid_limits(Equation):
+            expr = Eq(demo_d, Integral(demo_v, (demo_t, 1, demo_t1)))
 
 
 def test_exp():
