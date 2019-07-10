@@ -135,6 +135,23 @@ def test_Integral():
             expr = Eq(demo_d, Integral(demo_v, (demo_t, 1, demo_t1)))
 
 
+def test_Piecewise():
+    """Test that dimensions of Piecewise functions are correct."""
+    from sympy import Piecewise
+
+    class valid_piecewise(Equation):
+        expr = Eq(demo_v, Piecewise((0, demo_t <= 0),
+                                    (demo_d / demo_t, demo_t <= demo_t1),
+                                    (0, True)))
+
+    with pytest.raises(ValueError):
+
+        class invalid_limits(Equation):
+            expr = Eq(demo_v, Piecewise((0, demo_t <= 0),
+                                        (demo_d * demo_t, demo_t <= demo_t1),
+                                        (0, True)))
+
+
 def test_exp():
     """Test that variables can be used in exponent of equation."""
     class eq_with_var_in_exp(Equation):
