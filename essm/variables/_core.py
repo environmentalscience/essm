@@ -26,7 +26,8 @@ import warnings
 
 import six
 
-from sympy import Abs, Add, Basic, Derivative, Function, Mul, Pow, S, Symbol
+from sympy import (Abs, Add, Basic, Derivative, Function, Integral, Mul,
+                   Pow, S, Symbol)
 from sympy.physics.units import Dimension, Quantity, convert_to
 from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
 
@@ -167,27 +168,25 @@ class Variable(object):
             dimension = Dimension(1)
             for arg in expr.args:
                 arg_factor, arg_dim = \
-                    collect_factor_and_basedimension(arg)
+                    Variable.collect_factor_and_basedimension(arg)
                 factor *= arg_factor
                 dimension *= arg_dim
             return factor, dimension
         elif isinstance(expr, Pow):
-            factor, dim = collect_factor_and_basedimension(expr.base)
+            factor, dim = Variable.collect_factor_and_basedimension(expr.base)
             exp_factor, exp_dim = \
-                collect_factor_and_basedimension(expr.exp)
+                Variable.collect_factor_and_basedimension(expr.exp)
             if exp_dim.is_dimensionless:
                 exp_dim = 1
-            
-            #pytest.set_trace()
             return factor ** exp_factor, derive_base_dimension(
                 dim ** (exp_factor * exp_dim)
                 ).simplify()
         elif isinstance(expr, Add):
             factor, dim = \
-                collect_factor_and_basedimension(expr.args[0])
+                Variable.collect_factor_and_basedimension(expr.args[0])
             for addend in expr.args[1:]:
                 addend_factor, addend_dim = \
-                    collect_factor_and_basedimension(addend)
+                    Variable.collect_factor_and_basedimension(addend)
                 if dim != addend_dim:
                     raise ValueError(
                         'Dimension of "{0}" is {1}, '
@@ -197,21 +196,22 @@ class Variable(object):
             return factor, dim
         elif isinstance(expr, Derivative):
             factor, dim = \
-                collect_factor_and_basedimension(expr.args[0])
+                Variable.collect_factor_and_basedimension(expr.args[0])
             for independent, count in expr.variable_count:
                 ifactor, idim = \
-                    collect_factor_and_basedimension(independent)
+                    Variable.collect_factor_and_basedimension(independent)
                 factor /= ifactor**count
                 dim /= idim**count
             return factor, dim
         elif isinstance(expr, Integral):
             # Test that integration limits have the same units
-            collect_factor_and_basedimension(sum(expr.args[1]))
+            Variable.collect_factor_and_basedimension(sum(expr.args[1]))
             factor, dim = \
-                collect_factor_and_basedimension(expr.args[0]*expr.args[1][0])
-            return factor, dim    
+                Variable.collect_factor_and_basedimension(expr.args[0] *
+                                                          expr.args[1][0])
+            return factor, dim
         elif isinstance(expr, Function):
-            fds = [collect_factor_and_basedimension(
+            fds = [Variable.collect_factor_and_basedimension(
                 arg) for arg in expr.args]
             return (expr.func(*(f[0] for f in fds)),
                     expr.func(*(d[1] for d in fds)))
