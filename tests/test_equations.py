@@ -146,7 +146,7 @@ def test_Piecewise():
 
     with pytest.raises(ValueError):
 
-        class invalid_limits(Equation):
+        class invalid_units1(Equation):
             expr = Eq(demo_v, Piecewise((0, demo_t <= 0),
                                         (demo_d * demo_t, demo_t <= demo_t1),
                                         (0, True)))

@@ -27,7 +27,7 @@ import warnings
 import six
 
 from sympy import (Abs, Add, Basic, Derivative, Function, Integral, Mul,
-                   Pow, S, Symbol)
+                   Piecewise, Pow, S, Symbol)
 from sympy.physics.units import Dimension, Quantity, convert_to
 from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
 
@@ -209,6 +209,11 @@ class Variable(object):
             factor, dim = \
                 Variable.collect_factor_and_basedimension(expr.args[0] *
                                                           expr.args[1][0])
+            return factor, dim
+        elif isinstance(expr, Piecewise):
+            factor, dim = \
+                Variable.collect_factor_and_basedimension(
+                    sum([x[0] for x in expr.args]))
             return factor, dim
         elif isinstance(expr, Function):
             fds = [Variable.collect_factor_and_basedimension(
