@@ -135,6 +135,15 @@ class Variable(object):
             for independent, count in expr.variable_count:
                 dim /= Variable.get_dimensional_expr(independent) ** count
             return dim
+        elif isinstance(expr, Integral):
+            dim = Variable.get_dimensional_expr(expr.args[0] *
+                                                expr.args[1][0])
+            return dim
+        elif isinstance(expr, Piecewise):
+            dim = \
+                Variable.get_dimensional_expr(
+                    sum([x[0] for x in expr.args]))
+            return dim
         elif isinstance(expr, Function):
             args = [Variable.get_dimensional_expr(arg) for arg in expr.args]
             if all(i == 1 for i in args):
@@ -143,7 +152,7 @@ class Variable(object):
         elif isinstance(expr, Quantity):
             return expr.dimension.name
         elif isinstance(expr, BaseVariable):
-            return Quantity.get_dimensional_expr(expr.definition.unit)
+            return Variable.get_dimensional_expr(expr.definition.unit)
         return S.One
 
     @staticmethod

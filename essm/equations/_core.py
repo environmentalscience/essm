@@ -30,6 +30,7 @@ from sympy.core.relational import Eq
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
 from ..variables import Variable
+from ..variables.units import derive_baseunit
 from ..variables._core import BaseVariable, Variable
 
 
@@ -132,6 +133,7 @@ class BaseEquation(Eq):
             return expr
         # The below raises an error if units are not consistent
         Variable.collect_factor_and_basedimension(expr.lhs + expr.rhs)
+        #derive_baseunit(expr.lhs + expr.rhs)
         self = super(BaseEquation, cls).__new__(cls, *expr.args)
         self.definition = definition
         return self

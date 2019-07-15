@@ -7,7 +7,8 @@ from essm import Eq
 from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
-from essm.variables.units import joule, kelvin, kilogram, meter, mole, second
+from essm.variables.units import (joule, kelvin, kilogram, meter, mole, second,
+                                  derive_baseunit)
 from essm.variables.utils import (extract_variables, replace_defaults,
                                   replace_variables)
 from sympy import Derivative, exp, S, Symbol, solve, sqrt
@@ -96,6 +97,8 @@ def test_units_derivative():
 
         expr = Eq(demo_v, Derivative(demo_d, demo_fall.definition.t))
 
+    assert(derive_baseunit(valid_units.rhs) == meter / second)
+
     with pytest.raises(ValueError):
 
         class invalid_units_derivative(Equation):
@@ -129,6 +132,8 @@ def test_Integral():
     class valid_specific_integral(Equation):
         expr = Eq(demo_d, Integral(demo_v, (demo_t, 0, demo_t1)))
 
+    assert(derive_baseunit(valid_specific_integral.rhs) == meter)
+
     with pytest.raises(ValueError):
 
         class invalid_limits(Equation):
@@ -143,6 +148,8 @@ def test_Piecewise():
         expr = Eq(demo_v, Piecewise((0, demo_t <= 0),
                                     (demo_d / demo_t, demo_t <= demo_t1),
                                     (0, True)))
+
+    assert(derive_baseunit(valid_piecewise.rhs) == meter / second)
 
     with pytest.raises(ValueError):
 
