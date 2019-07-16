@@ -217,7 +217,7 @@ class Variable(object):
         elif isinstance(expr, Integral):
             # Test that integration limits have the same units
             Variable.collect_factor_and_basedimension(sum(expr.args[1]))
-            factor, dim = Variable.collect_factor_and_basedimension(
+            factor, dim = \
                 Variable.collect_factor_and_basedimension(expr.args[0] *
                                                           expr.args[1][0])
             return factor, dim
