@@ -18,6 +18,7 @@
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
 """Variables module to deal with physical variables and units.
+
 It allows attaching docstrings to variable names, defining their domains
 (e.g. integer, real or complex), their units and LaTeX representations.
 You can also provide a default value, which is particularly useful for
@@ -37,7 +38,6 @@ Then you can define a custom variable with its name, description, domain,
 latex_name, unit, and an optional default value.
 
 Example:
-
 .. code-block:: python
 
    from .variables.units import meter

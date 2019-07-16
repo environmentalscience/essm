@@ -127,8 +127,8 @@ def create_module(name, doc=None, folder=None, overwrite=False):
 
 class VariableWriter(object):
     """Generate Variable definitions.
-    Example:
 
+    Example:
     .. code-block:: python
         from essm._generator import VariableWriter
 
@@ -220,8 +220,8 @@ class VariableWriter(object):
 
 class EquationWriter(object):
     r"""Generate Equation definitions.
-    Example:
 
+    Example:
     .. code-block:: python
 
         from essm.equations import Equation

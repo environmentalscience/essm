@@ -36,11 +36,11 @@ from ..variables._core import BaseVariable, Variable
 
 class EquationMeta(RegistryType):
     r"""Equation interface.
+
     Defines an equation with a docstring and internal variables,
     if needed.
 
     Example:
-
     .. code-block:: python
 
         from ..variables.units import meter, second
@@ -64,7 +64,6 @@ class EquationMeta(RegistryType):
     :raises ValueError: if the units are inconsistent.
 
         Example:
-
         .. testcode:: python
 
            from ..variables.units import meter, second
@@ -157,7 +156,6 @@ class BaseEquation(Eq):
         r"""Return a new equation with subs applied to both sides.
 
         **Examples:**
-
         >>> from essm.equations.leaf.energy_water import (
         ... eq_Rs_enbal, eq_El, eq_Hl, eq_Rll )
         >>> eq_Rs_enbal.subs(eq_El, eq_Hl, eq_Rll)
