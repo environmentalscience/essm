@@ -43,23 +43,23 @@ class EquationMeta(RegistryType):
     Example:
     .. code-block:: python
 
-        from ..variables.units import meter, second
-        class test(Equation):
-            '''Test equation.'''
+       from ..variables.units import meter, second
+       class test(Equation):
+           '''Test equation.'''
 
-            class d(Variable):
-                '''Internal variable.'''
-                unit = meter
+           class d(Variable):
+               '''Internal variable.'''
+               unit = meter
 
-            class t(Variable):
-                '''Internal variable.'''
-                unit = second
+           class t(Variable):
+               '''Internal variable.'''
+               unit = second
 
-            class v(Variable):
-                '''Internal variable.'''
-                unit = meter/second
+           class v(Variable):
+               '''Internal variable.'''
+               unit = meter/second
 
-            expr = v == d / t
+           expr = v == d / t
 
     :raises ValueError: if the units are inconsistent.
 
