@@ -43,7 +43,7 @@ env:
 
 before_install:
   - git fetch --tags
-  - travis_retry pip install twine wheel coveralls
+  - travis_retry pip install -U twine wheel coveralls pip
   - travis_retry pip install check-manifest pydocstyle
   - travis_retry pip install -r requirements-devel.txt
 

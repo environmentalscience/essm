@@ -43,6 +43,7 @@ class EquationMeta(RegistryType):
     Example:
 
     .. code-block:: python
+
        from ..variables.units import meter, second
        class test(Equation):
            '''Test equation.'''
