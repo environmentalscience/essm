@@ -97,7 +97,7 @@ def test_units_derivative():
 
         expr = Eq(demo_v, Derivative(demo_d, demo_fall.definition.t))
 
-    assert(derive_baseunit(valid_units.rhs) == meter / second)
+    assert derive_baseunit(valid_units.rhs) == meter / second
 
     with pytest.raises(ValueError):
 
