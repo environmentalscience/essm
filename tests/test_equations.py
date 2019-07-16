@@ -164,6 +164,11 @@ def test_piecewise():
                                         (demo_d * demo_t, demo_t <= demo_t1),
                                         (0, True)))
 
+        class invalid_limits1(Equation):
+            expr = Eq(demo_v, Piecewise((0, demo_t <= 0),
+                                        (demo_d / demo_t, demo_t <= demo_v),
+                                        (0, True)))
+
 
 def test_exp():
     """Test that variables can be used in exponent of equation."""

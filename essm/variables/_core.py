@@ -215,15 +215,18 @@ class Variable(object):
                 dim /= idim**count
             return factor, dim
         elif isinstance(expr, Integral):
-            # Test that integration limits have the same units
-            Variable.collect_factor_and_basedimension(sum(expr.args[1]))
+            try:
+                Variable.collect_factor_and_basedimension(sum(expr.args[1]))
+            except ValueError:
+                raise ValueError(
+                    "Wrong dimensions of integration limits ({expr}).".format(
+                        expr=expr))
             factor, dim = \
                 Variable.collect_factor_and_basedimension(expr.args[0] *
                                                           expr.args[1][0])
             return factor, dim
         elif isinstance(expr, Piecewise):
-            factor, dim = \
-                Variable.collect_factor_and_basedimension(
+            factor, dim = Variable.collect_factor_and_basedimension(
                     sum([x[0] for x in expr.args]))
             return factor, dim
         elif isinstance(expr, Function):
