@@ -122,7 +122,7 @@ def test_integrate():
     )
 
 
-def test_Integral():
+def test_integral():
     """Test that dimensions of Integrals are correct."""
     from sympy import Integral
 
@@ -146,7 +146,7 @@ def test_log():
         expr = Eq(demo_d, demo_d1 * log(demo_t))
 
 
-def test_Piecewise():
+def test_piecewise():
     """Test that dimensions of Piecewise functions are correct."""
     from sympy import Piecewise
 
