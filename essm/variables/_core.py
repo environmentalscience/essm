@@ -141,8 +141,7 @@ class Variable(object):
                                                 expr.args[1][0])
             return dim
         elif isinstance(expr, Piecewise):
-            dim = \
-                Variable.get_dimensional_expr(
+            dim = Variable.get_dimensional_expr(
                     sum([x[0] for x in expr.args]))
             return dim
         elif isinstance(expr, Function):
