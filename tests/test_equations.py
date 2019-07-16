@@ -11,7 +11,7 @@ from essm.variables.units import (joule, kelvin, kilogram, meter, mole, second,
                                   derive_baseunit)
 from essm.variables.utils import (extract_variables, replace_defaults,
                                   replace_variables)
-from sympy import Derivative, exp, S, Symbol, solve, sqrt
+from sympy import Derivative, exp, log, S, Symbol, solve, sqrt
 from sympy.physics.units import Quantity, length, meter
 
 
@@ -138,6 +138,12 @@ def test_Integral():
 
         class invalid_limits(Equation):
             expr = Eq(demo_d, Integral(demo_v, (demo_t, 1, demo_t1)))
+
+
+def test_log():
+    """Test that log(unit) is dimensionless, as integrate(1/x, x) = log(x)."""
+    class valid_log(Equation):
+        expr = Eq(demo_d, demo_d1 * log(demo_t))
 
 
 def test_Piecewise():

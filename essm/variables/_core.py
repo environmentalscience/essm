@@ -26,10 +26,11 @@ import warnings
 
 import six
 
-from sympy import (Abs, Add, Basic, Derivative, Function, Integral, Mul,
+from sympy import (Abs, Add, Basic, Derivative, Function, Integral, log, Mul,
                    Piecewise, Pow, S, Symbol)
 from sympy.physics.units import Dimension, Quantity, convert_to
 from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
+from sympy.physics.units.util import check_dimensions
 
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
@@ -65,10 +66,10 @@ class VariableMeta(RegistryType):
                 instance.expr, instance.unit = definition, unit
 
                 dim_derived = dimsys_SI.get_dimensional_dependencies(
-                    Quantity.get_dimensional_expr(derived_unit)
+                    Variable.get_dimensional_expr(derived_unit)
                 )
                 dim_unit = dimsys_SI.get_dimensional_dependencies(
-                    Quantity.get_dimensional_expr(unit)
+                    Variable.get_dimensional_expr(unit)
                 )
                 if dim_derived != dim_unit:
                     raise ValueError(
@@ -190,6 +191,8 @@ class Variable(object):
             return factor ** exp_factor, derive_base_dimension(
                 dim ** (exp_factor * exp_dim)
                 ).simplify()
+        elif isinstance(expr, log):
+            return expr, Dimension(1)
         elif isinstance(expr, Add):
             factor, dim = \
                 Variable.collect_factor_and_basedimension(expr.args[0])
