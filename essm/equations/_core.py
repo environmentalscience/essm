@@ -36,7 +36,6 @@ from ..variables._core import BaseVariable, Variable
 
 class EquationMeta(RegistryType):
     r"""Equation interface.
-
     Defines an equation with a docstring and internal variables,
     if needed.
 
@@ -91,6 +90,7 @@ class EquationMeta(RegistryType):
         .. testoutput::
 
            ValueError: Invalid expression units: meter/second == meter*second
+
     """
 
     def __new__(cls, name, parents, dct):

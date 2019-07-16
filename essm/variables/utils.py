@@ -30,7 +30,6 @@ from .units import markdown
 
 class ListTable(list):
     """Override list class to render HTML Table in Jupyter notbook.
-
     Takes a 2-dimensional list of the form ``[[1, 2, 3], [4, 5, 6]],``
     and renders an HTML Table in IPython Notebook.
 
@@ -43,6 +42,7 @@ class ListTable(list):
     >>> table.append(['1', '2'])
     >>> table
     [['Column1', 'Column2'], ['1', '2']]
+
     """
 
     def _repr_html_(self):
