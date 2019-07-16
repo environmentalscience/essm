@@ -131,7 +131,7 @@ class VariableWriter(object):
     Example:
 
     .. code-block:: python
-        from essm._generator import VariableWriter
+       from essm._generator import VariableWriter
     """
 
     TPL = VARIABLE_TPL
