@@ -129,9 +129,9 @@ class VariableWriter(object):
     """Generate Variable definitions.
 
     Example:
+
     .. code-block:: python
         from essm._generator import VariableWriter
-
     """
 
     TPL = VARIABLE_TPL
@@ -222,6 +222,7 @@ class EquationWriter(object):
     r"""Generate Equation definitions.
 
     Example:
+
     .. code-block:: python
 
         from essm.equations import Equation
@@ -243,7 +244,6 @@ class EquationWriter(object):
                                {"name": "p_Dva2", "value": '1.96e-05',
                                 "units": meter^2/second}])
         print(writer)
-
     """
 
     TPL = EQUATION_TPL

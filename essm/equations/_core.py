@@ -41,6 +41,7 @@ class EquationMeta(RegistryType):
     if needed.
 
     Example:
+
     .. code-block:: python
 
        from ..variables.units import meter, second
@@ -63,32 +64,33 @@ class EquationMeta(RegistryType):
 
     :raises ValueError: if the units are inconsistent.
 
-        Example:
-        .. testcode:: python
+    Example:
 
-           from ..variables.units import meter, second
-           class test(Equation):
-               '''Test equation with inconsistent units.'''
+    .. testcode:: python
 
-               class d(Variable):
-                   '''Internal variable.'''
-                   unit = meter
+       from ..variables.units import meter, second
+       class test(Equation):
+           '''Test equation with inconsistent units.'''
 
-               class t(Variable):
-                   '''Internal variable.'''
-                   unit = second
+           class d(Variable):
+               '''Internal variable.'''
+               unit = meter
 
-               class v(Variable):
-                   '''Internal variable.'''
-                   unit = meter/second
+           class t(Variable):
+               '''Internal variable.'''
+               unit = second
 
-               expr = v == d * t
+           class v(Variable):
+               '''Internal variable.'''
+               unit = meter/second
 
-        Since the units of v and d*t are not the same, this returns:
+           expr = v == d * t
 
-        .. testoutput::
+    Since the units of v and d*t are not the same, this returns:
 
-           ValueError: Invalid expression units: meter/second == meter*second
+    .. testoutput::
+
+       ValueError: Invalid expression units: meter/second == meter*second
 
     """
 
@@ -156,6 +158,7 @@ class BaseEquation(Eq):
         r"""Return a new equation with subs applied to both sides.
 
         **Examples:**
+
         >>> from essm.equations.leaf.energy_water import (
         ... eq_Rs_enbal, eq_El, eq_Hl, eq_Rll )
         >>> eq_Rs_enbal.subs(eq_El, eq_Hl, eq_Rll)
