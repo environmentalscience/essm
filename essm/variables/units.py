@@ -135,6 +135,7 @@ def derive_baseunit(expr, name=None):
     from sympy.physics.units import Dimension
     from sympy.physics.units.dimensions import dimsys_SI
 
+    Variable.check_unit(expr)  # check for dimensional consistency
     variables = extract_variables(expr)
     for var1 in variables:
         q1 = Quantity('q_' + str(var1))
