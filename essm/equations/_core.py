@@ -30,6 +30,7 @@ from sympy.core.relational import Eq
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
 from ..variables import Variable
+from ..variables.units import derive_baseunit
 from ..variables._core import BaseVariable, Variable
 
 
@@ -43,53 +44,54 @@ class EquationMeta(RegistryType):
 
     .. code-block:: python
 
-        from ..variables.units import meter, second
-        class test(Equation):
-            '''Test equation.'''
+       from ..variables.units import meter, second
+       class test(Equation):
+           '''Test equation.'''
 
-            class d(Variable):
-                '''Internal variable.'''
-                unit = meter
+           class d(Variable):
+               '''Internal variable.'''
+               unit = meter
 
-            class t(Variable):
-                '''Internal variable.'''
-                unit = second
+           class t(Variable):
+               '''Internal variable.'''
+               unit = second
 
-            class v(Variable):
-                '''Internal variable.'''
-                unit = meter/second
+           class v(Variable):
+               '''Internal variable.'''
+               unit = meter/second
 
-            expr = v == d / t
+           expr = v == d / t
 
     :raises ValueError: if the units are inconsistent.
 
-        Example:
+    Example:
 
-        .. testcode:: python
+    .. testcode:: python
 
-           from ..variables.units import meter, second
-           class test(Equation):
-               '''Test equation with inconsistent units.'''
+       from ..variables.units import meter, second
+       class test(Equation):
+           '''Test equation with inconsistent units.'''
 
-               class d(Variable):
-                   '''Internal variable.'''
-                   unit = meter
+           class d(Variable):
+               '''Internal variable.'''
+               unit = meter
 
-               class t(Variable):
-                   '''Internal variable.'''
-                   unit = second
+           class t(Variable):
+               '''Internal variable.'''
+               unit = second
 
-               class v(Variable):
-                   '''Internal variable.'''
-                   unit = meter/second
+           class v(Variable):
+               '''Internal variable.'''
+               unit = meter/second
 
-               expr = v == d * t
+           expr = v == d * t
 
-        Since the units of v and d*t are not the same, this returns:
+    Since the units of v and d*t are not the same, this returns:
 
-        .. testoutput::
+    .. testoutput::
 
-           ValueError: Invalid expression units: meter/second == meter*second
+       ValueError: Invalid expression units: meter/second == meter*second
+
     """
 
     def __new__(cls, name, parents, dct):
@@ -131,7 +133,7 @@ class BaseEquation(Eq):
         if not isinstance(expr, Eq):
             return expr
         # The below raises an error if units are not consistent
-        Variable.collect_factor_and_basedimension(expr.lhs + expr.rhs)
+        Variable.check_unit(expr.lhs + expr.rhs)
         self = super(BaseEquation, cls).__new__(cls, *expr.args)
         self.definition = definition
         return self

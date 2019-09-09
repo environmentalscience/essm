@@ -135,16 +135,17 @@ def derive_baseunit(expr, name=None):
     from sympy.physics.units import Dimension
     from sympy.physics.units.dimensions import dimsys_SI
 
+    Variable.check_unit(expr)  # check for dimensional consistency
     variables = extract_variables(expr)
     for var1 in variables:
         q1 = Quantity('q_' + str(var1))
         q1.set_dimension(
-            Dimension(Quantity.get_dimensional_expr(
+            Dimension(Variable.get_dimensional_expr(
                 derive_baseunit(var1.definition.unit)))
         )
         q1.set_scale_factor(var1.definition.unit)
         expr = expr.xreplace({var1: q1})
-    dim = Dimension(Quantity.get_dimensional_expr(expr))
+    dim = Dimension(Variable.get_dimensional_expr(expr))
     return functools.reduce(
         operator.mul, (
             SI_BASE_DIMENSIONS[Symbol(d)] ** p

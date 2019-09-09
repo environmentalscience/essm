@@ -7,10 +7,11 @@ from essm import Eq
 from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
-from essm.variables.units import joule, kelvin, kilogram, meter, mole, second
+from essm.variables.units import (joule, kelvin, kilogram, meter, mole, second,
+                                  derive_baseunit)
 from essm.variables.utils import (extract_variables, replace_defaults,
                                   replace_variables)
-from sympy import Derivative, exp, S, Symbol, solve, sqrt
+from sympy import Derivative, exp, log, S, Symbol, solve, sqrt
 from sympy.physics.units import Quantity, length, meter
 
 
@@ -43,6 +44,18 @@ class demo_d1(Variable):
     """Test variable."""
 
     unit = meter
+
+
+class demo_t(Variable):
+    """Test variable."""
+
+    unit = second
+
+
+class demo_t1(Variable):
+    """Test variable."""
+
+    unit = second
 
 
 class demo_v(Variable):
@@ -84,6 +97,8 @@ def test_units_derivative():
 
         expr = Eq(demo_v, Derivative(demo_d, demo_fall.definition.t))
 
+    assert derive_baseunit(valid_units.rhs) == meter / second
+
     with pytest.raises(ValueError):
 
         class invalid_units_derivative(Equation):
@@ -98,13 +113,61 @@ def test_units_sqrt():
         expr = Eq(demo_v, sqrt(demo_d * demo_d1) / demo_fall.definition.t)
 
 
-def test_integral():
+def test_integrate():
     """Test that variables can be used as integration symbols."""
     from sympy import integrate
 
     assert demo_g * demo_fall.definition.t ** S(3) / S(6) == integrate(
         demo_fall.rhs, demo_fall.definition.t
     )
+
+
+def test_integral():
+    """Test that dimensions of Integrals are correct."""
+    from sympy import Integral
+
+    class valid_general_integral(Equation):
+        expr = Eq(demo_d, Integral(demo_v, demo_t))
+
+    class valid_specific_integral(Equation):
+        expr = Eq(demo_d, Integral(demo_v, (demo_t, 0, demo_t1)))
+
+    assert(derive_baseunit(valid_specific_integral.rhs) == meter)
+
+    with pytest.raises(ValueError):
+
+        class invalid_limits(Equation):
+            expr = Eq(demo_d, Integral(demo_v, (demo_t, 1, demo_t1)))
+
+
+def test_log():
+    """Test that log(unit) is dimensionless, as integrate(1/x, x) = log(x)."""
+    class valid_log(Equation):
+        expr = Eq(demo_d, demo_d1 * log(demo_t))
+
+
+def test_piecewise():
+    """Test that dimensions of Piecewise functions are correct."""
+    from sympy import Piecewise
+
+    class valid_piecewise(Equation):
+        expr = Eq(demo_v, Piecewise((0, demo_t <= 0),
+                                    (demo_d / demo_t, demo_t <= demo_t1),
+                                    (0, True)))
+
+    assert(derive_baseunit(valid_piecewise.rhs) == meter / second)
+
+    with pytest.raises(ValueError):
+
+        class invalid_units1(Equation):
+            expr = Eq(demo_v, Piecewise((0, demo_t <= 0),
+                                        (demo_d * demo_t, demo_t <= demo_t1),
+                                        (0, True)))
+
+        class invalid_limits1(Equation):
+            expr = Eq(demo_v, Piecewise((0, demo_t <= 0),
+                                        (demo_d / demo_t, demo_t <= demo_v),
+                                        (0, True)))
 
 
 def test_exp():

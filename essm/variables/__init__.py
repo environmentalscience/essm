@@ -38,7 +38,6 @@ Then you can define a custom variable with its name, description, domain,
 latex_name, unit, and an optional default value.
 
 Example:
-
 .. code-block:: python
 
    from .variables.units import meter

@@ -26,9 +26,11 @@ import warnings
 
 import six
 
-from sympy import Abs, Add, Basic, Derivative, Function, Mul, Pow, S, Symbol
+from sympy import (Abs, Add, Basic, Derivative, Function, Integral, log, Mul,
+                   Piecewise, Pow, S, Symbol)
 from sympy.physics.units import Dimension, Quantity, convert_to
 from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
+from sympy.physics.units.util import check_dimensions
 
 from ..bases import RegistryType
 from ..transformer import build_instance_expression
@@ -64,10 +66,10 @@ class VariableMeta(RegistryType):
                 instance.expr, instance.unit = definition, unit
 
                 dim_derived = dimsys_SI.get_dimensional_dependencies(
-                    Quantity.get_dimensional_expr(derived_unit)
+                    Variable.get_dimensional_expr(derived_unit)
                 )
                 dim_unit = dimsys_SI.get_dimensional_dependencies(
-                    Quantity.get_dimensional_expr(unit)
+                    Variable.get_dimensional_expr(unit)
                 )
                 if dim_derived != dim_unit:
                     raise ValueError(
@@ -134,6 +136,14 @@ class Variable(object):
             for independent, count in expr.variable_count:
                 dim /= Variable.get_dimensional_expr(independent) ** count
             return dim
+        elif isinstance(expr, Integral):
+            dim = Variable.get_dimensional_expr(expr.args[0] *
+                                                expr.args[1][0])
+            return dim
+        elif isinstance(expr, Piecewise):
+            dim = Variable.get_dimensional_expr(
+                    sum([x[0] for x in expr.args]))
+            return dim
         elif isinstance(expr, Function):
             args = [Variable.get_dimensional_expr(arg) for arg in expr.args]
             if all(i == 1 for i in args):
@@ -142,7 +152,7 @@ class Variable(object):
         elif isinstance(expr, Quantity):
             return expr.dimension.name
         elif isinstance(expr, BaseVariable):
-            return Quantity.get_dimensional_expr(expr.definition.unit)
+            return Variable.get_dimensional_expr(expr.definition.unit)
         return S.One
 
     @staticmethod
@@ -179,7 +189,9 @@ class Variable(object):
                 exp_dim = 1
             return factor ** exp_factor, derive_base_dimension(
                 dim ** (exp_factor * exp_dim)
-                )
+                ).simplify()
+        elif isinstance(expr, log):
+            return expr, Dimension(1)
         elif isinstance(expr, Add):
             factor, dim = \
                 Variable.collect_factor_and_basedimension(expr.args[0])
@@ -201,6 +213,21 @@ class Variable(object):
                     Variable.collect_factor_and_basedimension(independent)
                 factor /= ifactor**count
                 dim /= idim**count
+            return factor, dim
+        elif isinstance(expr, Integral):
+            try:
+                Variable.collect_factor_and_basedimension(sum(expr.args[1]))
+            except ValueError:
+                raise ValueError(
+                    "Wrong dimensions of integration limits ({expr}).".format(
+                        expr=expr))
+            factor, dim = \
+                Variable.collect_factor_and_basedimension(expr.args[0] *
+                                                          expr.args[1][0])
+            return factor, dim
+        elif isinstance(expr, Piecewise):
+            factor, dim = Variable.collect_factor_and_basedimension(
+                    sum([x[0] for x in expr.args]))
             return factor, dim
         elif isinstance(expr, Function):
             fds = [Variable.collect_factor_and_basedimension(
