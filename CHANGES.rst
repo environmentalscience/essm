@@ -1,6 +1,24 @@
 Changes
 =======
 
+``v0.4.0``
+----------
+*released 2019-11-19*
+
+Bug Fixes
+~~~~~~~~~
+
+- **equations:** Improve dimensional testing of equations and substitution (`PR #73 <https://github.com/environmentalscience/essm/pull/73>`__)
+
+- **equations:** Add support for Integral and Piecewise in Equation PR (`PR #76 <https://github.com/environmentalscience/essm/pull/76>`__)
+
+
+Features
+~~~~~~~~
+
+-  **utils:** subs_eq() for simultaneous substitutions.(`PR #75 <https://github.com/environmentalscience/essm/pull/75>`__)
+
+
 ``v0.3.0``
 ----------
 *released 2019-04-09*
