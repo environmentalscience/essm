@@ -7,6 +7,7 @@ include *.yapf
 include docs/requirements.txt
 include LICENSE
 recursive-include docs *.bib
+recursive-include docs *.ipynb
 recursive-include docs *.py
 recursive-include docs *.rst
 recursive-include docs Makefile
