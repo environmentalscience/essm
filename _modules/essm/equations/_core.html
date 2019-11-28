@@ -55,18 +55,18 @@
 <span class="c1"># MA 02111-1307, USA.</span>
 <span class="sd">&quot;&quot;&quot;Core equation type. Contains class definitions related to equations.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">from</span> <span class="nn">sympy.core.relational</span> <span class="k">import</span> <span class="n">Eq</span>
+<span class="kn">from</span> <span class="nn">sympy.core.relational</span> <span class="kn">import</span> <span class="n">Eq</span>
 
-<span class="kn">from</span> <span class="nn">..bases</span> <span class="k">import</span> <span class="n">RegistryType</span>
-<span class="kn">from</span> <span class="nn">..transformer</span> <span class="k">import</span> <span class="n">build_instance_expression</span>
-<span class="kn">from</span> <span class="nn">..variables</span> <span class="k">import</span> <span class="n">Variable</span>
-<span class="kn">from</span> <span class="nn">..variables.units</span> <span class="k">import</span> <span class="n">derive_baseunit</span>
-<span class="kn">from</span> <span class="nn">..variables._core</span> <span class="k">import</span> <span class="n">BaseVariable</span><span class="p">,</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">..bases</span> <span class="kn">import</span> <span class="n">RegistryType</span>
+<span class="kn">from</span> <span class="nn">..transformer</span> <span class="kn">import</span> <span class="n">build_instance_expression</span>
+<span class="kn">from</span> <span class="nn">..variables</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">..variables.units</span> <span class="kn">import</span> <span class="n">derive_baseunit</span>
+<span class="kn">from</span> <span class="nn">..variables._core</span> <span class="kn">import</span> <span class="n">BaseVariable</span><span class="p">,</span> <span class="n">Variable</span>
 
 
 <div class="viewcode-block" id="EquationMeta"><a class="viewcode-back" href="../../../api.html#essm.equations.EquationMeta">[docs]</a><span class="k">class</span> <span class="nc">EquationMeta</span><span class="p">(</span><span class="n">RegistryType</span><span class="p">):</span>
@@ -129,7 +129,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Build and register new variable.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s1">&#39;__registry__&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
             <span class="n">dct</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
@@ -164,7 +164,7 @@
 <span class="k">class</span> <span class="nc">BaseEquation</span><span class="p">(</span><span class="n">Eq</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add definition and short unit.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">definition</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">definition</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Eq</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">expr</span>
         <span class="c1"># The below raises an error if units are not consistent</span>
@@ -177,7 +177,7 @@
     <span class="k">def</span> <span class="nf">__doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="vm">__doc__</span>
 
-    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Combine two equations.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Eq</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -274,9 +274,9 @@
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
-    
     <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
     
 </ul>
 <div class="relations">

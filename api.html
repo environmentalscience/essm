@@ -46,11 +46,11 @@ physical constants.</p>
 <div class="section" id="creating-variables">
 <h3>Creating variables<a class="headerlink" href="#creating-variables" title="Permalink to this headline">¶</a></h3>
 <p>To create custom variables, first import <cite>Variable</cite>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables</span> <span class="k">import</span> <span class="n">Variable</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables</span> <span class="kn">import</span> <span class="n">Variable</span>
 </pre></div>
 </div>
 <p>To define units, you must first import these units from the library:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.units</span> <span class="k">import</span> <span class="n">joule</span><span class="p">,</span> <span class="n">kelvin</span><span class="p">,</span> <span class="n">meter</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.units</span> <span class="kn">import</span> <span class="n">joule</span><span class="p">,</span> <span class="n">kelvin</span><span class="p">,</span> <span class="n">meter</span>
 </pre></div>
 </div>
 <p>Then you can define a custom variable with its name, description, domain,
@@ -80,8 +80,8 @@ their default values, <cite>Variable.__units__</cite> returns their units, and
 in short notation.</p>
 <p>This module also contains libraries of pre-defined variables, which
 can be imported into your session, e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.leaf.energy_water</span> <span class="k">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.leaf.energy_water</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 <dl class="class">
@@ -2400,15 +2400,15 @@ and defining internal variables.</p>
 <div class="section" id="creating-equations">
 <h3>Creating equations<a class="headerlink" href="#creating-equations" title="Permalink to this headline">¶</a></h3>
 <p>To create custom equations, first import <cite>Equation</cite> and variables needed:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations</span> <span class="k">import</span> <span class="n">Equation</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations</span> <span class="kn">import</span> <span class="n">Equation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.physics.thermodynamics</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="importing-pre-defined-equations">
 <h3>Importing pre-defined equations<a class="headerlink" href="#importing-pre-defined-equations" title="Permalink to this headline">¶</a></h3>
 <p>You can import pre-defined equations as e.g.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations.physics.thermodynamics</span> <span class="k">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations.physics.thermodynamics</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 <dl class="class">
@@ -3187,9 +3187,9 @@ if needed.</p>
 <hr />
 <ul>
     
-    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
-    
     <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
+    
+    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
     
 </ul>
 <div class="relations">
