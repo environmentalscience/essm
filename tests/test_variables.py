@@ -175,4 +175,4 @@ def test_generate_metadata_table():
              'Units'),
             ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.', '$$',
             '2450000.0', 'J kg$^{-1}$'), ('$E_l$', 'E_l',
-            'Latent heat flux from leaf.', '$$', '-', 'J m$^{-2}$ s$^{-1}$')]
+            'Latent heat flux from leaf.', '$$', '-', 'J s$^{-1}$ m$^{-2}$')]
