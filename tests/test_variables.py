@@ -165,6 +165,7 @@ def test_markdown():
     """Check markdown representation of units."""
     assert markdown(kilogram * meter / second ** 2) == 'kg m s$^{-2}$'
     assert markdown(meter / second) == 'm s$^{-1}$'
+    assert markdown(second / meter) == 's m$^{-1}$'
 
 
 def test_generate_metadata_table():
