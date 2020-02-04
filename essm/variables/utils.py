@@ -56,20 +56,23 @@ class ListTable(list):
         return ''.join(html)
 
 
-def generate_metadata_table(variables=None, include_header=True):
+def generate_metadata_table(variables=None, include_header=True, cols=None):
     """Generate table of variables, default values and units.
 
     If variables not provided in list ``variables``, table will contain
     all variables in ``Variables.__registry__``.
+    It is possible to remove columns by providing a tuple with a subste of:
+    cols=('Symbol', 'Name', 'Description', 'Definition',
+                'Default value', 'Units')
     """
     from ._core import Variable
+    all_cols = ('Symbol', 'Name', 'Description', 'Definition',
+                'Default value', 'Units')
+    cols = cols or all_cols
     table = ListTable()
     variables = variables or Variable.__registry__.keys()
     if include_header:
-        table.append(
-            ('Symbol', 'Name', 'Description', 'Definition',
-             'Default value', 'Units')
-        )
+        table.append(cols)
 
     for variable in sorted(variables,
                            key=lambda x: x.definition.latex_name.lower()):
@@ -83,9 +86,16 @@ def generate_metadata_table(variables=None, include_header=True):
             defn = ''
         val = str(Variable.__defaults__.get(variable, '-'))
         unit = markdown(variable.definition.unit)
+        dict_col = {}
+        dict_col['Symbol'] = symbol
+        dict_col['Name'] = name
+        dict_col['Description'] = doc
+        dict_col['Definition'] = defn
+        dict_col['Default value'] = val
+        dict_col['Units'] = unit
 
         table.append(
-            (symbol, name, doc, defn, val, unit)
+            tuple(dict_col[item] for item in cols)
         )
     return table
 
