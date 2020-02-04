@@ -165,6 +165,7 @@ def test_markdown():
     """Check markdown representation of units."""
     assert markdown(kilogram * meter / second ** 2) == 'kg m s$^{-2}$'
     assert markdown(meter / second) == 'm s$^{-1}$'
+    assert markdown(second / meter) == 's m$^{-1}$'
 
 
 def test_generate_metadata_table():
@@ -172,6 +173,6 @@ def test_generate_metadata_table():
     assert generate_metadata_table([E_l, lambda_E]) \
         == [('Symbol', 'Name', 'Description', 'Definition', 'Default value',
              'Units'),
-            ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.', '$$',
+            ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.', '',
             '2450000.0', 'J kg$^{-1}$'), ('$E_l$', 'E_l',
-            'Latent heat flux from leaf.', '$$', '-', 'J m$^{-2}$ s$^{-1}$')]
+            'Latent heat flux from leaf.', '', '-', 'J s$^{-1}$ m$^{-2}$')]

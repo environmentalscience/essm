@@ -100,7 +100,6 @@ def markdown(unit):
             if isinstance(arg, Quantity):
                 tuples.append((str(arg.abbrev), 1))
         tuples.sort(key=itemgetter(1), reverse=True)
-        tuples.sort(key=itemgetter(0))
         for item in tuples:
             if item[1] == 1:
                 str1 = str1 + ' ' + item[0]
