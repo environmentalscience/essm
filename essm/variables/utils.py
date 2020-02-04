@@ -76,11 +76,16 @@ def generate_metadata_table(variables=None, include_header=True):
         symbol = '$' + variable.definition.latex_name + '$'
         name = str(variable)
         doc = variable.__doc__
-        defn = '$' + latex(Variable.__expressions__.get(variable, '')) + '$'
+        defn1 = Variable.__expressions__.get(variable, '')
+        if len(defn1) > 1:
+            defn = '$' + latex(defn1) + '$'
+        else:
+            defn = ''
         val = str(Variable.__defaults__.get(variable, '-'))
+        unit = markdown(variable.definition.unit)
 
         table.append(
-            (symbol, name, doc, defn, val, markdown(variable.definition.unit))
+            (symbol, name, doc, defn, val, unit)
         )
     return table
 

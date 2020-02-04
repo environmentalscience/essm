@@ -173,6 +173,6 @@ def test_generate_metadata_table():
     assert generate_metadata_table([E_l, lambda_E]) \
         == [('Symbol', 'Name', 'Description', 'Definition', 'Default value',
              'Units'),
-            ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.', '$$',
+            ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.', '',
             '2450000.0', 'J kg$^{-1}$'), ('$E_l$', 'E_l',
-            'Latent heat flux from leaf.', '$$', '-', 'J s$^{-1}$ m$^{-2}$')]
+            'Latent heat flux from leaf.', '', '-', 'J s$^{-1}$ m$^{-2}$')]
