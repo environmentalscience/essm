@@ -170,9 +170,12 @@ def test_markdown():
 
 def test_generate_metadata_table():
     """Check display of table of units."""
-    assert generate_metadata_table([E_l, lambda_E]) \
+    assert generate_metadata_table([demo_expression_variable, E_l, lambda_E]) \
         == [('Symbol', 'Name', 'Description', 'Definition', 'Default value',
              'Units'),
             ('$\\lambda_E$', 'lambda_E', 'Latent heat of evaporation.', '',
-            '2450000.0', 'J kg$^{-1}$'), ('$E_l$', 'E_l',
+            '2450000.0', 'J kg$^{-1}$'),
+            ('$demo_expression_variable$', 'demo_expression_variable',
+            'Test expression variable.', '$2 demo_variable$', '-', 'm'),
+            ('$E_l$', 'E_l',
             'Latent heat flux from leaf.', '', '-', 'J s$^{-1}$ m$^{-2}$')]

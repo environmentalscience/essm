@@ -80,7 +80,7 @@ def generate_metadata_table(variables=None, include_header=True, cols=None):
         name = str(variable)
         doc = variable.__doc__
         defn1 = Variable.__expressions__.get(variable, '')
-        if len(defn1) > 1:
+        if len(str(defn1)) > 1:
             defn = '$' + latex(defn1) + '$'
         else:
             defn = ''
