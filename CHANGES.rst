@@ -1,6 +1,18 @@
 Changes
 =======
 
+``v0.4.2``
+----------
+*released 2019-11-20*
+
+Bug Fixes
+~~~~~~~~~
+
+- **utils:** Improve markdown representation of units (`PR #79 <https://github.com/environmentalscience/essm/pull/79>`__)
+
+- **variables:**  Fix generate_metadata_table for selected variables (`PR #80 <https://github.com/environmentalscience/essm/pull/80>`__)
+
+
 ``v0.4.1``
 ----------
 *released 2019-11-20*
