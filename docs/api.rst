@@ -2,6 +2,14 @@
 API Docs
 ========
 
+Jupyter notebooks with API examples
+===================================
+A jupyter notebook with tables of importable variables and equations can be found at
+:doc:`examples/importable_variables_equations.rst`
+
+A jupyter notebook with use examples for the API can be found at 
+:doc:`examples/api_features.rst`
+
 Variables
 =========
 
@@ -95,3 +103,7 @@ Internals
    
 .. automodule:: essm.equations._core
    :members:
+
+Bibliography
+============
+.. bibliography:: refs.bib
