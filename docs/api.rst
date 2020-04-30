@@ -92,7 +92,3 @@ Internals
    
 .. automodule:: essm.equations._core
    :members:
-
-Bibliography
-============
-.. bibliography:: refs.bib
