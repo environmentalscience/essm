@@ -23,7 +23,7 @@ fromm ESSM.
 
    examples/importable_variables_equations
 
-API Examples
+Use examples
 =============
 
 Here you find use examples for different API features of ESSM.

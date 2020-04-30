@@ -4,11 +4,11 @@ API Docs
 
 Jupyter notebooks with API examples
 ===================================
-A jupyter notebook with tables of importable variables and equations can be found at
-:doc:`examples/importable_variables_equations.rst`
+A jupyter notebook with tables of importable variables and equations can be found at 
+https://github.com/environmentalscience/essm/blob/master/docs/examples/importable_variables_equations.ipynb
 
 A jupyter notebook with use examples for the API can be found at 
-:doc:`examples/api_features.rst`
+https://github.com/environmentalscience/essm/blob/master/docs/examples/api_features.ipynb
 
 Variables
 =========
