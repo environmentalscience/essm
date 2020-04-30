@@ -165,7 +165,7 @@ html_theme_options = {
     'logo': 'logo.png',
     'logo_name': False,
     'description':
-        'This package contains helpers to deal with physical variables '
+        'Python package for dealing with physical variables '
         'and units.',
     'github_user': 'environmentalscience',
     'github_repo': 'essm',
