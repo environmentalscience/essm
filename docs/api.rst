@@ -43,10 +43,10 @@ Radiation
 .. automodule:: essm.variables.leaf.radiation
    :members:
 
-Water Vapour
-~~~~~~~~~~~~
+Energy and Water
+~~~~~~~~~~~~~~~~
 
-.. automodule:: essm.variables.leaf.water_vapour
+.. automodule:: essm.variables.leaf.energy_water
    :members:
 
 Physics
