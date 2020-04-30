@@ -2,14 +2,14 @@ from essm.variables._core import BaseVariable, Variable
 from essm.equations import Equation
 from sympy import (Abs, Derivative, Eq, exp,
                    Integral, log, Piecewise, sqrt)
-from sympy.physics.units import meter
 from sympy.physics.units import second
 from sympy.physics.units import watt
 from sympy.physics.units import kelvin
-from sympy.physics.units import kilogram
-from sympy.physics.units import pascal
 from sympy.physics.units import mole
 from sympy.physics.units import joule
+from sympy.physics.units import pascal
+from sympy.physics.units import kilogram
+from sympy.physics.units import meter
 
 
 class alpha_a(Variable):
