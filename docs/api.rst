@@ -66,17 +66,6 @@ Equations
 
 .. automodule:: essm.equations
 
-Chamber
--------
-
-.. automodule:: essm.equations.chamber
-
-Insulation
-~~~~~~~~~~
-
-.. automodule:: essm.equations.chamber.insulation
-   :members:
-
 Leaf
 ----
 
