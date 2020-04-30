@@ -1,2 +1,8 @@
 -e git+https://github.com/sympy/sympy.git#egg=sympy
+jupyter
+nbconvert
+pandoc
+nbsphinx
+IPython
+ipykernel
 nbsphinx
