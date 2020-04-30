@@ -43,6 +43,7 @@ extras_require = {
         'Sphinx==1.8',
         'matplotlib>=1.5.1',
         'sphinxcontrib-bibtex>=0.3.5',
+        'nbsphinx>=0.6.1'
     ],
     'generator': ['yapf>=0.16.2', ],
     'tests':
