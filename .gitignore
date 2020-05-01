@@ -76,3 +76,6 @@ essm/version.py
 # Jupyter temp files
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+
+# Docu build
+docs/_build
