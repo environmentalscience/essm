@@ -77,5 +77,5 @@ essm/version.py
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 
-# Docu build
-docs/_build
+# Documentation build
+docs/_build/
