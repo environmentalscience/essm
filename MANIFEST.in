@@ -15,4 +15,6 @@ recursive-include docs/_static *.png
 recursive-include essm *.yapf
 recursive-include tests *.py
 
+recursive-exclude docs/_build *
+
 prune src
