@@ -48,7 +48,8 @@ extras_require = {
     'generator': ['yapf>=0.16.2', ],
     'tests':
         tests_require,
-    'dev': ['jupyter',
+    'dev': [
+        'jupyter',
         'nbconvert',
         'pandoc',
         'nbsphinx',
