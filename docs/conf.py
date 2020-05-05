@@ -94,7 +94,8 @@ extensions = [
     'matplotlib.sphinxext.plot_directive', 'sphinxcontrib.bibtex',
     'sphinx.ext.autodoc', 'sphinx.ext.autosummary', 'sphinx.ext.doctest',
     'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.coverage',
-    'sphinx.ext.mathjax', 'sphinx.ext.viewcode', 'sphinx.ext.githubpages'
+    'sphinx.ext.mathjax', 'sphinx.ext.viewcode', 'sphinx.ext.githubpages',
+    'nbsphinx'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -140,7 +141,8 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store',
+                   '**.ipynb_checkpoints']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -163,7 +165,7 @@ html_theme_options = {
     'logo': 'logo.png',
     'logo_name': False,
     'description':
-        'This package contains helpers to deal with physical variables '
+        'Python package for dealing with physical variables '
         'and units.',
     'github_user': 'environmentalscience',
     'github_repo': 'essm',
@@ -250,4 +252,7 @@ intersphinx_mapping = {'https://docs.python.org/': None}
 
 autoclass_content = 'both'
 
-autodoc_default_flags = ['members', 'undoc-members', 'show-inheritance']
+autodoc_default_options = {
+    'undoc-members': True,
+    'show-inheritance': True
+}

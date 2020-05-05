@@ -12,6 +12,27 @@ ESSM.
    installation
    usage
 
+Importable variables and equations
+==================================
+
+Here you find examples for importing pre-defined variables and equations 
+fromm ESSM.
+
+.. toctree::
+   :maxdepth: 3
+
+   examples/importable_variables_equations
+
+Use examples
+=============
+
+Here you find use examples for different API features of ESSM.
+
+.. toctree::
+   :maxdepth: 3
+
+   examples/api_features
+
 API Reference
 =============
 

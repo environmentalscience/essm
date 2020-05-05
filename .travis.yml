@@ -42,6 +42,7 @@ env:
 
 before_install:
   - git fetch --tags
+  - sudo apt-get install pandoc
   - travis_retry pip install -U twine wheel coveralls pip
   - travis_retry pip install check-manifest pydocstyle
   - travis_retry pip install -r requirements-devel.txt

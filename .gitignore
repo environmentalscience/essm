@@ -72,3 +72,10 @@ src/*
 
 # version.py
 essm/version.py
+
+# Jupyter temp files
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Documentation build
+docs/_build/
