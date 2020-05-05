@@ -2,6 +2,14 @@
 API Docs
 ========
 
+Jupyter notebooks with API examples
+===================================
+A jupyter notebook with tables of importable variables and equations can be found at 
+https://github.com/environmentalscience/essm/blob/master/docs/examples/importable_variables_equations.ipynb
+
+A jupyter notebook with use examples for the API can be found at 
+https://github.com/environmentalscience/essm/blob/master/docs/examples/api_features.ipynb
+
 Variables
 =========
 
@@ -35,10 +43,10 @@ Radiation
 .. automodule:: essm.variables.leaf.radiation
    :members:
 
-Water Vapour
-~~~~~~~~~~~~
+Energy and Water
+~~~~~~~~~~~~~~~~
 
-.. automodule:: essm.variables.leaf.water_vapour
+.. automodule:: essm.variables.leaf.energy_water
    :members:
 
 Physics
@@ -57,17 +65,6 @@ Equations
 =========
 
 .. automodule:: essm.equations
-
-Chamber
--------
-
-.. automodule:: essm.equations.chamber
-
-Insulation
-~~~~~~~~~~
-
-.. automodule:: essm.equations.chamber.insulation
-   :members:
 
 Leaf
 ----

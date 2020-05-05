@@ -6,14 +6,16 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Environmental Science using Symbolic Math &#8212; ESSM 0.4.2 documentation</title>
+    <title>Environmental Science using Symbolic Math &#8212; ESSM 0.4.3.dev1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="installation.html" />
@@ -66,6 +68,72 @@ ESSM.</p>
 </ul>
 </div>
 </div>
+<div class="section" id="importable-variables-and-equations">
+<h2>Importable variables and equations<a class="headerlink" href="#importable-variables-and-equations" title="Permalink to this headline">¶</a></h2>
+<p>Here you find examples for importing pre-defined variables and equations
+fromm ESSM.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/importable_variables_equations.html">Importable variables and equations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/importable_variables_equations.html#General-physics-variables-and-equations">General physics variables and equations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/importable_variables_equations.html#Variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/importable_variables_equations.html#Equations">Equations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/importable_variables_equations.html#Variables-and-equations-related-to-plant-leaves">Variables and equations related to plant leaves</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/importable_variables_equations.html#Variables-for-leaf-energy-and-water-balance">Variables for leaf energy and water balance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/importable_variables_equations.html#Equations-for-leaf-energy-and-water-balance">Equations for leaf energy and water balance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/importable_variables_equations.html#Variables-for-leaf-radiative-balance">Variables for leaf radiative balance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/importable_variables_equations.html#Variables-for-leaf-chamber-model">Variables for leaf chamber model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/importable_variables_equations.html#Leaf-chamber-insulation">Leaf chamber insulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/importable_variables_equations.html#Leaf-chamber-mass-balance">Leaf chamber mass balance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/importable_variables_equations.html#Bibliography">Bibliography</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="use-examples">
+<h2>Use examples<a class="headerlink" href="#use-examples" title="Permalink to this headline">¶</a></h2>
+<p>Here you find use examples for different API features of ESSM.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/api_features.html">Use examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/api_features.html#Importing-variables-and-equations-from-essm">Importing variables and equations from essm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/api_features.html#Plotting">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/api_features.html#Creating-new-variables">Creating new variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Variables-with-expressions-as-definitions">Variables with expressions as definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Linking-assumptions-to-variables">Linking assumptions to variables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/api_features.html#Creating-new-equations">Creating new equations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Custom-equation">Custom equation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#New-equation-based-on-manipulation-of-previous-equations">New equation based on manipulation of previous equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Show-inheritance-of-equations">Show inheritance of equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Computational-burden-of-deriving-equations-within-class-definition">Computational burden of deriving equations within class definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Empirical-equations-with-internal-variables">Empirical equations with internal variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Piecewise-defined-equations">Piecewise defined equations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples/api_features.html#Substituting-into-integrals-and-derivatives-and-evaluating">Substituting into integrals and derivatives and evaluating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/api_features.html#Unit-conversions">Unit conversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/api_features.html#Exporting-definitions">Exporting definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/api_features.html#Numerical-evaluations">Numerical evaluations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Substitution-of-equations-and-values-into-equations">Substitution of equations and values into equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Evaluation-of-equations-for-long-lists-of-variable-sets">Evaluation of equations for long lists of variable sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Numerical-solution">Numerical solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/api_features.html#Generate-code-from-sympy-expressions-and-execute">Generate code from sympy expressions and execute</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="api-reference">
 <h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
 <p>If you are looking for information on a specific function, class or method,
@@ -73,6 +141,7 @@ this part of the documentation is for you.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#jupyter-notebooks-with-api-examples">Jupyter notebooks with API examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#module-essm.variables">Variables</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#creating-variables">Creating variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#module-essm.variables.chamber">Chamber</a></li>
@@ -84,9 +153,8 @@ this part of the documentation is for you.</p>
 <li class="toctree-l2"><a class="reference internal" href="api.html#module-essm.equations">Equations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#creating-equations">Creating equations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#importing-pre-defined-equations">Importing pre-defined equations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id1">Chamber</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id4">Leaf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#id18">Physics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id1">Leaf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id15">Physics</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#module-essm.variables._core">Internals</a></li>
@@ -155,7 +223,7 @@ interested.</p>
 
 
 
-<p class="blurb">This package contains helpers to deal with physical variables and units.</p>
+<p class="blurb">Python package for dealing with physical variables and units.</p>
 
 
 
@@ -168,6 +236,12 @@ interested.</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/importable_variables_equations.html">Importable variables and equations</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/api_features.html">Use examples</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Docs</a></li>

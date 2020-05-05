@@ -6,18 +6,20 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>API Docs &#8212; ESSM 0.4.2 documentation</title>
+    <title>API Docs &#8212; ESSM 0.4.3.dev1 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Changes" href="changes.html" />
-    <link rel="prev" title="Usage" href="usage.html" />
+    <link rel="prev" title="Use examples" href="examples/api_features.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -36,6 +38,13 @@
             
   <div class="section" id="api-docs">
 <h1>API Docs<a class="headerlink" href="#api-docs" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jupyter-notebooks-with-api-examples">
+<h2>Jupyter notebooks with API examples<a class="headerlink" href="#jupyter-notebooks-with-api-examples" title="Permalink to this headline">¶</a></h2>
+<p>A jupyter notebook with tables of importable variables and equations can be found at
+<a class="reference external" href="https://github.com/environmentalscience/essm/blob/master/docs/examples/importable_variables_equations.ipynb">https://github.com/environmentalscience/essm/blob/master/docs/examples/importable_variables_equations.ipynb</a></p>
+<p>A jupyter notebook with use examples for the API can be found at
+<a class="reference external" href="https://github.com/environmentalscience/essm/blob/master/docs/examples/api_features.ipynb">https://github.com/environmentalscience/essm/blob/master/docs/examples/api_features.ipynb</a></p>
+</div>
 <div class="section" id="module-essm.variables">
 <span id="variables"></span><h2>Variables<a class="headerlink" href="#module-essm.variables" title="Permalink to this headline">¶</a></h2>
 <p>Variables module to deal with physical variables and units.</p>
@@ -84,33 +93,6 @@ can be imported into your session, e.g.:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.variables.leaf.energy_water</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
-<dl class="class">
-<dt id="essm.variables.Variable">
-<em class="property">class </em><code class="descclassname">essm.variables.</code><code class="descname">Variable</code><a class="reference internal" href="_modules/essm/variables/_core.html#Variable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Base type for all physical variables.</p>
-<dl class="staticmethod">
-<dt id="essm.variables.Variable.check_unit">
-<em class="property">static </em><code class="descname">check_unit</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.check_unit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable.check_unit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check if base dimensions of expression are consistent.</p>
-<p>Checks for dimension mismatches of the addends, thus preventing
-expressions like <cite>meter + second</cite> to be created.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="essm.variables.Variable.collect_factor_and_basedimension">
-<em class="property">static </em><code class="descname">collect_factor_and_basedimension</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.collect_factor_and_basedimension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable.collect_factor_and_basedimension" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return tuple with factor expression and dimension expression.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="essm.variables.Variable.get_dimensional_expr">
-<em class="property">static </em><code class="descname">get_dimensional_expr</code><span class="sig-paren">(</span><em>expr</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/variables/_core.html#Variable.get_dimensional_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.variables.Variable.get_dimensional_expr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return dimensions of expression.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-essm.variables.chamber">
 <span id="chamber"></span><h3>Chamber<a class="headerlink" href="#module-essm.variables.chamber" title="Permalink to this headline">¶</a></h3>
@@ -1076,32 +1058,944 @@ expressions like <cite>meter + second</cite> to be created.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-essm.variables.leaf.water_vapour">
-<span id="water-vapour"></span><h4>Water Vapour<a class="headerlink" href="#module-essm.variables.leaf.water_vapour" title="Permalink to this headline">¶</a></h4>
-<p>Leaf water vapour exchange and energy balance.</p>
+<div class="section" id="module-essm.variables.leaf.energy_water">
+<span id="energy-and-water"></span><h4>Energy and Water<a class="headerlink" href="#module-essm.variables.leaf.energy_water" title="Permalink to this headline">¶</a></h4>
+<p>Unsorted variables related to leaf model.</p>
 <dl class="class">
-<dt id="essm.variables.leaf.water_vapour.B_l">
-<em class="property">class </em><code class="descclassname">essm.variables.leaf.water_vapour.</code><code class="descname">B_l</code><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l" title="Permalink to this definition">¶</a></dt>
+<dt id="essm.variables.leaf.energy_water.alpha_l">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">alpha_l</code><a class="headerlink" href="#essm.variables.leaf.energy_water.alpha_l" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
-<p>Boundary layer thickness.</p>
+<p>Leaf albedo, fraction of shortwave radiation reflected by the leaf.</p>
 <dl class="attribute">
-<dt id="essm.variables.leaf.water_vapour.B_l.assumptions">
-<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l.assumptions" title="Permalink to this definition">¶</a></dt>
+<dt id="essm.variables.leaf.energy_water.alpha_l.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.alpha_l.assumptions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="essm.variables.leaf.water_vapour.B_l.latex_name">
-<code class="descname">latex_name</code><em class="property"> = 'B_l'</em><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l.latex_name" title="Permalink to this definition">¶</a></dt>
+<dt id="essm.variables.leaf.energy_water.alpha_l.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.alpha_l.domain" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="essm.variables.leaf.water_vapour.B_l.name">
-<code class="descname">name</code><em class="property"> = 'B_l'</em><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l.name" title="Permalink to this definition">¶</a></dt>
+<dt id="essm.variables.leaf.energy_water.alpha_l.latex_name">
+<code class="descname">latex_name</code><em class="property"> = '\\alpha_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.alpha_l.latex_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="essm.variables.leaf.water_vapour.B_l.unit">
-<code class="descname">unit</code><em class="property"> = meter</em><a class="headerlink" href="#essm.variables.leaf.water_vapour.B_l.unit" title="Permalink to this definition">¶</a></dt>
+<dt id="essm.variables.leaf.energy_water.alpha_l.name">
+<code class="descname">name</code><em class="property"> = 'alpha_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.alpha_l.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.alpha_l.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.leaf.energy_water.alpha_l.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.a_s">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">a_s</code><a class="headerlink" href="#essm.variables.leaf.energy_water.a_s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Fraction of one-sided leaf area covered by stomata.</p>
+<p>(1 if stomata are on one side only, 2 if they are on both sides).</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_s.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_s.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_s.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_s.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_s.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'a_s'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_s.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_s.name">
+<code class="descname">name</code><em class="property"> = 'a_s'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_s.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_s.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_s.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.a_sh">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">a_sh</code><a class="headerlink" href="#essm.variables.leaf.energy_water.a_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Fraction of projected area exchanging sensible heat with the air.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_sh.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_sh.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_sh.default">
+<code class="descname">default</code><em class="property"> = 2.0</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_sh.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_sh.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_sh.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_sh.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'a_{sh}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_sh.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_sh.name">
+<code class="descname">name</code><em class="property"> = 'a_sh'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_sh.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.a_sh.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.leaf.energy_water.a_sh.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.C_wl">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">C_wl</code><a class="headerlink" href="#essm.variables.leaf.energy_water.C_wl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Concentration of water in the leaf air space.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.C_wl.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.C_wl.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.C_wl.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.C_wl.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.C_wl.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'C_{wl}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.C_wl.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.C_wl.name">
+<code class="descname">name</code><em class="property"> = 'C_wl'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.C_wl.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.C_wl.unit">
+<code class="descname">unit</code><em class="property"> = mole/meter**3</em><a class="headerlink" href="#essm.variables.leaf.energy_water.C_wl.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.E_lmol">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">E_lmol</code><a class="headerlink" href="#essm.variables.leaf.energy_water.E_lmol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Transpiration rate in molar units.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_lmol.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_lmol.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_lmol.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_lmol.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_lmol.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'E_{l,mol}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_lmol.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_lmol.name">
+<code class="descname">name</code><em class="property"> = 'E_lmol'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_lmol.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_lmol.unit">
+<code class="descname">unit</code><em class="property"> = mole/(meter**2*second)</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_lmol.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.E_l">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">E_l</code><a class="headerlink" href="#essm.variables.leaf.energy_water.E_l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Latent heat flux from leaf.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_l.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_l.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_l.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_l.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_l.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'E_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_l.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_l.name">
+<code class="descname">name</code><em class="property"> = 'E_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_l.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.E_l.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter**2*second)</em><a class="headerlink" href="#essm.variables.leaf.energy_water.E_l.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.epsilon_l">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">epsilon_l</code><a class="headerlink" href="#essm.variables.leaf.energy_water.epsilon_l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Longwave emmissivity of the leaf surface.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.epsilon_l.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.epsilon_l.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.epsilon_l.default">
+<code class="descname">default</code><em class="property"> = 1.0</em><a class="headerlink" href="#essm.variables.leaf.energy_water.epsilon_l.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.epsilon_l.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.epsilon_l.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.epsilon_l.latex_name">
+<code class="descname">latex_name</code><em class="property"> = '\\epsilon_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.epsilon_l.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.epsilon_l.name">
+<code class="descname">name</code><em class="property"> = 'epsilon_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.epsilon_l.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.epsilon_l.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.leaf.energy_water.epsilon_l.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.g_bw">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">g_bw</code><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Boundary layer conductance to water vapour.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bw.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bw.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bw.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bw.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bw.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'g_{bw}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bw.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bw.name">
+<code class="descname">name</code><em class="property"> = 'g_bw'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bw.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bw.unit">
+<code class="descname">unit</code><em class="property"> = meter/second</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bw.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.g_bwmol">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">g_bwmol</code><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bwmol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Boundary layer conductance to water vapour.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bwmol.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bwmol.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bwmol.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bwmol.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bwmol.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'g_{bw,mol}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bwmol.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bwmol.name">
+<code class="descname">name</code><em class="property"> = 'g_bwmol'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bwmol.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_bwmol.unit">
+<code class="descname">unit</code><em class="property"> = mole/(meter**2*second)</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_bwmol.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.Gr">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">Gr</code><a class="headerlink" href="#essm.variables.leaf.energy_water.Gr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Grashof number.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.Gr.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.Gr.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.Gr.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.Gr.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.Gr.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'N_{Gr_L}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.Gr.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.Gr.name">
+<code class="descname">name</code><em class="property"> = 'Gr'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.Gr.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.Gr.unit">
+<code class="descname">unit</code><em class="property"> = 1</em><a class="headerlink" href="#essm.variables.leaf.energy_water.Gr.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.g_sw">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">g_sw</code><a class="headerlink" href="#essm.variables.leaf.energy_water.g_sw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Stomatal conductance to water vapour.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_sw.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_sw.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_sw.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_sw.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_sw.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'g_{sw}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_sw.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_sw.name">
+<code class="descname">name</code><em class="property"> = 'g_sw'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_sw.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_sw.unit">
+<code class="descname">unit</code><em class="property"> = meter/second</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_sw.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.g_swmol">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">g_swmol</code><a class="headerlink" href="#essm.variables.leaf.energy_water.g_swmol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Stomatal conductance to water vapour.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_swmol.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_swmol.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_swmol.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_swmol.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_swmol.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'g_{sw,mol}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_swmol.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_swmol.name">
+<code class="descname">name</code><em class="property"> = 'g_swmol'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_swmol.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_swmol.unit">
+<code class="descname">unit</code><em class="property"> = mole/(meter**2*second)</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_swmol.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.g_tw">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">g_tw</code><a class="headerlink" href="#essm.variables.leaf.energy_water.g_tw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Total leaf conductance to water vapour.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_tw.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_tw.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_tw.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_tw.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_tw.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'g_{tw}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_tw.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_tw.name">
+<code class="descname">name</code><em class="property"> = 'g_tw'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_tw.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_tw.unit">
+<code class="descname">unit</code><em class="property"> = meter/second</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_tw.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.g_twmol">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">g_twmol</code><a class="headerlink" href="#essm.variables.leaf.energy_water.g_twmol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Total leaf layer conductance to water vapour.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_twmol.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_twmol.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_twmol.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_twmol.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_twmol.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'g_{tw,mol}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_twmol.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_twmol.name">
+<code class="descname">name</code><em class="property"> = 'g_twmol'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_twmol.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.g_twmol.unit">
+<code class="descname">unit</code><em class="property"> = mole/(meter**2*second)</em><a class="headerlink" href="#essm.variables.leaf.energy_water.g_twmol.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.h_c">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">h_c</code><a class="headerlink" href="#essm.variables.leaf.energy_water.h_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Average 1-sided convective heat transfer coefficient.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.h_c.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.h_c.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.h_c.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.h_c.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.h_c.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'h_c'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.h_c.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.h_c.name">
+<code class="descname">name</code><em class="property"> = 'h_c'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.h_c.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.h_c.unit">
+<code class="descname">unit</code><em class="property"> = joule/(kelvin*meter**2*second)</em><a class="headerlink" href="#essm.variables.leaf.energy_water.h_c.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.H_l">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">H_l</code><a class="headerlink" href="#essm.variables.leaf.energy_water.H_l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Sensible heat flux from leaf.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.H_l.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.H_l.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.H_l.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.H_l.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.H_l.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'H_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.H_l.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.H_l.name">
+<code class="descname">name</code><em class="property"> = 'H_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.H_l.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.H_l.unit">
+<code class="descname">unit</code><em class="property"> = joule/(meter**2*second)</em><a class="headerlink" href="#essm.variables.leaf.energy_water.H_l.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.L_A">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">L_A</code><a class="headerlink" href="#essm.variables.leaf.energy_water.L_A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Leaf area.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_A.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_A.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_A.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_A.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_A.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'L_A'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_A.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_A.name">
+<code class="descname">name</code><em class="property"> = 'L_A'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_A.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_A.unit">
+<code class="descname">unit</code><em class="property"> = meter**2</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_A.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.L_l">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">L_l</code><a class="headerlink" href="#essm.variables.leaf.energy_water.L_l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Leaf width as characteristic length scale for convection.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_l.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_l.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_l.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_l.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_l.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'L_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_l.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_l.name">
+<code class="descname">name</code><em class="property"> = 'L_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_l.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.L_l.unit">
+<code class="descname">unit</code><em class="property"> = meter</em><a class="headerlink" href="#essm.variables.leaf.energy_water.L_l.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.P_wl">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">P_wl</code><a class="headerlink" href="#essm.variables.leaf.energy_water.P_wl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Water vapour pressure inside the leaf.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.P_wl.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.P_wl.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.P_wl.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.P_wl.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.P_wl.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'P_{wl}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.P_wl.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.P_wl.name">
+<code class="descname">name</code><em class="property"> = 'P_wl'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.P_wl.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.P_wl.unit">
+<code class="descname">unit</code><em class="property"> = pascal</em><a class="headerlink" href="#essm.variables.leaf.energy_water.P_wl.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.r_bw">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">r_bw</code><a class="headerlink" href="#essm.variables.leaf.energy_water.r_bw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Boundary layer resistance to water vapour, inverse of $g_{bw}$.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_bw.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_bw.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_bw.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_bw.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_bw.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'r_{bw}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_bw.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_bw.name">
+<code class="descname">name</code><em class="property"> = 'r_bw'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_bw.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_bw.unit">
+<code class="descname">unit</code><em class="property"> = second/meter</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_bw.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.r_sw">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">r_sw</code><a class="headerlink" href="#essm.variables.leaf.energy_water.r_sw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Stomatal resistance to water vapour, inverse of $g_{sw}$.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_sw.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_sw.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_sw.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_sw.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_sw.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'r_{sw}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_sw.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_sw.name">
+<code class="descname">name</code><em class="property"> = 'r_sw'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_sw.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_sw.unit">
+<code class="descname">unit</code><em class="property"> = second/meter</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_sw.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.r_tw">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">r_tw</code><a class="headerlink" href="#essm.variables.leaf.energy_water.r_tw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Total leaf resistance to water vapour, $r_{bv} + r_{sv}$.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_tw.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_tw.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_tw.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_tw.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_tw.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'r_{tw}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_tw.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_tw.name">
+<code class="descname">name</code><em class="property"> = 'r_tw'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_tw.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.r_tw.unit">
+<code class="descname">unit</code><em class="property"> = second/meter</em><a class="headerlink" href="#essm.variables.leaf.energy_water.r_tw.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.rho_al">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">rho_al</code><a class="headerlink" href="#essm.variables.leaf.energy_water.rho_al" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Density of air at the leaf surface.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.rho_al.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.rho_al.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.rho_al.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.rho_al.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.rho_al.latex_name">
+<code class="descname">latex_name</code><em class="property"> = '\\rho_{al}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.rho_al.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.rho_al.name">
+<code class="descname">name</code><em class="property"> = 'rho_al'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.rho_al.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.rho_al.unit">
+<code class="descname">unit</code><em class="property"> = kilogram/meter**3</em><a class="headerlink" href="#essm.variables.leaf.energy_water.rho_al.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.R_la">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">R_la</code><a class="headerlink" href="#essm.variables.leaf.energy_water.R_la" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Longwave radiation absorbed by leaf.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_la.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_la.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_la.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_la.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_la.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'R_{la}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_la.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_la.name">
+<code class="descname">name</code><em class="property"> = 'R_la'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_la.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_la.unit">
+<code class="descname">unit</code><em class="property"> = watt/meter**2</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_la.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.R_ll">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">R_ll</code><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Longwave radiation away from leaf.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ll.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ll.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ll.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ll.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ll.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'R_{ll}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ll.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ll.name">
+<code class="descname">name</code><em class="property"> = 'R_ll'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ll.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ll.unit">
+<code class="descname">unit</code><em class="property"> = watt/meter**2</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ll.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.R_ld">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">R_ld</code><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Downwards emitted/reflected global radiation from leaf.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ld.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ld.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ld.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ld.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ld.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'R_{ld}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ld.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ld.name">
+<code class="descname">name</code><em class="property"> = 'R_ld'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ld.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_ld.unit">
+<code class="descname">unit</code><em class="property"> = watt/meter**2</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_ld.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.R_lu">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">R_lu</code><a class="headerlink" href="#essm.variables.leaf.energy_water.R_lu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Upwards emitted/reflected global radiation from leaf.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_lu.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_lu.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_lu.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_lu.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_lu.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'R_{lu}'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_lu.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_lu.name">
+<code class="descname">name</code><em class="property"> = 'R_lu'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_lu.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.R_lu.unit">
+<code class="descname">unit</code><em class="property"> = watt/meter**2</em><a class="headerlink" href="#essm.variables.leaf.energy_water.R_lu.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.T_l">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">T_l</code><a class="headerlink" href="#essm.variables.leaf.energy_water.T_l" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Leaf temperature.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_l.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_l.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_l.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_l.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_l.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'T_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_l.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_l.name">
+<code class="descname">name</code><em class="property"> = 'T_l'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_l.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_l.unit">
+<code class="descname">unit</code><em class="property"> = kelvin</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_l.unit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="essm.variables.leaf.energy_water.T_w">
+<em class="property">class </em><code class="descclassname">essm.variables.leaf.energy_water.</code><code class="descname">T_w</code><a class="headerlink" href="#essm.variables.leaf.energy_water.T_w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#essm.variables._core.Variable" title="essm.variables._core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.variables._core.Variable</span></code></a></p>
+<p>Radiative temperature of objects surrounding the leaf.</p>
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_w.assumptions">
+<code class="descname">assumptions</code><em class="property"> = {'real': True}</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_w.assumptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_w.domain">
+<code class="descname">domain</code><em class="property"> = 'real'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_w.domain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_w.latex_name">
+<code class="descname">latex_name</code><em class="property"> = 'T_w'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_w.latex_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_w.name">
+<code class="descname">name</code><em class="property"> = 'T_w'</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_w.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="essm.variables.leaf.energy_water.T_w.unit">
+<code class="descname">unit</code><em class="property"> = kelvin</em><a class="headerlink" href="#essm.variables.leaf.energy_water.T_w.unit" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2411,49 +3305,9 @@ and defining internal variables.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">essm.equations.physics.thermodynamics</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
-<dl class="class">
-<dt id="essm.equations.Equation">
-<em class="property">class </em><code class="descclassname">essm.equations.</code><code class="descname">Equation</code><a class="reference internal" href="_modules/essm/equations/_core.html#Equation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.equations.Equation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Base type for all equations.</p>
-<dl class="classmethod">
-<dt id="essm.equations.Equation.args">
-<em class="property">classmethod </em><code class="descname">args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/essm/equations/_core.html#Equation.args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#essm.equations.Equation.args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return equation arguments from registry if exist.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="id1">
-<h3>Chamber<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="module-essm.equations.chamber"></span><p>Chamber.</p>
-<div class="section" id="id2">
-<h4>Insulation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
-<span class="target" id="module-essm.equations.chamber.insulation"></span><p>Chamber insulation.</p>
-<dl class="class">
-<dt id="essm.equations.chamber.insulation.eq_Qi">
-<em class="property">class </em><code class="descclassname">essm.equations.chamber.insulation.</code><code class="descname">eq_Qi</code><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
-<p>Calculate ….</p>
-<p><a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id3">[schymanski_leaf-scale_2017]</a></p>
-<dl class="attribute">
-<dt id="essm.equations.chamber.insulation.eq_Qi.expr">
-<code class="descname">expr</code><em class="property"> = Eq(Q_i, A_i*dT_i*lambda_i/L_i)</em><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi.expr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Describe how you got the equation.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="essm.equations.chamber.insulation.eq_Qi.name">
-<code class="descname">name</code><em class="property"> = 'eq_Qi'</em><a class="headerlink" href="#essm.equations.chamber.insulation.eq_Qi.name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-</div>
-<div class="section" id="id4">
-<h3>Leaf<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>Leaf<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-essm.equations.leaf"></span><p>Equations related to leaf energy and water balance.</p>
 <div class="section" id="module-essm.equations.leaf.energy_water">
 <span id="energy-water"></span><h4>Energy Water<a class="headerlink" href="#module-essm.equations.leaf.energy_water" title="Permalink to this headline">¶</a></h4>
@@ -2463,7 +3317,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Rs_enbal</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Rs_enbal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Calculate R_s from energy balance.</p>
-<p>(Eq. 1 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id5">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. 1 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id2">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Rs_enbal.expr">
 <code class="descname">expr</code><em class="property"> = Eq(R_s, E_l + H_l + R_ll)</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Rs_enbal.expr" title="Permalink to this definition">¶</a></dt>
@@ -2481,7 +3335,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Rll</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Rll" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>R_ll as function of T_l and T_w.</p>
-<p>(Eq. 2 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id6">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. 2 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id3">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Rll.expr">
 <code class="descname">expr</code><em class="property"> = Eq(R_ll, a_sh*epsilon_l*sigm*(T_l**4 - T_w**4))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Rll.expr" title="Permalink to this definition">¶</a></dt>
@@ -2499,7 +3353,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Hl</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Hl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>H_l as function of T_l.</p>
-<p>(Eq. 3 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id7">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. 3 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id4">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Hl.expr">
 <code class="descname">expr</code><em class="property"> = Eq(H_l, a_sh*h_c*(-T_a + T_l))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Hl.expr" title="Permalink to this definition">¶</a></dt>
@@ -2517,7 +3371,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_El</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_El" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>E_l as function of E_lmol.</p>
-<p>(Eq. 4 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id8">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. 4 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id5">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_El.expr">
 <code class="descname">expr</code><em class="property"> = Eq(E_l, E_lmol*M_w*lambda_E)</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_El.expr" title="Permalink to this definition">¶</a></dt>
@@ -2535,7 +3389,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Elmol</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Elmol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>E_lmol as functino of g_tw and C_wl.</p>
-<p>(Eq. 5 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id9">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. 5 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id6">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Elmol.expr">
 <code class="descname">expr</code><em class="property"> = Eq(E_lmol, g_tw*(-C_wa + C_wl))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Elmol.expr" title="Permalink to this definition">¶</a></dt>
@@ -2553,7 +3407,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_gtw</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_gtw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>g_tw from g_sw and g_bw.</p>
-<p>(Eq. 6 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id10">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. 6 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id7">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_gtw.expr">
 <code class="descname">expr</code><em class="property"> = Eq(g_tw, 1/(1/g_sw + 1/g_bw))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_gtw.expr" title="Permalink to this definition">¶</a></dt>
@@ -2571,7 +3425,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_gbw_hc</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_gbw_hc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>g_bw as function of h_c.</p>
-<p>(Eq. B2 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id11">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B2 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id8">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_gbw_hc.expr">
 <code class="descname">expr</code><em class="property"> = Eq(g_bw, a_s*h_c/(Le**(2/3)*c_pa*rho_a))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_gbw_hc.expr" title="Permalink to this definition">¶</a></dt>
@@ -2589,7 +3443,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Cwl</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Cwl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>C_wl as function of P_wl and T_l.</p>
-<p>(Eq. B4 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id12">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B4 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id9">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Cwl.expr">
 <code class="descname">expr</code><em class="property"> = Eq(C_wl, P_wl/(R_mol*T_l))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Cwl.expr" title="Permalink to this definition">¶</a></dt>
@@ -2607,7 +3461,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Pwl</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Pwl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Clausius-Clapeyron P_wl as function of T_l.</p>
-<p>(Eq. B3 in <a class="reference internal" href="index.html#hartmann-global-1994" id="id13">[hartmann_global_1994]</a>)</p>
+<p>(Eq. B3 in <a class="reference internal" href="index.html#hartmann-global-1994" id="id10">[hartmann_global_1994]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Pwl.expr">
 <code class="descname">expr</code><em class="property"> = Eq(P_wl, p_CC1*exp(-M_w*lambda_E*(-1/p_CC2 + 1/T_l)/R_mol))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Pwl.expr" title="Permalink to this definition">¶</a></dt>
@@ -2635,7 +3489,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Elmol_conv</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Elmol_conv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>E_lmol as function of g_twmol and P_wl.</p>
-<p>(Eq. B6 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id14">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B6 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id11">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Elmol_conv.expr">
 <code class="descname">expr</code><em class="property"> = Eq(E_lmol, g_twmol*(-P_wa + P_wl)/P_a)</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Elmol_conv.expr" title="Permalink to this definition">¶</a></dt>
@@ -2688,7 +3542,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_hc</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_hc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>h_c as a function of Nu and L_l.</p>
-<p>(Eq. B10 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id15">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B10 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id12">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_hc.expr">
 <code class="descname">expr</code><em class="property"> = Eq(h_c, Nu*k_a/L_l)</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_hc.expr" title="Permalink to this definition">¶</a></dt>
@@ -2706,7 +3560,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Re</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Re" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Re as a function of v_w and L_l.</p>
-<p>(Eq. B11 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id16">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B11 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id13">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Re.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Re, L_l*v_w/nu_a)</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Re.expr" title="Permalink to this definition">¶</a></dt>
@@ -2724,7 +3578,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.leaf.energy_water.</code><code class="descname">eq_Gr</code><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Gr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Gr as function of air density within and outside of leaf.</p>
-<p>(Eq. B12 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id17">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B12 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id14">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.leaf.energy_water.eq_Gr.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Gr, L_l**3*g*(rho_a - rho_al)/(nu_a**2*rho_al))</em><a class="headerlink" href="#essm.equations.leaf.energy_water.eq_Gr.expr" title="Permalink to this definition">¶</a></dt>
@@ -2739,15 +3593,15 @@ and defining internal variables.</p>
 
 </div>
 </div>
-<div class="section" id="id18">
-<h3>Physics<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id15">
+<h3>Physics<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="module-essm.equations.physics.thermodynamics"></span><p>General and atmospheric thermodynamics equations.</p>
 <dl class="class">
 <dt id="essm.equations.physics.thermodynamics.eq_Le">
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_Le</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Le" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Le as function of alpha_a and D_va.</p>
-<p>(Eq. B3 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id19">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B3 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id16">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_Le.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Le, alpha_a/D_va)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Le.expr" title="Permalink to this definition">¶</a></dt>
@@ -2765,7 +3619,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_Cwa</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Cwa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>C_wa as a function of P_wa and T_a.</p>
-<p>(Eq. B9 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id20">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B9 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id17">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_Cwa.expr">
 <code class="descname">expr</code><em class="property"> = Eq(C_wa, P_wa/(R_mol*T_a))</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Cwa.expr" title="Permalink to this definition">¶</a></dt>
@@ -2783,7 +3637,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_Nu_forced_all</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Nu_forced_all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>Nu as function of Re and Re_c under forced conditions.</p>
-<p>(Eqs. B13–B15 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id21">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eqs. B13–B15 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id18">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_Nu_forced_all.expr">
 <code class="descname">expr</code><em class="property"> = Eq(Nu, -Pr**(1/3)*(-37*Re**(4/5) + 37*(Re + Re_c - Abs(Re - Re_c)/2)**(4/5) - 664*sqrt(Re + Re_c - Abs(Re - Re_c)/2))/1000)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Nu_forced_all.expr" title="Permalink to this definition">¶</a></dt>
@@ -2801,7 +3655,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_Dva</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Dva" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>D_va as a function of air temperature.</p>
-<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id22">[monteith_principles_2007]</a>)</p>
+<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id19">[monteith_principles_2007]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_Dva.expr">
 <code class="descname">expr</code><em class="property"> = Eq(D_va, T_a*p_Dva1 - p_Dva2)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_Dva.expr" title="Permalink to this definition">¶</a></dt>
@@ -2829,7 +3683,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_alphaa</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_alphaa" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>alpha_a as a function of air temperature.</p>
-<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id23">[monteith_principles_2007]</a>)</p>
+<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id20">[monteith_principles_2007]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_alphaa.expr">
 <code class="descname">expr</code><em class="property"> = Eq(alpha_a, T_a*p_alpha1 - p_alpha2)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_alphaa.expr" title="Permalink to this definition">¶</a></dt>
@@ -2857,7 +3711,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_ka</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_ka" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>k_a as a function of air temperature.</p>
-<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id24">[monteith_principles_2007]</a>)</p>
+<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id21">[monteith_principles_2007]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_ka.expr">
 <code class="descname">expr</code><em class="property"> = Eq(k_a, T_a*p_ka1 + p_ka2)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_ka.expr" title="Permalink to this definition">¶</a></dt>
@@ -2885,7 +3739,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_nua</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_nua" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>nu_a as a function of air temperature.</p>
-<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id25">[monteith_principles_2007]</a>)</p>
+<p>(Table A.3 in <a class="reference internal" href="index.html#monteith-principles-2007" id="id22">[monteith_principles_2007]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_nua.expr">
 <code class="descname">expr</code><em class="property"> = Eq(nu_a, T_a*p_nua1 - p_nua2)</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_nua.expr" title="Permalink to this definition">¶</a></dt>
@@ -2913,7 +3767,7 @@ and defining internal variables.</p>
 <em class="property">class </em><code class="descclassname">essm.equations.physics.thermodynamics.</code><code class="descname">eq_rhoa_Pwa_Ta</code><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_rhoa_Pwa_Ta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#essm.equations._core.Equation" title="essm.equations._core.Equation"><code class="xref py py-class docutils literal notranslate"><span class="pre">essm.equations._core.Equation</span></code></a></p>
 <p>rho_a as a function of P_wa and T_a.</p>
-<p>(Eq. B20 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id26">[schymanski_leaf-scale_2017]</a>)</p>
+<p>(Eq. B20 in <a class="reference internal" href="index.html#schymanski-leaf-scale-2017" id="id23">[schymanski_leaf-scale_2017]</a>)</p>
 <dl class="attribute">
 <dt id="essm.equations.physics.thermodynamics.eq_rhoa_Pwa_Ta.expr">
 <code class="descname">expr</code><em class="property"> = Eq(rho_a, (M_N2*P_N2 + M_O2*P_O2 + M_w*P_wa)/(R_mol*T_a))</em><a class="headerlink" href="#essm.equations.physics.thermodynamics.eq_rhoa_Pwa_Ta.expr" title="Permalink to this definition">¶</a></dt>
@@ -3141,7 +3995,7 @@ if needed.</p>
 
 
 
-<p class="blurb">This package contains helpers to deal with physical variables and units.</p>
+<p class="blurb">Python package for dealing with physical variables and units.</p>
 
 
 
@@ -3155,8 +4009,15 @@ if needed.</p>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/importable_variables_equations.html">Importable variables and equations</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/api_features.html">Use examples</a></li>
+</ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jupyter-notebooks-with-api-examples">Jupyter notebooks with API examples</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-essm.variables">Variables</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#creating-variables">Creating variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-essm.variables.chamber">Chamber</a></li>
@@ -3168,9 +4029,8 @@ if needed.</p>
 <li class="toctree-l2"><a class="reference internal" href="#module-essm.equations">Equations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#creating-equations">Creating equations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#importing-pre-defined-equations">Importing pre-defined equations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Chamber</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Leaf</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id18">Physics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Leaf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Physics</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-essm.variables._core">Internals</a></li>
@@ -3196,7 +4056,7 @@ if needed.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="usage.html" title="previous chapter">Usage</a></li>
+      <li>Previous: <a href="examples/api_features.html" title="previous chapter">Use examples</a></li>
       <li>Next: <a href="changes.html" title="next chapter">Changes</a></li>
   </ul></li>
 </ul>
