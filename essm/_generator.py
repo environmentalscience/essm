@@ -176,7 +176,7 @@ class VariableWriter(object):
             result = _lint_content(result)
         return result
 
-    def var(
+    def newvar(
             self,
             name,
             doc='',
@@ -284,7 +284,7 @@ class EquationWriter(object):
         reformatted_result = _lint_content(result)
         return reformatted_result
 
-    def eq(self, name, expr, doc='', parents=None, variables=None):
+    def neweq(self, name, expr, doc='', parents=None, variables=None):
         """Add new equation."""
         if parents:
             parents = ', '.join(parent + '.definition' for parent in parents)
@@ -300,7 +300,7 @@ class EquationWriter(object):
             writer = VariableWriter()
             internal_variables = set()
             for variable in variables:
-                writer.var(**variable)
+                writer.newvar(**variable)
                 internal_variables.add(variable['name'])
             variables = re.sub(
                 r'^',

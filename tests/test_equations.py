@@ -310,7 +310,7 @@ def test_equation_writer(tmpdir):
     d = var('d')
     t = var('t')
     writer_td = EquationWriter(docstring='Test of Equation_writer.')
-    writer_td.eq(
+    writer_td.neweq(
         'demo_fall',
         Eq(demo_g, d / t ** 2),
         doc='Test equation.\n\n    (Some reference)\n    ',
@@ -340,27 +340,27 @@ def test_equation_writer_linebreaks(tmpdir):
         x_N2, x_O2
 
     writer_td = EquationWriter(docstring='Test of Equation_writer.')
-    writer_td.eq(
+    writer_td.neweq(
         'eq_Le',
         Eq(Le, alpha_a / D_va),
         doc='Le as function of alpha_a and D_va.'
     )
-    writer_td.eq(
+    writer_td.neweq(
         'eq_Cwa',
         Eq(C_wa, P_wa / (R_mol * T_a)),
         doc='C_wa as a function of P_wa and T_a.'
     )
-    writer_td.eq(
+    writer_td.neweq(
         'eq_rhoa_Pwa_Ta',
         Eq(rho_a, (M_w * P_wa + M_N2 * P_N2 + M_O2 * P_O2) / (R_mol * T_a)),
         doc='rho_a as a function of P_wa and T_a.'
     )
-    writer_td.eq(
+    writer_td.neweq(
         'eq_Pa',
         Eq(P_a, P_N2 + P_O2 + P_wa),
         doc='Calculate air pressure from partial pressures.'
     )
-    writer_td.eq(
+    writer_td.neweq(
         'eq_PN2_PO2',
         Eq(P_N2, x_N2 / x_O2 * P_O2),
         doc='Calculate P_N2 as a function of P_O2'
