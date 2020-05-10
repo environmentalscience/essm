@@ -303,7 +303,6 @@ def test_solve():
     ) == [0.031 * demo_d - 1.68e-7 * demo_d2]
 
 
-#@pytest.mark.skip(reason="needs rewrite for SymPy")
 def test_equation_writer(tmpdir):
     """EquationWriter creates importable file with internal variables."""
     from sympy import var
@@ -331,15 +330,14 @@ def test_equation_writer(tmpdir):
     with open(eq_file, "rb") as source_file:
         code = compile(eq_file.read(), eq_file, "exec")
     exec(code, g)
-    #execfile(eq_file.strpath, g)
     assert g['demo_fall'].definition.d.definition.default == 0.9
 
 
-@pytest.mark.skip(reason="needs rewrite for SymPy")
 def test_equation_writer_linebreaks(tmpdir):
     """EquationWriter breaks long import lines."""
     from essm.variables.physics.thermodynamics import alpha_a, D_va, P_wa, \
-        R_mol, T_a, M_O2, P_O2, P_N2, M_N2, M_w, Le, C_wa, rho_a, P_a
+        R_mol, T_a, M_O2, P_O2, P_N2, M_N2, M_w, Le, C_wa, rho_a, P_a, \
+        x_N2, x_O2
 
     writer_td = EquationWriter(docstring='Test of Equation_writer.')
     writer_td.eq(
