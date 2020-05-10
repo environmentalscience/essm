@@ -303,7 +303,7 @@ def test_solve():
     ) == [0.031 * demo_d - 1.68e-7 * demo_d2]
 
 
-@pytest.mark.skip(reason="needs rewrite for SymPy")
+#@pytest.mark.skip(reason="needs rewrite for SymPy")
 def test_equation_writer(tmpdir):
     """EquationWriter creates importable file with internal variables."""
     from sympy import var
@@ -319,16 +319,19 @@ def test_equation_writer(tmpdir):
             "name": "d",
             "value": '0.9',
             "units": meter,
-            "latexname": 'p_1'
+            "latex_name": 'p_1'
         }, {
             "name": "t",
             "units": second,
-            "latexname": 'p_2'
+            "latex_name": 'p_2'
         }]
     )
     eq_file = tmpdir.mkdir('test').join('test_equations.py')
     writer_td.write(eq_file.strpath)
-    execfile(eq_file.strpath, g)
+    with open(eq_file, "rb") as source_file:
+        code = compile(eq_file.read(), eq_file, "exec")
+    exec(code, g)
+    #execfile(eq_file.strpath, g)
     assert g['demo_fall'].definition.d.definition.default == 0.9
 
 

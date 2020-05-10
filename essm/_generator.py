@@ -73,7 +73,7 @@ class {name}(Variable):
     name = {name!r}
     unit = {units}
     domain = {domain!r}
-    latex_name = {latexname!r}
+    latex_name = {latex_name!r}
     {default}
 """
 
@@ -182,26 +182,22 @@ class VariableWriter(object):
             doc='',
             units=None,
             domain='real',
-            latexname=None,
+            latex_name=None,
             value=None
     ):
         """Add new variable."""
-        if not latexname:
-            latexname = name
+        if not latex_name:
+            latex_name = name
         if value is None:
             default = ''
         else:
             default = 'default = ' + str(value)
-            # Skip trailing zeroes from real numbers only
-            if isinstance(value, type(0.1)):
-                default = 'default = ' + value.str(skip_zeroes=True
-                                                   ).replace('^', '**')
         context = {
             "name": name,
             "doc": doc,
             "units": str(units).replace('^', '**') if units else '1/1',
             "domain": domain,
-            "latexname": latexname,
+            "latex_name": latex_name,
             "default": default
         }
         self.vars.append(context)
@@ -210,7 +206,7 @@ class VariableWriter(object):
         if units:
             if units != 1:
                 for arg in units.args:
-                    self._imports['essm.variables.units'].add(str(arg))
+                    self._imports['sympy.physics.units'].add(str(arg))
 
     def write(self, filename):
         """Serialize itself to a filename."""
@@ -297,7 +293,7 @@ class EquationWriter(object):
 
         if variables:
             for variable in variables:
-                variable.setdefault('latexname', variable['name'])
+                variable.setdefault('latex_name', variable['name'])
                 variable['doc'] = "Internal parameter of {0}.".format(name)
 
             # Serialize the internal variables.
