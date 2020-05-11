@@ -20,7 +20,7 @@
 # MA 02111-1307, USA.
 """Utility function for variables, expressions and equations."""
 
-from essm.equations._core import BaseEquation
+from essm.equations._core import BaseEquation, EquationMeta
 from essm.variables._core import BaseVariable
 from sympy import Eq, latex, preorder_traversal
 from sympy.core.expr import Expr
@@ -114,7 +114,7 @@ def get_allparents(equation, allparents=None):
         allparents = set()
     if isinstance(equation, BaseEquation):
         parents = equation.definition.__bases__
-    else: 
+    else:
         parents = equation.__bases__
     for parent in parents:
         if hasattr(parent, 'name'):
