@@ -32,6 +32,7 @@ Here you find use examples for different API features of ESSM.
    :maxdepth: 3
 
    examples/api_features
+   examples/examples_numerics
 
 API Reference
 =============
