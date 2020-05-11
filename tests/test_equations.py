@@ -333,7 +333,7 @@ def test_equation_writer(tmpdir):
         doc='Test equation.\n\n    (Some reference)\n    ',
         variables=[{
             "name": "d",
-            "value": '0.9',
+            "default": '0.9',
             "units": meter,
             "latex_name": 'p_1'
         }, {

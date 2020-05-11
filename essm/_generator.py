@@ -193,15 +193,15 @@ class VariableWriter(object):
             units=None,
             domain='real',
             latex_name=None,
-            value=None
+            default=None
     ):
         """Add new variable."""
         if not latex_name:
             latex_name = name
-        if value is None:
+        if default is None:
             default = ''
         else:
-            default = 'default = ' + str(value)
+            default = 'default = ' + str(default)
         context = {
             "name": name,
             "doc": doc,
@@ -245,9 +245,9 @@ class EquationWriter(object):
                   parents=['eq_Pa'])
         writer.eq('eq_Dva', Eq(D_va, p_Dva1*T_a - p_Dva2),
                   doc='D_va as a function of air temperature',
-                  variables = [{"name": "p_Dva1", "value": '1.49e-07',
+                  variables = [{"name": "p_Dva1", "default": '1.49e-07',
                                 "units": meter**2/second/kelvin},
-                               {"name": "p_Dva2", "value": '1.96e-05',
+                               {"name": "p_Dva2", "default": '1.96e-05',
                                 "units": meter**2/second}])
         print(writer)
     """
