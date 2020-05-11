@@ -4,7 +4,7 @@
 import pytest
 
 from essm import Eq
-from essm._generator import EquationWriter
+from essm._generator import EquationWriter, VariableWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import (joule, kelvin, kilogram, meter, mole, second,
@@ -301,6 +301,23 @@ def test_solve():
     assert solve(
         10 ** 6 * demo_d1 - 0.031e6 * demo_d + 0.168 * demo_d2, demo_d1
     ) == [0.031 * demo_d - 1.68e-7 * demo_d2]
+
+
+def test_variable_writer(tmpdir):
+    """VariableWriter creates importable file with internal variables."""
+    g = {}
+    writer_td = VariableWriter(docstring='Test of Variable_writer.')
+    writer_td.newvar(
+        'g',
+        'meter / second ^ 2',
+        'default = 9.81'
+    )
+    eq_file = tmpdir.mkdir('test').join('test_variables.py')
+    writer_td.write(eq_file.strpath)
+    with open(eq_file, "rb") as source_file:
+        code = compile(eq_file.read(), eq_file, "exec")
+    exec(code, g)
+    assert g['g'].definition.default == 9.81
 
 
 def test_equation_writer(tmpdir):

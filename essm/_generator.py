@@ -27,6 +27,8 @@ from collections import defaultdict
 
 import pkg_resources
 from isort import SortImports
+from sympy import Eq, latex, preorder_traversal
+from sympy.physics.units import Quantity
 from yapf.yapflib.yapf_api import FormatCode
 
 import essm
@@ -125,6 +127,14 @@ def create_module(name, doc=None, folder=None, overwrite=False):
     return path
 
 
+def extract_units(expr):
+    """Traverse through expression and return set of units."""
+    return {
+        arg
+        for arg in preorder_traversal(expr) if isinstance(arg, Quantity)
+    }
+
+
 class VariableWriter(object):
     """Generate Variable definitions.
 
@@ -205,7 +215,7 @@ class VariableWriter(object):
         # register all imports of units
         if units:
             if units != 1:
-                for arg in units.args:
+                for arg in extract_units(units):
                     self._imports['sympy.physics.units'].add(str(arg))
 
     def write(self, filename):
@@ -228,17 +238,17 @@ class EquationWriter(object):
             P_a, P_wa, P_N2, P_O2
         var('p_Dva1 p_Dva2')
         writer = EquationWriter(docstring="Test.")
-        writer.eq('eq_Pa', P_a == P_N2 + P_O2 + P_wa,
+        writer.eq('eq_Pa', Eq(P_a, P_N2 + P_O2 + P_wa),
                   doc='Sum partial pressures to obtain total air pressure.')
-        writer.eq('eq_Pwa_Pa', P_wa == P_a - P_N2 - P_O2,
+        writer.eq('eq_Pwa_Pa', Eq(P_wa, P_a - P_N2 - P_O2),
                   doc='Calculate P_wa from total air pressure.',
                   parents=['eq_Pa'])
-        writer.eq('eq_Dva', D_va == p_Dva1*T_a - p_Dva2,
+        writer.eq('eq_Dva', Eq(D_va, p_Dva1*T_a - p_Dva2),
                   doc='D_va as a function of air temperature',
                   variables = [{"name": "p_Dva1", "value": '1.49e-07',
-                                "units": meter^2/second/kelvin},
+                                "units": meter**2/second/kelvin},
                                {"name": "p_Dva2", "value": '1.96e-05',
-                                "units": meter^2/second}])
+                                "units": meter**2/second}])
         print(writer)
     """
 
