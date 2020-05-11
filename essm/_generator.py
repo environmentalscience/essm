@@ -293,7 +293,8 @@ class EquationWriter(object):
     LICENSE_TPL = LICENSE_TPL
     default_imports = {
         '__future__': {'division'},
-        'essm.equations': {'Equation'}
+        'essm.equations': {'Equation'},
+        'sympy': {'Integral'}
     }
     """Set up default imports, including standard division."""
 
