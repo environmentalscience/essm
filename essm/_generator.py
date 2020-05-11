@@ -75,7 +75,7 @@ class {name}(Variable):
 
     name = {name!r}
     unit = {units}
-    domain = {domain!r}
+    assumptions = {assumptions!r}
     latex_name = {latex_name!r}
     {default}
 """
@@ -205,7 +205,7 @@ class VariableWriter(object):
             name,
             doc='',
             units=None,
-            domain='real',
+            assumptions={'real': True},
             latex_name=None,
             default=None
     ):
@@ -220,7 +220,7 @@ class VariableWriter(object):
             "name": name,
             "doc": doc,
             "units": str(units).replace('^', '**') if units else '1/1',
-            "domain": domain,
+            "assumptions": assumptions,
             "latex_name": latex_name,
             "default": default
         }
@@ -249,10 +249,10 @@ class VariableWriter(object):
         name = dict_attr.get('name')
         doc = dict_attr.get('__doc__')
         units = dict_attr.get('unit')
-        domain = dict_attr.get('assumptions')
+        assumptions = dict_attr.get('assumptions')
         latex_name = dict_attr.get('latex_name')
         value = dict_attr.get('default')
-        self.newvar(name, doc, units, domain, latex_name, value)
+        self.newvar(name, doc, units, assumptions, latex_name, value)
 
     def write(self, filename):
         """Serialize itself to a filename."""
@@ -418,7 +418,7 @@ class EquationWriter(object):
         variables = [{'name': d1.get('name'),
                       'doc': d1.get('__doc__'),
                       'units': d1.get('unit'),
-                      'domain': d1.get('assumptions'),
+                      'assumptions': d1.get('assumptions'),
                       'latex_name': d1.get('latex_name'),
                       'default': d1.get('default')}
                      for d1 in int_vars_attr]
