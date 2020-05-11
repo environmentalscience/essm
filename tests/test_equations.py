@@ -304,7 +304,8 @@ def test_solve():
 
 
 def test_variable_writer(tmpdir):
-    """VariableWriter creates importable file with internal variables."""
+    """VariableWriter creates importable file with variable definitions."""
+    from essm.variables.physics.thermodynamics import c_pa
     g = {}
     writer_td = VariableWriter(docstring='Test of Variable_writer.')
     writer_td.newvar(
@@ -312,12 +313,14 @@ def test_variable_writer(tmpdir):
         'meter / second ^ 2',
         'default = 9.81'
     )
+    writer_td.var(c_pa)
     eq_file = tmpdir.mkdir('test').join('test_variables.py')
     writer_td.write(eq_file.strpath)
     with open(eq_file, "rb") as source_file:
         code = compile(eq_file.read(), eq_file, "exec")
     exec(code, g)
     assert g['g'].definition.default == 9.81
+    assert g['c_pa'].definition.unit == c_pa.definition.unit
 
 
 def test_equation_writer(tmpdir):

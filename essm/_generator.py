@@ -141,7 +141,12 @@ class VariableWriter(object):
     Example:
 
     .. code-block:: python
-       from essm._generator import VariableWriter
+        from essm._generator import VariableWriter
+        from essm.variables.physics.thermodynamics import c_pa, P_a
+        writer = VariableWriter(docstring="Test.")
+        writer.var(c_pa)
+        writer.var(P_a)
+        print(writer)
     """
 
     TPL = VARIABLE_TPL
@@ -217,6 +222,28 @@ class VariableWriter(object):
             if units != 1:
                 for arg in extract_units(units):
                     self._imports['sympy.physics.units'].add(str(arg))
+
+    def var(self, var1):
+        """ Add pre-defined variable to writer.
+
+        Example:
+
+        .. code-block:: python
+        from essm._generator import VariableWriter
+        from essm.variables.physics.thermodynamics import c_pa, P_a
+        writer = VariableWriter(docstring="Test.")
+        writer.var(c_pa)
+        writer.var(P_a)
+        print(writer)
+        """
+        dict_attr = var1.definition.__dict__
+        name = dict_attr.get('name')
+        doc = dict_attr.get('__doc__')
+        units = dict_attr.get('unit')
+        domain = dict_attr.get('assumptions')
+        latex_name = dict_attr.get('latex_name')
+        value = dict_attr.get('default')
+        self.newvar(name, doc, units, domain, latex_name, value)
 
     def write(self, filename):
         """Serialize itself to a filename."""
