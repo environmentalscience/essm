@@ -112,11 +112,14 @@ def get_allparents(equation, allparents=None):
     """Return set of parents of equation recursively."""
     if not allparents:
         allparents = set()
-    parents = equation.definition.__bases__
+    if isinstance(equation, BaseEquation):
+        parents = equation.definition.__bases__
+    else: 
+        parents = equation.__bases__
     for parent in parents:
         if hasattr(parent, 'name'):
             allparents.update([parent.name])
-            get_allparents(eval(parent.name), allparents)
+            get_allparents(parent, allparents)
     return allparents
 
 
