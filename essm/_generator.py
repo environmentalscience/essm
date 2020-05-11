@@ -42,7 +42,7 @@ STYLE_YAPF = pkg_resources.resource_filename('essm', 'style.yapf')
 
 LICENSE_TPL = """# -*- coding: utf-8 -*-
 #
-# This file is part of essm.
+# This file is for use with essm.
 # Copyright (C) {year} ETH Zurich, Swiss Data Science Center.
 #
 # essm is free software; you can redistribute it
