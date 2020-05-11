@@ -34,6 +34,7 @@ from yapf.yapflib.yapf_api import FormatCode
 import essm
 
 from .variables import Variable
+from .variables.utils import get_parents
 
 logger = logging.getLogger()
 
@@ -374,6 +375,40 @@ class EquationWriter(object):
 
         for match in re.finditer(_IMPORTS, str(expr)) or []:
             self._imports['essm'].add(match.group())
+
+    def eq(self, eq1):
+        """Add pre-defined equation to writer, including any internal variables.
+
+        Example:
+
+        .. code-block:: python
+        from essm._generator import EquationWriter, VariableWriter
+        from essm.variables.utils import get_parents
+        from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
+        writer = EquationWriter(docstring="Test.")
+        write_eq(eq_Pwl, writer)
+        write_eq(eq_Cwl, writer)
+        print(writer)
+        """
+
+        dict_attr = eq1.definition.__dict__
+        int_vars = set(dict_attr.keys()) - \
+            {'__module__', '__doc__', 'name', 'expr'}
+        name = dict_attr.get('name')
+        doc = dict_attr.get('__doc__')
+        expr = dict_attr.get('expr')
+        parents = get_parents(eq1)
+        int_vars_attr = [
+            eq1.definition.__dict__[var1]
+               .definition.__dict__ for var1 in int_vars]
+        variables = [{'name': d1.get('name'),
+                      'doc': d1.get('__doc__'),
+                      'units': d1.get('unit'),
+                      'domain': d1.get('assumptions'),
+                      'latex_name': d1.get('latex_name'),
+                      'default': d1.get('default')}
+                     for d1 in int_vars_attr]
+        self.neweq(name, expr, doc, parents, variables=variables)
 
     def write(self, filename):
         """Serialize itself to a filename."""

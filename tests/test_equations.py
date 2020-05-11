@@ -326,6 +326,8 @@ def test_variable_writer(tmpdir):
 def test_equation_writer(tmpdir):
     """EquationWriter creates importable file with internal variables."""
     from sympy import var
+    from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
+    writer = EquationWriter(docstring="Test.")
     g = {}
     d = var('d')
     t = var('t')
@@ -345,12 +347,16 @@ def test_equation_writer(tmpdir):
             "latex_name": 'p_2'
         }]
     )
+    writer_td.eq(eq_Cwl)
+    writer_td.eq(eq_Pwl)
     eq_file = tmpdir.mkdir('test').join('test_equations.py')
     writer_td.write(eq_file.strpath)
     with open(eq_file, "rb") as source_file:
         code = compile(eq_file.read(), eq_file, "exec")
     exec(code, g)
     assert g['demo_fall'].definition.d.definition.default == 0.9
+    assert g['eq_Cwl'].definition.expr == eq_Cwl.definition.expr
+    assert g['eq_Pwl'].definition.expr == eq_Pwl.definition.expr
 
 
 def test_equation_writer_linebreaks(tmpdir):
