@@ -27,14 +27,14 @@ from collections import defaultdict
 
 import pkg_resources
 from isort import SortImports
-from sympy import Eq, latex, preorder_traversal
+from sympy import Eq, Function, latex, preorder_traversal
 from sympy.physics.units import Quantity
 from yapf.yapflib.yapf_api import FormatCode
 
 import essm
 
 from .variables import Variable
-from .variables.utils import get_parents
+from .variables.utils import extract_variables, get_parents
 
 logger = logging.getLogger()
 
@@ -126,6 +126,14 @@ def create_module(name, doc=None, folder=None, overwrite=False):
         logger.debug('Created file {0}.'.format(init_path))
 
     return path
+
+
+def extract_functions(expr):
+    """Traverse through expression and return set of functions."""
+    return {
+        arg.func
+        for arg in preorder_traversal(expr) if isinstance(arg, Function)
+    }
 
 
 def extract_units(expr):
@@ -366,7 +374,13 @@ class EquationWriter(object):
         self.eqs.append(context)
 
         # register all imports
-        for arg in expr.args:
+        for arg in extract_functions(expr):
+            self._imports['sympy'].add(str(arg))
+
+        for match in re.finditer(_IMPORTS, str(expr)) or []:
+            self._imports['sympy'].add(match.group())
+
+        for arg in extract_variables(expr):
             if str(arg) not in internal_variables and\
                     arg in Variable.__registry__:
                 self._imports[Variable.__registry__[arg].__module__].add(

@@ -327,6 +327,8 @@ def test_equation_writer(tmpdir):
     """EquationWriter creates importable file with internal variables."""
     from sympy import var
     from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
+    from essm.variables.physics.thermodynamics import lambda_E, M_w, R_mol
+    from essm.variables.leaf.energy_water import P_wl, T_l
     writer = EquationWriter(docstring="Test.")
     g = {}
     d = var('d')
