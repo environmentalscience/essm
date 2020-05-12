@@ -17,7 +17,7 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
-"""Variables defined in api_features.ipynb."""
+"""Variables defined in api_features.ipynb and dependencies."""
 
 from sympy.physics.units import (
     joule, kelvin, kilogram, meter, mole, pascal, second, watt

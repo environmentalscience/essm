@@ -17,7 +17,7 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
-"""Test of Equation_writer."""
+"""Equations defined in api_features.ipynb and dependencies."""
 
 from __future__ import division
 
@@ -72,15 +72,6 @@ class eq_Dva(Equation):
     (Table A.3 in :cite:`monteith_principles_2007`)
     """
 
-    class p_Dva1(Variable):
-        """Internal parameter of eq_Dva."""
-
-        name = 'p_Dva1'
-        unit = meter ** 2 / (kelvin * second)
-        assumptions = {'real': True}
-        latex_name = 'p_1'
-        default = 1.49e-07
-
     class p_Dva2(Variable):
         """Internal parameter of eq_Dva."""
 
@@ -89,6 +80,15 @@ class eq_Dva(Equation):
         assumptions = {'real': True}
         latex_name = 'p_2'
         default = 1.96e-05
+
+    class p_Dva1(Variable):
+        """Internal parameter of eq_Dva."""
+
+        name = 'p_Dva1'
+        unit = meter ** 2 / (kelvin * second)
+        assumptions = {'real': True}
+        latex_name = 'p_1'
+        default = 1.49e-07
 
     expr = Eq(D_va, T_a * p_Dva1 - p_Dva2)
 
@@ -126,15 +126,6 @@ class eq_ka(Equation):
     (Table A.3 in :cite:`monteith_principles_2007`)
     """
 
-    class p_ka2(Variable):
-        """Internal parameter of eq_ka."""
-
-        name = 'p_ka2'
-        unit = joule / (kelvin * meter * second)
-        assumptions = {'real': True}
-        latex_name = 'p_2'
-        default = 0.00563
-
     class p_ka1(Variable):
         """Internal parameter of eq_ka."""
 
@@ -143,6 +134,15 @@ class eq_ka(Equation):
         assumptions = {'real': True}
         latex_name = 'p_1'
         default = 6.84e-05
+
+    class p_ka2(Variable):
+        """Internal parameter of eq_ka."""
+
+        name = 'p_ka2'
+        unit = joule / (kelvin * meter * second)
+        assumptions = {'real': True}
+        latex_name = 'p_2'
+        default = 0.00563
 
     expr = Eq(k_a, T_a * p_ka1 + p_ka2)
 
@@ -153,15 +153,6 @@ class eq_nua(Equation):
     (Table A.3 in :cite:`monteith_principles_2007`)
     """
 
-    class p_nua1(Variable):
-        """Internal parameter of eq_nua."""
-
-        name = 'p_nua1'
-        unit = meter ** 2 / (kelvin * second)
-        assumptions = {'real': True}
-        latex_name = 'p_1'
-        default = 9e-08
-
     class p_nua2(Variable):
         """Internal parameter of eq_nua."""
 
@@ -170,6 +161,15 @@ class eq_nua(Equation):
         assumptions = {'real': True}
         latex_name = 'p_2'
         default = 1.13e-05
+
+    class p_nua1(Variable):
+        """Internal parameter of eq_nua."""
+
+        name = 'p_nua1'
+        unit = meter ** 2 / (kelvin * second)
+        assumptions = {'real': True}
+        latex_name = 'p_1'
+        default = 9e-08
 
     expr = Eq(nu_a, T_a * p_nua1 - p_nua2)
 
@@ -209,19 +209,10 @@ class eq_ideal_gas_law(Equation):
 
 
 class eq_Pwa_CC(Equation):
-    """Clausius-Clapeyron P_wa as function of T_g. 
+    """Clausius-Clapeyron P_wa as function of T_g.
 
     Eq. B3 in :cite{hartmann_global_1994}
     """
-
-    class p_CC2(Variable):
-        """Internal parameter of eq_Pwa_CC."""
-
-        name = 'p_CC2'
-        unit = kelvin
-        assumptions = {'real': True}
-        latex_name = '273'
-        default = 273.0
 
     class p_CC1(Variable):
         """Internal parameter of eq_Pwa_CC."""
@@ -231,6 +222,15 @@ class eq_Pwa_CC(Equation):
         assumptions = {'real': True}
         latex_name = '611'
         default = 611.0
+
+    class p_CC2(Variable):
+        """Internal parameter of eq_Pwa_CC."""
+
+        name = 'p_CC2'
+        unit = kelvin
+        assumptions = {'real': True}
+        latex_name = '273'
+        default = 273.0
 
     expr = Eq(
         P_wa, p_CC1 * exp(-M_w * lambda_E * (-1 / p_CC2 + 1 / T_g) / R_mol)
@@ -266,7 +266,7 @@ class eq_PN2(eq_Pa.definition, eq_PN2_PO2.definition):
     expr = Eq(P_N2, (P_a * x_N2 - P_wa * x_N2) / (x_N2 + x_O2))
 
 
-class eq_rhoa(eq_rhoa_Pwa_Ta.definition, eq_PN2.definition, eq_PO2.definition):
+class eq_rhoa(eq_PN2.definition, eq_rhoa_Pwa_Ta.definition, eq_PO2.definition):
     """Calculate rho_a from T_a, P_a and P_wa."""
 
     expr = Eq(
