@@ -238,12 +238,12 @@ class VariableWriter(object):
         Example:
 
         .. code-block:: python
-        from essm._generator import VariableWriter
-        from essm.variables.physics.thermodynamics import c_pa, P_a
-        writer = VariableWriter(docstring="Test.")
-        writer.var(c_pa)
-        writer.var(P_a)
-        print(writer)
+            from essm._generator import VariableWriter
+            from essm.variables.physics.thermodynamics import c_pa, P_a
+            writer = VariableWriter(docstring="Test.")
+            writer.var(c_pa)
+            writer.var(P_a)
+            print(writer)
         """
         dict_attr = var1.definition.__dict__
         name = dict_attr.get('name')
@@ -267,26 +267,26 @@ class EquationWriter(object):
 
     .. code-block:: python
 
-    from essm.equations import Equation
-    from essm._generator import EquationWriter
-    from essm.variables.units import second, meter, kelvin
-    from essm.variables.physics.thermodynamics import R_s, D_va, T_a, \
-        P_a, P_wa, P_N2, P_O2
-    from essm.equations.physics.thermodynamics import eq_Pa
-    from sympy import Eq, symbols
-    p_Dva1, p_Dva2 = symbols('p_Dva1, p_Dva2')
-    writer = EquationWriter(docstring="Test.")
-    writer.eq(eq_Pa)
-    writer.neweq('eq_Pwa_Pa', Eq(P_wa, P_a - P_N2 - P_O2),
-            doc='Calculate P_wa from total air pressure.',
-            parents=['eq_Pa'])
-    writer.neweq('eq_Dva', Eq(D_va, p_Dva1*T_a - p_Dva2),
-            doc='D_va as a function of air temperature',
-            variables = [{"name": "p_Dva1", "default": '1.49e-07',
-                            "units": meter**2/second/kelvin},
-                        {"name": "p_Dva2", "default": '1.96e-05',
-                            "units": meter**2/second}])
-    print(writer)
+        from essm.equations import Equation
+        from essm._generator import EquationWriter
+        from essm.variables.units import second, meter, kelvin
+        from essm.variables.physics.thermodynamics import R_s, D_va, T_a, \
+            P_a, P_wa, P_N2, P_O2
+        from essm.equations.physics.thermodynamics import eq_Pa
+        from sympy import Eq, symbols
+        p_Dva1, p_Dva2 = symbols('p_Dva1, p_Dva2')
+        writer = EquationWriter(docstring="Test.")
+        writer.eq(eq_Pa)
+        writer.neweq('eq_Pwa_Pa', Eq(P_wa, P_a - P_N2 - P_O2),
+                doc='Calculate P_wa from total air pressure.',
+                parents=['eq_Pa'])
+        writer.neweq('eq_Dva', Eq(D_va, p_Dva1*T_a - p_Dva2),
+                doc='D_va as a function of air temperature',
+                variables = [{"name": "p_Dva1", "default": '1.49e-07',
+                                "units": meter**2/second/kelvin},
+                            {"name": "p_Dva2", "default": '1.96e-05',
+                                "units": meter**2/second}])
+        print(writer)
     """
 
     TPL = EQUATION_TPL
@@ -398,13 +398,13 @@ class EquationWriter(object):
         Example:
 
         .. code-block:: python
-        from essm._generator import EquationWriter, VariableWriter
-        from essm.variables.utils import get_parents
-        from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
-        writer = EquationWriter(docstring="Test.")
-        writer.eq(eq_Pwl)
-        writer.eq(eq_Cwl)
-        print(writer)
+            from essm._generator import EquationWriter, VariableWriter
+            from essm.variables.utils import get_parents
+            from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
+            writer = EquationWriter(docstring="Test.")
+            writer.eq(eq_Pwl)
+            writer.eq(eq_Cwl)
+            print(writer)
         """
 
         dict_attr = eq1.definition.__dict__
