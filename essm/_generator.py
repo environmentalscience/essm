@@ -233,7 +233,7 @@ class VariableWriter(object):
                     self._imports['sympy.physics.units'].add(str(arg))
 
     def var(self, var1):
-        """ Add pre-defined variable to writer.
+        """Add pre-defined variable to writer.
 
         Example:
 
@@ -406,7 +406,6 @@ class EquationWriter(object):
             writer.eq(eq_Cwl)
             print(writer)
         """
-
         dict_attr = eq1.definition.__dict__
         int_vars = set(dict_attr.keys()) - \
             {'__module__', '__doc__', 'name', 'expr'}
