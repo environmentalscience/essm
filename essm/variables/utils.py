@@ -18,9 +18,9 @@
 # along with essm; if not, write to the
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 # MA 02111-1307, USA.
-"""Utility function for variables."""
+"""Utility function for variables, expressions and equations."""
 
-from essm.equations._core import BaseEquation
+from essm.equations._core import BaseEquation, EquationMeta
 from essm.variables._core import BaseVariable
 from sympy import Eq, latex, preorder_traversal
 from sympy.core.expr import Expr
@@ -106,6 +106,31 @@ def extract_variables(expr):
         arg
         for arg in preorder_traversal(expr) if isinstance(arg, BaseVariable)
     }
+
+
+def get_allparents(equation, allparents=None):
+    """Return set of parents of equation recursively."""
+    if not allparents:
+        allparents = set()
+    if isinstance(equation, BaseEquation):
+        parents = equation.definition.__bases__
+    else:
+        parents = equation.__bases__
+    for parent in parents:
+        if hasattr(parent, 'name'):
+            allparents.update([parent.name])
+            get_allparents(parent, allparents)
+    return allparents
+
+
+def get_parents(equation):
+    """Return set of parents of equation."""
+    allparents = set()
+    parents = equation.definition.__bases__
+    for parent in parents:
+        if hasattr(parent, 'name'):
+            allparents.update([parent.name])
+    return allparents
 
 
 def replace_variables(expr, variables=None):

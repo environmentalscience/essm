@@ -3,7 +3,7 @@ Changes
 
 ``v0.4.2``
 ----------
-*released 2019-11-20*
+*released 2020-04-28*
 
 Bug Fixes
 ~~~~~~~~~

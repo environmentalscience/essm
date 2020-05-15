@@ -27,11 +27,14 @@ from collections import defaultdict
 
 import pkg_resources
 from isort import SortImports
+from sympy import Eq, Function, latex, preorder_traversal
+from sympy.physics.units import Quantity
 from yapf.yapflib.yapf_api import FormatCode
 
 import essm
 
 from .variables import Variable
+from .variables.utils import extract_variables, get_parents
 
 logger = logging.getLogger()
 
@@ -39,7 +42,7 @@ STYLE_YAPF = pkg_resources.resource_filename('essm', 'style.yapf')
 
 LICENSE_TPL = """# -*- coding: utf-8 -*-
 #
-# This file is part of essm.
+# This file is for use with essm.
 # Copyright (C) {year} ETH Zurich, Swiss Data Science Center.
 #
 # essm is free software; you can redistribute it
@@ -72,8 +75,8 @@ class {name}(Variable):
 
     name = {name!r}
     unit = {units}
-    domain = {domain!r}
-    latex_name = {latexname!r}
+    assumptions = {assumptions!r}
+    latex_name = {latex_name!r}
     {default}
 """
 
@@ -125,13 +128,34 @@ def create_module(name, doc=None, folder=None, overwrite=False):
     return path
 
 
+def extract_functions(expr):
+    """Traverse through expression and return set of functions."""
+    return {
+        arg.func
+        for arg in preorder_traversal(expr) if isinstance(arg, Function)
+    }
+
+
+def extract_units(expr):
+    """Traverse through expression and return set of units."""
+    return {
+        arg
+        for arg in preorder_traversal(expr) if isinstance(arg, Quantity)
+    }
+
+
 class VariableWriter(object):
     """Generate Variable definitions.
 
     Example:
 
     .. code-block:: python
-       from essm._generator import VariableWriter
+        from essm._generator import VariableWriter
+        from essm.variables.physics.thermodynamics import c_pa, P_a
+        writer = VariableWriter(docstring="Test.")
+        writer.var(c_pa)
+        writer.var(P_a)
+        print(writer)
     """
 
     TPL = VARIABLE_TPL
@@ -176,32 +200,28 @@ class VariableWriter(object):
             result = _lint_content(result)
         return result
 
-    def var(
+    def newvar(
             self,
             name,
             doc='',
             units=None,
-            domain='real',
-            latexname=None,
-            value=None
+            assumptions={'real': True},
+            latex_name=None,
+            default=None
     ):
         """Add new variable."""
-        if not latexname:
-            latexname = name
-        if value is None:
+        if not latex_name:
+            latex_name = name
+        if default is None:
             default = ''
         else:
-            default = 'default = ' + str(value)
-            # Skip trailing zeroes from real numbers only
-            if isinstance(value, type(0.1)):
-                default = 'default = ' + value.str(skip_zeroes=True
-                                                   ).replace('^', '**')
+            default = 'default = ' + str(default)
         context = {
             "name": name,
             "doc": doc,
             "units": str(units).replace('^', '**') if units else '1/1',
-            "domain": domain,
-            "latexname": latexname,
+            "assumptions": assumptions,
+            "latex_name": latex_name,
             "default": default
         }
         self.vars.append(context)
@@ -209,8 +229,30 @@ class VariableWriter(object):
         # register all imports of units
         if units:
             if units != 1:
-                for arg in units.args:
-                    self._imports['essm.variables.units'].add(str(arg))
+                for arg in extract_units(units):
+                    self._imports['sympy.physics.units'].add(str(arg))
+
+    def var(self, var1):
+        """Add pre-defined variable to writer.
+
+        Example:
+
+        .. code-block:: python
+            from essm._generator import VariableWriter
+            from essm.variables.physics.thermodynamics import c_pa, P_a
+            writer = VariableWriter(docstring="Test.")
+            writer.var(c_pa)
+            writer.var(P_a)
+            print(writer)
+        """
+        dict_attr = var1.definition.__dict__
+        name = dict_attr.get('name')
+        doc = dict_attr.get('__doc__')
+        units = dict_attr.get('unit')
+        assumptions = dict_attr.get('assumptions')
+        latex_name = dict_attr.get('latex_name')
+        value = dict_attr.get('default')
+        self.newvar(name, doc, units, assumptions, latex_name, value)
 
     def write(self, filename):
         """Serialize itself to a filename."""
@@ -230,19 +272,20 @@ class EquationWriter(object):
         from essm.variables.units import second, meter, kelvin
         from essm.variables.physics.thermodynamics import R_s, D_va, T_a, \
             P_a, P_wa, P_N2, P_O2
-        var('p_Dva1 p_Dva2')
+        from essm.equations.physics.thermodynamics import eq_Pa
+        from sympy import Eq, symbols
+        p_Dva1, p_Dva2 = symbols('p_Dva1, p_Dva2')
         writer = EquationWriter(docstring="Test.")
-        writer.eq('eq_Pa', P_a == P_N2 + P_O2 + P_wa,
-                  doc='Sum partial pressures to obtain total air pressure.')
-        writer.eq('eq_Pwa_Pa', P_wa == P_a - P_N2 - P_O2,
-                  doc='Calculate P_wa from total air pressure.',
-                  parents=['eq_Pa'])
-        writer.eq('eq_Dva', D_va == p_Dva1*T_a - p_Dva2,
-                  doc='D_va as a function of air temperature',
-                  variables = [{"name": "p_Dva1", "value": '1.49e-07',
-                                "units": meter^2/second/kelvin},
-                               {"name": "p_Dva2", "value": '1.96e-05',
-                                "units": meter^2/second}])
+        writer.eq(eq_Pa)
+        writer.neweq('eq_Pwa_Pa', Eq(P_wa, P_a - P_N2 - P_O2),
+                doc='Calculate P_wa from total air pressure.',
+                parents=['eq_Pa'])
+        writer.neweq('eq_Dva', Eq(D_va, p_Dva1*T_a - p_Dva2),
+                doc='D_va as a function of air temperature',
+                variables = [{"name": "p_Dva1", "default": '1.49e-07',
+                                "units": meter**2/second/kelvin},
+                            {"name": "p_Dva2", "default": '1.96e-05',
+                                "units": meter**2/second}])
         print(writer)
     """
 
@@ -251,7 +294,8 @@ class EquationWriter(object):
     LICENSE_TPL = LICENSE_TPL
     default_imports = {
         '__future__': {'division'},
-        'essm.equations': {'Equation'}
+        'essm.equations': {'Equation'},
+        'sympy': {'Integral'}
     }
     """Set up default imports, including standard division."""
 
@@ -288,7 +332,7 @@ class EquationWriter(object):
         reformatted_result = _lint_content(result)
         return reformatted_result
 
-    def eq(self, name, expr, doc='', parents=None, variables=None):
+    def neweq(self, name, expr, doc='', parents=None, variables=None):
         """Add new equation."""
         if parents:
             parents = ', '.join(parent + '.definition' for parent in parents)
@@ -297,14 +341,14 @@ class EquationWriter(object):
 
         if variables:
             for variable in variables:
-                variable.setdefault('latexname', variable['name'])
+                variable.setdefault('latex_name', variable['name'])
                 variable['doc'] = "Internal parameter of {0}.".format(name)
 
             # Serialize the internal variables.
             writer = VariableWriter()
             internal_variables = set()
             for variable in variables:
-                writer.var(**variable)
+                writer.newvar(**variable)
                 internal_variables.add(variable['name'])
             variables = re.sub(
                 r'^',
@@ -332,7 +376,13 @@ class EquationWriter(object):
         self.eqs.append(context)
 
         # register all imports
-        for arg in expr.args:
+        for arg in extract_functions(expr):
+            self._imports['sympy'].add(str(arg))
+
+        for match in re.finditer(_IMPORTS, str(expr)) or []:
+            self._imports['sympy'].add(match.group())
+
+        for arg in extract_variables(expr):
             if str(arg) not in internal_variables and\
                     arg in Variable.__registry__:
                 self._imports[Variable.__registry__[arg].__module__].add(
@@ -341,6 +391,39 @@ class EquationWriter(object):
 
         for match in re.finditer(_IMPORTS, str(expr)) or []:
             self._imports['essm'].add(match.group())
+
+    def eq(self, eq1):
+        """Add pre-defined equation to writer, including any internal variables.
+
+        Example:
+
+        .. code-block:: python
+            from essm._generator import EquationWriter, VariableWriter
+            from essm.variables.utils import get_parents
+            from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
+            writer = EquationWriter(docstring="Test.")
+            writer.eq(eq_Pwl)
+            writer.eq(eq_Cwl)
+            print(writer)
+        """
+        dict_attr = eq1.definition.__dict__
+        int_vars = set(dict_attr.keys()) - \
+            {'__module__', '__doc__', 'name', 'expr'}
+        name = dict_attr.get('name')
+        doc = dict_attr.get('__doc__')
+        expr = dict_attr.get('expr')
+        parents = get_parents(eq1)
+        int_vars_attr = [
+            eq1.definition.__dict__[var1]
+               .definition.__dict__ for var1 in int_vars]
+        variables = [{'name': d1.get('name'),
+                      'doc': d1.get('__doc__'),
+                      'units': d1.get('unit'),
+                      'assumptions': d1.get('assumptions'),
+                      'latex_name': d1.get('latex_name'),
+                      'default': d1.get('default')}
+                     for d1 in int_vars_attr]
+        self.neweq(name, expr, doc, parents, variables=variables)
 
     def write(self, filename):
         """Serialize itself to a filename."""

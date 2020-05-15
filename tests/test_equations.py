@@ -4,7 +4,7 @@
 import pytest
 
 from essm import Eq
-from essm._generator import EquationWriter
+from essm._generator import EquationWriter, VariableWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import (joule, kelvin, kilogram, meter, mole, second,
@@ -303,63 +303,91 @@ def test_solve():
     ) == [0.031 * demo_d - 1.68e-7 * demo_d2]
 
 
-@pytest.mark.skip(reason="needs rewrite for SymPy")
+def test_variable_writer(tmpdir):
+    """VariableWriter creates importable file with variable definitions."""
+    from essm.variables.physics.thermodynamics import c_pa
+    g = {}
+    writer_td = VariableWriter(docstring='Test of Variable_writer.')
+    writer_td.newvar(
+        'g',
+        'meter / second ^ 2',
+        'default = 9.81'
+    )
+    writer_td.var(c_pa)
+    eq_file = tmpdir.mkdir('test').join('test_variables.py')
+    writer_td.write(eq_file.strpath)
+    with open(eq_file, "rb") as source_file:
+        code = compile(eq_file.read(), eq_file, "exec")
+    exec(code, g)
+    assert g['g'].definition.default == 9.81
+    assert g['c_pa'].definition.unit == c_pa.definition.unit
+
+
 def test_equation_writer(tmpdir):
     """EquationWriter creates importable file with internal variables."""
     from sympy import var
+    from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
+    from essm.variables.physics.thermodynamics import lambda_E, M_w, R_mol
+    from essm.variables.leaf.energy_water import P_wl, T_l
     g = {}
     d = var('d')
     t = var('t')
     writer_td = EquationWriter(docstring='Test of Equation_writer.')
-    writer_td.eq(
+    writer_td.neweq(
         'demo_fall',
         Eq(demo_g, d / t ** 2),
         doc='Test equation.\n\n    (Some reference)\n    ',
         variables=[{
             "name": "d",
-            "value": '0.9',
+            "default": '0.9',
             "units": meter,
-            "latexname": 'p_1'
+            "latex_name": 'p_1'
         }, {
             "name": "t",
             "units": second,
-            "latexname": 'p_2'
+            "latex_name": 'p_2'
         }]
     )
+    writer_td.eq(eq_Cwl)
+    writer_td.eq(eq_Pwl)
     eq_file = tmpdir.mkdir('test').join('test_equations.py')
     writer_td.write(eq_file.strpath)
-    execfile(eq_file.strpath, g)
+    with open(eq_file, "rb") as source_file:
+        code = compile(eq_file.read(), eq_file, "exec")
+    exec(code, g)
     assert g['demo_fall'].definition.d.definition.default == 0.9
+    assert g['eq_Cwl'].definition.expr == eq_Cwl.definition.expr
+    assert g['eq_Pwl'].definition.expr == eq_Pwl.definition.expr
 
 
-@pytest.mark.skip(reason="needs rewrite for SymPy")
 def test_equation_writer_linebreaks(tmpdir):
     """EquationWriter breaks long import lines."""
     from essm.variables.physics.thermodynamics import alpha_a, D_va, P_wa, \
-        R_mol, T_a, M_O2, P_O2, P_N2, M_N2, M_w, Le, C_wa, rho_a, P_a
+        R_mol, T_a, M_O2, P_O2, P_N2, M_N2, M_w, Le, C_wa, rho_a, P_a, \
+        x_N2, x_O2
 
     writer_td = EquationWriter(docstring='Test of Equation_writer.')
-    writer_td.eq(
+    writer_td.neweq(
         'eq_Le',
         Eq(Le, alpha_a / D_va),
         doc='Le as function of alpha_a and D_va.'
     )
-    writer_td.eq(
+    writer_td.neweq(
         'eq_Cwa',
         Eq(C_wa, P_wa / (R_mol * T_a)),
         doc='C_wa as a function of P_wa and T_a.'
     )
-    writer_td.eq(
+    writer_td.neweq(
         'eq_rhoa_Pwa_Ta',
         Eq(rho_a, (M_w * P_wa + M_N2 * P_N2 + M_O2 * P_O2) / (R_mol * T_a)),
         doc='rho_a as a function of P_wa and T_a.'
     )
-    writer_td.eq(
+    writer_td.neweq(
         'eq_Pa',
         Eq(P_a, P_N2 + P_O2 + P_wa),
         doc='Calculate air pressure from partial pressures.'
     )
-    writer_td.eq(
+    writer_td.neweq(
         'eq_PN2_PO2',
         Eq(P_N2, x_N2 / x_O2 * P_O2),
         doc='Calculate P_N2 as a function of P_O2'
