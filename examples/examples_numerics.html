@@ -1,0 +1,1051 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Use examples for numerical calculations &#8212; ESSM 0.4.3.dev2 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Docs" href="../api.html" />
+    <link rel="prev" title="Use examples" href="api_features.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Use-examples-for-numerical-calculations">
+<h1>Use examples for numerical calculations<a class="headerlink" href="#Use-examples-for-numerical-calculations" title="Permalink to this headline">¶</a></h1>
+<p>This jupyter notebook can be found at: <a class="reference external" href="https://github.com/environmentalscience/essm/blob/master/docs/examples/examples_numerics.ipynb">https://github.com/environmentalscience/essm/blob/master/docs/examples/examples_numerics.ipynb</a></p>
+<p>Below, we will import variable and equation defintions that were previously exported from api_features.ipynb by running the file <code class="docutils literal notranslate"><span class="pre">test_equation_definitions.py</span></code>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">init_printing</span><span class="p">,</span> <span class="n">latex</span>
+<span class="n">init_printing</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">sympy.printing</span> <span class="kn">import</span> <span class="n">StrPrinter</span>
+<span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Quantity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">abbrev</span><span class="p">)</span>    <span class="c1"># displays short units (m instead of meter)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">run</span> -i &#39;test_equation_definitions.py&#39;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_Dva1&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_Dva.p_Dva1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_Dva2&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_Dva.p_Dva2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_alpha2&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_alphaa.p_alpha2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_alpha1&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_alphaa.p_alpha1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_ka2&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_ka.p_ka2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_ka1&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_ka.p_ka1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_nua1&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_nua.p_nua1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_nua2&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_nua.p_nua2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_CC2&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_Pwa_CC.p_CC2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;test_variable_definitions:p_CC1&#34; will be overridden by &#34;__main__:&lt;class &#39;__main__.eq_Pwa_CC.p_CC1&#39;&gt;&#34;
+  instance[expr] = instance
+</pre></div></div>
+</div>
+<div class="section" id="Numerical-evaluations">
+<h2>Numerical evaluations<a class="headerlink" href="#Numerical-evaluations" title="Permalink to this headline">¶</a></h2>
+<p>See here for detailed instructions on how to turn sympy expressions into code: <a class="reference external" href="https://docs.sympy.org/latest/modules/codegen.html">https://docs.sympy.org/latest/modules/codegen.html</a></p>
+<p>We will first list all equations defined in this worksheet:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">Equation</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">eq</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+eq_Le: Eq(Le, alpha_a/D_va)
+eq_Cwa: Eq(C_wa, P_wa/(R_mol*T_a))
+eq_Nu_forced_all: Eq(Nu, -Pr**(1/3)*(-37*Re**(4/5) + 37*(Re + Re_c - Abs(Re - Re_c)/2)**(4/5) - 664*sqrt(Re + Re_c - Abs(Re - Re_c)/2))/1000)
+eq_Dva: Eq(D_va, T_a*p_Dva1 - p_Dva2)
+eq_alphaa: Eq(alpha_a, T_a*p_alpha1 - p_alpha2)
+eq_ka: Eq(k_a, T_a*p_ka1 + p_ka2)
+eq_nua: Eq(nu_a, T_a*p_nua1 - p_nua2)
+eq_rhoa_Pwa_Ta: Eq(rho_a, (M_N2*P_N2 + M_O2*P_O2 + M_w*P_wa)/(R_mol*T_a))
+eq_Pa: Eq(P_a, P_N2 + P_O2 + P_wa)
+eq_PN2_PO2: Eq(P_N2, P_O2*x_N2/x_O2)
+eq_ideal_gas_law: Eq(P_g*V_g, R_mol*T_g*n_g)
+eq_Pwa_CC: Eq(P_wa, p_CC1*exp(-M_w*lambda_E*(-1/p_CC2 + 1/T_g)/R_mol))
+eq1: Eq(P_wa, Piecewise((0, T_a &lt; 0), (p_CC1*exp(-M_w*lambda_E*(-1/p_CC2 + 1/T_g)/R_mol), True)))
+eq_Pwa_Delta: Eq(P_wa, P_wa1 + Integral(Delta_Pwa, (T_g, T_a1, T_a2)))
+eq_PO2: Eq(P_O2, (P_a*x_O2 - P_wa*x_O2)/(x_N2 + x_O2))
+eq_PN2: Eq(P_N2, (P_a*x_N2 - P_wa*x_N2)/(x_N2 + x_O2))
+eq_rhoa: Eq(rho_a, (x_N2*(M_N2*P_a - P_wa*(M_N2 - M_w)) + x_O2*(M_O2*P_a - P_wa*(M_O2 - M_w)))/(R_mol*T_a*x_N2 + R_mol*T_a*x_O2))
+eq_Pg: Eq(P_g, R_mol*T_g*n_g/V_g)
+eq_Pwa_nw: Eq(P_wa, R_mol*T_g*n_w/V_g)
+</pre></div></div>
+</div>
+<div class="section" id="Substitution-of-equations-and-values-into-equations">
+<h3>Substitution of equations and values into equations<a class="headerlink" href="#Substitution-of-equations-and-values-into-equations" title="Permalink to this headline">¶</a></h3>
+<p>The easiest way is to define a dictionary with all variables we want to substitute as keys. We start with the default variables and then add more. First, however, we will define a function to display the contents of a dictionary:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">print_dict</span><span class="p">(</span><span class="n">vdict</span><span class="p">,</span> <span class="n">list_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print values and units of variables in vdict.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">list_vars</span><span class="p">:</span>
+        <span class="n">list_vars</span> <span class="o">=</span> <span class="n">vdict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">var1</span> <span class="ow">in</span> <span class="n">list_vars</span><span class="p">:</span>
+        <span class="n">unit1</span> <span class="o">=</span> <span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span>
+        <span class="k">if</span> <span class="n">unit1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">unit1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">vdict</span><span class="p">[</span><span class="n">var1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1"> </span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">vdict</span><span class="p">[</span><span class="n">var1</span><span class="p">]),</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vdict</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">print_dict</span><span class="p">(</span><span class="n">vdict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+c_pa: 1010.0 J/(K*kg)
+c_pamol: 29.19 J/(K*mol)
+c_pv: 1864 J/(K*kg)
+g: 9.81 m/s**2
+lambda_E: 2450000.0 J/kg
+M_air: 0.02897 kg/mol
+M_N2: 0.028 kg/mol
+M_O2: 0.032 kg/mol
+M_w: 0.018 kg/mol
+R_mol: 8.314472 J/(K*mol)
+sigm: 5.67e-08 J/(K**4*m**2*s)
+T0: 273.15 K
+x_N2: 0.79
+x_O2: 0.21
+p_Dva1: 1.49e-07 m**2/(K*s)
+p_Dva2: 1.96e-05 m**2/s
+p_alpha1: 1.32e-07 m**2/(K*s)
+p_alpha2: 1.73e-05 m**2/s
+p_ka1: 6.84e-05 J/(K**2*m*s)
+p_ka2: 0.00563 J/(K*m*s)
+p_nua1: 9e-08 m**2/(K*s)
+p_nua2: 1.13e-05 m**2/s
+p_CC1: 611.0 Pa
+p_CC2: 273.0 K
+</pre></div></div>
+</div>
+<p>We can substitute a range of equations into each other by using the custom function <code class="docutils literal notranslate"><span class="pre">subs_eq</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="kn">import</span> <span class="n">subs_eq</span>
+<span class="n">subs_eq</span><span class="p">(</span><span class="n">eq_Le</span><span class="p">,</span> <span class="p">[</span><span class="n">eq_alphaa</span><span class="p">,</span> <span class="n">eq_Dva</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$$N_{Le} = \frac{T_a p_1 - p_2}{T_a p_1 - p_2}$$</div></div>
+</div>
+<p>We can also use subs_eq to substitute equations into each other and a dictionary with values. We will first add an entry for T_a into the dictionary and then substitute:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vdict</span><span class="p">[</span><span class="n">T_a</span><span class="p">]</span> <span class="o">=</span> <span class="mf">300.</span>
+<span class="n">subs_eq</span><span class="p">(</span><span class="n">eq_Le</span><span class="p">,</span> <span class="p">[</span><span class="n">eq_alphaa</span><span class="p">,</span> <span class="n">eq_Dva</span><span class="p">],</span> <span class="n">vdict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$$N_{Le} = 0.888446215139442$$</div></div>
+</div>
+</div>
+<div class="section" id="Evaluation-of-equations-for-long-lists-of-variable-sets">
+<h3>Evaluation of equations for long lists of variable sets<a class="headerlink" href="#Evaluation-of-equations-for-long-lists-of-variable-sets" title="Permalink to this headline">¶</a></h3>
+<p>Substitution of variables into equations takes a lot of time if they need to be evaluated for a large number of variables. We can use theano to speed this up:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#import theano</span>
+<span class="kn">from</span> <span class="nn">sympy.printing.theanocode</span> <span class="kn">import</span> <span class="n">theano_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING (theano.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
+</pre></div></div>
+</div>
+<p>We will now create two long lists of values representing T_g and n_g respectively and show how long it takes to compute ideal gas law values.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">npoints</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">xmin</span> <span class="o">=</span> <span class="mf">290.</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="mf">310.</span>
+<span class="n">Tvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">npoints</span><span class="p">)</span>
+<span class="n">xmin</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">nvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="p">(</span><span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">npoints</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="c1"># looping</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">eq_ideal_gas_law</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">)</span>
+<span class="n">resvals0</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Tvals</span><span class="p">)):</span>
+    <span class="n">resvals0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">T_g</span><span class="p">:</span> <span class="n">Tvals</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n_g</span><span class="p">:</span> <span class="n">nvals</span><span class="p">[</span><span class="n">i</span><span class="p">]}))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 7.46 s, sys: 43.4 ms, total: 7.5 s
+Wall time: 7.68 s
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="c1"># Using theano</span>
+<span class="n">f1</span> <span class="o">=</span> <span class="n">theano_function</span><span class="p">([</span><span class="n">T_g</span><span class="p">,</span> <span class="n">n_g</span><span class="p">],</span> <span class="p">[</span><span class="n">eq_ideal_gas_law</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">)],</span> <span class="n">dims</span><span class="o">=</span><span class="p">{</span><span class="n">T_g</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_g</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+<span class="n">resvals1</span> <span class="o">=</span> <span class="n">f1</span><span class="p">(</span><span class="n">Tvals</span><span class="p">,</span><span class="n">nvals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 106 ms, sys: 11.7 ms, total: 118 ms
+Wall time: 623 ms
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">list</span><span class="p">(</span><span class="n">resvals0</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="n">resvals1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+<p><strong>Both approaches give identical results, but ``theano_function`` makes it a lot faster.</strong></p>
+</div>
+<div class="section" id="Numerical-solution">
+<h3>Numerical solution<a class="headerlink" href="#Numerical-solution" title="Permalink to this headline">¶</a></h3>
+<p>Some equations cannot be solved analytically for a given variable, e.g. eq_Nu_forced_all cannot be solved analytically for Re if Nu is given, so we can use numerical solvers instead:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">nsolve</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">vdict</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">vdict</span><span class="p">[</span><span class="n">Pr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.71</span>
+<span class="n">vdict</span><span class="p">[</span><span class="n">Re_c</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3000.</span>
+<span class="n">vdict</span><span class="p">[</span><span class="n">Nu</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1000.</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">eq_Nu_forced_all</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vdict</span><span class="p">)</span>
+<span class="n">nsolve</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="mf">1000.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$$690263.0346446$$</div></div>
+</div>
+<p>Now applying to a long list of Nu-values:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">npoints</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">xmin</span> <span class="o">=</span> <span class="mf">1000.</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="mf">1200.</span>
+<span class="n">Nuvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">npoints</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="c1"># Solving for a range of Nu values</span>
+<span class="n">vdict</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">vdict</span><span class="p">[</span><span class="n">Pr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.71</span>
+<span class="n">vdict</span><span class="p">[</span><span class="n">Re_c</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3000.</span>
+<span class="n">resvals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">Nu1</span> <span class="ow">in</span> <span class="n">Nuvals</span><span class="p">:</span>
+    <span class="n">vdict</span><span class="p">[</span><span class="n">Nu</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nu1</span>
+    <span class="n">resvals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nsolve</span><span class="p">(</span><span class="n">eq_Nu_forced_all</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vdict</span><span class="p">),</span> <span class="mf">1000.</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 1.56 s, sys: 3.9 ms, total: 1.56 s
+Wall time: 1.56 s
+</pre></div></div>
+</div>
+<p>We will now again use a theano function to make it faster. First we import optimize from scipy and preapre the theano_function:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">sciopt</span>
+<span class="n">vdict</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">vdict</span><span class="p">[</span><span class="n">Pr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.71</span>
+<span class="n">vdict</span><span class="p">[</span><span class="n">Re_c</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3000.</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="n">eq_Nu_forced_all</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vdict</span><span class="p">)</span>
+<span class="n">expr1</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">rhs</span> <span class="o">-</span> <span class="n">expr</span><span class="o">.</span><span class="n">lhs</span>
+<span class="n">fun_tf</span> <span class="o">=</span> <span class="n">theano_function</span><span class="p">([</span><span class="n">Re</span><span class="p">,</span> <span class="n">Nu</span><span class="p">],</span> <span class="p">[</span><span class="n">expr1</span><span class="p">],</span> <span class="n">dims</span><span class="o">=</span><span class="p">{</span><span class="n">Nu</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">Re</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+<span class="n">x0vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">Nuvals</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mf">2000.</span><span class="p">)</span> <span class="c1"># array of same shape as Nuvals, with initial guess</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="c1"># Solving for a range of Nu values</span>
+<span class="n">resvals1</span> <span class="o">=</span> <span class="n">sciopt</span><span class="o">.</span><span class="n">fsolve</span><span class="p">(</span><span class="n">fun_tf</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">Nuvals</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 7.35 ms, sys: 0 ns, total: 7.35 ms
+Wall time: 7.24 ms
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">resvals</span> <span class="o">-</span> <span class="n">resvals1</span><span class="p">)</span><span class="o">/</span><span class="n">resvals</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$$5.35695853236626 \cdot 10^{-11}$$</div></div>
+</div>
+<p><strong>Using theano and scipy makes it 2 orders of magnitude faster and the results are different only by 10:math:`^{-10}`%!</strong> <strong>Note, however, that scipy gets slowed down for large arrays, so it is more efficient to re-run it repreatedly with subsections of the arra:</strong></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">npoints</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">xmin</span> <span class="o">=</span> <span class="mf">1000.</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="mf">1200.</span>
+<span class="n">Nuvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">npoints</span><span class="p">)</span>
+<span class="n">x0vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">Nuvals</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mf">2000.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="c1"># Solving for a range of Nu values</span>
+<span class="n">resvals1</span> <span class="o">=</span> <span class="n">sciopt</span><span class="o">.</span><span class="n">fsolve</span><span class="p">(</span><span class="n">fun_tf</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">Nuvals</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0vals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 1.6 s, sys: 4.13 ms, total: 1.61 s
+Wall time: 1.61 s
+</pre></div></div>
+</div>
+<p>We will now test that we can process Nuvals bit by bit and re-create it consistently:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Solving for a range of Nu values</span>
+<span class="n">imax</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Nuvals</span><span class="p">)</span>
+<span class="n">i0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">idiff</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">i1</span> <span class="o">=</span> <span class="n">i0</span>
+<span class="n">resvals2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">while</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="n">imax</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">i0</span> <span class="o">=</span> <span class="n">i1</span>    <span class="c1"># note that resvals[0:2] + resvals[2:4] = resvals[0:4]</span>
+    <span class="n">i1</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">i0</span><span class="o">+</span><span class="n">idiff</span><span class="p">,</span> <span class="n">imax</span><span class="p">)</span>
+    <span class="n">resvals0</span> <span class="o">=</span> <span class="n">Nuvals</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">]</span>
+    <span class="n">resvals2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resvals2</span><span class="p">,</span><span class="n">resvals0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">resvals2</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="n">Nuvals</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+<p>Now we will run fsolve for portions of Nuvals bit by bit:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="c1"># Solving for a range of Nu values</span>
+<span class="n">imax</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Nuvals</span><span class="p">)</span>
+<span class="n">i0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">idiff</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">i1</span> <span class="o">=</span> <span class="n">i0</span>
+<span class="n">resvals2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">while</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="n">imax</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">i0</span> <span class="o">=</span> <span class="n">i1</span>    <span class="c1"># note that resvals[0:2] + resvals[2:4] = resvals[0:4]</span>
+    <span class="n">i1</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">i0</span><span class="o">+</span><span class="n">idiff</span><span class="p">,</span> <span class="n">imax</span><span class="p">)</span>
+    <span class="n">resvals0</span> <span class="o">=</span> <span class="n">sciopt</span><span class="o">.</span><span class="n">fsolve</span><span class="p">(</span><span class="n">fun_tf</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">Nuvals</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">],</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0vals</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">])</span>
+    <span class="n">resvals2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resvals2</span><span class="p">,</span><span class="n">resvals0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 56.5 ms, sys: 16 µs, total: 56.5 ms
+Wall time: 56 ms
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">resvals1</span> <span class="o">-</span> <span class="n">resvals2</span><span class="p">)</span><span class="o">/</span><span class="n">resvals1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$$7.122603685219754e-10$$</div></div>
+</div>
+<p><strong>It is strange that resvals1 and resvals2 are different at all, but anyway, it is clear that slicing the data in relatively small portions is important to keep ``scipy.optimize.fsolve`` time-efficient.</strong></p>
+</div>
+<div class="section" id="Generate-code-from-sympy-expressions-and-execute">
+<h3>Generate code from sympy expressions and execute<a class="headerlink" href="#Generate-code-from-sympy-expressions-and-execute" title="Permalink to this headline">¶</a></h3>
+<p>Need to install gfortran system-wide first!</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">sympy.utilities.autowrap</span> <span class="kn">import</span> <span class="n">autowrap</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y z&#39;</span><span class="p">)</span>
+<span class="n">expr</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+<span class="n">autowrap_func</span> <span class="o">=</span> <span class="n">autowrap</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="n">autowrap_func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 8 µs, sys: 0 ns, total: 8 µs
+Wall time: 13.4 µs
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$$-1.0$$</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span><span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 70 ms, sys: 3.77 ms, total: 73.8 ms
+Wall time: 72.4 ms
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$$-1$$</div></div>
+</div>
+<p>Use of <code class="docutils literal notranslate"><span class="pre">autowrap</span></code> made the calculation 3 orders of magnitude faster than substitution of values into the original expression!</p>
+<p>Another way is to use <code class="docutils literal notranslate"><span class="pre">binary_function</span></code>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">sympy.utilities.autowrap</span> <span class="kn">import</span> <span class="n">binary_function</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">binary_function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%time</span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">subs</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span><span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 2.47 ms, sys: 0 ns, total: 2.47 ms
+Wall time: 2.65 ms
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math notranslate nohighlight">
+$$-1.0$$</div></div>
+</div>
+<p>However, for the above example, <code class="docutils literal notranslate"><span class="pre">binary_function</span></code> was 2 orders of magnitude slower than <code class="docutils literal notranslate"><span class="pre">autowrap</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+<p class="blurb">Python package for dealing with physical variables and units.</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="importable_variables_equations.html">Importable variables and equations</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="api_features.html">Use examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Use examples for numerical calculations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Numerical-evaluations">Numerical evaluations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Substitution-of-equations-and-values-into-equations">Substitution of equations and values into equations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Evaluation-of-equations-for-long-lists-of-variable-sets">Evaluation of equations for long lists of variable sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Numerical-solution">Numerical solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Generate-code-from-sympy-expressions-and-execute">Generate code from sympy expressions and execute</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Docs</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changes.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://github.com/environmentalscience/essm">essm@GitHub</a></li>
+    
+    <li class="toctree-l1"><a href="https://pypi.python.org/pypi/essm/">essm@PyPI</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api_features.html" title="previous chapter">Use examples</a></li>
+      <li>Next: <a href="../api.html" title="next chapter">API Docs</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Stan Schymanski.
+      
+      |
+      <a href="../_sources/examples/examples_numerics.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/environmentalscience/essm" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Use examples &#8212; ESSM 0.4.3.dev1 documentation</title>
+    <title>Use examples &#8212; ESSM 0.4.3.dev2 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -18,7 +18,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API Docs" href="../api.html" />
+    <link rel="next" title="Use examples for numerical calculations" href="examples_numerics.html" />
     <link rel="prev" title="Importable variables and equations" href="importable_variables_equations.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -290,7 +290,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&#39;0.4.2.dev5+dirty&#39;
+&#39;0.4.3.dev21+dirty&#39;
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -1026,19 +1026,13 @@ $$P_{wa} = \frac{R_{mol} T_g n_w}{V_g}$$</div></div>
 <div class="math notranslate nohighlight">
 $$\left [ P_g = \frac{R_{mol} T_g n_g}{V_g}\right ]$$</div></div>
 </div>
+<p>We can also use a pre-defined function to extract the set of parents:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">get_parents</span><span class="p">(</span><span class="n">equation</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return set of recursive parents of equation.&quot;&quot;&quot;</span>
-    <span class="n">allparents</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="n">parents</span> <span class="o">=</span> <span class="n">equation</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="vm">__bases__</span>
-    <span class="k">for</span> <span class="n">parent</span> <span class="ow">in</span> <span class="n">parents</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">):</span>
-            <span class="n">allparents</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">allparents</span>
+<span></span><span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="kn">import</span> <span class="n">get_parents</span>
 <span class="n">get_parents</span><span class="p">(</span><span class="n">eq_Pwa_nw</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1052,22 +1046,13 @@ $$\left [ P_g = \frac{R_{mol} T_g n_g}{V_g}\right ]$$</div></div>
 {&#39;eq_Pg&#39;}
 </pre></div></div>
 </div>
-<p>We can also write a function to get all parents recursively:</p>
+<p>We can use another function to get all parents recursively:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">get_allparents</span><span class="p">(</span><span class="n">equation</span><span class="p">,</span> <span class="n">allparents</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return set of recursive parents of equation.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">allparents</span><span class="p">:</span>
-        <span class="n">allparents</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="n">parents</span> <span class="o">=</span> <span class="n">equation</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="vm">__bases__</span>
-    <span class="k">for</span> <span class="n">parent</span> <span class="ow">in</span> <span class="n">parents</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">):</span>
-            <span class="n">allparents</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
-            <span class="n">get_allparents</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">allparents</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">allparents</span>
+<span></span><span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="kn">import</span> <span class="n">get_allparents</span>
 <span class="n">get_allparents</span><span class="p">(</span><span class="n">eq_Pwa_nw</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1081,30 +1066,12 @@ $$\left [ P_g = \frac{R_{mol} T_g n_g}{V_g}\right ]$$</div></div>
 {&#39;eq_Pg&#39;, &#39;eq_ideal_gas_law&#39;}
 </pre></div></div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">get_allparents</span><span class="p">(</span><span class="n">eq_Pg</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-{&#39;eq_ideal_gas_law&#39;}
-</pre></div></div>
-</div>
 </div>
 <div class="section" id="Computational-burden-of-deriving-equations-within-class-definition">
 <h3>Computational burden of deriving equations within class definition<a class="headerlink" href="#Computational-burden-of-deriving-equations-within-class-definition" title="Permalink to this headline">¶</a></h3>
 <p>If we solve for a variable to derive a new equation, is the solve() command performed every time this equation is used?</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1135,7 +1102,7 @@ $$\left [ P_g = \frac{R_{mol} T_g n_g}{V_g}\right ]$$</div></div>
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1143,7 +1110,7 @@ $$\left [ P_g = \frac{R_{mol} T_g n_g}{V_g}\right ]$$</div></div>
 $$P_g = \frac{R_{mol} T_g n_g}{V_g}$$</div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1157,12 +1124,12 @@ $$P_g = \frac{R_{mol} T_g n_g}{V_g}$$</div></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-CPU times: user 2 µs, sys: 1 µs, total: 3 µs
-Wall time: 7.15 µs
+CPU times: user 3 µs, sys: 2 µs, total: 5 µs
+Wall time: 8.34 µs
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1170,7 +1137,7 @@ Wall time: 7.15 µs
 $$P_g = 249.42$$</div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1184,12 +1151,12 @@ $$P_g = 249.42$$</div></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-CPU times: user 2 µs, sys: 1 µs, total: 3 µs
-Wall time: 7.15 µs
+CPU times: user 3 µs, sys: 1 µs, total: 4 µs
+Wall time: 7.87 µs
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1204,7 +1171,7 @@ $$P_g = 249.42$$</div></div>
 <div class="math notranslate nohighlight">
 \[P_{wa} = 611 e^\frac{-M_w \lambda_E (1/T_g - 1/273)}{R_{mol}}\]</div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1234,7 +1201,7 @@ $$P_g = 249.42$$</div></div>
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1262,7 +1229,7 @@ Dimension of &#34;1/T_g&#34; is Dimension(1/temperature), but it should be the s
 </div>
 <p>The unit mismatch reported in the error message stems from the fact that the numbers in the empirical equation actually need units. Since the term in the exponent has to be non-dimensional, the units of <code class="docutils literal notranslate"><span class="pre">611</span></code> must be the same as those of <code class="docutils literal notranslate"><span class="pre">P_wa</span></code>, i.e. pascal. The units of the subtraction term in the exponent must match, meaning that <code class="docutils literal notranslate"><span class="pre">273</span></code> needs units of kelvin. To avoid the error message, we can define the empirical numbers as internal variables to the equation we want to define:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1292,7 +1259,7 @@ Dimension of &#34;1/T_g&#34; is Dimension(1/temperature), but it should be the s
 </div>
 <p>In the above, we defined the latex representation of the empirical constants as their actual values, so the equation displays in the familiar way:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1301,7 +1268,7 @@ Dimension of &#34;1/T_g&#34; is Dimension(1/temperature), but it should be the s
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1310,7 +1277,7 @@ $$P_{wa} = 611 e^{- \frac{M_w \lambda_E \left(- \frac{1}{273} + \frac{1}{T_g}\ri
 </div>
 <p>All default values of variables defined along with the variable definitions are stored in a dictionary that can be accessed as <code class="docutils literal notranslate"><span class="pre">Variable.__defaults__</span></code>. We can substitute the values from this dictionary into our empirical equation to plot saturation vapour pressure as a function of temperature:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1340,7 +1307,7 @@ Eq(P_wa, 167405731976.232*exp(-5304.00487246815/T_g))
 <div class="section" id="Piecewise-defined-equations">
 <h3>Piecewise defined equations<a class="headerlink" href="#Piecewise-defined-equations" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1351,7 +1318,7 @@ Eq(P_wa, 167405731976.232*exp(-5304.00487246815/T_g))
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1359,7 +1326,7 @@ Eq(P_wa, 167405731976.232*exp(-5304.00487246815/T_g))
 $$P_{wa} = \begin{cases} 0 &amp; \text{for}\: T_a &lt; 0 \\611 e^{- \frac{M_w \lambda_E \left(- \frac{1}{273} + \frac{1}{T_g}\right)}{R_{mol}}} &amp; \text{otherwise} \end{cases}$$</div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1395,7 +1362,7 @@ $$P_{wa} = \begin{cases} 0 &amp; \text{for}\: T_a &lt; 0 \\611 e^{- \frac{M_w \l
 </div>
 <p>This definition can be accessed by typing <code class="docutils literal notranslate"><span class="pre">Delta_Pwa.definition.expr</span></code>. Example:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1421,7 +1388,7 @@ $$\Delta = \frac{d}{d T_g} P_{wa}$$</div></div>
 </div>
 <p>We also defined the Clausius-Clapeyron approximation to <span class="math notranslate nohighlight">\(P_{wa}(T_g)\)</span> as <code class="docutils literal notranslate"><span class="pre">eq_Pwa_CC</span></code>.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1450,7 +1417,7 @@ Clausius-Clapeyron P_wa as function of T_g.
 </div>
 <p>If we want to substitute this approximation into <code class="docutils literal notranslate"><span class="pre">Delta_Pwa.definition.expr</span></code>, we need to use <code class="docutils literal notranslate"><span class="pre">replace</span></code> instead of <code class="docutils literal notranslate"><span class="pre">subs</span></code> and evaluate the derivative using <code class="docutils literal notranslate"><span class="pre">doit()</span></code>:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1476,7 +1443,7 @@ $$\Delta = \frac{M_w \lambda_E 611 e^{- \frac{M_w \lambda_E \left(- \frac{1}{273
 </div>
 <p>If we only had the slope of the curve, we could take the integral to get the absolute value:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1511,7 +1478,7 @@ $$\Delta = \frac{M_w \lambda_E 611 e^{- \frac{M_w \lambda_E \left(- \frac{1}{273
 $$P_{wa} = P_{wa1} + \int_{T_{a1}}^{T_{a2}} \Delta\, dT_g$$</div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1544,7 +1511,7 @@ $$P_{wa} = 167405731976.232 e^{- \frac{5304.00487246815}{T_{a2}}}$$</div></div>
 <h2>Unit conversions<a class="headerlink" href="#Unit-conversions" title="Permalink to this headline">¶</a></h2>
 <p>Values for variables are often given in obscure units, but to convert to our standard units, we can use the dictionary <code class="docutils literal notranslate"><span class="pre">SI_EXTENDED_DIMENSIONS</span></code>:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1570,935 +1537,185 @@ $$P_{wa} = 167405731976.232 e^{- \frac{5304.00487246815}{T_{a2}}}$$</div></div>
 </div>
 <div class="section" id="Exporting-definitions">
 <h2>Exporting definitions<a class="headerlink" href="#Exporting-definitions" title="Permalink to this headline">¶</a></h2>
-<p>The below example exports all relevant definitions from this jupyter notebook into a file called <code class="docutils literal notranslate"><span class="pre">test_definitions.py</span></code>, from which they can be re-imported into a different notebook just by executing <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">test_definitions</span> <span class="pre">import</span> <span class="pre">*</span></code>, as shown below.</p>
+<p>The below example creates a file called <code class="docutils literal notranslate"><span class="pre">test_variable-definitions.py</span></code> with all the variable definitions and relevant imports used in this notebook. Then, we re-import all the variables from the newly created file and create another file called <code class="docutils literal notranslate"><span class="pre">test_equation-definitions.py</span></code> with all the equation definitions and relevant imports. To re-use the equations in another notebook, just execute <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">test_equation-definitions.py</span> <span class="pre">import</span> <span class="pre">*</span></code></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">essm._generator</span> <span class="kn">import</span> <span class="n">EquationWriter</span><span class="p">,</span> <span class="n">VariableWriter</span>
+</pre></div>
+</div>
+</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">preorder_traversal</span>
-<span class="k">def</span> <span class="nf">extract_units</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Traverse through expression and return set of units.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="n">arg</span>
-        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">preorder_traversal</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">)</span>
-    <span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">re</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test_definitions.py&#39;</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file1</span><span class="p">:</span>
-    <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from essm.variables._core import BaseVariable, Variable</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from essm.equations import Equation</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from sympy import (Abs, Derivative, Eq, exp,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;                   Integral, log, Piecewise, sqrt)&#39;</span><span class="p">)</span>
-    <span class="c1"># Create import strings for all units</span>
-    <span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Quantity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>    <span class="c1"># displays long units (meter instead of m)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">Variable</span><span class="o">.</span><span class="n">__units__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">extract_units</span><span class="p">(</span><span class="n">unit</span><span class="p">):</span>
-            <span class="n">s</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
-        <span class="n">commandstr</span> <span class="o">=</span> <span class="s1">&#39;from sympy.physics.units import &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">commandstr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">Variable</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">symbol</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">latex_name</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">name</span>
-        <span class="n">doc</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="vm">__doc__</span>
-        <span class="n">unit</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span>
-        <span class="n">assumptions</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">assumptions</span>
-        <span class="n">latex_name</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">latex_name</span>
-        <span class="n">expression</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="n">__expressions__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">default</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
-
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="c1"># Variable class line</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;class </span><span class="si">{0}</span><span class="s1">(Variable):</span><span class="se">\n</span><span class="s1">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span><span class="p">)</span>
-
-        <span class="c1"># doc line</span>
-        <span class="n">str_list</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span> <span class="p">)</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;    &quot;&quot;&quot;&#39;</span>
-        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">str_list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_line</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">77</span><span class="p">:</span>
-                <span class="n">str_line</span> <span class="o">=</span> <span class="n">str_line</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">item</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;        &#39;</span> <span class="o">+</span> <span class="n">item</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;    &quot;&quot;&quot;&#39;</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="c1"># name line</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s2">&quot;    name = &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="c1"># unit line</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;    unit = </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="c1"># assumptions line</span>
-        <span class="n">str_list</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;    assumptions = </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">str_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">str_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_line</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">77</span><span class="p">:</span>
-                <span class="n">str_line</span> <span class="o">=</span> <span class="n">str_line</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">item</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;        &#39;</span> <span class="o">+</span> <span class="n">item</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="c1"># latex_name</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s2">&quot;    latex_name = r&#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">latex_name</span><span class="p">)</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">write_equation</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">file1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes equation definition to file.&quot;&quot;&quot;</span>
-        <span class="n">parents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">get_parents</span><span class="p">(</span><span class="n">eq</span><span class="p">))</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">name</span>
-        <span class="n">doc</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="vm">__doc__</span>
-        <span class="n">equ</span> <span class="o">=</span> <span class="n">eq</span>
-
-        <span class="c1"># Equation class line</span>
-        <span class="k">if</span> <span class="n">parents</span> <span class="o">==</span> <span class="p">():</span>
-            <span class="n">str_parents</span> <span class="o">=</span> <span class="s1">&#39;(Equation&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">str_parents</span> <span class="o">=</span> <span class="s1">&#39;(</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.definition&#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parents</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-                    <span class="n">str_parents</span> <span class="o">=</span> <span class="n">str_parents</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">item</span> <span class="o">+</span> <span class="s1">&#39;.definition&#39;</span>
-        <span class="n">str_parents</span> <span class="o">=</span> <span class="n">str_parents</span> <span class="o">+</span> <span class="s1">&#39;):&#39;</span>
-        <span class="n">str_list</span> <span class="o">=</span> <span class="n">str_parents</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;class </span><span class="si">{0}{1}</span><span class="s1">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">str_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">str_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_line</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">77</span><span class="p">:</span>
-                    <span class="n">str_line</span> <span class="o">=</span> <span class="n">str_line</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">item</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;,  # nopep8</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                    <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;        &#39;</span> <span class="o">+</span> <span class="n">item</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-
-        <span class="c1"># doc line</span>
-        <span class="n">str_list</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span> <span class="p">)</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;    &quot;&quot;&quot;&#39;</span>
-        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">str_list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_line</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">79</span><span class="p">:</span>
-                <span class="n">str_line</span> <span class="o">=</span> <span class="n">str_line</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">item</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;        &#39;</span> <span class="o">+</span> <span class="n">item</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;    &quot;&quot;&quot;&#39;</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="c1"># expr line</span>
-        <span class="n">str_list</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;(\*\*|\*|/)&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">equ</span><span class="p">))</span>
-        <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;    expr =&#39;</span>
-        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">str_list</span><span class="p">:</span>
-            <span class="n">str_line</span> <span class="o">=</span> <span class="n">str_line</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">item</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">str_line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">str_line</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">]:</span>
-                    <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span> <span class="o">+</span> <span class="s2">&quot;   # nopep8</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-                    <span class="n">str_line</span> <span class="o">=</span> <span class="s1">&#39;        &#39;</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">str_line</span><span class="p">)</span>
-
-    <span class="n">eqs_with_deps</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">Equation</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">parents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">get_parents</span><span class="p">(</span><span class="n">eq</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">parents</span> <span class="o">==</span> <span class="p">():</span>
-            <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">write_equation</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">file1</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">eqs_with_deps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span> <span class="c1"># Equations with dependencies must be at the end</span>
-
-    <span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">eqs_with_deps</span><span class="p">:</span>
-        <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">write_equation</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">file1</span><span class="p">)</span>
-    <span class="n">file1</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-
+<span></span><span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Quantity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>    <span class="c1"># displays long units (meter instead of m)</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">VariableWriter</span><span class="p">(</span><span class="n">docstring</span><span class="o">=</span><span class="s1">&#39;Variables defined in api_features.ipynb and dependencies.&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">Variable</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;test_variable_definitions.py&#39;</span><span class="p">)</span>
 <span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Quantity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">abbrev</span><span class="p">)</span>    <span class="c1"># displays short units (m instead of meter)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">test_variable_definitions</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:alpha_a&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.alpha_a&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:c_pa&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.c_pa&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:c_pamol&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.c_pamol&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:c_pv&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.c_pv&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:C_wa&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.C_wa&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:D_va&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.D_va&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:g&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.g&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Gr&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.Gr&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:h_c&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.h_c&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:k_a&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.k_a&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:lambda_E&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.lambda_E&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Le&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.Le&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:M_air&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.M_air&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:M_N2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.M_N2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:M_O2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.M_O2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:M_w&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.M_w&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:nu_a&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.nu_a&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Nu&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.Nu&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:P_a&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.P_a&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Pr&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.Pr&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:P_N2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.P_N2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:P_O2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.P_O2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:P_wa&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.P_wa&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:P_was&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.P_was&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:R_d&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.R_d&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Re_c&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.Re_c&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Re&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.Re&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:rho_a&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.rho_a&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:R_u&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.R_u&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:R_mol&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.R_mol&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:R_s&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.R_s&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:sigm&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.sigm&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:T0&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.T0&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:T_a&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.T_a&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:v_w&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.v_w&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:x_N2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.x_N2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:x_O2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.x_O2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_Dva1&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_Dva1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_Dva2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_Dva2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_alpha1&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_alpha1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_alpha2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_alpha2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_ka1&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_ka1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_ka2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_ka2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_nua1&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_nua1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_nua2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_nua2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:P_g&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.P_g&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:V_g&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.V_g&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:n_g&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.n_g&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:n_w&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.n_w&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:T_g&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.T_g&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:Delta_Pwa&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.Delta_Pwa&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:x&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.x&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:p_CC1&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_CC1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:p_CC2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.p_CC2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:T_a1&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.T_a1&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:T_a2&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.T_a2&#39;&gt;&#34;
+  instance[expr] = instance
+/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:P_wa1&#34; will be overridden by &#34;test_variable_definitions:&lt;class &#39;test_variable_definitions.P_wa1&#39;&gt;&#34;
+  instance[expr] = instance
+</pre></div></div>
+</div>
+<p>Since we re-imported names that already had definitions associated with them, we got a warning for each of them before it was overwritten. This tells us that the same variable used before may now have a different meaning, which could introduce inconsistency in the notebook. Here, however, we know that they are all the same. Now that we have re-imported all variables, we can use the <code class="docutils literal notranslate"><span class="pre">EquationWriter</span></code> to generate another python file with all the equations and variables they depend on, as shown
+below. The re-import was necessary so that the import statements do not point to <code class="docutils literal notranslate"><span class="pre">__main__</span></code> for locally defined variables.</p>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">test_definitions</span> <span class="kn">import</span> <span class="o">*</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:alpha_a&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.alpha_a&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:c_pa&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.c_pa&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:c_pamol&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.c_pamol&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:c_pv&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.c_pv&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:C_wa&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.C_wa&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:D_va&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.D_va&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:g&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.g&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Gr&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.Gr&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:h_c&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.h_c&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:k_a&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.k_a&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:lambda_E&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.lambda_E&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Le&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.Le&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:M_air&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.M_air&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:M_N2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.M_N2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:M_O2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.M_O2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:M_w&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.M_w&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:nu_a&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.nu_a&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Nu&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.Nu&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:P_a&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.P_a&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Pr&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.Pr&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:P_N2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.P_N2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:P_O2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.P_O2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:P_wa&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.P_wa&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:P_was&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.P_was&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:R_d&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.R_d&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Re_c&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.Re_c&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:Re&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.Re&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:rho_a&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.rho_a&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:R_u&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.R_u&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:R_mol&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.R_mol&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:R_s&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.R_s&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:sigm&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.sigm&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:T0&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.T0&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:T_a&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.T_a&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:v_w&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.v_w&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:x_N2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.x_N2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.variables.physics.thermodynamics:x_O2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.x_O2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_Dva1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_Dva1&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_Dva2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_Dva2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_alpha1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_alpha1&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_alpha2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_alpha2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_ka1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_ka1&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_ka2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_ka2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_nua1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_nua1&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;essm.equations.physics.thermodynamics:p_nua2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_nua2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:P_g&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.P_g&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:V_g&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.V_g&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:n_g&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.n_g&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:n_w&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.n_w&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:T_g&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.T_g&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:Delta_Pwa&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.Delta_Pwa&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:x&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.x&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:p_CC1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_CC1&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:p_CC2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.p_CC2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:T_a1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.T_a1&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:T_a2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.T_a2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/variables/_core.py:89: UserWarning: &#34;__main__:P_wa1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.P_wa1&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_Le&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Le&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_Cwa&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Cwa&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_Nu_forced_all&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Nu_forced_all&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_Dva&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Dva&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_alphaa&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_alphaa&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_ka&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_ka&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_nua&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_nua&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_rhoa_Pwa_Ta&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_rhoa_Pwa_Ta&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_Pa&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Pa&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_PN2_PO2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_PN2_PO2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;__main__:eq_ideal_gas_law&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_ideal_gas_law&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;__main__:eq_Pwa_CC&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Pwa_CC&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;__main__:eq1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq1&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;__main__:eq_Pwa_Delta&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Pwa_Delta&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_PO2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_PO2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_PN2&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_PN2&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;essm.equations.physics.thermodynamics:eq_rhoa&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_rhoa&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;__main__:eq_Pg1&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Pg&#39;&gt;&#34;
-  instance[expr] = instance
-/home/stan/Programs/essm/essm/equations/_core.py:107: UserWarning: &#34;__main__:eq_Pwa_nw&#34; will be overridden by &#34;test_definitions:&lt;class &#39;test_definitions.eq_Pwa_nw&#39;&gt;&#34;
-  instance[expr] = instance
-</pre></div></div>
-</div>
-<p>Since we re-imported names that already had definitions associated with them, we got a warning for each of them before it was overwritten. This tells us that the same variable used before may now have a different meaning, which could introduce inconsistency in the notebook. Here, however, we know that they are all the same.</p>
-</div>
-<div class="section" id="Numerical-evaluations">
-<h2>Numerical evaluations<a class="headerlink" href="#Numerical-evaluations" title="Permalink to this headline">¶</a></h2>
-<p>See here for detailed instructions on how to turn sympy expressions into code: <a class="reference external" href="https://docs.sympy.org/latest/modules/codegen.html">https://docs.sympy.org/latest/modules/codegen.html</a></p>
-<p>We will first list all equations defined in this worksheet:</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">Equation</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">eq</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-eq_Le: Eq(Le, alpha_a/D_va)
-eq_Cwa: Eq(C_wa, P_wa/(R_mol*T_a))
-eq_Nu_forced_all: Eq(Nu, -Pr**(1/3)*(-37*Re**(4/5) + 37*(Re + Re_c - Abs(Re - Re_c)/2)**(4/5) - 664*sqrt(Re + Re_c - Abs(Re - Re_c)/2))/1000)
-eq_Dva: Eq(D_va, T_a*p_Dva1 - p_Dva2)
-eq_alphaa: Eq(alpha_a, T_a*p_alpha1 - p_alpha2)
-eq_ka: Eq(k_a, T_a*p_ka1 + p_ka2)
-eq_nua: Eq(nu_a, T_a*p_nua1 - p_nua2)
-eq_rhoa_Pwa_Ta: Eq(rho_a, (M_N2*P_N2 + M_O2*P_O2 + M_w*P_wa)/(R_mol*T_a))
-eq_Pa: Eq(P_a, P_N2 + P_O2 + P_wa)
-eq_PN2_PO2: Eq(P_N2, P_O2*x_N2/x_O2)
-eq_PO2: Eq(P_O2, (P_a*x_O2 - P_wa*x_O2)/(x_N2 + x_O2))
-eq_PN2: Eq(P_N2, (P_a*x_N2 - P_wa*x_N2)/(x_N2 + x_O2))
-eq_rhoa: Eq(rho_a, (x_N2*(M_N2*P_a - P_wa*(M_N2 - M_w)) + x_O2*(M_O2*P_a - P_wa*(M_O2 - M_w)))/(R_mol*T_a*x_N2 + R_mol*T_a*x_O2))
-eq_ideal_gas_law: Eq(P_g*V_g, R_mol*T_g*n_g)
-eq_Pg: Eq(P_g, R_mol*T_g*n_g/V_g)
-eq_Pwa_nw: Eq(P_wa, R_mol*T_g*n_w/V_g)
-eq_Pwa_CC: Eq(P_wa, p_CC1*exp(-M_w*lambda_E*(-1/p_CC2 + 1/T_g)/R_mol))
-eq1: Eq(P_wa, Piecewise((0, T_a &lt; 0), (p_CC1*exp(-M_w*lambda_E*(-1/p_CC2 + 1/T_g)/R_mol), True)))
-eq_Pwa_Delta: Eq(P_wa, P_wa1 + Integral(Delta_Pwa, (T_g, T_a1, T_a2)))
-</pre></div></div>
-</div>
-<div class="section" id="Substitution-of-equations-and-values-into-equations">
-<h3>Substitution of equations and values into equations<a class="headerlink" href="#Substitution-of-equations-and-values-into-equations" title="Permalink to this headline">¶</a></h3>
-<p>The easiest way is to define a dictionary with all variables we want to substitute as keys. We start with the default variables and then add more. First, however, we will define a function to display the contents of a dictionary:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">print_dict</span><span class="p">(</span><span class="n">vdict</span><span class="p">,</span> <span class="n">list_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Print values and units of variables in vdict.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">list_vars</span><span class="p">:</span>
-        <span class="n">list_vars</span> <span class="o">=</span> <span class="n">vdict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">var1</span> <span class="ow">in</span> <span class="n">list_vars</span><span class="p">:</span>
-        <span class="n">unit1</span> <span class="o">=</span> <span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span>
-        <span class="k">if</span> <span class="n">unit1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">unit1</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="k">if</span> <span class="n">vdict</span><span class="p">[</span><span class="n">var1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1"> </span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">vdict</span><span class="p">[</span><span class="n">var1</span><span class="p">]),</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit1</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">vdict</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">print_dict</span><span class="p">(</span><span class="n">vdict</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-c_pa: 1010.0 J/(K*kg)
-c_pamol: 29.19 J/(K*mol)
-c_pv: 1864 J/(K*kg)
-g: 9.81 m/s**2
-lambda_E: 2450000.0 J/kg
-M_air: 0.02897 kg/mol
-M_N2: 0.028 kg/mol
-M_O2: 0.032 kg/mol
-M_w: 0.018 kg/mol
-R_mol: 8.314472 J/(K*mol)
-sigm: 5.67e-08 J/(K**4*m**2*s)
-T0: 273.15 K
-x_N2: 0.79
-x_O2: 0.21
-p_Dva1: 1.49e-07 m**2/(K*s)
-p_Dva2: 1.96e-05 m**2/s
-p_alpha1: 1.32e-07 m**2/(K*s)
-p_alpha2: 1.73e-05 m**2/s
-p_ka1: 6.84e-05 J/(K**2*m*s)
-p_ka2: 0.00563 J/(K*m*s)
-p_nua1: 9e-08 m**2/(K*s)
-p_nua2: 1.13e-05 m**2/s
-p_CC1: 611.0 Pa
-p_CC2: 273.0 K
-</pre></div></div>
-</div>
-<p>We can substitute a range of equations into each other by using the custom function <code class="docutils literal notranslate"><span class="pre">subs_eq</span></code>:</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="kn">import</span> <span class="n">subs_eq</span>
-<span class="n">subs_eq</span><span class="p">(</span><span class="n">eq_Le</span><span class="p">,</span> <span class="p">[</span><span class="n">eq_alphaa</span><span class="p">,</span> <span class="n">eq_Dva</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="math notranslate nohighlight">
-$$N_{Le} = \frac{T_a p_1 - p_2}{T_a p_1 - p_2}$$</div></div>
-</div>
-<p>We can also use subs_eq to substitute equations into each other and a dictionary with values. We will first add an entry for T_a into the dictionary and then substitute:</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">vdict</span><span class="p">[</span><span class="n">T_a</span><span class="p">]</span> <span class="o">=</span> <span class="mf">300.</span>
-<span class="n">subs_eq</span><span class="p">(</span><span class="n">eq_Le</span><span class="p">,</span> <span class="p">[</span><span class="n">eq_alphaa</span><span class="p">,</span> <span class="n">eq_Dva</span><span class="p">],</span> <span class="n">vdict</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="math notranslate nohighlight">
-$$N_{Le} = 0.888446215139442$$</div></div>
-</div>
-</div>
-<div class="section" id="Evaluation-of-equations-for-long-lists-of-variable-sets">
-<h3>Evaluation of equations for long lists of variable sets<a class="headerlink" href="#Evaluation-of-equations-for-long-lists-of-variable-sets" title="Permalink to this headline">¶</a></h3>
-<p>Substitution of variables into equations takes a lot of time if they need to be evaluated for a large number of variables. We can use theano to speed this up:</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#import theano</span>
-<span class="kn">from</span> <span class="nn">sympy.printing.theanocode</span> <span class="kn">import</span> <span class="n">theano_function</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-WARNING (theano.tensor.blas): Using NumPy C-API based implementation for BLAS functions.
-</pre></div></div>
-</div>
-<p>We will now create two long lists of values representing T_g and n_g respectively and show how long it takes to compute ideal gas law values.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">npoints</span> <span class="o">=</span> <span class="mi">10000</span>
-<span class="n">xmin</span> <span class="o">=</span> <span class="mf">290.</span>
-<span class="n">xmax</span> <span class="o">=</span> <span class="mf">310.</span>
-<span class="n">Tvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">npoints</span><span class="p">)</span>
-<span class="n">xmin</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">xmax</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">nvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="p">(</span><span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">npoints</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="c1"># looping</span>
-<span class="n">expr</span> <span class="o">=</span> <span class="n">eq_ideal_gas_law</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">)</span>
-<span class="n">resvals0</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Tvals</span><span class="p">)):</span>
-    <span class="n">resvals0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">T_g</span><span class="p">:</span> <span class="n">Tvals</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n_g</span><span class="p">:</span> <span class="n">nvals</span><span class="p">[</span><span class="n">i</span><span class="p">]}))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 6.73 s, sys: 8.6 ms, total: 6.74 s
-Wall time: 6.74 s
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="c1"># Using theano</span>
-<span class="n">f1</span> <span class="o">=</span> <span class="n">theano_function</span><span class="p">([</span><span class="n">T_g</span><span class="p">,</span> <span class="n">n_g</span><span class="p">],</span> <span class="p">[</span><span class="n">eq_ideal_gas_law</span><span class="o">.</span><span class="n">rhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="p">)],</span> <span class="n">dims</span><span class="o">=</span><span class="p">{</span><span class="n">T_g</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_g</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
-<span class="n">resvals1</span> <span class="o">=</span> <span class="n">f1</span><span class="p">(</span><span class="n">Tvals</span><span class="p">,</span><span class="n">nvals</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 47.5 ms, sys: 14.6 ms, total: 62.1 ms
-Wall time: 724 ms
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">list</span><span class="p">(</span><span class="n">resvals0</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="n">resvals1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-True
-</pre></div></div>
-</div>
-<p><strong>Both approaches give identical results, but ``theano_function`` makes it a lot faster.</strong></p>
-</div>
-<div class="section" id="Numerical-solution">
-<h3>Numerical solution<a class="headerlink" href="#Numerical-solution" title="Permalink to this headline">¶</a></h3>
-<p>Some equations cannot be solved analytically for a given variable, e.g. eq_Nu_forced_all cannot be solved analytically for Re if Nu is given, so we can use numerical solvers instead:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">nsolve</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">vdict</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">vdict</span><span class="p">[</span><span class="n">Pr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.71</span>
-<span class="n">vdict</span><span class="p">[</span><span class="n">Re_c</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3000.</span>
-<span class="n">vdict</span><span class="p">[</span><span class="n">Nu</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1000.</span>
-<span class="n">expr</span> <span class="o">=</span> <span class="n">eq_Nu_forced_all</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vdict</span><span class="p">)</span>
-<span class="n">nsolve</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="mf">1000.</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="math notranslate nohighlight">
-$$690263.0346446$$</div></div>
-</div>
-<p>Now applying to a long list of Nu-values:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">npoints</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">xmin</span> <span class="o">=</span> <span class="mf">1000.</span>
-<span class="n">xmax</span> <span class="o">=</span> <span class="mf">1200.</span>
-<span class="n">Nuvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">npoints</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="c1"># Solving for a range of Nu values</span>
-<span class="n">vdict</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">vdict</span><span class="p">[</span><span class="n">Pr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.71</span>
-<span class="n">vdict</span><span class="p">[</span><span class="n">Re_c</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3000.</span>
-<span class="n">resvals</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">Nu1</span> <span class="ow">in</span> <span class="n">Nuvals</span><span class="p">:</span>
-    <span class="n">vdict</span><span class="p">[</span><span class="n">Nu</span><span class="p">]</span> <span class="o">=</span> <span class="n">Nu1</span>
-    <span class="n">resvals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nsolve</span><span class="p">(</span><span class="n">eq_Nu_forced_all</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vdict</span><span class="p">),</span> <span class="mf">1000.</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 1.84 s, sys: 10.3 ms, total: 1.85 s
-Wall time: 1.85 s
-</pre></div></div>
-</div>
-<p>We will now again use a theano function to make it faster. First we import optimize from scipy and preapre the theano_function:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">sciopt</span>
-<span class="n">vdict</span> <span class="o">=</span> <span class="n">Variable</span><span class="o">.</span><span class="vm">__defaults__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">vdict</span><span class="p">[</span><span class="n">Pr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.71</span>
-<span class="n">vdict</span><span class="p">[</span><span class="n">Re_c</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3000.</span>
-<span class="n">expr</span> <span class="o">=</span> <span class="n">eq_Nu_forced_all</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">vdict</span><span class="p">)</span>
-<span class="n">expr1</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">rhs</span> <span class="o">-</span> <span class="n">expr</span><span class="o">.</span><span class="n">lhs</span>
-<span class="n">fun_tf</span> <span class="o">=</span> <span class="n">theano_function</span><span class="p">([</span><span class="n">Re</span><span class="p">,</span> <span class="n">Nu</span><span class="p">],</span> <span class="p">[</span><span class="n">expr1</span><span class="p">],</span> <span class="n">dims</span><span class="o">=</span><span class="p">{</span><span class="n">Nu</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">Re</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
-<span class="n">x0vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">Nuvals</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mf">2000.</span><span class="p">)</span> <span class="c1"># array of same shape as Nuvals, with initial guess</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="c1"># Solving for a range of Nu values</span>
-<span class="n">resvals1</span> <span class="o">=</span> <span class="n">sciopt</span><span class="o">.</span><span class="n">fsolve</span><span class="p">(</span><span class="n">fun_tf</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">Nuvals</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0vals</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 7.57 ms, sys: 0 ns, total: 7.57 ms
-Wall time: 7.72 ms
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">resvals</span> <span class="o">-</span> <span class="n">resvals1</span><span class="p">)</span><span class="o">/</span><span class="n">resvals</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="math notranslate nohighlight">
-$$5.35695853236626 \cdot 10^{-11}$$</div></div>
-</div>
-<p><strong>Using theano and scipy makes it 2 orders of magnitude faster and the results are different only by 10:math:`^{-10}`%!</strong> <strong>Note, however, that scipy gets slowed down for large arrays, so it is more efficient to re-run it repreatedly with subsections of the arra:</strong></p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[68]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">npoints</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">xmin</span> <span class="o">=</span> <span class="mf">1000.</span>
-<span class="n">xmax</span> <span class="o">=</span> <span class="mf">1200.</span>
-<span class="n">Nuvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">npoints</span><span class="p">)</span>
-<span class="n">x0vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">Nuvals</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mf">2000.</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="c1"># Solving for a range of Nu values</span>
-<span class="n">resvals1</span> <span class="o">=</span> <span class="n">sciopt</span><span class="o">.</span><span class="n">fsolve</span><span class="p">(</span><span class="n">fun_tf</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">Nuvals</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0vals</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 2.07 s, sys: 5.18 ms, total: 2.08 s
-Wall time: 2.08 s
-</pre></div></div>
-</div>
-<p>We will now test that we can process Nuvals bit by bit and re-create it consistently:</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Solving for a range of Nu values</span>
-<span class="n">imax</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Nuvals</span><span class="p">)</span>
-<span class="n">i0</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">idiff</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">i1</span> <span class="o">=</span> <span class="n">i0</span>
-<span class="n">resvals2</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">while</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="n">imax</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="n">i0</span> <span class="o">=</span> <span class="n">i1</span>    <span class="c1"># note that resvals[0:2] + resvals[2:4] = resvals[0:4]</span>
-    <span class="n">i1</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">i0</span><span class="o">+</span><span class="n">idiff</span><span class="p">,</span> <span class="n">imax</span><span class="p">)</span>
-    <span class="n">resvals0</span> <span class="o">=</span> <span class="n">Nuvals</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">]</span>
-    <span class="n">resvals2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resvals2</span><span class="p">,</span><span class="n">resvals0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">resvals2</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="n">Nuvals</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-True
-</pre></div></div>
-</div>
-<p>Now we will run fsolve for portions of Nuvals bit by bit:</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="c1"># Solving for a range of Nu values</span>
-<span class="n">imax</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Nuvals</span><span class="p">)</span>
-<span class="n">i0</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">idiff</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">i1</span> <span class="o">=</span> <span class="n">i0</span>
-<span class="n">resvals2</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">while</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="n">imax</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="n">i0</span> <span class="o">=</span> <span class="n">i1</span>    <span class="c1"># note that resvals[0:2] + resvals[2:4] = resvals[0:4]</span>
-    <span class="n">i1</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">i0</span><span class="o">+</span><span class="n">idiff</span><span class="p">,</span> <span class="n">imax</span><span class="p">)</span>
-    <span class="n">resvals0</span> <span class="o">=</span> <span class="n">sciopt</span><span class="o">.</span><span class="n">fsolve</span><span class="p">(</span><span class="n">fun_tf</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">Nuvals</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">],</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0vals</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">])</span>
-    <span class="n">resvals2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resvals2</span><span class="p">,</span><span class="n">resvals0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 74 ms, sys: 464 µs, total: 74.4 ms
-Wall time: 75.2 ms
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">((</span><span class="n">resvals1</span> <span class="o">-</span> <span class="n">resvals2</span><span class="p">)</span><span class="o">/</span><span class="n">resvals1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[72]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="math notranslate nohighlight">
-$$7.122603685219754e-10$$</div></div>
-</div>
-<p><strong>It is strange that resvals1 and resvals2 are different at all, but anyway, it is clear that slicing the data in relatively small portions is important to keep ``scipy.optimize.fsolve`` time-efficient.</strong></p>
-</div>
-<div class="section" id="Generate-code-from-sympy-expressions-and-execute">
-<h3>Generate code from sympy expressions and execute<a class="headerlink" href="#Generate-code-from-sympy-expressions-and-execute" title="Permalink to this headline">¶</a></h3>
-<p>Need to install gfortran system-wide first!</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sympy.utilities.autowrap</span> <span class="kn">import</span> <span class="n">autowrap</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">symbols</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y z&#39;</span><span class="p">)</span>
-<span class="n">expr</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
-<span class="n">autowrap_func</span> <span class="o">=</span> <span class="n">autowrap</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="n">autowrap_func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 7 µs, sys: 2 µs, total: 9 µs
-Wall time: 13.1 µs
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="math notranslate nohighlight">
-$$-1.0$$</div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span><span class="mi">2</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 76.3 ms, sys: 4.05 ms, total: 80.3 ms
-Wall time: 79.7 ms
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="math notranslate nohighlight">
-$$-1$$</div></div>
-</div>
-<p>Use of <code class="docutils literal notranslate"><span class="pre">autowrap</span></code> made the calculation 3 orders of magnitude faster than substitution of values into the original expression!</p>
-<p>Another way is to use <code class="docutils literal notranslate"><span class="pre">binary_function</span></code>:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">sympy.utilities.autowrap</span> <span class="kn">import</span> <span class="n">binary_function</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">binary_function</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%time</span>
-<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">subs</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span><span class="mi">2</span><span class="p">})</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-CPU times: user 1.15 ms, sys: 287 µs, total: 1.44 ms
-Wall time: 1.45 ms
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="math notranslate nohighlight">
-$$-1.0$$</div></div>
-</div>
-<p>However, for the above example, <code class="docutils literal notranslate"><span class="pre">binary_function</span></code> was 10 times slower than <code class="docutils literal notranslate"><span class="pre">autowrap</span></code>.</p>
-</div>
+<span></span><span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Quantity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>    <span class="c1"># displays long units (meter instead of m)</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">EquationWriter</span><span class="p">(</span><span class="n">docstring</span><span class="o">=</span><span class="s1">&#39;Equations defined in api_features.ipynb and dependencies.&#39;</span><span class="p">)</span>
+<span class="n">eqs_with_deps</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">Equation</span><span class="o">.</span><span class="n">__registry__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">parents</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">get_parents</span><span class="p">(</span><span class="n">eq</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">parents</span> <span class="o">==</span> <span class="p">():</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">eqs_with_deps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span> <span class="c1"># Equations with dependencies must be at the end</span>
+<span class="k">for</span> <span class="n">eq</span> <span class="ow">in</span> <span class="n">eqs_with_deps</span><span class="p">:</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">eq</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;test_equation_definitions.py&#39;</span><span class="p">)</span>
+
+<span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Quantity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">abbrev</span><span class="p">)</span>    <span class="c1"># displays short units (m instead of meter)</span>
+</pre></div>
+</div>
+</div>
+<p>These definitions are re-imported in <code class="docutils literal notranslate"><span class="pre">examples_numerics.ipynb</span></code>, where you can also find examples for numerical computations using essm equations and variables.</p>
 </div>
 </div>
 
@@ -2556,15 +1773,9 @@ $$-1.0$$</div></div>
 <li class="toctree-l2"><a class="reference internal" href="#Substituting-into-integrals-and-derivatives-and-evaluating">Substituting into integrals and derivatives and evaluating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Unit-conversions">Unit conversions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Exporting-definitions">Exporting definitions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Numerical-evaluations">Numerical evaluations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Substitution-of-equations-and-values-into-equations">Substitution of equations and values into equations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Evaluation-of-equations-for-long-lists-of-variable-sets">Evaluation of equations for long lists of variable sets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Numerical-solution">Numerical solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Generate-code-from-sympy-expressions-and-execute">Generate code from sympy expressions and execute</a></li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="examples_numerics.html">Use examples for numerical calculations</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Docs</a></li>
@@ -2589,7 +1800,7 @@ $$-1.0$$</div></div>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="importable_variables_equations.html" title="previous chapter">Importable variables and equations</a></li>
-      <li>Next: <a href="../api.html" title="next chapter">API Docs</a></li>
+      <li>Next: <a href="examples_numerics.html" title="next chapter">Use examples for numerical calculations</a></li>
   </ul></li>
 </ul>
 </div>
