@@ -4,7 +4,7 @@
 import pytest
 
 from essm import Eq
-from essm._generator import EquationWriter, VariableWriter
+from essm._generator import EquationWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import (joule, kelvin, kilogram, meter, mole, second,
@@ -62,12 +62,6 @@ class demo_v(Variable):
     """Test variable."""
 
     unit = meter / second
-
-
-class demo_v1(Variable):
-    """Test variable with expression."""
-
-    expr = demo_d1 / demo_t1
 
 
 class demo_fall(Equation):
@@ -307,28 +301,6 @@ def test_solve():
     assert solve(
         10 ** 6 * demo_d1 - 0.031e6 * demo_d + 0.168 * demo_d2, demo_d1
     ) == [0.031 * demo_d - 1.68e-7 * demo_d2]
-
-
-def test_variable_writer(tmpdir):
-    """VariableWriter creates importable file with variable definitions."""
-    from essm.variables.physics.thermodynamics import c_pa
-    g = {}
-    writer_td = VariableWriter(docstring='Test of Variable_writer.')
-    writer_td.newvar(
-        'g',
-        'meter / second ^ 2',
-        'default = 9.81'
-    )
-    writer_td.var(c_pa)
-    writer_td.var(demo_v1)
-    eq_file = tmpdir.mkdir('test').join('test_variables.py')
-    writer_td.write(eq_file.strpath)
-    with open(eq_file, "rb") as source_file:
-        code = compile(eq_file.read(), eq_file, "exec")
-    exec(code, g)
-    assert g['g'].definition.default == 9.81
-    assert g['c_pa'].definition.unit == c_pa.definition.unit
-    assert g['demo_v1'].definition.expr == demo_v1.definition.expr
 
 
 def test_equation_writer(tmpdir):

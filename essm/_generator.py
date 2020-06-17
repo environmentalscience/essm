@@ -78,6 +78,7 @@ class {name}(Variable):
     assumptions = {assumptions!r}
     latex_name = {latex_name!r}
     {default}
+    {expr}
 """
 
 # CONSTANTS = re.compile(r'\b(e|pi)\b')
@@ -207,22 +208,28 @@ class VariableWriter(object):
             units=None,
             assumptions={'real': True},
             latex_name=None,
-            default=None
+            default=None,
+            expr=None
     ):
         """Add new variable."""
         if not latex_name:
             latex_name = name
         if default is None:
-            default = ''
+            default = 'default = None'
         else:
             default = 'default = ' + str(default)
+        if expr is None:
+            expr = ''
+        else:
+            expr = 'expr = ' + str(expr)
         context = {
             "name": name,
             "doc": doc,
             "units": str(units).replace('^', '**') if units else '1/1',
             "assumptions": assumptions,
             "latex_name": latex_name,
-            "default": default
+            "default": default,
+            "expr": expr
         }
         self.vars.append(context)
 
@@ -252,7 +259,8 @@ class VariableWriter(object):
         assumptions = dict_attr.get('assumptions')
         latex_name = dict_attr.get('latex_name')
         value = dict_attr.get('default')
-        self.newvar(name, doc, units, assumptions, latex_name, value)
+        expr = dict_attr.get('expr')
+        self.newvar(name, doc, units, assumptions, latex_name, value, expr)
 
     def write(self, filename):
         """Serialize itself to a filename."""
