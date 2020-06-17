@@ -64,6 +64,12 @@ class demo_v(Variable):
     unit = meter / second
 
 
+class demo_v1(Variable):
+    """Test variable with expression."""
+
+    expr = demo_d1 / demo_t1
+
+
 class demo_fall(Equation):
     """Test equation."""
 
@@ -314,6 +320,7 @@ def test_variable_writer(tmpdir):
         'default = 9.81'
     )
     writer_td.var(c_pa)
+    writer_td.var(demo_v1)
     eq_file = tmpdir.mkdir('test').join('test_variables.py')
     writer_td.write(eq_file.strpath)
     with open(eq_file, "rb") as source_file:
@@ -321,6 +328,7 @@ def test_variable_writer(tmpdir):
     exec(code, g)
     assert g['g'].definition.default == 9.81
     assert g['c_pa'].definition.unit == c_pa.definition.unit
+    assert g['demo_v1'].definition.expr == demo_v1.definition.expr
 
 
 def test_equation_writer(tmpdir):
