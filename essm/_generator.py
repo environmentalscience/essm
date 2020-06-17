@@ -97,38 +97,6 @@ def _lint_content(content):
     return content
 
 
-def create_module(name, doc=None, folder=None, overwrite=False):
-    """Create folder with init file."""
-    name_path = (name.replace('.', os.path.sep), ) \
-        if not isinstance(name, (tuple, list)) \
-        else name
-    folder = folder or pkg_resources.resource_filename('essm', '')
-    path = os.path.join(folder, *name_path)
-    try:
-        os.makedirs(path)
-        logger.info('Created new folder: {0}'.format(path))
-    except OSError as e1:
-        logger.error('Could not create new folder: {0}'.format(path))
-
-    init_path = os.path.join(path, '__init__.py')
-
-    if os.path.isfile(init_path):
-        logger.info(
-            '{0} already exists. Use `overwrite=True` to overwrite.'.
-            format(init_path)
-        )
-
-    if overwrite or not os.path.isfile(init_path):
-        with open(init_path, 'w') as file_out:
-            file_out.write(
-                LICENSE_TPL.format(year=datetime.datetime.now().year)
-            )
-            file_out.write('"""{0}"""\n'.format(doc))
-        logger.debug('Created file {0}.'.format(init_path))
-
-    return path
-
-
 def extract_functions(expr):
     """Traverse through expression and return set of functions."""
     return {
@@ -263,7 +231,6 @@ class VariableWriter(object):
         value = dict_attr.get('default')
         expr = dict_attr.get('expr')
         self.newvar(name, doc, units, assumptions, latex_name, value, expr)
-
 
     def write(self, filename):
         """Serialize itself to a filename."""
