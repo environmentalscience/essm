@@ -4,7 +4,7 @@
 import pytest
 
 from essm import Eq
-from essm._generator import EquationWriter
+from essm._generator import EquationWriter, VariableWriter
 from essm.equations import Equation
 from essm.variables import Variable
 from essm.variables.units import (joule, kelvin, kilogram, meter, mole, second,

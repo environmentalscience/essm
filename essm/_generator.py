@@ -222,6 +222,7 @@ class VariableWriter(object):
             expr = ''
         else:
             expr = 'expr = ' + str(expr)
+
         context = {
             "name": name,
             "doc": doc,
@@ -230,6 +231,7 @@ class VariableWriter(object):
             "latex_name": latex_name,
             "default": default,
             "expr": expr
+
         }
         self.vars.append(context)
 
@@ -261,6 +263,7 @@ class VariableWriter(object):
         value = dict_attr.get('default')
         expr = dict_attr.get('expr')
         self.newvar(name, doc, units, assumptions, latex_name, value, expr)
+
 
     def write(self, filename):
         """Serialize itself to a filename."""
