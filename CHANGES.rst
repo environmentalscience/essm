@@ -1,6 +1,26 @@
 Changes
 =======
 
+``v0.4.3``
+----------
+*released 2020-06-18*
+
+Bug Fixes
+~~~~~~~~~
+- **utils:**  Include expr in variable definitions when writing to file 
+  (`PR #87 <https://github.com/environmentalscience/essm/pull/87>`__)
+
+
+Features
+~~~~~~~~
+
+- **documentation:** Add use examples as Jupyter notebooks and integrate in documentation
+  (`PR #83 <https://github.com/environmentalscience/essm/pull/83>`__)
+
+- **utils:**  Enable writers of .py files for re-import of variable and equation definitions 
+  (`PR #84 <https://github.com/environmentalscience/essm/pull/84>`__)
+
+
 ``v0.4.2``
 ----------
 *released 2020-04-28*

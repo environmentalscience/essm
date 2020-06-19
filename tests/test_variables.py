@@ -4,6 +4,7 @@
 import pytest
 
 from essm.variables import Variable
+from essm._generator import VariableWriter
 from essm.variables.units import (derive_baseunit, derive_unit, joule,
                                   kilogram, markdown, meter, second)
 from essm.variables.utils import generate_metadata_table
@@ -179,3 +180,27 @@ def test_generate_metadata_table():
             'Test expression variable.', '$2 demo_variable$', '-', 'm'),
             ('$E_l$', 'E_l',
             'Latent heat flux from leaf.', '', '-', 'J s$^{-1}$ m$^{-2}$')]
+
+
+def test_variable_writer(tmpdir):
+    """VariableWriter creates importable file with variable definitions."""
+    from essm.variables.physics.thermodynamics import c_pa
+    g = {}
+    writer_td = VariableWriter(docstring='Test of Variable_writer.')
+    writer_td.newvar(
+        'g',
+        units=meter / second ** 2,
+        default=9.81
+    )
+    writer_td.var(c_pa)
+    writer_td.var(demo_variable)
+    writer_td.var(demo_expression_variable)
+    eq_file = tmpdir.mkdir('test').join('test_variables.py')
+    writer_td.write(eq_file.strpath)
+    with open(eq_file, "rb") as source_file:
+        code = compile(eq_file.read(), eq_file, "exec")
+    exec(code, g)
+    assert g['g'].definition.default == 9.81
+    assert g['c_pa'].definition.unit == c_pa.definition.unit
+    assert g['demo_expression_variable'].definition.expr \
+        == demo_expression_variable.definition.expr

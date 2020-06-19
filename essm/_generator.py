@@ -78,6 +78,7 @@ class {name}(Variable):
     assumptions = {assumptions!r}
     latex_name = {latex_name!r}
     {default}
+    {expr}
 """
 
 # CONSTANTS = re.compile(r'\b(e|pi)\b')
@@ -94,38 +95,6 @@ def _lint_content(content):
     content = SortImports(file_contents=content).output
     content = FormatCode(content, style_config=STYLE_YAPF)[0]
     return content
-
-
-def create_module(name, doc=None, folder=None, overwrite=False):
-    """Create folder with init file."""
-    name_path = (name.replace('.', os.path.sep), ) \
-        if not isinstance(name, (tuple, list)) \
-        else name
-    folder = folder or pkg_resources.resource_filename('essm', '')
-    path = os.path.join(folder, *name_path)
-    try:
-        os.makedirs(path)
-        logger.info('Created new folder: {0}'.format(path))
-    except OSError as e1:
-        logger.error('Could not create new folder: {0}'.format(path))
-
-    init_path = os.path.join(path, '__init__.py')
-
-    if os.path.isfile(init_path):
-        logger.info(
-            '{0} already exists. Use `overwrite=True` to overwrite.'.
-            format(init_path)
-        )
-
-    if overwrite or not os.path.isfile(init_path):
-        with open(init_path, 'w') as file_out:
-            file_out.write(
-                LICENSE_TPL.format(year=datetime.datetime.now().year)
-            )
-            file_out.write('"""{0}"""\n'.format(doc))
-        logger.debug('Created file {0}.'.format(init_path))
-
-    return path
 
 
 def extract_functions(expr):
@@ -207,22 +176,30 @@ class VariableWriter(object):
             units=None,
             assumptions={'real': True},
             latex_name=None,
-            default=None
+            default=None,
+            expr=None
     ):
         """Add new variable."""
         if not latex_name:
             latex_name = name
         if default is None:
-            default = ''
+            default = 'default = None'
         else:
             default = 'default = ' + str(default)
+        if expr is None:
+            expr = ''
+        else:
+            expr = 'expr = ' + str(expr)
+
         context = {
             "name": name,
             "doc": doc,
             "units": str(units).replace('^', '**') if units else '1/1',
             "assumptions": assumptions,
             "latex_name": latex_name,
-            "default": default
+            "default": default,
+            "expr": expr
+
         }
         self.vars.append(context)
 
@@ -252,7 +229,8 @@ class VariableWriter(object):
         assumptions = dict_attr.get('assumptions')
         latex_name = dict_attr.get('latex_name')
         value = dict_attr.get('default')
-        self.newvar(name, doc, units, assumptions, latex_name, value)
+        expr = dict_attr.get('expr')
+        self.newvar(name, doc, units, assumptions, latex_name, value, expr)
 
     def write(self, filename):
         """Serialize itself to a filename."""
