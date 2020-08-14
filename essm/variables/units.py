@@ -58,7 +58,7 @@ watt = u.watt
 weber = u.weber
 
 SI_BASE_DIMENSIONS = {
-    Quantity.get_dimensional_expr(d): d
+    SI.get_dimensional_expr(d): d
     for d in SI._base_units
 }
 
@@ -67,7 +67,7 @@ SI_EXTENDED_UNITS = list(SI._base_units) + [
     farad, ohm, siemens, weber, tesla, henry
 ]
 SI_EXTENDED_DIMENSIONS = {
-    Quantity.get_dimensional_expr(d): d
+    SI.get_dimensional_expr(d): d
     for d in SI_EXTENDED_UNITS
 }
 
