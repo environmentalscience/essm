@@ -139,11 +139,11 @@ def derive_baseunit(expr, name=None):
     variables = extract_variables(expr)
     for var1 in variables:
         q1 = Quantity('q_' + str(var1))
-        q1.set_dimension(
-            Dimension(Variable.get_dimensional_expr(
+        SI.set_quantity_dimension(
+            q1, Dimension(SI.get_dimensional_expr(
                 derive_baseunit(var1.definition.unit)))
         )
-        q1.set_scale_factor(var1.definition.unit)
+        SI.set_quantity_scale_factor(q1, var1.definition.unit)
         expr = expr.xreplace({var1: q1})
     dim = Dimension(Variable.get_dimensional_expr(expr))
     return functools.reduce(
