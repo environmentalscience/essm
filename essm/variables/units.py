@@ -25,14 +25,15 @@ import operator
 import sympy.physics.units as u
 from sympy import Symbol
 from sympy.physics.units import Dimension, Quantity, find_unit
-from sympy.physics.units.dimensions import (amount_of_substance, capacitance,
-                                            charge, conductance, dimsys_SI,
+from sympy.physics.units.definitions.dimension_definitions import (
+                                            amount_of_substance, capacitance,
+                                            charge, conductance,
                                             energy, force, frequency,
                                             inductance, luminous_intensity,
                                             magnetic_density, magnetic_flux,
                                             power, pressure, temperature, time,
                                             voltage)
-from sympy.physics.units.systems import SI
+from sympy.physics.units.systems.si import dimsys_SI, SI
 
 candela = u.candela
 coulomb = u.coulomb
@@ -132,7 +133,7 @@ def derive_baseunit(expr, name=None):
     from essm.variables import Variable
     from essm.variables.utils import extract_variables
     from sympy.physics.units import Dimension
-    from sympy.physics.units.dimensions import dimsys_SI
+    from sympy.physics.units.systems.si import dimsys_SI
 
     Variable.check_unit(expr)  # check for dimensional consistency
     variables = extract_variables(expr)
