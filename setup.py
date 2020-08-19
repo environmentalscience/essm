@@ -64,7 +64,7 @@ for reqs in extras_require.values():
 
 setup_requires = [
     'pytest-runner>=2.6.2',
-    'setuptools_scm>=3.1.0',
+    'setuptools-scm>=3.1.0',
 ]
 
 install_requires = [
