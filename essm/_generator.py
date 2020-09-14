@@ -25,8 +25,8 @@ import os
 import re
 from collections import defaultdict
 
+import isort
 import pkg_resources
-from isort import SortImports
 from sympy import Eq, Function, latex, preorder_traversal
 from sympy.physics.units import Quantity
 from yapf.yapflib.yapf_api import FormatCode
@@ -92,7 +92,7 @@ _IMPORTS = re.compile(
 
 def _lint_content(content):
     """Automatically lint the generated code."""
-    content = SortImports(file_contents=content).output
+    content = isort.code(content)
     content = FormatCode(content, style_config=STYLE_YAPF)[0]
     return content
 
