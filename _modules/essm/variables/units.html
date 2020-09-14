@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>essm.variables.units &#8212; ESSM 0.4.4.dev1 documentation</title>
+    <title>essm.variables.units &#8212; ESSM 0.4.4.dev2 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -62,14 +62,15 @@
 <span class="kn">import</span> <span class="nn">sympy.physics.units</span> <span class="k">as</span> <span class="nn">u</span>
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">Symbol</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="kn">import</span> <span class="n">Dimension</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">find_unit</span>
-<span class="kn">from</span> <span class="nn">sympy.physics.units.dimensions</span> <span class="kn">import</span> <span class="p">(</span><span class="n">amount_of_substance</span><span class="p">,</span> <span class="n">capacitance</span><span class="p">,</span>
-                                            <span class="n">charge</span><span class="p">,</span> <span class="n">conductance</span><span class="p">,</span> <span class="n">dimsys_SI</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.units.definitions.dimension_definitions</span> <span class="kn">import</span> <span class="p">(</span>
+                                            <span class="n">amount_of_substance</span><span class="p">,</span> <span class="n">capacitance</span><span class="p">,</span>
+                                            <span class="n">charge</span><span class="p">,</span> <span class="n">conductance</span><span class="p">,</span>
                                             <span class="n">energy</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span>
                                             <span class="n">inductance</span><span class="p">,</span> <span class="n">luminous_intensity</span><span class="p">,</span>
                                             <span class="n">magnetic_density</span><span class="p">,</span> <span class="n">magnetic_flux</span><span class="p">,</span>
                                             <span class="n">power</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span>
                                             <span class="n">voltage</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">sympy.physics.units.systems</span> <span class="kn">import</span> <span class="n">SI</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.units.systems.si</span> <span class="kn">import</span> <span class="n">dimsys_SI</span><span class="p">,</span> <span class="n">SI</span>
 
 <span class="n">candela</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">candela</span>
 <span class="n">coulomb</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">coulomb</span>
@@ -94,7 +95,7 @@
 <span class="n">weber</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">weber</span>
 
 <span class="n">SI_BASE_DIMENSIONS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">d</span>
+    <span class="n">SI</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">d</span>
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">SI</span><span class="o">.</span><span class="n">_base_units</span>
 <span class="p">}</span>
 
@@ -103,7 +104,7 @@
     <span class="n">farad</span><span class="p">,</span> <span class="n">ohm</span><span class="p">,</span> <span class="n">siemens</span><span class="p">,</span> <span class="n">weber</span><span class="p">,</span> <span class="n">tesla</span><span class="p">,</span> <span class="n">henry</span>
 <span class="p">]</span>
 <span class="n">SI_EXTENDED_DIMENSIONS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">Quantity</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">d</span>
+    <span class="n">SI</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="n">d</span>
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">SI_EXTENDED_UNITS</span>
 <span class="p">}</span>
 
@@ -169,17 +170,17 @@
     <span class="kn">from</span> <span class="nn">essm.variables</span> <span class="kn">import</span> <span class="n">Variable</span>
     <span class="kn">from</span> <span class="nn">essm.variables.utils</span> <span class="kn">import</span> <span class="n">extract_variables</span>
     <span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="kn">import</span> <span class="n">Dimension</span>
-    <span class="kn">from</span> <span class="nn">sympy.physics.units.dimensions</span> <span class="kn">import</span> <span class="n">dimsys_SI</span>
+    <span class="kn">from</span> <span class="nn">sympy.physics.units.systems.si</span> <span class="kn">import</span> <span class="n">dimsys_SI</span>
 
     <span class="n">Variable</span><span class="o">.</span><span class="n">check_unit</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>  <span class="c1"># check for dimensional consistency</span>
     <span class="n">variables</span> <span class="o">=</span> <span class="n">extract_variables</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">var1</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
         <span class="n">q1</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="s1">&#39;q_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">var1</span><span class="p">))</span>
-        <span class="n">q1</span><span class="o">.</span><span class="n">set_dimension</span><span class="p">(</span>
-            <span class="n">Dimension</span><span class="p">(</span><span class="n">Variable</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span>
+        <span class="n">SI</span><span class="o">.</span><span class="n">set_quantity_dimension</span><span class="p">(</span>
+            <span class="n">q1</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">(</span><span class="n">SI</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span>
                 <span class="n">derive_baseunit</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)))</span>
         <span class="p">)</span>
-        <span class="n">q1</span><span class="o">.</span><span class="n">set_scale_factor</span><span class="p">(</span><span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+        <span class="n">SI</span><span class="o">.</span><span class="n">set_quantity_scale_factor</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">var1</span><span class="o">.</span><span class="n">definition</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">var1</span><span class="p">:</span> <span class="n">q1</span><span class="p">})</span>
     <span class="n">dim</span> <span class="o">=</span> <span class="n">Dimension</span><span class="p">(</span><span class="n">Variable</span><span class="o">.</span><span class="n">get_dimensional_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>

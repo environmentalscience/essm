@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>essm.equations._core &#8212; ESSM 0.4.4.dev1 documentation</title>
+    <title>essm.equations._core &#8212; ESSM 0.4.4.dev2 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -171,7 +171,8 @@
             <span class="k">return</span> <span class="n">expr</span>
         <span class="c1"># The below raises an error if units are not consistent</span>
         <span class="n">Variable</span><span class="o">.</span><span class="n">check_unit</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">lhs</span> <span class="o">+</span> <span class="n">expr</span><span class="o">.</span><span class="n">rhs</span><span class="p">)</span>
-        <span class="bp">self</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">BaseEquation</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="bp">self</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">BaseEquation</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">,</span>
+                                                <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">definition</span> <span class="o">=</span> <span class="n">definition</span>
         <span class="k">return</span> <span class="bp">self</span>
 
