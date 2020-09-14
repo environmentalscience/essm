@@ -1,6 +1,23 @@
 Changes
 =======
 
+``v1.0.0``
+----------
+*released 2020-09-17*
+
+Bug Fixes
+~~~~~~~~~
+
+- **utils:**  Update code to work with isort5 
+  (`PR #89 <https://github.com/environmentalscience/essm/pull/89>`__)
+
+Features
+~~~~~~~~
+
+- **global:** Refactor code to work with sympy>=1.6
+  (`PR #90 <https://github.com/environmentalscience/essm/pull/90>`__)
+
+
 ``v0.4.3``
 ----------
 *released 2020-06-18*
