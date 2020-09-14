@@ -64,11 +64,11 @@ for reqs in extras_require.values():
 
 setup_requires = [
     'pytest-runner>=2.6.2',
-    'setuptools_scm>=3.1.0',
+    'setuptools-scm>=3.1.0',
 ]
 
 install_requires = [
-    'sympy==1.3',
+    'sympy>=1.6.0',
     'six>=1.10.0',
 ]
 

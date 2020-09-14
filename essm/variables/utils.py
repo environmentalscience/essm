@@ -135,7 +135,8 @@ def get_parents(equation):
 
 def replace_variables(expr, variables=None):
     """Replace all base variables in expression by ``variables``."""
-    if not isinstance(expr, Expr):  # stop recursion
+    if not isinstance(expr, Expr)\
+       and not isinstance(expr, BaseEquation):  # stop recursion
         return expr
     symbols = {
         key: getattr(key, '_name', key)

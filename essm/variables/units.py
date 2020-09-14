@@ -25,14 +25,15 @@ import operator
 import sympy.physics.units as u
 from sympy import Symbol
 from sympy.physics.units import Dimension, Quantity, find_unit
-from sympy.physics.units.dimensions import (amount_of_substance, capacitance,
-                                            charge, conductance, dimsys_SI,
+from sympy.physics.units.definitions.dimension_definitions import (
+                                            amount_of_substance, capacitance,
+                                            charge, conductance,
                                             energy, force, frequency,
                                             inductance, luminous_intensity,
                                             magnetic_density, magnetic_flux,
                                             power, pressure, temperature, time,
                                             voltage)
-from sympy.physics.units.systems import SI
+from sympy.physics.units.systems.si import dimsys_SI, SI
 
 candela = u.candela
 coulomb = u.coulomb
@@ -57,7 +58,7 @@ watt = u.watt
 weber = u.weber
 
 SI_BASE_DIMENSIONS = {
-    Quantity.get_dimensional_expr(d): d
+    SI.get_dimensional_expr(d): d
     for d in SI._base_units
 }
 
@@ -66,7 +67,7 @@ SI_EXTENDED_UNITS = list(SI._base_units) + [
     farad, ohm, siemens, weber, tesla, henry
 ]
 SI_EXTENDED_DIMENSIONS = {
-    Quantity.get_dimensional_expr(d): d
+    SI.get_dimensional_expr(d): d
     for d in SI_EXTENDED_UNITS
 }
 
@@ -132,17 +133,17 @@ def derive_baseunit(expr, name=None):
     from essm.variables import Variable
     from essm.variables.utils import extract_variables
     from sympy.physics.units import Dimension
-    from sympy.physics.units.dimensions import dimsys_SI
+    from sympy.physics.units.systems.si import dimsys_SI
 
     Variable.check_unit(expr)  # check for dimensional consistency
     variables = extract_variables(expr)
     for var1 in variables:
         q1 = Quantity('q_' + str(var1))
-        q1.set_dimension(
-            Dimension(Variable.get_dimensional_expr(
+        SI.set_quantity_dimension(
+            q1, Dimension(SI.get_dimensional_expr(
                 derive_baseunit(var1.definition.unit)))
         )
-        q1.set_scale_factor(var1.definition.unit)
+        SI.set_quantity_scale_factor(q1, var1.definition.unit)
         expr = expr.xreplace({var1: q1})
     dim = Dimension(Variable.get_dimensional_expr(expr))
     return functools.reduce(

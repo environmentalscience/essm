@@ -29,7 +29,7 @@ import six
 from sympy import (Abs, Add, Basic, Derivative, Function, Integral, log, Mul,
                    Piecewise, Pow, S, Symbol)
 from sympy.physics.units import Dimension, Quantity, convert_to
-from sympy.physics.units.dimensions import dimsys_default, dimsys_SI
+from sympy.physics.units.systems.si import dimsys_SI, SI
 from sympy.physics.units.util import check_dimensions
 
 from ..bases import RegistryType
@@ -82,7 +82,7 @@ class VariableMeta(RegistryType):
                 instance,
                 dct['name'],
                 abbrev=dct['latex_name'],
-                dimension=Dimension(Quantity.get_dimensional_expr(unit)),
+                dimension=Dimension(SI.get_dimensional_expr(unit)),
                 scale_factor=unit or S.One,
                 **dct['assumptions']
             )
@@ -276,8 +276,8 @@ def _Quantity_constructor_postprocessor_Add(expr):
     expressions like ``meter + second`` to be created.
     """
     deset = {
-        tuple(sorted(dimsys_default.get_dimensional_dependencies(Dimension(
-            Quantity.get_dimensional_expr(i) if not i.is_number else 1
+        tuple(sorted(dimsys_SI.get_dimensional_dependencies(Dimension(
+            SI.get_dimensional_expr(i) if not i.is_number else 1
         )).items()))
         for i in expr.args
         if i.free_symbols == set()  # do not raise if there are symbols

@@ -134,7 +134,8 @@ class BaseEquation(Eq):
             return expr
         # The below raises an error if units are not consistent
         Variable.check_unit(expr.lhs + expr.rhs)
-        self = super(BaseEquation, cls).__new__(cls, *expr.args)
+        self = super(BaseEquation, cls).__new__(cls, *expr.args,
+                                                evaluate=False)
         self.definition = definition
         return self
 
