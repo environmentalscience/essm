@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Changes &#8212; ESSM 0.4.4.dev2 documentation</title>
+    <title>Changes &#8212; ESSM 1.0.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -38,18 +38,36 @@
             
   <div class="section" id="changes">
 <h1>Changes<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v1-0-0">
+<h2><code class="docutils literal notranslate"><span class="pre">v1.0.0</span></code><a class="headerlink" href="#v1-0-0" title="Permalink to this headline">¶</a></h2>
+<p><em>released 2020-09-24</em></p>
+<div class="section" id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>utils:</strong>  Update code to work with isort5
+(<a class="reference external" href="https://github.com/environmentalscience/essm/pull/89">PR #89</a>)</li>
+</ul>
+</div>
+<div class="section" id="features">
+<h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><strong>global:</strong> Refactor code to work with sympy&gt;=1.6
+(<a class="reference external" href="https://github.com/environmentalscience/essm/pull/90">PR #90</a>)</li>
+</ul>
+</div>
+</div>
 <div class="section" id="v0-4-3">
 <h2><code class="docutils literal notranslate"><span class="pre">v0.4.3</span></code><a class="headerlink" href="#v0-4-3" title="Permalink to this headline">¶</a></h2>
 <p><em>released 2020-06-18</em></p>
-<div class="section" id="bug-fixes">
-<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Bug Fixes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>utils:</strong>  Include expr in variable definitions when writing to file
 (<a class="reference external" href="https://github.com/environmentalscience/essm/pull/87">PR #87</a>)</li>
 </ul>
 </div>
-<div class="section" id="features">
-<h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h3>Features<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>documentation:</strong> Add use examples as Jupyter notebooks and integrate in documentation
 (<a class="reference external" href="https://github.com/environmentalscience/essm/pull/83">PR #83</a>)</li>
@@ -61,8 +79,8 @@
 <div class="section" id="v0-4-2">
 <h2><code class="docutils literal notranslate"><span class="pre">v0.4.2</span></code><a class="headerlink" href="#v0-4-2" title="Permalink to this headline">¶</a></h2>
 <p><em>released 2020-04-28</em></p>
-<div class="section" id="id1">
-<h3>Bug Fixes<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>Bug Fixes<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>utils:</strong> Improve markdown representation of units (<a class="reference external" href="https://github.com/environmentalscience/essm/pull/79">PR #79</a>)</li>
 <li><strong>variables:</strong>  Fix generate_metadata_table for selected variables (<a class="reference external" href="https://github.com/environmentalscience/essm/pull/80">PR #80</a>)</li>
@@ -72,15 +90,15 @@
 <div class="section" id="v0-4-1">
 <h2><code class="docutils literal notranslate"><span class="pre">v0.4.1</span></code><a class="headerlink" href="#v0-4-1" title="Permalink to this headline">¶</a></h2>
 <p><em>released 2019-11-20</em></p>
-<div class="section" id="id2">
-<h3>Bug Fixes<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Bug Fixes<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>equations:</strong> Improve dimensional testing of equations and substitution (<a class="reference external" href="https://github.com/environmentalscience/essm/pull/73">PR #73</a>)</li>
 <li><strong>equations:</strong> Add support for Integral and Piecewise in Equation PR (<a class="reference external" href="https://github.com/environmentalscience/essm/pull/76">PR #76</a>)</li>
 </ul>
 </div>
-<div class="section" id="id3">
-<h3>Features<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h3>Features<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>utils:</strong> subs_eq() for simultaneous substitutions.(<a class="reference external" href="https://github.com/environmentalscience/essm/pull/75">PR #75</a>)</li>
 </ul>
@@ -89,15 +107,15 @@
 <div class="section" id="v0-3-0">
 <h2><code class="docutils literal notranslate"><span class="pre">v0.3.0</span></code><a class="headerlink" href="#v0-3-0" title="Permalink to this headline">¶</a></h2>
 <p><em>released 2019-04-09</em></p>
-<div class="section" id="id4">
-<h3>Bug Fixes<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id6">
+<h3>Bug Fixes<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>equations:</strong> improve substitutions with equations
 (<a class="reference external" href="https://github.com/environmentalscience/essm/commit/79ac37d">79ac37d</a>)</li>
 </ul>
 </div>
-<div class="section" id="id5">
-<h3>Features<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id7">
+<h3>Features<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><strong>utils:</strong> add definition to metadata table
 (<a class="reference external" href="https://github.com/environmentalscience/essm/commit/3ceaa69">3ceaa69</a>)</li>
