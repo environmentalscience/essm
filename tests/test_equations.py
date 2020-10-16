@@ -113,6 +113,13 @@ def test_units_sqrt():
         expr = Eq(demo_v, sqrt(demo_d * demo_d1) / demo_fall.definition.t)
 
 
+def test_units_exp():
+    """Check units in exp. SHOULD FAIL!"""
+
+    class valid_units_exp(Equation):
+        expr = Eq(demo_d/demo_d1, exp(demo_1))
+
+
 def test_integrate():
     """Test that variables can be used as integration symbols."""
     from sympy import integrate
