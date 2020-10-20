@@ -27,7 +27,7 @@ import warnings
 import six
 
 from sympy import (Abs, Add, Basic, Derivative, Function, Integral, log, Mul,
-                   preorder_traversal, Piecewise, Pow, S, Symbol)
+                   Piecewise, Pow, S, Symbol)
 from sympy.physics.units import (Dimension, Quantity, convert_to)
 from sympy.physics.units.systems.si import dimsys_SI, SI
 from sympy.physics.units.util import check_dimensions
