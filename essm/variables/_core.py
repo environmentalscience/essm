@@ -230,8 +230,8 @@ class Variable(object):
                     sum([x[0] for x in expr.args]))
             return factor, dim
         elif isinstance(expr, Function):
-            fds = set(Variable.collect_factor_and_basedimension(
-                arg)[1] for arg in expr.args)
+            fds = {Variable.collect_factor_and_basedimension(
+                arg)[1] for arg in expr.args}
             if fds != {Dimension(1)}:
                 print(fds)
                 raise ValueError(
