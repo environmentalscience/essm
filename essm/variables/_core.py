@@ -233,7 +233,6 @@ class Variable(object):
             fds = {Variable.collect_factor_and_basedimension(
                 arg)[1] for arg in expr.args}
             if fds != {Dimension(1)}:
-                print(fds)
                 raise ValueError(
                     'Arguments in function are not dimensionless, '
                     'but have dimensions of {0}'.format(fds))
