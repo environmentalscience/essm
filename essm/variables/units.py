@@ -165,5 +165,6 @@ def derive_base_dimension(dim):
 
 __all__ = (
     'derive_baseunit', 'derive_unit', 'markdown',
-    'joule', 'kelvin', 'kilogram', 'meter', 'mole', 'pascal', 'second', 'watt'
+    'joule', 'kelvin', 'kilogram', 'meter', 'mole',
+    'pascal', 'second', 'watt'
 )
