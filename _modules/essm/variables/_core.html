@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>essm.variables._core &#8212; ESSM 1.0.0 documentation</title>
+    <title>essm.variables._core &#8212; ESSM 1.0.1.dev1 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -65,7 +65,7 @@
 
 <span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Abs</span><span class="p">,</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Derivative</span><span class="p">,</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Integral</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span>
                    <span class="n">Piecewise</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="kn">import</span> <span class="n">Dimension</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">convert_to</span>
+<span class="kn">from</span> <span class="nn">sympy.physics.units</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Dimension</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">convert_to</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.units.systems.si</span> <span class="kn">import</span> <span class="n">dimsys_SI</span><span class="p">,</span> <span class="n">SI</span>
 <span class="kn">from</span> <span class="nn">sympy.physics.units.util</span> <span class="kn">import</span> <span class="n">check_dimensions</span>
 
@@ -267,10 +267,13 @@
                     <span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">]))</span>
             <span class="k">return</span> <span class="n">factor</span><span class="p">,</span> <span class="n">dim</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Function</span><span class="p">):</span>
-            <span class="n">fds</span> <span class="o">=</span> <span class="p">[</span><span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span>
-                <span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
-            <span class="k">return</span> <span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fds</span><span class="p">)),</span>
-                    <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">fds</span><span class="p">)))</span>
+            <span class="n">fds</span> <span class="o">=</span> <span class="p">{</span><span class="n">Variable</span><span class="o">.</span><span class="n">collect_factor_and_basedimension</span><span class="p">(</span>
+                <span class="n">arg</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">}</span>
+            <span class="k">if</span> <span class="n">fds</span> <span class="o">!=</span> <span class="p">{</span><span class="n">Dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">)}:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s1">&#39;Arguments in function are not dimensionless, &#39;</span>
+                    <span class="s1">&#39;but have dimensions of </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fds</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">expr</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Dimension</span><span class="p">):</span>
             <span class="k">return</span> <span class="mi">1</span><span class="p">,</span> <span class="n">expr</span>
         <span class="k">else</span><span class="p">:</span>
