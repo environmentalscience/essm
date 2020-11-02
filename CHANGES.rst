@@ -1,6 +1,17 @@
 Changes
 =======
 
+``v1.0.1``
+----------
+*released 2020-11-05*
+
+Bug Fixes
+~~~~~~~~~
+
+- **global:**  Allow dimensionless variables in functions
+  (`PR #94 <https://github.com/environmentalscience/essm/pull/94>`__)
+
+
 ``v1.0.0``
 ----------
 *released 2020-09-24*
