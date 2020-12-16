@@ -1,6 +1,17 @@
 Changes
 =======
 
+``v1.1``
+----------
+*released 2020-12-20*
+
+Features
+~~~~~~~~
+
+- **utils:**  Enable supplementary_imports in VariableWriter and EquationWriter
+  (`PR #84 <https://github.com/environmentalscience/essm/pull/95>`__)
+
+
 ``v1.0.1``
 ----------
 *released 2020-11-05*
