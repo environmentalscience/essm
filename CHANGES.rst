@@ -9,7 +9,7 @@ Features
 ~~~~~~~~
 
 - **utils:**  Enable supplementary_imports in VariableWriter and EquationWriter
-  (`PR #84 <https://github.com/environmentalscience/essm/pull/95>`__)
+  (`PR #84 <https://github.com/environmentalscience/essm/pull/96>`__)
 
 
 ``v1.0.1``
