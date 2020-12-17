@@ -121,7 +121,7 @@ class VariableWriter(object):
     .. code-block:: python
         from essm._generator import VariableWriter
         from essm.variables.physics.thermodynamics import c_pa, P_a
-        writer = VariableWriter(docstring="Test.",\
+        writer = VariableWriter(docstring="Test.",
             supplementary_imports={'sympy.physics.units': {'mega', 'kilo'}})
         writer.var(c_pa)
         writer.var(P_a)
@@ -219,7 +219,7 @@ class VariableWriter(object):
         .. code-block:: python
             from essm._generator import VariableWriter
             from essm.variables.physics.thermodynamics import c_pa, P_a
-            writer = VariableWriter(docstring="Test.",\
+            writer = VariableWriter(docstring="Test.",
                 supplementary_imports={'sympy.physics.units': {'mega'}})
             writer.var(c_pa)
             writer.var(P_a)
@@ -251,12 +251,12 @@ class EquationWriter(object):
         from essm.equations import Equation
         from essm._generator import EquationWriter
         from essm.variables.units import second, meter, kelvin
-        from essm.variables.physics.thermodynamics import R_s, D_va, T_a, \
-            P_a, P_wa, P_N2, P_O2
+        from essm.variables.physics.thermodynamics import (R_s, D_va, T_a,
+            P_a, P_wa, P_N2, P_O2)
         from essm.equations.physics.thermodynamics import eq_Pa
         from sympy import Eq, symbols
         p_Dva1, p_Dva2 = symbols('p_Dva1, p_Dva2')
-        writer = EquationWriter(docstring="Test.",\
+        writer = EquationWriter(docstring="Test.",
             supplementary_imports={'sympy': {'exp', 'sin'}})
         writer.eq(eq_Pa)
         writer.neweq('eq_Pwa_Pa', Eq(P_wa, P_a - P_N2 - P_O2),
