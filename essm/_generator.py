@@ -376,7 +376,7 @@ class EquationWriter(object):
             self._imports['essm'].add(match.group())
 
     def eq(self, eq1):
-        """Add pre-defined equation to writer, including any internal variables.
+        """Add pre-defined equation to writer, incl. any internal variables.
 
         Example:
 
