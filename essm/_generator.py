@@ -384,7 +384,7 @@ class EquationWriter(object):
             from essm._generator import EquationWriter, VariableWriter
             from essm.variables.utils import get_parents
             from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
-            writer = EquationWriter(docstring="Test.",\
+            writer = EquationWriter(docstring="Test.",
                 supplementary_imports={'sympy': {'exp', 'sin'}})
             writer.eq(eq_Pwl)
             writer.eq(eq_Cwl)
