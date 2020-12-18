@@ -121,7 +121,8 @@ class VariableWriter(object):
     .. code-block:: python
         from essm._generator import VariableWriter
         from essm.variables.physics.thermodynamics import c_pa, P_a
-        writer = VariableWriter(docstring="Test.")
+        writer = VariableWriter(docstring="Test.",
+            supplementary_imports={'sympy.physics.units': {'mega', 'kilo'}})
         writer.var(c_pa)
         writer.var(P_a)
         print(writer)
@@ -133,11 +134,12 @@ class VariableWriter(object):
         'essm.variables': {'Variable'},
     }
 
-    def __init__(self, docstring=None):
+    def __init__(self, docstring=None, supplementary_imports={}):
         """Initialize variable writer."""
         self.docstring = docstring
         self._imports = defaultdict(set)
         self._imports.update(**self.default_imports)
+        self._imports.update(**supplementary_imports)
         self.vars = []
 
     @property
@@ -217,7 +219,8 @@ class VariableWriter(object):
         .. code-block:: python
             from essm._generator import VariableWriter
             from essm.variables.physics.thermodynamics import c_pa, P_a
-            writer = VariableWriter(docstring="Test.")
+            writer = VariableWriter(docstring="Test.",
+                supplementary_imports={'sympy.physics.units': {'mega'}})
             writer.var(c_pa)
             writer.var(P_a)
             print(writer)
@@ -248,12 +251,13 @@ class EquationWriter(object):
         from essm.equations import Equation
         from essm._generator import EquationWriter
         from essm.variables.units import second, meter, kelvin
-        from essm.variables.physics.thermodynamics import R_s, D_va, T_a, \
-            P_a, P_wa, P_N2, P_O2
+        from essm.variables.physics.thermodynamics import (R_s, D_va, T_a,
+            P_a, P_wa, P_N2, P_O2)
         from essm.equations.physics.thermodynamics import eq_Pa
         from sympy import Eq, symbols
         p_Dva1, p_Dva2 = symbols('p_Dva1, p_Dva2')
-        writer = EquationWriter(docstring="Test.")
+        writer = EquationWriter(docstring="Test.",
+            supplementary_imports={'sympy': {'exp', 'sin'}})
         writer.eq(eq_Pa)
         writer.neweq('eq_Pwa_Pa', Eq(P_wa, P_a - P_N2 - P_O2),
                 doc='Calculate P_wa from total air pressure.',
@@ -277,11 +281,12 @@ class EquationWriter(object):
     }
     """Set up default imports, including standard division."""
 
-    def __init__(self, docstring=None):
+    def __init__(self, docstring=None, supplementary_imports={}):
         """Initialise equation writer."""
         self.docstring = docstring
         self._imports = defaultdict(set)
         self._imports.update(**self.default_imports)
+        self._imports.update(**supplementary_imports)
         self.eqs = []
 
     @property
@@ -371,7 +376,7 @@ class EquationWriter(object):
             self._imports['essm'].add(match.group())
 
     def eq(self, eq1):
-        """Add pre-defined equation to writer, including any internal variables.
+        """Add pre-defined equation to writer, incl. any internal variables.
 
         Example:
 
@@ -379,7 +384,8 @@ class EquationWriter(object):
             from essm._generator import EquationWriter, VariableWriter
             from essm.variables.utils import get_parents
             from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
-            writer = EquationWriter(docstring="Test.")
+            writer = EquationWriter(docstring="Test.",
+                supplementary_imports={'sympy': {'exp', 'sin'}})
             writer.eq(eq_Pwl)
             writer.eq(eq_Cwl)
             print(writer)

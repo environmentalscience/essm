@@ -392,3 +392,40 @@ def test_equation_writer_linebreaks(tmpdir):
     with open(eq_file.strpath) as outfile:
         maxlinelength = max([len(line) for line in outfile.readlines()])
     assert maxlinelength < 80
+
+
+def test_equation_variable_writer_imports(tmpdir):
+    """Provide additional imports in EquationWriter and VariableWriter"""
+    from sympy import Eq, var, sin
+    from sympy.physics.units import mega, joule
+
+    g = {}
+
+    class energy1(Variable):
+        """Energy variable"""
+        unit = mega*joule
+
+    class eq_sin_energy(Equation):
+        """Equation with sine function"""
+        expr = Eq(demo_1, sin(demo_d/demo_d1))
+
+    writer_var = VariableWriter(docstring='Test of VariableWriter.',
+                                supplementary_imports={
+                                    'sympy.physics.units': {'mega'}})
+    writer_var.var(energy1)
+    var_file = tmpdir.mkdir('test1').join('test_vars.py')
+    writer_var.write(var_file.strpath)
+    with open(var_file, "rb") as source_file:
+        code = compile(var_file.read(), var_file, "exec")
+    exec(code, g)
+    assert g['energy1'].definition.unit == mega*joule
+
+    writer_eq = EquationWriter(docstring='Test of EquationWriter.',
+                               supplementary_imports={'sympy': {'sin'}})
+    writer_eq.eq(eq_sin_energy)
+    eq_file = tmpdir.mkdir('test2').join('test_equations_sin.py')
+    writer_eq.write(eq_file.strpath)
+    with open(eq_file, "rb") as source_file:
+        code = compile(eq_file.read(), eq_file, "exec")
+    exec(code, g)
+    assert g['eq_sin_energy'].definition.expr == eq_sin_energy.definition.expr
