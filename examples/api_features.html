@@ -1368,11 +1368,11 @@ $$P_{wa} = \begin{cases} 0 &amp; \text{for}\: T_a &lt; 0 \\611 e^{- \frac{M_w \l
 <div class="section" id="Substituting-into-integrals-and-derivatives-and-evaluating">
 <h2>Substituting into integrals and derivatives and evaluating<a class="headerlink" href="#Substituting-into-integrals-and-derivatives-and-evaluating" title="Permalink to this headline">¶</a></h2>
 <p>Above, we defined <code class="docutils literal notranslate"><span class="pre">Delta_Pwa</span></code> as a variable that represents the partial derivative of <code class="docutils literal notranslate"><span class="pre">P_wa</span></code> with respect to <code class="docutils literal notranslate"><span class="pre">T_g</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Delta_Pwa</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Slope of saturated vapour pressure, $\partial P_{ws} / \partial T_g&quot;&quot;&quot;</span>
-    <span class="n">expr</span> <span class="o">=</span> <span class="n">P_wa</span><span class="p">(</span><span class="n">T_g</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">T_g</span><span class="p">)</span>
-    <span class="c1">#unit = pascal/kelvin</span>
-    <span class="n">latex_name</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\Delta&#39;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>class Delta_Pwa(Variable):
+    &quot;&quot;&quot;Slope of saturated vapour pressure, $\partial P_{ws} / \partial T_g&quot;&quot;&quot;
+    expr = P_wa(T_g).diff(T_g)
+    #unit = pascal/kelvin
+    latex_name = r&#39;\Delta&#39;
 </pre></div>
 </div>
 <p>This definition can be accessed by typing <code class="docutils literal notranslate"><span class="pre">Delta_Pwa.definition.expr</span></code>. Example:</p>
