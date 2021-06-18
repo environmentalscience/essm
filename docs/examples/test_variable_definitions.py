@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is for use with essm.
-# Copyright (C) 2020 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2021 ETH Zurich, Swiss Data Science Center.
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -19,11 +19,10 @@
 # MA 02111-1307, USA.
 """Variables defined in api_features.ipynb and dependencies."""
 
-from sympy.physics.units import (
-    joule, kelvin, kilogram, meter, mole, pascal, second, watt
-)
-
 from essm.variables import Variable
+from sympy.physics.units import (
+    atmosphere, bar, joule, kelvin, kilogram, meter, mole, pascal, second, watt
+)
 
 
 class alpha_a(Variable):
@@ -33,6 +32,7 @@ class alpha_a(Variable):
     unit = meter ** 2 / second
     assumptions = {'real': True}
     latex_name = '\\alpha_a'
+    default = None
 
 
 class c_pa(Variable):
@@ -78,6 +78,7 @@ class C_wa(Variable):
     unit = mole / meter ** 3
     assumptions = {'real': True}
     latex_name = 'C_{wa}'
+    default = None
 
 
 class D_va(Variable):
@@ -87,6 +88,7 @@ class D_va(Variable):
     unit = meter ** 2 / second
     assumptions = {'real': True}
     latex_name = 'D_{va}'
+    default = None
 
 
 class g(Variable):
@@ -106,6 +108,7 @@ class Gr(Variable):
     unit = 1
     assumptions = {'real': True}
     latex_name = 'N_{Gr_L}'
+    default = None
 
 
 class h_c(Variable):
@@ -115,6 +118,7 @@ class h_c(Variable):
     unit = joule / (kelvin * meter ** 2 * second)
     assumptions = {'real': True}
     latex_name = 'h_c'
+    default = None
 
 
 class k_a(Variable):
@@ -124,6 +128,7 @@ class k_a(Variable):
     unit = joule / (kelvin * meter * second)
     assumptions = {'real': True}
     latex_name = 'k_a'
+    default = None
 
 
 class lambda_E(Variable):
@@ -143,6 +148,7 @@ class Le(Variable):
     unit = 1
     assumptions = {'real': True}
     latex_name = 'N_{Le}'
+    default = None
 
 
 class M_air(Variable):
@@ -195,6 +201,7 @@ class nu_a(Variable):
     unit = meter ** 2 / second
     assumptions = {'real': True}
     latex_name = '\\nu_a'
+    default = None
 
 
 class Nu(Variable):
@@ -204,6 +211,7 @@ class Nu(Variable):
     unit = 1
     assumptions = {'real': True}
     latex_name = 'N_{Nu_L}'
+    default = None
 
 
 class P_a(Variable):
@@ -213,6 +221,7 @@ class P_a(Variable):
     unit = pascal
     assumptions = {'real': True}
     latex_name = 'P_a'
+    default = None
 
 
 class Pr(Variable):
@@ -222,6 +231,7 @@ class Pr(Variable):
     unit = 1
     assumptions = {'real': True}
     latex_name = 'N_{Pr}'
+    default = None
 
 
 class P_N2(Variable):
@@ -231,6 +241,7 @@ class P_N2(Variable):
     unit = pascal
     assumptions = {'real': True}
     latex_name = 'P_{N2}'
+    default = None
 
 
 class P_O2(Variable):
@@ -240,6 +251,7 @@ class P_O2(Variable):
     unit = pascal
     assumptions = {'real': True}
     latex_name = 'P_{O2}'
+    default = None
 
 
 class P_wa(Variable):
@@ -249,6 +261,7 @@ class P_wa(Variable):
     unit = pascal
     assumptions = {'real': True}
     latex_name = 'P_{wa}'
+    default = None
 
 
 class P_was(Variable):
@@ -258,6 +271,7 @@ class P_was(Variable):
     unit = pascal
     assumptions = {'real': True}
     latex_name = 'P_{was}'
+    default = None
 
 
 class R_d(Variable):
@@ -267,6 +281,7 @@ class R_d(Variable):
     unit = watt / meter ** 2
     assumptions = {'real': True}
     latex_name = 'R_d'
+    default = None
 
 
 class Re_c(Variable):
@@ -276,6 +291,7 @@ class Re_c(Variable):
     unit = 1
     assumptions = {'real': True}
     latex_name = 'N_{Re_c}'
+    default = None
 
 
 class Re(Variable):
@@ -285,6 +301,7 @@ class Re(Variable):
     unit = 1
     assumptions = {'real': True}
     latex_name = 'N_{Re_L}'
+    default = None
 
 
 class rho_a(Variable):
@@ -294,6 +311,7 @@ class rho_a(Variable):
     unit = kilogram / meter ** 3
     assumptions = {'real': True}
     latex_name = '\\rho_a'
+    default = None
 
 
 class R_u(Variable):
@@ -303,6 +321,7 @@ class R_u(Variable):
     unit = watt / meter ** 2
     assumptions = {'real': True}
     latex_name = 'R_u'
+    default = None
 
 
 class R_mol(Variable):
@@ -322,6 +341,7 @@ class R_s(Variable):
     unit = joule / (meter ** 2 * second)
     assumptions = {'real': True}
     latex_name = 'R_s'
+    default = None
 
 
 class sigm(Variable):
@@ -351,6 +371,7 @@ class T_a(Variable):
     unit = kelvin
     assumptions = {'real': True}
     latex_name = 'T_a'
+    default = None
 
 
 class v_w(Variable):
@@ -360,6 +381,7 @@ class v_w(Variable):
     unit = meter / second
     assumptions = {'real': True}
     latex_name = 'v_w'
+    default = None
 
 
 class x_N2(Variable):
@@ -469,6 +491,7 @@ class P_g(Variable):
     unit = pascal
     assumptions = {'real': True}
     latex_name = 'P_g'
+    default = None
 
 
 class V_g(Variable):
@@ -478,6 +501,7 @@ class V_g(Variable):
     unit = meter ** 3
     assumptions = {'real': True}
     latex_name = 'V_g'
+    default = None
 
 
 class n_g(Variable):
@@ -487,6 +511,7 @@ class n_g(Variable):
     unit = mole
     assumptions = {'real': True}
     latex_name = 'n_g'
+    default = None
 
 
 class n_w(Variable):
@@ -496,6 +521,7 @@ class n_w(Variable):
     unit = mole
     assumptions = {'real': True}
     latex_name = 'n_w'
+    default = None
 
 
 class T_g(Variable):
@@ -505,6 +531,7 @@ class T_g(Variable):
     unit = kelvin
     assumptions = {'real': True}
     latex_name = 'T_g'
+    default = None
 
 
 class Delta_Pwa(Variable):
@@ -514,6 +541,8 @@ class Delta_Pwa(Variable):
     unit = pascal / kelvin
     assumptions = {'real': True}
     latex_name = '\\Delta'
+    default = None
+    expr = Derivative(P_wa, T_g)
 
 
 class x(Variable):
@@ -523,6 +552,7 @@ class x(Variable):
     unit = 1
     assumptions = {'positive': True, 'real': True}
     latex_name = 'x'
+    default = None
 
 
 class p_CC1(Variable):
@@ -552,6 +582,7 @@ class T_a1(Variable):
     unit = kelvin
     assumptions = {'real': True}
     latex_name = 'T_{a1}'
+    default = None
 
 
 class T_a2(Variable):
@@ -561,6 +592,7 @@ class T_a2(Variable):
     unit = kelvin
     assumptions = {'real': True}
     latex_name = 'T_{a2}'
+    default = None
 
 
 class P_wa1(Variable):
@@ -570,6 +602,27 @@ class P_wa1(Variable):
     unit = pascal
     assumptions = {'real': True}
     latex_name = 'P_{wa1}'
+    default = None
+
+
+class P_wa_bar(Variable):
+    """P_wa in bar"""
+
+    name = 'P_wa_bar'
+    unit = bar
+    assumptions = {'real': True}
+    latex_name = 'P_{wa,bar}'
+    default = None
+
+
+class P_wa_atm(Variable):
+    """P_wa in atm"""
+
+    name = 'P_wa_atm'
+    unit = atmosphere
+    assumptions = {'real': True}
+    latex_name = 'P_{wa,atm}'
+    default = None
 
 
 __all__ = (
@@ -630,4 +683,6 @@ __all__ = (
     'T_a1',
     'T_a2',
     'P_wa1',
+    'P_wa_bar',
+    'P_wa_atm',
 )
