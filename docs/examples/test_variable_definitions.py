@@ -20,6 +20,7 @@
 """Variables defined in api_features.ipynb and dependencies."""
 
 from essm.variables import Variable
+from sympy import Derivative
 from sympy.physics.units import (
     atmosphere, bar, joule, kelvin, kilogram, meter, mole, pascal, second, watt
 )

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is for use with essm.
-# Copyright (C) 2020 ETH Zurich, Swiss Data Science Center.
+# Copyright (C) 2021 ETH Zurich, Swiss Data Science Center.
 #
 # essm is free software; you can redistribute it
 # and/or modify it under the terms of the GNU General Public License as
@@ -21,16 +21,16 @@
 
 from __future__ import division
 
-from sympy import Abs, Eq, Integral, Piecewise, exp, sqrt
-from sympy.physics.units import joule, kelvin, meter, pascal, second
-
 from essm import Eq, sqrt
 from essm.equations import Equation
 from essm.variables import Variable
+from sympy import Abs, Eq, Integral, Piecewise, exp, sqrt
+from sympy.physics.units import joule, kelvin, meter, pascal, second
+
 from test_variable_definitions import (
     M_N2, M_O2, P_N2, P_O2, C_wa, D_va, Delta_Pwa, Le, M_w, Nu, P_a, P_g, P_wa,
-    P_wa1, Pr, R_mol, Re, Re_c, T_a, T_a1, T_a2, T_g, V_g, alpha_a, k_a,
-    lambda_E, n_g, n_w, nu_a, p_CC1, p_CC2, rho_a, x_N2, x_O2
+    P_wa1, P_wa_atm, P_wa_bar, Pr, R_mol, Re, Re_c, T_a, T_a1, T_a2, T_g, V_g,
+    alpha_a, k_a, lambda_E, n_g, n_w, nu_a, p_CC1, p_CC2, rho_a, x_N2, x_O2
 )
 
 
@@ -60,8 +60,9 @@ class eq_Nu_forced_all(Equation):
 
     expr = Eq(
         Nu, -Pr ** (1 / 3) * (
-            -37 * Re ** (4 / 5) + 37 * (Re + Re_c - Abs(Re - Re_c) / 2) **
-            (4 / 5) - 664 * sqrt(Re + Re_c - Abs(Re - Re_c) / 2)
+            -37 * Re ** (4 / 5) + 37 *
+            (Re + Re_c - Abs(Re - Re_c) / 2) ** (4 / 5) -
+            664 * sqrt(Re + Re_c - Abs(Re - Re_c) / 2)
         ) / 1000
     )
 
@@ -153,15 +154,6 @@ class eq_nua(Equation):
     (Table A.3 in :cite:`monteith_principles_2007`)
     """
 
-    class p_nua2(Variable):
-        """Internal parameter of eq_nua."""
-
-        name = 'p_nua2'
-        unit = meter ** 2 / second
-        assumptions = {'real': True}
-        latex_name = 'p_2'
-        default = 1.13e-05
-
     class p_nua1(Variable):
         """Internal parameter of eq_nua."""
 
@@ -170,6 +162,15 @@ class eq_nua(Equation):
         assumptions = {'real': True}
         latex_name = 'p_1'
         default = 9e-08
+
+    class p_nua2(Variable):
+        """Internal parameter of eq_nua."""
+
+        name = 'p_nua2'
+        unit = meter ** 2 / second
+        assumptions = {'real': True}
+        latex_name = 'p_2'
+        default = 1.13e-05
 
     expr = Eq(nu_a, T_a * p_nua1 - p_nua2)
 
@@ -214,15 +215,6 @@ class eq_Pwa_CC(Equation):
     Eq. B3 in :cite{hartmann_global_1994}
     """
 
-    class p_CC1(Variable):
-        """Internal parameter of eq_Pwa_CC."""
-
-        name = 'p_CC1'
-        unit = pascal
-        assumptions = {'real': True}
-        latex_name = '611'
-        default = 611.0
-
     class p_CC2(Variable):
         """Internal parameter of eq_Pwa_CC."""
 
@@ -231,6 +223,15 @@ class eq_Pwa_CC(Equation):
         assumptions = {'real': True}
         latex_name = '273'
         default = 273.0
+
+    class p_CC1(Variable):
+        """Internal parameter of eq_Pwa_CC."""
+
+        name = 'p_CC1'
+        unit = pascal
+        assumptions = {'real': True}
+        latex_name = '611'
+        default = 611.0
 
     expr = Eq(
         P_wa, p_CC1 * exp(-M_w * lambda_E * (-1 / p_CC2 + 1 / T_g) / R_mol)
@@ -254,6 +255,18 @@ class eq_Pwa_Delta(Equation):
     expr = Eq(P_wa, P_wa1 + Integral(Delta_Pwa, (T_g, T_a1, T_a2)))
 
 
+class eq_Pwa_bar_atm(Equation):
+    """Test equation using variables with same dimensions but different units"""
+
+    expr = Eq(P_wa, P_wa_atm + P_wa_bar)
+
+
+class eq_Pwab_Pwa(Equation):
+    """Test equation using variables with same dimensions but different units"""
+
+    expr = Eq(P_wa, P_wa1 + P_wa_bar)
+
+
 class eq_PO2(eq_Pa.definition, eq_PN2_PO2.definition):
     """Calculate P_O2 as a function of P_a, P_N2 and P_wa."""
 
@@ -266,7 +279,7 @@ class eq_PN2(eq_Pa.definition, eq_PN2_PO2.definition):
     expr = Eq(P_N2, (P_a * x_N2 - P_wa * x_N2) / (x_N2 + x_O2))
 
 
-class eq_rhoa(eq_PN2.definition, eq_rhoa_Pwa_Ta.definition, eq_PO2.definition):
+class eq_rhoa(eq_rhoa_Pwa_Ta.definition, eq_PO2.definition, eq_PN2.definition):
     """Calculate rho_a from T_a, P_a and P_wa."""
 
     expr = Eq(
@@ -304,6 +317,8 @@ __all__ = (
     'eq_Pwa_CC',
     'eq1',
     'eq_Pwa_Delta',
+    'eq_Pwa_bar_atm',
+    'eq_Pwab_Pwa',
     'eq_PO2',
     'eq_PN2',
     'eq_rhoa',
