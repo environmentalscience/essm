@@ -317,7 +317,8 @@ class EquationWriter(object):
 
     def neweq(self, name, expr, doc='', parents=None, variables=None,
               autovars=1):
-        """Add new equation, incl. any variables.
+        """Add new equation, including any variables.
+        
         If you wish to suppress import of external variables,
         pass autovars=0."""
         if parents:
