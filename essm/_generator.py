@@ -315,8 +315,14 @@ class EquationWriter(object):
         reformatted_result = _lint_content(result)
         return reformatted_result
 
-    def neweq(self, name, expr, doc='', parents=None, variables=None):
-        """Add new equation."""
+    def neweq(self, name, expr, doc='', parents=None, variables=None,
+              autovars=1):
+        """
+        Add new equation, including any variables.
+
+        If you wish to suppress import of external variables,
+        pass autovars=0.
+        """
         if parents:
             parents = ', '.join(parent + '.definition' for parent in parents)
         else:
@@ -365,18 +371,23 @@ class EquationWriter(object):
         for match in re.finditer(_IMPORTS, str(expr)) or []:
             self._imports['sympy'].add(match.group())
 
-        for arg in extract_variables(expr):
-            if str(arg) not in internal_variables and\
-                    arg in Variable.__registry__:
-                self._imports[Variable.__registry__[arg].__module__].add(
-                    str(arg)
-                )
+        if autovars == 1:    # Optional inclusion of external variable imports
+            for arg in extract_variables(expr):
+                if str(arg) not in internal_variables and\
+                        arg in Variable.__registry__:
+                    self._imports[Variable.__registry__[arg].__module__].add(
+                        str(arg)
+                    )
 
         for match in re.finditer(_IMPORTS, str(expr)) or []:
             self._imports['essm'].add(match.group())
 
-    def eq(self, eq1):
-        """Add pre-defined equation to writer, incl. any internal variables.
+    def eq(self, eq1, autovars=1):
+        """
+        Add pre-defined equation to writer, incl. any variables.
+
+        If you wish to suppress import of external variables,
+        pass autovars=0.
 
         Example:
 
@@ -386,7 +397,7 @@ class EquationWriter(object):
             from essm.equations.leaf.energy_water import eq_Pwl, eq_Cwl
             writer = EquationWriter(docstring="Test.",
                 supplementary_imports={'sympy': {'exp', 'sin'}})
-            writer.eq(eq_Pwl)
+            writer.eq(eq_Pwl, autovars=0)
             writer.eq(eq_Cwl)
             print(writer)
         """
@@ -407,7 +418,8 @@ class EquationWriter(object):
                       'latex_name': d1.get('latex_name'),
                       'default': d1.get('default')}
                      for d1 in int_vars_attr]
-        self.neweq(name, expr, doc, parents, variables=variables)
+        self.neweq(name, expr, doc, parents, variables=variables,
+                   autovars=autovars)
 
     def write(self, filename):
         """Serialize itself to a filename."""
