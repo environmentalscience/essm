@@ -317,10 +317,12 @@ class EquationWriter(object):
 
     def neweq(self, name, expr, doc='', parents=None, variables=None,
               autovars=1):
-        """Add new equation, including any variables.
-        
+        """
+        Add new equation, including any variables.
+
         If you wish to suppress import of external variables,
-        pass autovars=0."""
+        pass autovars=0.
+        """
         if parents:
             parents = ', '.join(parent + '.definition' for parent in parents)
         else:
@@ -381,7 +383,8 @@ class EquationWriter(object):
             self._imports['essm'].add(match.group())
 
     def eq(self, eq1, autovars=1):
-        """Add pre-defined equation to writer, incl. any variables.
+        """
+        Add pre-defined equation to writer, incl. any variables.
         If you wish to suppress import of external variables,
         pass autovars=0.
 
