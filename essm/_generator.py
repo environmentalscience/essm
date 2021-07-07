@@ -385,7 +385,7 @@ class EquationWriter(object):
     def eq(self, eq1, autovars=1):
         """
         Add pre-defined equation to writer, incl. any variables.
-        
+
         If you wish to suppress import of external variables,
         pass autovars=0.
 
