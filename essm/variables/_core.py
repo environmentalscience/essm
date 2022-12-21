@@ -232,10 +232,10 @@ class Variable(object):
         elif isinstance(expr, Function):
             fds = {Variable.collect_factor_and_basedimension(
                 arg)[1] for arg in expr.args}
-            if fds != {Dimension(1)}:
-                raise ValueError(
-                    'Arguments in function are not dimensionless, '
-                    'but have dimensions of {0}'.format(fds))
+            # if fds != {Dimension(1)}:
+            #     raise ValueError(
+            #         'Arguments in function are not dimensionless, '
+            #         'but have dimensions of {0}'.format(fds))
             return expr, Dimension(1)
         elif isinstance(expr, Dimension):
             return 1, expr
