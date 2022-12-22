@@ -11,7 +11,7 @@ from essm.variables.units import (joule, kelvin, kilogram, meter, mole, second,
                                   derive_baseunit)
 from essm.variables.utils import (extract_variables, replace_defaults,
                                   replace_variables)
-from sympy import cos, Derivative, exp, log, S, Symbol, solve, sqrt
+from sympy import cos, Derivative, exp, Function, log, S, Symbol, solve, sqrt
 from sympy.physics.units import Quantity, length, meter
 
 
@@ -286,6 +286,15 @@ def test_check_unit():
 
     assert Variable.check_unit(1 - exp(var_joule / var_joule_base)) == \
         1 - exp(var_joule/var_joule_base)
+
+
+def test_check_unit_function():
+    """
+    Make sure that check_unit works with symbolic functions"""
+
+    f = Function('f')(demo_t)
+    assert Variable.check_unit(Derivative(f, demo_t)) == \
+        Derivative(f, demo_t)
 
 
 def test_double_registration():
